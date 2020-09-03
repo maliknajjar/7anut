@@ -116,6 +116,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     child: TextField(
+                      obscureText: true,
                       style: TextStyle(
                         fontSize: 15,
                       ),
