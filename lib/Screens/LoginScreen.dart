@@ -66,7 +66,16 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ),
-                      color: Color(0xFFFFFCD7)
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFFFFFCE1),
+                          Color(0xFFFFF6A4),
+                        ],
+                        begin: FractionalOffset(0.0, 0.0),
+                        end: FractionalOffset(0.0, 1.0),
+                        stops: [0.0, 1.0],
+                        tileMode: TileMode.clamp
+                      ), 
                     ),
                     child: TextField(
                       style: TextStyle(fontSize: 15),
@@ -95,7 +104,16 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ),
-                      color: Color(0xFFFFFCD7)
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFFFFFCE1),
+                          Color(0xFFFFF6A4),
+                        ],
+                        begin: FractionalOffset(0.0, 0.0),
+                        end: FractionalOffset(0.0, 1.0),
+                        stops: [0.0, 1.0],
+                        tileMode: TileMode.clamp
+                      ),
                     ),
                     child: TextField(
                       style: TextStyle(
