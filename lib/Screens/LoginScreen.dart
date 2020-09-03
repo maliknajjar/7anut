@@ -11,14 +11,15 @@ class LoginScreen extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
               // color: Colors.blue[400],
-              gradient: LinearGradient(
+              gradient: RadialGradient(
                 colors: [
-                  Color(0xFF3366FF),
-                  Color(0xFF00CCFF),
+                  Color(0xFF5DA7E6).withOpacity(0.75),
+                  Color(0xFF3C9DE5),
                 ],
-                begin: FractionalOffset(0.0, 0.0),
-                end: FractionalOffset(1.0, 0.0),
+                // begin: FractionalOffset(0.0, 0.0),
+                // end: FractionalOffset(0.0, 1.0),
                 stops: [0.0, 1.0],
+                radius: 1,
                 tileMode: TileMode.clamp
               ),
             ),
