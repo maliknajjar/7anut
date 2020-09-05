@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -284,6 +286,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: (){
+                      Navigator.of(context).pushNamed("/login");
                       print("this works");
                     },
                     child: Container(
