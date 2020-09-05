@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,41 +54,6 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                            BoxShadow(
-                            blurRadius: 10,
-                            spreadRadius: 0,
-                            color: Colors.black.withOpacity(0.1)
-                          ),
-                        ],
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFFFFFCE1),
-                            Color(0xFFFFF6A4),
-                          ],
-                          begin: FractionalOffset(0.0, 0.0),
-                          end: FractionalOffset(0.0, 1.0),
-                          stops: [0.0, 1.0],
-                          tileMode: TileMode.clamp
-                        ), 
-                      ),
-                      child: TextField(
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: Colors.black54,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          hintText: 'Email'
-                        ),
-                      ),
-                    ),
-                    Container(
                       margin: EdgeInsets.only(
                         top: 7.5,
                         bottom: 20, 
@@ -126,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          hintText: 'Password'
+                          hintText: 'Email'
                         ),
                       ),
                     ),
@@ -161,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                           ), 
                         ),
                         child: Center(
-                          child: Text("Login"),
+                          child: Text("Send New Password"),
                         ),
                       ),
                     )
@@ -209,9 +174,11 @@ class LoginScreen extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      Navigator.of(context).pushNamed("/register");
+                      Navigator.of(context).pop();
+                      print("this works");
                     },
                     child: Container(
+                      constraints: BoxConstraints(maxWidth: 150),
                       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(
                         color: Colors.yellow[400],
@@ -226,20 +193,22 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ]
                       ),
-                      child: Text("Create New Account"),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_back
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: Text("Go Back"),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-              InkWell(
-                onTap: (){
-                  Navigator.of(context).pushNamed("/forgotpassword");
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Text("Forget Password?", style: TextStyle(color: Colors.white, decoration: TextDecoration.underline)),
-                ),
-              )
             ],
           ),
         ),
