@@ -209,7 +209,7 @@ class LoginScreen extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      print("this works");
+                      Navigator.of(context).pushNamed("/register");
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
