@@ -286,7 +286,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      Navigator.of(context).pushNamed("/login");
+                      Navigator.of(context).pop();
                       print("this works");
                     },
                     child: Container(
