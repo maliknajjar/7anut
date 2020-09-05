@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
               Container(
                 constraints: BoxConstraints(maxWidth: 300),
                 // height: 200,
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   color: Colors.yellow,
@@ -90,7 +90,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                        top: 7.5
+                        top: 7.5,
+                        bottom: 20, 
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
@@ -129,90 +130,116 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.only(top: 20, bottom: 20),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                            BoxShadow(
-                            blurRadius: 10,
-                            spreadRadius: 3,
-                            color: Colors.black.withOpacity(0.25)
-                          ),
-                        ],
-                        // border: Border.all(color: Colors.black, width: 2),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15)
-                        ),
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.yellow[300],
-                            Colors.yellow,
+                    InkWell(
+                      onTap: (){
+                        print("this works");
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                              BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 3,
+                              color: Colors.black.withOpacity(0.25)
+                            ),
                           ],
-                          begin: FractionalOffset(0.0, 0.0),
-                          end: FractionalOffset(0.0, 1.0),
-                          stops: [0.0, 1.0],
-                          tileMode: TileMode.clamp
-                        ), 
-                      ),
-                      child: Center(
-                        child: Text("Login"),
+                          // border: Border.all(color: Colors.black, width: 2),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15)
+                          ),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.yellow[300],
+                              Colors.yellow,
+                            ],
+                            begin: FractionalOffset(0.0, 0.0),
+                            end: FractionalOffset(0.0, 1.0),
+                            stops: [0.0, 1.0],
+                            tileMode: TileMode.clamp
+                          ), 
+                        ),
+                        child: Center(
+                          child: Text("Login"),
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      height: 2,
-                      margin: EdgeInsets.only(left: 20, top: 30, bottom: 30),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
+              Container(
+                constraints: BoxConstraints(maxWidth: 300),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        height: 2,
+                        margin: EdgeInsets.only(left: 20, top: 30, bottom: 30),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.25),
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: Center(child: Text("or")),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      height: 2,
-                      margin: EdgeInsets.only(right: 20, top: 30, bottom: 30),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Center(child: Text("or")),
                       ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        height: 2,
+                        margin: EdgeInsets.only(right: 20, top: 30, bottom: 30),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.25),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 width: double.infinity,
                 constraints: BoxConstraints(maxWidth: 300),
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15)
-                  ),
-                  boxShadow: [
-                      BoxShadow(
-                      blurRadius: 10,
-                      spreadRadius: 3,
-                      color: Colors.grey[800].withOpacity(0.5)
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: Center(
+                  child: InkWell(
+                    onTap: (){
+                      print("this works");
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[400],
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15)
+                        ),
+                        boxShadow: [
+                            BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: 3,
+                            color: Colors.grey[800].withOpacity(0.5)
+                          ),
+                        ]
+                      ),
+                      child: Text("Create New Account"),
                     ),
-                  ]
+                  ),
                 ),
-                child: Text("test"),
               ),
+              InkWell(
+                onTap: (){
+                  print("this works");
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Text("Forget Password?", style: TextStyle(color: Colors.white, decoration: TextDecoration.underline)),
+                ),
+              )
             ],
           ),
         ),
