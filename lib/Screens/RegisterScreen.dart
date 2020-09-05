@@ -89,6 +89,81 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
+                      margin: EdgeInsets.only(top: 7.5,),
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                            BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            color: Colors.black.withOpacity(0.1)
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFFFFCE1),
+                            Color(0xFFFFF6A4),
+                          ],
+                          begin: FractionalOffset(0.0, 0.0),
+                          end: FractionalOffset(0.0, 1.0),
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp
+                        ), 
+                      ),
+                      child: TextField(
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: Colors.black54,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 10),
+                          hintText: 'Full Name'
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 7.5,),
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                            BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            color: Colors.black.withOpacity(0.1)
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFFFFCE1),
+                            Color(0xFFFFF6A4),
+                          ],
+                          begin: FractionalOffset(0.0, 0.0),
+                          end: FractionalOffset(0.0, 1.0),
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp
+                        ),
+                      ),
+                      child: TextField(
+                        obscureText: true,
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                        cursorColor: Colors.black54,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 10),
+                          hintText: 'Password'
+                        ),
+                      ),
+                    ),
+                    Container(
                       margin: EdgeInsets.only(
                         top: 7.5,
                         bottom: 20, 
@@ -126,7 +201,7 @@ class RegisterScreen extends StatelessWidget {
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          hintText: 'Password'
+                          hintText: 'Confirm Password'
                         ),
                       ),
                     ),
