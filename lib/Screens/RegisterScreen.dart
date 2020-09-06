@@ -13,8 +13,6 @@ class RegisterScreen extends StatelessWidget {
               Color(0xFF5DA7E6).withOpacity(0.75),
               Color(0xFF3C9DE5),
             ],
-            // begin: FractionalOffset(0.0, 0.0),
-            // end: FractionalOffset(0.0, 1.0),
             stops: [0.0, 1.0],
             radius: 1,
             tileMode: TileMode.clamp
@@ -26,7 +24,6 @@ class RegisterScreen extends StatelessWidget {
             children: [
               Container(
                 constraints: BoxConstraints(maxWidth: 300),
-                // height: 200,
                 padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -220,7 +217,6 @@ class RegisterScreen extends StatelessWidget {
                               color: Colors.black.withOpacity(0.25)
                             ),
                           ],
-                          // border: Border.all(color: Colors.black, width: 2),
                           borderRadius: BorderRadius.all(
                             Radius.circular(15)
                           ),
@@ -284,8 +280,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      Navigator.of(context).pop();
-                      print("this works");
+                      // Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false, arguments: "malik");
                     },
                     child: Container(
                       constraints: BoxConstraints(maxWidth: 150),

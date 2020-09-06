@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    // var args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -13,8 +16,6 @@ class LoginScreen extends StatelessWidget {
               Color(0xFF5DA7E6).withOpacity(0.75),
               Color(0xFF3C9DE5),
             ],
-            // begin: FractionalOffset(0.0, 0.0),
-            // end: FractionalOffset(0.0, 1.0),
             stops: [0.0, 1.0],
             radius: 1,
             tileMode: TileMode.clamp
@@ -26,7 +27,6 @@ class LoginScreen extends StatelessWidget {
             children: [
               Container(
                 constraints: BoxConstraints(maxWidth: 300),
-                // height: 200,
                 padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -145,7 +145,6 @@ class LoginScreen extends StatelessWidget {
                               color: Colors.black.withOpacity(0.25)
                             ),
                           ],
-                          // border: Border.all(color: Colors.black, width: 2),
                           borderRadius: BorderRadius.all(
                             Radius.circular(15)
                           ),
@@ -161,7 +160,7 @@ class LoginScreen extends StatelessWidget {
                           ), 
                         ),
                         child: Center(
-                          child: Text("Login"),
+                          child: Text("login"),
                         ),
                       ),
                     )

@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Color(0xFF303030), //change your color here
+          color: Color(0xFF303030),
         ),
         centerTitle: true,
         title: Image.asset(
