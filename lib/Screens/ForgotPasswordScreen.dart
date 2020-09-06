@@ -171,7 +171,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                   child: InkWell(
                     onTap: (){
                       Navigator.of(context).pop();
-                      print("this works");
                     },
                     child: Container(
                       constraints: BoxConstraints(maxWidth: 150),

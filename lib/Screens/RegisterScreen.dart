@@ -281,6 +281,7 @@ class RegisterScreen extends StatelessWidget {
                   child: InkWell(
                     onTap: (){
                       // Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false, arguments: "malik");
+                      Navigator.of(context).pop();
                     },
                     child: Container(
                       constraints: BoxConstraints(maxWidth: 150),

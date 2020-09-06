@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
+  final url = 'http://localhost:5000';
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +134,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: (){
-                        print("this works");
+                        http.get(url).then((r){
+                          print(r.body);
+                          print(r.statusCode);
+                        });
                       },
                       child: Container(
                         width: double.infinity,
