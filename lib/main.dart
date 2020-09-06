@@ -7,7 +7,7 @@ import 'Screens/ForgotPasswordScreen.dart';
 
 void main() {
   runApp(MyApp());
-}
+}  
 
 class MyApp extends StatelessWidget {
   @override
