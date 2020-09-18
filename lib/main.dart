@@ -4,6 +4,7 @@ import 'Screens/HomeScreen.dart';
 import 'Screens/LoginScreen.dart';
 import 'Screens/RegisterScreen.dart';
 import 'Screens/ForgotPasswordScreen.dart';
+import 'Screens/CategoryScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,12 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: "/login",
+      initialRoute: "/category",
       routes: {
         "/home": (context) => HomeScreen(),
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
-        "/forgotpassword": (context) => ForgotPasswordScreen()
+        "/forgotpassword": (context) => ForgotPasswordScreen(),
+        "/category": (context) => CategoryScreen(),
       },
     );
   }

@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
         ),
         centerTitle: true,
         title: Image.asset(
-          "assets/images/logo-01.png",
+          "assets/images/logo-01.png", 
           height: 25,
         ),
         backgroundColor: Color(0xFF5DA7E6),
