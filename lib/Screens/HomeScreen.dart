@@ -117,7 +117,10 @@ class HomeScreen extends StatelessWidget {
                     color: Color(0xFF303030),
                   ),
                   // NULL space for design \/ \/ \/ \/ \/
-                  Icon(Icons.ac_unit),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, right: 20),
+                    child: Icon(Icons.ac_unit),
+                  ),
                   // NULL space for design /\ /\ /\ /\ /\
                   Icon(
                     Icons.location_on,
