@@ -21,7 +21,7 @@ class CategoryWidget extends StatelessWidget {
         ),
         mainAxisSpacing: 15,
         crossAxisSpacing: theWidth * 0.05,
-        crossAxisCount: 4,
+        crossAxisCount: 3,
         childAspectRatio: 0.75,
         children: <Widget>[
           for (var i = 0; i < 30; i++)

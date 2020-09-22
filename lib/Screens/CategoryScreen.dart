@@ -21,7 +21,7 @@ class CategoryScreen extends StatelessWidget {
         ),
         backgroundColor: Color(0xFF5DA7E6),
           bottom: TabBar(
-            labelColor: Color(0xFFFCF555),
+            labelColor: Color(0xFF303030),
             unselectedLabelColor: Color(0xFF303030),
             indicatorColor: Color(0xFFFCF555),
             isScrollable: true,
