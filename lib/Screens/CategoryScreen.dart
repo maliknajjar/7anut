@@ -11,15 +11,25 @@ class CategoryScreen extends StatelessWidget {
       length: 14,
       child: Scaffold(
         appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Color(0xFF303030),
-        ),
-        centerTitle: true,
-        title: Image.asset(
-          "assets/images/logo-01.png", 
-          height: 25,
-        ),
-        backgroundColor: Color(0xFF5DA7E6),
+          actions: <Widget>[
+            Container(
+              margin: EdgeInsets.only(right: 15),
+              child: Icon(
+                Icons.shopping_cart,
+                size: 25,
+                color: Color(0xFF303030),
+              ),
+            ),
+          ],
+          iconTheme: IconThemeData(
+            color: Color(0xFF303030),
+          ),
+          centerTitle: true,
+          title: Image.asset(
+            "assets/images/logo-01.png", 
+            height: 25,
+          ),
+          backgroundColor: Color(0xFF5DA7E6),
           bottom: TabBar(
             labelColor: Color(0xFF303030),
             unselectedLabelColor: Color(0xFF303030),
@@ -27,13 +37,13 @@ class CategoryScreen extends StatelessWidget {
             isScrollable: true,
             tabs: [
               Tab(icon: Text("New products")),
-              Tab(icon: Text("water")),
-              Tab(icon: Text("Fruits and vegetables")),
+              Tab(icon: Text("Water")),
+              Tab(icon: Text("Fruits and Vegetables")),
               Tab(icon: Text("Baked goods")),
               Tab(icon: Text("Snacks")),
-              Tab(icon: Text("icecream")),
-              Tab(icon: Text("food")),
-              Tab(icon: Text("drinks")),
+              Tab(icon: Text("Icecream")),
+              Tab(icon: Text("Food")),
+              Tab(icon: Text("Drinks")),
               Tab(icon: Text("Basic materials")),
               Tab(icon: Text("Personal care")),
               Tab(icon: Text("Electronics")),

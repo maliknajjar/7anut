@@ -22,33 +22,60 @@ class CategoryWidget extends StatelessWidget {
         mainAxisSpacing: 15,
         crossAxisSpacing: theWidth * 0.05,
         crossAxisCount: 3,
-        childAspectRatio: 0.75,
+        childAspectRatio: 0.7,
         children: <Widget>[
           for (var i = 0; i < 30; i++)
             Column(
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            "https://cdn.shopify.com/s/files/1/1698/1675/products/Tomato_Thessaloniki.jpg?v=1537070112"),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(2, 2),
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                "https://cdn.shopify.com/s/files/1/1698/1675/products/Tomato_Thessaloniki.jpg?v=1537070112"),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      Positioned(
+                        right: 7.5,
+                        top: 7.5,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                          child: Icon(Icons.add),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -56,15 +83,27 @@ class CategoryWidget extends StatelessWidget {
                     width: double.infinity,
                     margin: EdgeInsets.only(
                       top: 7.5,
+                      left: 10,
                     ),
-                    child: Center(
-                      child: Text(
-                        "maliko",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: theWidth * 0.04,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "maliko",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: theWidth * 0.04,
+                          ),
                         ),
-                      ),
+                        Text(
+                          "maliko",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: theWidth * 0.04,
+                            color: Colors.grey
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
