@@ -12,7 +12,7 @@ class OrdersScreen extends StatelessWidget {
         title: Text(
           "Orders",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.yellow,
           ),
         ),
       ),
