@@ -15,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
             ],
             stops: [0.0, 1.0],
             radius: 1,
-            tileMode: TileMode.clamp
+            tileMode: TileMode.clamp,
           ),
         ),
         child: Center(
