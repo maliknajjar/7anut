@@ -5,6 +5,7 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Color(0xFF5DA7E6),
         iconTheme: IconThemeData(
           color: Color(0xFF303030),
@@ -12,7 +13,7 @@ class OrdersScreen extends StatelessWidget {
         title: Text(
           "Orders",
           style: TextStyle(
-            color: Colors.black,
+            color: Color(0xFF303030),
           ),
         ),
       ),
