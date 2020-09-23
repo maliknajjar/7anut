@@ -6,6 +6,7 @@ import 'Screens/RegisterScreen.dart';
 import 'Screens/ForgotPasswordScreen.dart';
 import 'Screens/CategoryScreen.dart';
 import 'Screens/OrdersScreen.dart';
+import 'Screens/ProfileScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         "/forgotpassword": (context) => ForgotPasswordScreen(),
         "/category": (context) => CategoryScreen(),
         "/orders": (context) => OrdersScreen(),
+        "/profile": (context) => ProfileScreen(),
       },
     );
   }
