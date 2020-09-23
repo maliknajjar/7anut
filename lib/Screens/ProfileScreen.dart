@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
         title: Text(
           "Profile",
           style: TextStyle(
-            color: Colors.yellow,
+            color: Colors.black,
           ),
         ),
       ),
