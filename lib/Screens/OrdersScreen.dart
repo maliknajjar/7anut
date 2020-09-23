@@ -15,7 +15,6 @@ class OrdersScreen extends StatelessWidget {
             color: Color(0xFF303030),
           ),
         ),
-        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: 20),
