@@ -22,7 +22,7 @@ class CategoryWidget extends StatelessWidget {
         mainAxisSpacing: 15,
         crossAxisSpacing: theWidth * 0.05,
         crossAxisCount: 3,
-        childAspectRatio: 0.7,
+        childAspectRatio: 0.69,
         children: <Widget>[
           for (var i = 0; i < 30; i++)
             Column(
@@ -56,8 +56,8 @@ class CategoryWidget extends StatelessWidget {
                         right: 7.5,
                         top: 7.5,
                         child: Container(
-                          height: 40,
-                          width: 40,
+                          height: 35,
+                          width: 35,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
                               Radius.circular(15),

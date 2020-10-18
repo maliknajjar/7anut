@@ -6,10 +6,8 @@ class EditProfileScreen extends StatefulWidget {
   String editProfilePlaceHolder = "nothing";
 
   EditProfileScreen({String editProfileTitle, String editProfilePlaceHolder}) {
-    this.editProfileTitle =
-        editProfileTitle != null ? editProfileTitle : "Edit";
-    this.editProfilePlaceHolder =
-        editProfilePlaceHolder != null ? editProfileTitle : "Nothing";
+    this.editProfileTitle = editProfileTitle != null ? editProfileTitle : "Edit";
+    this.editProfilePlaceHolder = editProfilePlaceHolder != null ? editProfileTitle : "Nothing";
   }
 
   @override
@@ -93,18 +91,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue, 
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.all(20),
-                child: Center(
-                  child: Text("Save", 
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.white
+              GestureDetector(
+                onTap: (){
+                  print("save pressed");
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue, 
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.all(15),
+                  child: Center(
+                    child: Text("Save", 
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white
+                      ),
                     ),
                   ),
                 ),

@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // to remove the debug banner
       title: 'Flutter Demo',
-      initialRoute: "/editprofile",
+      initialRoute: "/category",
       routes: {
         "/home": (context) => HomeScreen(),
         "/login": (context) => LoginScreen(),
