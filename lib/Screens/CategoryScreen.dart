@@ -11,6 +11,16 @@ class CategoryScreen extends StatelessWidget {
       length: 14,
       child: Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            Container(
+              margin: EdgeInsets.only(right: 15),
+              child: Icon(
+                Icons.shopping_cart,
+                size: 25,
+                color: Color(0xFF303030),
+              ),
+            ),
+          ],
           iconTheme: IconThemeData(
             color: Color(0xFF303030),
           ),

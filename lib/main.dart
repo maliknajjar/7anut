@@ -8,6 +8,7 @@ import 'Screens/CategoryScreen.dart';
 import 'Screens/OrdersScreen.dart';
 import 'Screens/ProfileScreen.dart';
 import 'Screens/EditProfileScreen.dart';
+import 'Screens/BasketScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: 'Flutter Demo',
-      initialRoute: "/login",
+      initialRoute: "/basket",
       routes: {
         "/home": (context) => HomeScreen(),
         "/login": (context) => LoginScreen(),
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         "/orders": (context) => OrdersScreen(),
         "/profile": (context) => ProfileScreen(),
         "/editprofile": (context) => EditProfileScreen(),
+        "/basket": (context) => BasketScreen(),
       },
     );
   }
