@@ -17,11 +17,38 @@ class BasketScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Text("test"),
-        )
-      ),
+      body: Container(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(2, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Text("test"),
+                  ),
+                  Container(
+                    child: Text("test"),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 }
