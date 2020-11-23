@@ -38,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Name", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),),
+                      InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile");}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)),
                     ],
                   ),
                   Container(
@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Email", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),),
+                      InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile");}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)),
                     ],
                   ),
                   Container(
@@ -92,8 +92,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Phone Number", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),),
-                    ],
+                      InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile");}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)),                    ],
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 20),
@@ -119,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Password", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),),
+                      InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile");}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)),
                     ],
                   ),
                   Container(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BasketScreen extends StatelessWidget {
-  final int theLimit = 2;
+  final int itemsNumber = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +24,18 @@ class BasketScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              for(int i = 1; i <= theLimit; i++)
+              for(int i = 1; i <= itemsNumber; i++)
               Container(
-                margin: EdgeInsets.only(bottom: i == theLimit  ? 20 : 0, left: 0, right: 0, top: 20),
+                margin: EdgeInsets.only(bottom: i == itemsNumber  ? 20 : 0, left: 0, right: 0, top: 0),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
+                  border: Border(
+                    top: BorderSide(
+                      width: i == 1  ? 0 : 2,
+                      color: Colors.grey[200],
+                    )
+                  )
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,16 +67,26 @@ class BasketScreen extends StatelessWidget {
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 10),
-                          child: Text("malikoooooo"),
-                        ),
+                          height: 90,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("hahahahaha", style: TextStyle(fontSize: 20),),
+                              Text("hahahahaha", style: TextStyle(fontSize: 15, color: Colors.grey[700]),),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                    Column(
-                      children: [
-                        Icon(Icons.keyboard_arrow_up),
-                        Text("5"),
-                        Icon(Icons.keyboard_arrow_down),
-                      ],
+                    Container(
+                      margin: EdgeInsets.only(right: 10),
+                      child: Column(
+                        children: [
+                          Icon(Icons.keyboard_arrow_up, size: 40, color: Colors.grey[700],),
+                          Text("5", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.grey[700]),),
+                          Icon(Icons.keyboard_arrow_down, size: 40, color: Colors.grey[700],),
+                        ],
+                      ),
                     )
                   ],
                 ),
