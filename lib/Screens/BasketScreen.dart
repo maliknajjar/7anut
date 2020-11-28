@@ -104,7 +104,7 @@ class BasketScreen extends StatelessWidget {
                                     bottom: 60,
                                     child: InkWell(
                                       onTap: (){
-                                        Items.printSelectedItems();
+                                        Items.printAllSelectedItems();
                                       },
                                       child: Icon(
                                         Icons.keyboard_arrow_up,

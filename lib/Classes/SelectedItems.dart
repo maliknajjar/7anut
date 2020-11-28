@@ -1,7 +1,7 @@
 class Items {
   static var selectedItemsMap = {};
 
-  static void printSelectedItems(){
+  static void printAllSelectedItems(){
     selectedItemsMap.forEach((key, value) {
       print("\nkey: " + key + "\nvalue: " + value);
     });
