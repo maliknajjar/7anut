@@ -15,6 +15,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  var selectedItems = {};
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
