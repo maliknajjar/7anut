@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-// importing items class
-import '../Classes/SelectedItems.dart';
+// classes
+import '../Classes/Basket.dart';
 
 class BasketScreen extends StatelessWidget {
   final int itemsNumber = 10;
@@ -104,7 +104,8 @@ class BasketScreen extends StatelessWidget {
                                     bottom: 60,
                                     child: InkWell(
                                       onTap: (){
-                                        Items.printAllSelectedItems();
+                                        Basket.addItem("tomatoes");
+                                        print(Basket.basketItems);
                                       },
                                       child: Icon(
                                         Icons.keyboard_arrow_up,
@@ -117,7 +118,7 @@ class BasketScreen extends StatelessWidget {
                                     top: 60,
                                     child: InkWell(
                                       onTap: (){
-                                        print("hahahaha");
+                                        print(Basket.basketItems);
                                       },
                                       child: Icon(
                                         Icons.keyboard_arrow_down,
