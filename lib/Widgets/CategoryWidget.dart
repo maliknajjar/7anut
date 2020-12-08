@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class CategoryWidget extends StatelessWidget {
+  var arr = [1,2,3,4,5,6,7];
+
   @override
   Widget build(BuildContext context) {
     // var args = ModalRoute.of(context).settings.arguments;
@@ -24,22 +27,43 @@ class CategoryWidget extends StatelessWidget {
         crossAxisCount: 3,
         childAspectRatio: 0.69,
         children: <Widget>[
-          for (var i = 0; i < 30; i++)
-            Column(
-              children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "https://cdn.shopify.com/s/files/1/1698/1675/products/Tomato_Thessaloniki.jpg?v=1537070112"),
-                            fit: BoxFit.cover,
+          for(var item in arr ) 
+          Column(
+            children: <Widget>[
+              AspectRatio(
+                aspectRatio: 1,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            "https://cdn.shopify.com/s/files/1/1698/1675/products/Tomato_Thessaloniki.jpg?v=1537070112"),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(2, 2),
                           ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      right: 7.5,
+                      top: 7.5,
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(
-                            Radius.circular(20),
+                            Radius.circular(15),
                           ),
                           color: Colors.white,
                           boxShadow: [
@@ -51,64 +75,43 @@ class CategoryWidget extends StatelessWidget {
                             ),
                           ],
                         ),
+                        child: Icon(Icons.add),
                       ),
-                      Positioned(
-                        right: 7.5,
-                        top: 7.5,
-                        child: Container(
-                          height: 35,
-                          width: 35,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(2, 2),
-                              ),
-                            ],
-                          ),
-                          child: Icon(Icons.add),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(
+                    top: 7.5,
+                    left: 10,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "maliko",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: theWidth * 0.04,
+                        ),
+                      ),
+                      Text(
+                        "maliko",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: theWidth * 0.04,
+                          color: Colors.grey
                         ),
                       ),
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(
-                      top: 7.5,
-                      left: 10,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "maliko",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: theWidth * 0.04,
-                          ),
-                        ),
-                        Text(
-                          "maliko",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: theWidth * 0.04,
-                            color: Colors.grey
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
         ],
       ),
     );

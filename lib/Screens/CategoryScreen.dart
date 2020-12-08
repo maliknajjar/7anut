@@ -8,7 +8,7 @@ class CategoryScreen extends StatelessWidget {
     // var args = ModalRoute.of(context).settings.arguments;
 
     return DefaultTabController(
-      length: 14,
+      length: 13,
       child: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
@@ -36,7 +36,6 @@ class CategoryScreen extends StatelessWidget {
             indicatorColor: Color(0xFFFCF555),
             isScrollable: true,
             tabs: [
-              Tab(icon: Text("New products")),
               Tab(icon: Text("Water")),
               Tab(icon: Text("Fruits and Vegetables")),
               Tab(icon: Text("Baked goods")),
@@ -55,7 +54,6 @@ class CategoryScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            CategoryWidget(),
             CategoryWidget(),
             CategoryWidget(),
             CategoryWidget(),
