@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CategoryWidget extends StatelessWidget {
-  var arr = [1,2,3,4,5,6,7];
+  var arr = [1,2,3,4,5];
 
   @override
   Widget build(BuildContext context) {
     // var args = ModalRoute.of(context).settings.arguments;
     var theWidth = MediaQuery.of(context).size.width;
+
+    http.get("http://localhost:8000/products?json").then((r){
+      List valueMap = json.decode(r.body);
+      print(valueMap[0]);
+    });
 
     return Container(
       padding: EdgeInsets.only(
