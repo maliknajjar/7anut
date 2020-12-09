@@ -2,20 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class CategoryWidget extends StatelessWidget {
-  var arr = [1,2,3,4,5];
+class CategoryWidget extends StatefulWidget {
+  @override
+  _CategoryWidgetState createState() => _CategoryWidgetState();
+}
+
+class _CategoryWidgetState extends State<CategoryWidget> {
+  var arr;
+  bool dataIsAvailable = false;
+
+  @override
+  initState() {
+    super.initState();
+    
+    http.get("http://localhost:8000/products?json").then((r){
+      setState(() {
+        dataIsAvailable = true;
+        arr = json.decode(r.body);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    // var args = ModalRoute.of(context).settings.arguments;
     var theWidth = MediaQuery.of(context).size.width;
 
-    http.get("http://localhost:8000/products?json").then((r){
-      List valueMap = json.decode(r.body);
-      print(valueMap[0]);
-    });
-
-    return Container(
+    return !dataIsAvailable 
+    ? Center(child: Text("loading products")) 
+    : Container(
       padding: EdgeInsets.only(
         // bottom: 100.5,
       ),
@@ -43,8 +57,7 @@ class CategoryWidget extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            "https://cdn.shopify.com/s/files/1/1698/1675/products/Tomato_Thessaloniki.jpg?v=1537070112"),
+                          image: NetworkImage(item["imageUrl"]),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.all(
@@ -98,14 +111,14 @@ class CategoryWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "maliko",
+                        item["Name"],
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: theWidth * 0.04,
                         ),
                       ),
                       Text(
-                        "maliko",
+                        item["size"],
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: theWidth * 0.04,
