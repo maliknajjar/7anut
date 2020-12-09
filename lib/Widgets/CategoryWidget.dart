@@ -3,23 +3,36 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CategoryWidget extends StatefulWidget {
+  String category;
+  CategoryWidget(String cat){
+    category = cat;
+  }
+
   @override
-  _CategoryWidgetState createState() => _CategoryWidgetState();
+  _CategoryWidgetState createState() => _CategoryWidgetState(category);
 }
 
 class _CategoryWidgetState extends State<CategoryWidget> {
   var arr;
+  String category;
   bool dataIsAvailable = false;
+
+  _CategoryWidgetState(String cat){
+    category = cat;
+  }
 
   @override
   initState() {
     super.initState();
     
-    http.get("http://localhost:8000/products?json").then((r){
-      setState(() {
-        dataIsAvailable = true;
-        arr = json.decode(r.body);
-      });
+    http.get("http://localhost:8000/products?json&category=" + category).then((r){
+      if (this.mounted) {
+        setState(() {
+          dataIsAvailable = true;
+          arr = json.decode(r.body);
+          print(category);
+        });
+      }
     });
   }
 
@@ -28,7 +41,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     var theWidth = MediaQuery.of(context).size.width;
 
     return !dataIsAvailable 
-    ? Center(child: Text("loading products")) 
+    ? Container(color: Color(0xFF5DA7E6).withOpacity(0.1), child: Center(child: Text("loading products"))) 
     : Container(
       padding: EdgeInsets.only(
         // bottom: 100.5,

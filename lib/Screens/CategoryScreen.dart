@@ -1,15 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import "../Widgets/CategoryWidget.dart";
 
-class CategoryScreen extends StatelessWidget {
+class CategoryScreen extends StatefulWidget {
+  @override
+  _CategoryScreenState createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends State<CategoryScreen> {
+  var arr;
+  bool dataIsAvailable = false;
+
+  @override
+  initState() {
+    super.initState();
+    
+    http.get("http://localhost:8000/categories").then((r){
+      setState(() {
+        dataIsAvailable = true;
+        arr = json.decode(r.body);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // var args = ModalRoute.of(context).settings.arguments;
-
     return DefaultTabController(
-      length: 13,
-      child: Scaffold(
+      length: !dataIsAvailable ? 0 : arr.length,
+      child: !dataIsAvailable 
+      ? Scaffold(backgroundColor: Color(0xFF5DA7E6).withOpacity(0.1), body: Center(child: Text("loading products")))
+      : Scaffold(
         appBar: AppBar(
           actions: <Widget>[
             Container(
@@ -36,37 +58,15 @@ class CategoryScreen extends StatelessWidget {
             indicatorColor: Color(0xFFFCF555),
             isScrollable: true,
             tabs: [
-              Tab(icon: Text("Water")),
-              Tab(icon: Text("Fruits and Vegetables")),
-              Tab(icon: Text("Baked goods")),
-              Tab(icon: Text("Snacks")),
-              Tab(icon: Text("Icecream")),
-              Tab(icon: Text("Food")),
-              Tab(icon: Text("Drinks")),
-              Tab(icon: Text("Basic materials")),
-              Tab(icon: Text("Personal care")),
-              Tab(icon: Text("Electronics")),
-              Tab(icon: Text("Animal food")),
-              Tab(icon: Text("kids Accessories")),
-              Tab(icon: Text("Clothes")),
+              for(var item in arr)
+              Tab(icon: Text(item["name"])),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
-            CategoryWidget(),
+            for(var item in arr)
+            CategoryWidget(item["name"]),
           ],
         ),
       ),
