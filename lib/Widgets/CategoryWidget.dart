@@ -27,7 +27,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   initState() {
     super.initState();
     
-    http.get("http://localhost:8000/products?json&category=" + category).then((r){
+    http.get("http://10.0.2.2:8000/products?json&category=" + category).then((r){
       if (this.mounted) {
         setState(() {
           dataIsAvailable = true;
@@ -42,7 +42,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     var theWidth = MediaQuery.of(context).size.width;
 
     return !dataIsAvailable 
-    ? Container(color: Color(0xFF5DA7E6).withOpacity(0.1), child: Center(child: Image.asset("images/loading.gif", height: 100, width: 100,))) 
+    ? Container(color: Color(0xFF5DA7E6).withOpacity(0.1), child: Center(child: Image.asset("assets/images/loading.gif", height: 100, width: 100,))) 
     : Container(
       padding: EdgeInsets.only(
         // bottom: 100.5,
@@ -94,6 +94,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       child: InkWell(
                         onTap: (){
                           Basket.addItem(item["Name"]);
+                          Basket.printAllSelectedItems();
                         },
                         child: Container(
                           height: 35,

@@ -17,7 +17,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   initState() {
     super.initState();
     
-    http.get("http://localhost:8000/categories").then((r){
+    http.get("http://10.0.2.2:8000/categories").then((r){
       setState(() {
         dataIsAvailable = true;
         arr = json.decode(r.body);
