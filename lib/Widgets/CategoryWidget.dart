@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../Classes/Basket.dart';
+
 class CategoryWidget extends StatefulWidget {
   String category;
   CategoryWidget(String cat){
@@ -30,7 +32,6 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         setState(() {
           dataIsAvailable = true;
           arr = json.decode(r.body);
-          print(category);
         });
       }
     });
@@ -90,24 +91,29 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                     Positioned(
                       right: 7.5,
                       top: 7.5,
-                      child: Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(2, 2),
+                      child: InkWell(
+                        onTap: (){
+                          Basket.addItem(item["Name"]);
+                        },
+                        child: Container(
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
                             ),
-                          ],
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                          child: Icon(Icons.add),
                         ),
-                        child: Icon(Icons.add),
                       ),
                     ),
                   ],

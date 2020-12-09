@@ -30,7 +30,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return DefaultTabController(
       length: !dataIsAvailable ? 0 : arr.length,
       child: !dataIsAvailable 
-      ? Scaffold(backgroundColor: Color(0xFF5DA7E6).withOpacity(0.1), body: Center(child: Image.asset("images/loading.gif", height: 100, width: 100,)))
+      ? Scaffold(backgroundColor: Colors.grey[200], body: Center(child: Image.asset("assets/images/loading.gif", height: 100, width: 100,)))
       : Scaffold(
         appBar: AppBar(
           actions: <Widget>[

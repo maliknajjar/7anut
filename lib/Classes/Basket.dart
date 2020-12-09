@@ -5,7 +5,7 @@ class Basket {
     print(Basket.basketItems);
   }
 
-  static void addItem(String itemKeyName){
-    basketItems.add({});
+  static void addItem(String itemName){
+    basketItems.add(itemName);
   }
 }
