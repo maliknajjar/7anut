@@ -41,7 +41,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     var theWidth = MediaQuery.of(context).size.width;
 
     return !dataIsAvailable 
-    ? Container(color: Color(0xFF5DA7E6).withOpacity(0.1), child: Center(child: Text("loading products"))) 
+    ? Container(color: Color(0xFF5DA7E6).withOpacity(0.1), child: Center(child: Image.asset("images/loading.gif", height: 100, width: 100,))) 
     : Container(
       padding: EdgeInsets.only(
         // bottom: 100.5,
