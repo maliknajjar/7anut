@@ -5,6 +5,7 @@ import 'dart:convert';
 import "../Widgets/CategoryWidget.dart";
 
 class CategoryScreen extends StatefulWidget {
+  
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
@@ -27,8 +28,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String index = ModalRoute.of(context).settings.arguments.toString();
     return DefaultTabController(
-      initialIndex: 0,
+      initialIndex: int.parse(index),
       length: !dataIsAvailable ? 0 : arr.length,
       child: !dataIsAvailable 
       ? Scaffold(backgroundColor: Colors.grey[200], body: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,)))

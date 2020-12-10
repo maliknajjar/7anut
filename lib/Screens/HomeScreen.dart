@@ -60,49 +60,54 @@ class _HomeScreenState extends State<HomeScreen> {
               childAspectRatio: 0.75,
               children: <Widget>[
                 for(var item in arr)
-                Column(
-                  children: <Widget>[
-                    AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(item["imageUrl"]),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(2, 2),
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).pushNamed("/category", arguments: item["ID"] - 1);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      AspectRatio(
+                        aspectRatio: 1,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(item["imageUrl"]),
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                          top: 7.5,
-                        ),
-                        child: Center(
-                          child: Text(
-                            item["name"],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: theWidth * 0.04,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
                             ),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                            top: 7.5,
+                          ),
+                          child: Center(
+                            child: Text(
+                              item["name"],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: theWidth * 0.04,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
