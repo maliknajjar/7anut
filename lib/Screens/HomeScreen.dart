@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  var arr;
+  bool dataIsAvailable = false;
+
+  @override
+  initState() {
+    super.initState();
+    
+    http.get("http://10.0.2.2:8000/categories").then((r){
+      setState(() {
+        dataIsAvailable = true;
+        arr = json.decode(r.body);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var theWidth = MediaQuery.of(context).size.width;
@@ -37,52 +59,51 @@ class HomeScreen extends StatelessWidget {
               crossAxisCount: 4,
               childAspectRatio: 0.75,
               children: <Widget>[
-                for (var i = 0; i < 30; i++)
-                  Column(
-                    children: <Widget>[
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://cdn.shopify.com/s/files/1/1698/1675/products/Tomato_Thessaloniki.jpg?v=1537070112"),
-                              fit: BoxFit.cover,
+                for(var item in arr)
+                Column(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(item["imageUrl"]),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(2, 2),
                             ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          top: 7.5,
+                        ),
+                        child: Center(
+                          child: Text(
+                            item["name"],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: theWidth * 0.04,
                             ),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(2, 2),
-                              ),
-                            ],
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            top: 7.5,
-                          ),
-                          child: Center(
-                            child: Text(
-                              "maliko",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: theWidth * 0.04,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
