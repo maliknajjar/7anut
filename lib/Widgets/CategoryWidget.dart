@@ -97,8 +97,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           Basket.printAllSelectedItems();
                         },
                         child: Container(
-                          height: 35,
-                          width: 35,
+                          height: theWidth * 0.085,
+                          width: theWidth * 0.085,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
                               Radius.circular(15),
