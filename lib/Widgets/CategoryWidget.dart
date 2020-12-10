@@ -40,6 +40,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     var theWidth = MediaQuery.of(context).size.width;
+    var columnMultiplier = 2;
+    theWidth /= columnMultiplier;
 
     return !dataIsAvailable 
     ? Container(color: Color(0xFF5DA7E6).withOpacity(0.1), child: Center(child: Image.asset("assets/images/loading.gif", height: 100, width: 100,))) 
@@ -58,7 +60,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         ),
         mainAxisSpacing: 15,
         crossAxisSpacing: theWidth * 0.05,
-        crossAxisCount: 3,
+        crossAxisCount: 3 * columnMultiplier,
         childAspectRatio: 0.69,
         children: <Widget>[
           for(var item in arr ) 
@@ -75,7 +77,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.all(
-                          Radius.circular(20),
+                          Radius.circular(theWidth * 0.06),
                         ),
                         color: Colors.white,
                         boxShadow: [
@@ -89,8 +91,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       ),
                     ),
                     Positioned(
-                      right: 7.5,
-                      top: 7.5,
+                      right: theWidth * 0.0225,
+                      top: theWidth * 0.0225,
                       child: InkWell(
                         onTap: (){
                           Basket.addItem(item["Name"]);
@@ -101,7 +103,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           width: theWidth * 0.085,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(15),
+                              Radius.circular(theWidth * 0.035),
                             ),
                             color: Colors.white,
                             boxShadow: [
@@ -113,7 +115,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               ),
                             ],
                           ),
-                          child: Icon(Icons.add),
+                          child: Icon(Icons.add, size: theWidth * 0.07,),
                         ),
                       ),
                     ),
