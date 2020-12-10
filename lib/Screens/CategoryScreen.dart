@@ -28,6 +28,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: 0,
       length: !dataIsAvailable ? 0 : arr.length,
       child: !dataIsAvailable 
       ? Scaffold(backgroundColor: Colors.grey[200], body: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,)))

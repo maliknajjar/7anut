@@ -40,7 +40,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     var theWidth = MediaQuery.of(context).size.width;
-    var columnMultiplier = 2;
+    var columnMultiplier = 1;
     theWidth /= columnMultiplier;
 
     return !dataIsAvailable 
