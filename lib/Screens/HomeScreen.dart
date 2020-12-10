@@ -132,10 +132,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Icon(
-                    Icons.person,
-                    size: 35,
-                    color: Color(0xFF303030),
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed("/profile");
+                    },
+                    child: Icon(
+                      Icons.person,
+                      size: 35,
+                      color: Color(0xFF303030),
+                    ),
                   ),
                   Icon(
                     Icons.search,
