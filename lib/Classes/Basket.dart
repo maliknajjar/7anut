@@ -1,7 +1,7 @@
 class Basket {
   static var basketItems = [];
 
-  static int getItemNumber(String itemID){
+  static int getItemQty(String itemID){
     
   }
 
@@ -10,6 +10,12 @@ class Basket {
   }
 
   static void addItem(String itemID){
+    for(int i = 0; i < Basket.basketItems.length; i++){
+      if(Basket.basketItems[i]["ID"] == itemID){
+        Basket.basketItems[i]["qty"]++;
+        return;
+      }
+    }
     basketItems.add({"ID": itemID, "qty": 1});
   }
 }
