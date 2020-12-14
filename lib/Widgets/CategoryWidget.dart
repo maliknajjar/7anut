@@ -44,7 +44,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     theWidth /= columnMultiplier;
 
     return !dataIsAvailable 
-    ? Container(color: Color(0xFF5DA7E6).withOpacity(0.1), child: Center(child: Image.asset("assets/images/loading.gif", height: 100, width: 100,))) 
+    ? Container(color: Colors.white70, child: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,))) 
     : Container(
       padding: EdgeInsets.only(
         // bottom: 100.5,
@@ -95,7 +95,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       top: theWidth * 0.0225,
                       child: InkWell(
                         onTap: (){
-                          Basket.addItem(item["Name"]);
+                          Basket.addItem(item["ID"].toString());
                           Basket.printAllSelectedItems();
                         },
                         child: Container(

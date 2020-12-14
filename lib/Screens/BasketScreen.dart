@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // classes
 import '../Classes/Basket.dart';
 
-class BasketScreen extends StatelessWidget {
+class BasketScreen extends StatefulWidget {
+  @override
+  _BasketScreenState createState() => _BasketScreenState();
+}
+
+class _BasketScreenState extends State<BasketScreen> {
+  var products;
+  bool dataIsAvailable = false;
+
+  @override
+  initState() {
+    super.initState();
+    
+    http.get("http://10.0.2.2:8000/api/products").then((r){
+      if (this.mounted) {
+        setState(() {
+          dataIsAvailable = true;
+          products = json.decode(r.body);
+          print(products);
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return !dataIsAvailable 
+    ? Container(color: Colors.white70, child: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,))) 
+    : Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF5DA7E6),
@@ -28,7 +54,7 @@ class BasketScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    for (int i = 1; i <= 10; i++)
+                    for (int i = 0; i < Basket.basketItems.length; i++)
                       Container(
                         margin: EdgeInsets.only(
                             bottom: i == 10 ? 20 : 0,
@@ -54,7 +80,8 @@ class BasketScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: NetworkImage(
-                                          "https://cdn.shopify.com/s/files/1/1698/1675/products/Tomato_Thessaloniki.jpg?v=1537070112"),
+                                        products[int.parse(Basket.basketItems[i]["ID"])]["imageUrl"],
+                                      ),
                                       fit: BoxFit.cover,
                                     ),
                                     borderRadius: BorderRadius.all(
@@ -79,11 +106,11 @@ class BasketScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "hahahahaha",
+                                        products[int.parse(Basket.basketItems[i]["ID"])]["Name"],
                                         style: TextStyle(fontSize: 20),
                                       ),
                                       Text(
-                                        "hahahahaha",
+                                        products[int.parse(Basket.basketItems[i]["ID"])]["size"],
                                         style: TextStyle(
                                             fontSize: 15,
                                             color: Colors.grey[700]),
@@ -95,41 +122,103 @@ class BasketScreen extends StatelessWidget {
                             ),
                             Container(
                               height: 100,
-                              width: 100,
+                              width: 90,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    initialValue: "0",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 30
-                                    ),
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                    ),
-                                  ),
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
+                                        Radius.circular(10),
                                       ),
                                       color: Colors.white,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
+                                          color: Colors.grey
+                                              .withOpacity(0.5),
                                           spreadRadius: 2,
                                           blurRadius: 5,
                                           offset: Offset(2, 2),
                                         ),
                                       ],
                                     ),
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      initialValue: 1.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 30),
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("+", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
-                                        Text("-", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                                        InkWell(
+                                          onTap: (){
+                                            print("+++++++++++++");
+                                          },
+                                          child: Container(
+                                            width: 40,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10),
+                                              ),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(2, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Text(
+                                              "+",
+                                              style: TextStyle(
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: (){
+                                            print("-------------");
+                                            print(Basket.basketItems);
+                                          },
+                                          child: Container(
+                                            width: 40,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10),
+                                              ),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(2, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Text(
+                                              "-",
+                                              style: TextStyle(
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   )
