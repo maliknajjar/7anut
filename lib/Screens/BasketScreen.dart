@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 import '../Classes/Basket.dart';
 
 class BasketScreen extends StatelessWidget {
-  final int itemsNumber = 10;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +28,10 @@ class BasketScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    for (int i = 1; i <= itemsNumber; i++)
+                    for (int i = 1; i <= 10; i++)
                       Container(
                         margin: EdgeInsets.only(
-                            bottom: i == itemsNumber ? 20 : 0,
+                            bottom: i == 10 ? 20 : 0,
                             left: 0,
                             right: 0,
                             top: 0),
@@ -98,43 +96,27 @@ class BasketScreen extends StatelessWidget {
                             Container(
                               height: 100,
                               width: 50,
-                              child: Stack(
-                                alignment: Alignment.center,
+                              child: Column(
                                 children: [
-                                  Positioned(
-                                    bottom: 60,
-                                    child: InkWell(
-                                      onTap: (){
-                                        Basket.addItem("tomatoes");
-                                        print(Basket.basketItems);
-                                      },
-                                      child: Icon(
-                                        Icons.keyboard_arrow_up,
-                                        size: 50,
-                                        color: Colors.grey[700],
-                                      ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        top: BorderSide(width: 1.5),
+                                        right: BorderSide(width: 1.5),
+                                        left: BorderSide(width: 1.5),
+                                      )
                                     ),
+                                    child: Text("data"),
                                   ),
-                                  Positioned(
-                                    top: 60,
-                                    child: InkWell(
-                                      onTap: (){
-                                        print(Basket.basketItems);
-                                      },
-                                      child: Icon(
-                                        Icons.keyboard_arrow_down,
-                                        size: 50,
-                                        color: Colors.grey[700],
-                                      ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(width: 1.5, color: Colors.red),
+                                        right: BorderSide(width: 1.5, color: Colors.red),
+                                        left: BorderSide(width: 1.5, color: Colors.red),
+                                      )
                                     ),
-                                  ),
-                                  Text(
-                                    "5",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[700],
-                                    ),
+                                    child: Text("data"),
                                   ),
                                 ],
                               ),
