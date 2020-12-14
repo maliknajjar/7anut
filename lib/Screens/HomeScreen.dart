@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   initState() {
     super.initState();
     
-    http.get("http://10.0.2.2:8000/categories").then((r){
+    http.get("http://10.0.2.2:8000/api/categories").then((r){
       setState(() {
         dataIsAvailable = true;
         arr = json.decode(r.body);

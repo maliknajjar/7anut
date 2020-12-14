@@ -27,7 +27,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   initState() {
     super.initState();
     
-    http.get("http://10.0.2.2:8000/products?json&category=" + category).then((r){
+    http.get("http://10.0.2.2:8000/api/products/" + category).then((r){
       if (this.mounted) {
         setState(() {
           dataIsAvailable = true;
