@@ -95,29 +95,22 @@ class BasketScreen extends StatelessWidget {
                             ),
                             Container(
                               height: 100,
-                              width: 50,
+                              width: 75,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey, width: 2),
+                                borderRadius: BorderRadius.all(Radius.circular(10))
+                              ),
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        top: BorderSide(width: 1.5),
-                                        right: BorderSide(width: 1.5),
-                                        left: BorderSide(width: 1.5),
-                                      )
-                                    ),
-                                    child: Text("data"),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(width: 1.5, color: Colors.red),
-                                        right: BorderSide(width: 1.5, color: Colors.red),
-                                        left: BorderSide(width: 1.5, color: Colors.red),
-                                      )
-                                    ),
-                                    child: Text("data"),
-                                  ),
+                                  Text("0"),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text("+"),
+                                      Text("-"),
+                                    ],
+                                  )
                                 ],
                               ),
                             )
