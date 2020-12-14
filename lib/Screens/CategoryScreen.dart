@@ -39,10 +39,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
           actions: <Widget>[
             Container(
               margin: EdgeInsets.only(right: 15),
-              child: Icon(
-                Icons.shopping_cart,
-                size: 25,
-                color: Color(0xFF303030),
+              child: InkWell(
+                onTap: (){
+                  Navigator.of(context).pushNamed("/basket");
+                },
+                child: Icon(
+                  Icons.shopping_cart,
+                  size: 25,
+                  color: Color(0xFF303030),
+                ),
               ),
             ),
           ],

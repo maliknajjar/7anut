@@ -173,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.bottomCenter,
               child: InkWell(
                 onTap: () {
-                  print("this realy works man");
+                  Navigator.of(context).pushNamed("/basket");
                 },
                 child: Container(
                   height: 70,
