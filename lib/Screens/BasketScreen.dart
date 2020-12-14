@@ -95,21 +95,43 @@ class BasketScreen extends StatelessWidget {
                             ),
                             Container(
                               height: 100,
-                              width: 75,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(10))
-                              ),
+                              width: 100,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text("0"),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text("+"),
-                                      Text("-"),
-                                    ],
+                                  TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    initialValue: "0",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 30
+                                    ),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                      ),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(2, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text("+", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                                        Text("-", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
