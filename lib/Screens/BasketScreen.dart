@@ -144,7 +144,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                     ),
                                     child: TextFormField(
                                       keyboardType: TextInputType.number,
-                                      initialValue: 1.toString(),
+                                      initialValue: Basket.basketItems[i]["qty"].toString(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 30),
                                       decoration: InputDecoration(
@@ -159,6 +159,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                         InkWell(
                                           onTap: (){
                                             print("+++++++++++++");
+                                            Basket.addItem(Basket.basketItems[i]["ID"]);
                                           },
                                           child: Container(
                                             width: 40,
