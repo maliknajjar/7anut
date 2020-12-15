@@ -175,8 +175,10 @@ class _BasketScreenState extends State<BasketScreen> {
                                         InkWell(
                                           onTap: () {
                                             print("-------------");
-                                            // print(Basket.basketItems);
-                                            print(Basket.basketItems[i]["qty"]);
+                                            setState(() {
+                                              Basket.removeItem(Basket.basketItems[i]["ID"]);
+                                            });
+                                            print(Basket.basketItems);
                                           },
                                           child: Container(
                                             width: 40,
