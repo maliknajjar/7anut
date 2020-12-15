@@ -35,7 +35,7 @@ class _BasketScreenState extends State<BasketScreen> {
                     for (int i = 0; i < Basket.basketItems.length; i++)
                       Container(
                         margin: EdgeInsets.only(
-                            bottom: i == 10 ? 20 : 0,
+                            bottom: 0,
                             left: 0,
                             right: 0,
                             top: 0),
@@ -43,8 +43,8 @@ class _BasketScreenState extends State<BasketScreen> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border(
-                            top: BorderSide(
-                              width: i == 0 ? 0 : 2,
+                            bottom: BorderSide(
+                              width: 2,
                               color: Colors.grey[200],
                             ),
                           ),
