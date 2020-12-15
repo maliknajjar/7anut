@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 // classes
 import '../Classes/Basket.dart';
@@ -11,29 +9,9 @@ class BasketScreen extends StatefulWidget {
 }
 
 class _BasketScreenState extends State<BasketScreen> {
-  var products;
-  bool dataIsAvailable = false;
-
-  @override
-  initState() {
-    super.initState();
-    
-    http.get("http://10.0.2.2:8000/api/products").then((r){
-      if (this.mounted) {
-        setState(() {
-          dataIsAvailable = true;
-          products = json.decode(r.body);
-          print(products);
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return !dataIsAvailable 
-    ? Container(color: Colors.white70, child: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,))) 
-    : Scaffold(
+    return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF5DA7E6),
@@ -63,12 +41,14 @@ class _BasketScreenState extends State<BasketScreen> {
                             top: 0),
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border(
-                                top: BorderSide(
-                              width: i == 1 ? 0 : 2,
+                          color: Colors.white,
+                          border: Border(
+                            top: BorderSide(
+                              width: i == 0 ? 0 : 2,
                               color: Colors.grey[200],
-                            ))),
+                            ),
+                          ),
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -80,7 +60,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: NetworkImage(
-                                        products[int.parse(Basket.basketItems[i]["ID"])]["imageUrl"],
+                                        Basket.basketItems[i]["imageUrl"],
                                       ),
                                       fit: BoxFit.cover,
                                     ),
@@ -106,11 +86,11 @@ class _BasketScreenState extends State<BasketScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        products[int.parse(Basket.basketItems[i]["ID"])]["Name"],
+                                        Basket.basketItems[i]["Name"],
                                         style: TextStyle(fontSize: 20),
                                       ),
                                       Text(
-                                        products[int.parse(Basket.basketItems[i]["ID"])]["size"],
+                                        Basket.basketItems[i]["size"],
                                         style: TextStyle(
                                             fontSize: 15,
                                             color: Colors.grey[700]),
@@ -124,7 +104,8 @@ class _BasketScreenState extends State<BasketScreen> {
                               height: 100,
                               width: 90,
                               child: Column(
-                                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
@@ -134,8 +115,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                       color: Colors.white,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.grey
-                                              .withOpacity(0.5),
+                                          color: Colors.grey.withOpacity(0.5),
                                           spreadRadius: 2,
                                           blurRadius: 5,
                                           offset: Offset(2, 2),
@@ -144,6 +124,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                     ),
                                     child: TextFormField(
                                       keyboardType: TextInputType.number,
+                                      key: Key(Basket.basketItems[i]["qty"].toString()),
                                       initialValue: Basket.basketItems[i]["qty"].toString(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 30),
@@ -154,12 +135,15 @@ class _BasketScreenState extends State<BasketScreen> {
                                   ),
                                   Container(
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         InkWell(
-                                          onTap: (){
+                                          onTap: () {
                                             print("+++++++++++++");
-                                            Basket.addItem(Basket.basketItems[i]["ID"]);
+                                            setState(() {
+                                              Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"]);
+                                            });
                                           },
                                           child: Container(
                                             width: 40,
@@ -189,9 +173,10 @@ class _BasketScreenState extends State<BasketScreen> {
                                           ),
                                         ),
                                         InkWell(
-                                          onTap: (){
+                                          onTap: () {
                                             print("-------------");
-                                            print(Basket.basketItems);
+                                            // print(Basket.basketItems);
+                                            print(Basket.basketItems[i]["qty"]);
                                           },
                                           child: Container(
                                             width: 40,
