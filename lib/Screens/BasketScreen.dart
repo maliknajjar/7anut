@@ -93,6 +93,13 @@ class _BasketScreenState extends State<BasketScreen> {
                                             style: TextStyle(fontSize: 20),
                                           ),
                                           Text(
+                                            Basket.basketItems[i]["price"] + " DT",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.grey[700]
+                                            ),
+                                          ),
+                                          Text(
                                             Basket.basketItems[i]["size"],
                                             style: TextStyle(
                                               fontSize: 15,
@@ -103,7 +110,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                       ),
                                       Center(
                                         child: Text(
-                                          "Price: " + Basket.basketItems[i]["price"].toString(),
+                                          "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
                                           style: TextStyle(
                                             fontSize: 20,
                                             color: Colors.grey[900],
@@ -144,6 +151,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                           return;
                                         }
                                         Basket.changeItemQty(Basket.basketItems[i]["ID"], string);
+                                        setState(() {
+                                          print("page refreshed");
+                                        });
                                       },
                                       keyboardType: TextInputType.number,
                                       key: Key(Basket.basketItems[i]["qty"].toString()),
