@@ -9,6 +9,26 @@ class BasketScreen extends StatefulWidget {
 }
 
 class _BasketScreenState extends State<BasketScreen> {
+  List<FocusNode> focusNodes = new List<FocusNode>.generate(Basket.basketItems.length, (_) => new FocusNode()) ;
+
+  @override
+  void initState() {
+    super.initState();
+    for(FocusNode i in focusNodes){
+      i = FocusNode();
+    }
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    for(FocusNode i in focusNodes){
+      i.dispose();
+    }
+    print("done disposing all focus nodes");
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,6 +150,8 @@ class _BasketScreenState extends State<BasketScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
+                                    width: double.infinity,
+                                    height: 55,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10),
@@ -144,26 +166,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                         ),
                                       ],
                                     ),
-                                    child: TextFormField(
-                                      onChanged: (string){
-                                        if(string == ""){
-                                          Basket.changeItemQty(Basket.basketItems[i]["ID"], 1.toString());
-                                          return;
-                                        }
-                                        Basket.changeItemQty(Basket.basketItems[i]["ID"], string);
-                                        setState(() {
-                                          print("page refreshed");
-                                        });
-                                      },
-                                      keyboardType: TextInputType.number,
-                                      key: Key(Basket.basketItems[i]["qty"].toString()),
-                                      initialValue: Basket.basketItems[i]["qty"].toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 30),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
+                                    child: Center(child: Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 30),)),
                                   ),
                                   Container(
                                     child: Row(
