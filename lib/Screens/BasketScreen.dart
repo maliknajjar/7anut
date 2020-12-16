@@ -82,18 +82,33 @@ class _BasketScreenState extends State<BasketScreen> {
                                   margin: EdgeInsets.only(left: 10),
                                   height: 90,
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        Basket.basketItems[i]["Name"],
-                                        style: TextStyle(fontSize: 20),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            Basket.basketItems[i]["Name"],
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                          Text(
+                                            Basket.basketItems[i]["size"],
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.grey[700]
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        Basket.basketItems[i]["size"],
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.grey[700]),
+                                      Center(
+                                        child: Text(
+                                          "Price: " + Basket.basketItems[i]["price"].toString(),
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.grey[900],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -123,6 +138,13 @@ class _BasketScreenState extends State<BasketScreen> {
                                       ],
                                     ),
                                     child: TextFormField(
+                                      onChanged: (string){
+                                        if(string == ""){
+                                          Basket.changeItemQty(Basket.basketItems[i]["ID"], 1.toString());
+                                          return;
+                                        }
+                                        Basket.changeItemQty(Basket.basketItems[i]["ID"], string);
+                                      },
                                       keyboardType: TextInputType.number,
                                       key: Key(Basket.basketItems[i]["qty"].toString()),
                                       initialValue: Basket.basketItems[i]["qty"].toString(),
@@ -142,7 +164,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                           onTap: () {
                                             print("+++++++++++++");
                                             setState(() {
-                                              Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"]);
+                                              Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString());
                                             });
                                           },
                                           child: Container(

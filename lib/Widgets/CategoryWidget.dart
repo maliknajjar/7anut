@@ -95,7 +95,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       top: theWidth * 0.0225,
                       child: InkWell(
                         onTap: (){
-                          Basket.addItem(item["ID"].toString(), item["Name"], item["size"], item["imageUrl"]);
+                          Basket.addItem(item["ID"].toString(), item["Name"], item["size"], item["imageUrl"], item["price"].toString());
                           Basket.printAllSelectedItems();
                         },
                         child: Container(
