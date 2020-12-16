@@ -175,7 +175,6 @@ class _BasketScreenState extends State<BasketScreen> {
                                       children: [
                                         InkWell(
                                           onTap: () {
-                                            print("+++++++++++++");
                                             setState(() {
                                               Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString());
                                             });
@@ -209,11 +208,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            print("-------------");
                                             setState(() {
                                               Basket.removeItem(Basket.basketItems[i]["ID"]);
                                             });
-                                            print(Basket.basketItems);
                                           },
                                           child: Container(
                                             width: 40,

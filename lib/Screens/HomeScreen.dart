@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned.fill(
-            bottom: -10,
+            bottom: -5,
             child: Align(
               alignment: Alignment.bottomCenter,
               child: InkWell(

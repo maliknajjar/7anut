@@ -33,4 +33,13 @@ class Basket {
       }
     }
   }
+
+  static String getItemsTotalNumber(){
+    int totalNumber = 0;
+    for(int i = 0; i < Basket.basketItems.length; i++){
+      totalNumber += Basket.basketItems[i]["qty"];
+    }
+    if(totalNumber == 0) return "0";
+    return totalNumber.toString();
+  }
 }
