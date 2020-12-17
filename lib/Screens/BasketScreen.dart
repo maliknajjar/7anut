@@ -33,6 +33,12 @@ class _BasketScreenState extends State<BasketScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: (){
+              Navigator.of(context).pop();
+            } 
+          ),
           centerTitle: true,
           backgroundColor: Color(0xFF5DA7E6),
           iconTheme: IconThemeData(

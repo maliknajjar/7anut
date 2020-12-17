@@ -166,7 +166,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           curve: Curves.easeInOut,
           child: InkWell(
             onTap: (){
-              Navigator.of(context).pushNamed("/basket");
+              Navigator.of(context).pushNamed("/basket").then((value){
+                setState(() {});
+              });
+              // Navigator.of(context).pushNamed("/basket");
             },
             child: Stack(
               children: [
