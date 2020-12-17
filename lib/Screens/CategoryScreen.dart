@@ -36,21 +36,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ? Scaffold(backgroundColor: Colors.grey[200], body: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,)))
       : Scaffold(
         appBar: AppBar(
-          actions: <Widget>[
-            Container(
-              margin: EdgeInsets.only(right: 15),
-              child: InkWell(
-                onTap: (){
-                  Navigator.of(context).pushNamed("/basket");
-                },
-                child: Icon(
-                  Icons.shopping_cart,
-                  size: 25,
-                  color: Color(0xFF303030),
-                ),
-              ),
-            ),
-          ],
           iconTheme: IconThemeData(
             color: Color(0xFF303030),
           ),
