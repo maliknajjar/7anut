@@ -9,26 +9,6 @@ class BasketScreen extends StatefulWidget {
 }
 
 class _BasketScreenState extends State<BasketScreen> {
-  List<FocusNode> focusNodes = new List<FocusNode>.generate(Basket.basketItems.length, (_) => new FocusNode()) ;
-
-  @override
-  void initState() {
-    super.initState();
-    for(FocusNode i in focusNodes){
-      i = FocusNode();
-    }
-  }
-
-  @override
-  void dispose() {
-    // Clean up the focus node when the Form is disposed.
-    for(FocusNode i in focusNodes){
-      i.dispose();
-    }
-    print("done disposing all focus nodes");
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

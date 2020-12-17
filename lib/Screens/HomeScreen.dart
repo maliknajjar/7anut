@@ -3,12 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HomeScreen extends StatefulWidget {
+  var products;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var arr;
   bool dataIsAvailable = false;
 
   @override
@@ -17,8 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
     
     http.get("http://10.0.2.2:8000/api/categories").then((r){
       setState(() {
+        widget.products = json.decode(r.body);
         dataIsAvailable = true;
-        arr = json.decode(r.body);
       });
     });
   }
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: !dataIsAvailable ? Colors.blue[100] : Color(0xFF303030),
         ),
         centerTitle: true,
         title: Image.asset(
@@ -39,7 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Color(0xFF5DA7E6),
       ),
-      body: Stack(
+      body: !dataIsAvailable 
+      ? Center(child: Text("Loading"))
+      : Stack(
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(
@@ -59,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisCount: 4,
               childAspectRatio: 0.75,
               children: <Widget>[
-                for(var item in arr)
+                for(var item in widget.products)
                 InkWell(
                   onTap: (){
                     Navigator.of(context).pushNamed("/category", arguments: item["ID"] - 1);

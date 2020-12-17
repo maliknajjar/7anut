@@ -6,7 +6,8 @@ import '../Classes/Basket.dart';
 
 class CategoryWidget extends StatefulWidget {
   String category;
-  CategoryWidget(String cat){
+  Function() refresh;
+  CategoryWidget(String cat, this.refresh){
     category = cat;
   }
 
@@ -49,7 +50,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       padding: EdgeInsets.only(
         // bottom: 100.5,
       ),
-      color: Color(0xFF5DA7E6).withOpacity(0.1),
+      color: Colors.white70,
       width: double.infinity,
       child: GridView.count(
         padding: EdgeInsets.only(
@@ -96,6 +97,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       child: InkWell(
                         onTap: (){
                           Basket.addItem(item["ID"].toString(), item["Name"], item["size"], item["imageUrl"], item["price"].toString());
+                          widget.refresh();
                         },
                         child: Container(
                           height: theWidth * 0.085,

@@ -15,6 +15,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
   var arr;
   bool dataIsAvailable = false;
 
+  refresh(){
+    setState(() {});
+  }
+
   @override
   initState() {
     super.initState();
@@ -64,7 +68,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             TabBarView(
               children: [
                 for(var item in arr)
-                CategoryWidget(item["name"]),
+                CategoryWidget(item["name"], refresh),
               ],
             ),
             AnimatedPositioned(
