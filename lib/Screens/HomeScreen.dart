@@ -158,10 +158,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     size: 35,
                     color: Color(0xFF303030),
                   ),
-                  Icon(
-                    Icons.menu,
-                    size: 35,
-                    color: Color(0xFF303030),
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed("/orders");
+                    },
+                    child: Icon(
+                      Icons.menu,
+                      size: 35,
+                      color: Color(0xFF303030),
+                    ),
                   ),
                 ],
               ),
