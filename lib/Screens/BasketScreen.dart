@@ -33,18 +33,13 @@ class _BasketScreenState extends State<BasketScreen> {
         ),
         body: Stack(
           children: [
-            Container(
-              padding: EdgeInsets.all(0),
-              child: SingleChildScrollView(
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(bottom: 100),
                 child: Column(
                   children: [
                     for (int i = 0; i < Basket.basketItems.length; i++)
                       Container(
-                        margin: EdgeInsets.only(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            top: 0),
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -238,6 +233,33 @@ class _BasketScreenState extends State<BasketScreen> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 20),
+                height: 60,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
+                  color: Color(0xFFFCF555),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Icon(Icons.arrow_forward),
+                  ],
+                )
+              ),
+            )
           ],
         ));
   }

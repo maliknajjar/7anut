@@ -18,10 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     
     http.get("http://10.0.2.2:8000/api/categories").then((r){
-      setState(() {
         products = json.decode(r.body);
         Products.categories= json.decode(r.body);
-        dataIsAvailable = true;
 
         http.get("http://10.0.2.2:8000/api/products/").then((r){
           if (this.mounted) {
@@ -31,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           }
         });
-      });
     });
   }
 

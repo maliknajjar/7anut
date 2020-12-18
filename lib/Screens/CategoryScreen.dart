@@ -65,7 +65,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Navigator.of(context).pushNamed("/basket").then((value) => setState((){}));
                 },
                 child: Container(
-                  height: 70,
+                  height: 60,
                   width: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(40)),

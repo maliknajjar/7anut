@@ -36,7 +36,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       child: GridView.count(
         padding: EdgeInsets.only(
           top: theWidth * 0.05,
-          bottom: 15,
+          bottom: 100,
           right: theWidth * 0.025,
           left: theWidth * 0.025,
         ),
