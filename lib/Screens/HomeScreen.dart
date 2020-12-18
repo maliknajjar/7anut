@@ -177,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.of(context).pushNamed("/orders");
                     },
                     child: Icon(
-                      Icons.menu,
+                      Icons.access_time,
                       size: 35,
                       color: Color(0xFF303030),
                     ),
