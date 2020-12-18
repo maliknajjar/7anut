@@ -254,7 +254,14 @@ class _BasketScreenState extends State<BasketScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                        Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                      ],
+                    ),
                     Icon(Icons.arrow_forward),
                   ],
                 )

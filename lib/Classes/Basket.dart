@@ -51,4 +51,12 @@ class Basket {
     if(totalNumber == 0) return "";
     return totalNumber.toString();
   }
+
+  static double getUltimateTotal(){
+    double totalNumber = 0;
+    for(int i = 0; i < Basket.basketItems.length; i++){
+      totalNumber += Basket.basketItems[i]["qty"] * double.parse(Basket.basketItems[i]["price"]);
+    }
+    return totalNumber;
+  }
 }
