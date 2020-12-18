@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import "../Widgets/CategoryWidget.dart";
 import "../Classes/Basket.dart";
+import '../Classes/Procucts.dart';
 
 class CategoryScreen extends StatefulWidget {
   
@@ -12,23 +11,10 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  var arr;
   bool dataIsAvailable = false;
 
   refresh(){
     setState(() {});
-  }
-
-  @override
-  initState() {
-    super.initState();
-    
-    http.get("http://10.0.2.2:8000/api/categories").then((r){
-      setState(() {
-        dataIsAvailable = true;
-        arr = json.decode(r.body);
-      });
-    });
   }
 
   @override
@@ -38,10 +24,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
     
     return DefaultTabController(
       initialIndex: int.parse(index),
-      length: !dataIsAvailable ? 0 : arr.length,
-      child: !dataIsAvailable 
-      ? Scaffold(backgroundColor: Colors.grey[200], body: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,)))
-      : Scaffold(
+      length: Products.categories.length,
+      child: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: Color(0xFF303030),
@@ -58,7 +42,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             indicatorColor: Color(0xFFFCF555),
             isScrollable: true,
             tabs: [
-              for(var item in arr)
+              for(var item in Products.categories)
               Tab(icon: Text(item["name"])),
             ],
           ),
@@ -67,7 +51,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           children: [
             TabBarView(
               children: [
-                for(var item in arr)
+                for(var item in Products.categories)
                 CategoryWidget(item["name"], refresh),
               ],
             ),

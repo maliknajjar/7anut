@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../Classes/Procucts.dart';
+
 class HomeScreen extends StatefulWidget {
-  var products;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var products;
   bool dataIsAvailable = false;
 
   @override
@@ -17,8 +19,18 @@ class _HomeScreenState extends State<HomeScreen> {
     
     http.get("http://10.0.2.2:8000/api/categories").then((r){
       setState(() {
-        widget.products = json.decode(r.body);
+        products = json.decode(r.body);
+        Products.categories= json.decode(r.body);
         dataIsAvailable = true;
+
+        http.get("http://10.0.2.2:8000/api/products/").then((r){
+          if (this.mounted) {
+            setState(() {
+              dataIsAvailable = true;
+              Products.products = json.decode(r.body);
+            });
+          }
+        });
       });
     });
   }
@@ -61,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisCount: 4,
               childAspectRatio: 0.75,
               children: <Widget>[
-                for(var item in widget.products)
+                for(var item in products)
                 InkWell(
                   onTap: (){
                     Navigator.of(context).pushNamed("/category", arguments: item["ID"] - 1);

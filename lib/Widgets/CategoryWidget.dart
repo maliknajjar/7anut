@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import '../Classes/Basket.dart';
+import '../Classes/Procucts.dart';
 
 class CategoryWidget extends StatefulWidget {
   String category;
@@ -16,26 +15,10 @@ class CategoryWidget extends StatefulWidget {
 }
 
 class _CategoryWidgetState extends State<CategoryWidget> {
-  var arr;
   String category;
-  bool dataIsAvailable = false;
 
   _CategoryWidgetState(String cat){
     category = cat;
-  }
-
-  @override
-  initState() {
-    super.initState();
-    
-    http.get("http://10.0.2.2:8000/api/products/" + category).then((r){
-      if (this.mounted) {
-        setState(() {
-          dataIsAvailable = true;
-          arr = json.decode(r.body);
-        });
-      }
-    });
   }
 
   @override
@@ -44,9 +27,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     var columnMultiplier = 1;
     theWidth /= columnMultiplier;
 
-    return !dataIsAvailable 
-    ? Container(color: Colors.white70, child: Center(child: Image.asset("assets/images/logo-01.png", height: 100, width: 100,))) 
-    : Container(
+    return Container(
       padding: EdgeInsets.only(
         // bottom: 100.5,
       ),
@@ -64,7 +45,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         crossAxisCount: 3 * columnMultiplier,
         childAspectRatio: 0.69,
         children: <Widget>[
-          for(var item in arr ) 
+          for(var item in Products.getProductsByCategory(category)) 
           Column(
             children: <Widget>[
               AspectRatio(
