@@ -42,4 +42,13 @@ class Basket {
     if(totalNumber == 0) return "0";
     return totalNumber.toString();
   }
+
+  static String getQtyById(String id){
+    int totalNumber = 0;
+    for(int i = 0; i < Basket.basketItems.length; i++){
+      if(Basket.basketItems[i]["ID"] == id) totalNumber += Basket.basketItems[i]["qty"];
+    }
+    if(totalNumber == 0) return "";
+    return totalNumber.toString();
+  }
 }

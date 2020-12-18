@@ -45,7 +45,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         crossAxisCount: 3 * columnMultiplier,
         childAspectRatio: 0.69,
         children: <Widget>[
-          for(var item in Products.getProductsByCategory(category)) 
+          for(var item in Products.getProductsByCategory(category))
           Column(
             children: <Widget>[
               AspectRatio(
@@ -53,6 +53,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                 child: Stack(
                   children: [
                     Container(
+                      child: Center(child: Text(Basket.getQtyById(item["ID"].toString()), style: TextStyle(fontSize: 110, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.5)))),
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(item["imageUrl"]),
