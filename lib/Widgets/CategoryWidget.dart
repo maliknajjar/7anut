@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../Classes/Basket.dart';
 import '../Classes/Procucts.dart';
 
 class CategoryWidget extends StatefulWidget {
   String category;
-  Function() refresh;
-  CategoryWidget(String cat, this.refresh){
+  CategoryWidget(String cat){
     category = cat;
   }
 
@@ -78,8 +78,16 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       top: theWidth * 0.0225,
                       child: InkWell(
                         onTap: (){
-                          Basket.addItem(item["ID"].toString(), item["Name"], item["size"], item["imageUrl"], item["price"].toString());
-                          widget.refresh();
+                          setState(() {
+                            var createUserMap = {
+                              "email": "baba@baba.com",
+                              "fullName": "baba baba",
+                              "password": "123456",
+                              "phoneNumber": "2333656",
+                            };
+                            http.post("http://10.0.2.2:8000/api/createUser", body: createUserMap).then((value) => print(value));
+                            Basket.addItem(item["ID"].toString(), item["Name"], item["size"], item["imageUrl"], item["price"].toString());
+                          });
                         },
                         child: Container(
                           height: theWidth * 0.085,

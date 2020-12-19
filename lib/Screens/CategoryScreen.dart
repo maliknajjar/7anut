@@ -52,7 +52,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             TabBarView(
               children: [
                 for(var item in Products.categories)
-                CategoryWidget(item["name"], refresh),
+                CategoryWidget(item["name"]),
               ],
             ),
             AnimatedPositioned(
