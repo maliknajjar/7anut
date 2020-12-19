@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
+  String email;
+  String fullName;
+  String phoneNumber;
+  String password;
+  String confirmPassword;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,6 +81,9 @@ class RegisterScreen extends StatelessWidget {
                         ), 
                       ),
                       child: TextField(
+                        onChanged: (string){
+                          email = string;
+                        },
                         style: TextStyle(fontSize: 15),
                         cursorColor: Colors.black54,
                         decoration: InputDecoration(
@@ -111,6 +120,9 @@ class RegisterScreen extends StatelessWidget {
                         ), 
                       ),
                       child: TextField(
+                        onChanged: (string){
+                          fullName = string;
+                        },
                         style: TextStyle(fontSize: 15),
                         cursorColor: Colors.black54,
                         decoration: InputDecoration(
@@ -147,6 +159,9 @@ class RegisterScreen extends StatelessWidget {
                         ), 
                       ),
                       child: TextField(
+                        onChanged: (string){
+                          phoneNumber = string;
+                        },
                         style: TextStyle(fontSize: 15),
                         cursorColor: Colors.black54,
                         decoration: InputDecoration(
@@ -183,6 +198,9 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       child: TextField(
+                        onChanged: (string){
+                          password = string;
+                        },
                         obscureText: true,
                         style: TextStyle(
                           fontSize: 15,
@@ -225,6 +243,9 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       child: TextField(
+                        onChanged: (string){
+                          confirmPassword = string;
+                        },
                         obscureText: true,
                         style: TextStyle(
                           fontSize: 15,
@@ -240,7 +261,11 @@ class RegisterScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: (){
-                        print("this works");
+                        print(email);
+                        print(fullName);
+                        print(phoneNumber);
+                        print(password);
+                        print(confirmPassword);
                       },
                       child: Container(
                         width: double.infinity,
@@ -316,7 +341,6 @@ class RegisterScreen extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      // Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false, arguments: "malik");
                       Navigator.of(context).pop();
                     },
                     child: Container(

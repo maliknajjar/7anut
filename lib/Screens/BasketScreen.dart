@@ -236,11 +236,8 @@ class _BasketScreenState extends State<BasketScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: EdgeInsets.only(bottom: 20),
-                height: 60,
-                width: 200,
+                height: 60, 
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(40)),
                   color: Color(0xFFFCF555),
                   boxShadow: [
                     BoxShadow(

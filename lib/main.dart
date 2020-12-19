@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: 'Flutter Demo',
-      initialRoute: "/home",
+      initialRoute: "/login",
       routes: {
         "/home": (context) => HomeScreen(),
         "/login": (context) => LoginScreen(),

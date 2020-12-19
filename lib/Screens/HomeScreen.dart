@@ -18,17 +18,17 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     
     http.get("http://10.0.2.2:8000/api/categories").then((r){
-        products = json.decode(r.body);
-        Products.categories= json.decode(r.body);
-
-        http.get("http://10.0.2.2:8000/api/products/").then((r){
-          if (this.mounted) {
-            setState(() {
-              dataIsAvailable = true;
-              Products.products = json.decode(r.body);
-            });
-          }
-        });
+      products = json.decode(r.body);
+      Products.categories= json.decode(r.body);
+    }).then((value){
+      http.get("http://10.0.2.2:8000/api/products/").then((r){
+        if (this.mounted) {
+          setState(() {
+            dataIsAvailable = true;
+            Products.products = json.decode(r.body);
+          });
+        }
+      });
     });
   }
 
