@@ -319,6 +319,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       notify("Email is already in use", 2000, Colors.red);
                                       return;
                                     }
+                                    if(r.body == "phone number is not valid"){
+                                      notify(r.body, 2000, Colors.red);
+                                      return;
+                                    }
                                     notify(r.body, 2000, Colors.green);
                                   });
                                 },
