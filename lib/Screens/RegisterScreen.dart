@@ -310,7 +310,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     "fullName": fullName,
                                     "phoneNumber": phoneNumber,
                                     "password": password,
-                                    "confirmPassword": confirmPassword,
                                   }).then((r){
                                     setState(() {
                                       registerButtonName = "Register";
@@ -320,7 +319,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       return;
                                     }
                                     if(r.body == "phone number is not valid"){
-                                      notify(r.body, 2000, Colors.red);
+                                      notify("phone number is not valid", 2000, Colors.red);
                                       return;
                                     }
                                     notify(r.body, 2000, Colors.green);
