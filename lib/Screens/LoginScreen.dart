@@ -180,6 +180,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                     "password": password,
                                   }).then((r){
                                     theButton = Text("login");
+                                    if(r.body == "email does not exist"){
+                                      notify(r.body, 2000, Colors.red);
+                                      return;
+                                    }
+                                    if(r.body == "password is wrong"){
+                                      notify(r.body, 2000, Colors.red);
+                                      return;
+                                    }
+                                    if(r.body == "successfully loged in"){
+                                      Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                      return;
+                                    }
                                     notify(r.body, 2000, Colors.blue);
                                   });
                                 },
@@ -282,8 +294,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         InkWell(
                           onTap: (){
                             Navigator.of(context).pushNamed("/forgotpassword").then((value){
-                              if(value == "success"){
-                                notify("check your email for password", 2000, Colors.green);
+                              if(value == "nothing"){
+                                
+                              }else{
+                                notify(value, 3000, Colors.green);
                               }
                             });
                           },

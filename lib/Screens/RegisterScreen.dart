@@ -355,7 +355,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       notify("phone number is not valid", 2000, Colors.red);
                                       return;
                                     }
-                                    notify(r.body, 2000, Colors.green);
+                                    if(r.body == "account was successfully created"){
+                                      Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                    }else{
+                                      notify(r.body, 2000, Colors.red);
+                                    }
                                   });
                                 },
                                 child: Container(
@@ -432,7 +436,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Center(
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).pop();
+                                Navigator.of(context).pop("nothing");
                               },
                               child: Container(
                                 constraints: BoxConstraints(maxWidth: 150),

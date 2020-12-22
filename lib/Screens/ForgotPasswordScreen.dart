@@ -145,7 +145,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       notify(r.body, 2000, Colors.red);
                                       return;
                                     }
-                                    Navigator.of(context).pop("success");
+                                    Navigator.of(context).pop(r.body);
                                   });
                                 },
                                 child: Container(
@@ -222,7 +222,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           child: Center(
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).pop();
+                                Navigator.of(context).pop("nothing");
                               },
                               child: Container(
                                 constraints: BoxConstraints(maxWidth: 150),
