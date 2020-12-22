@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
+import '../configuration.dart';
+
 class ForgotPasswordScreen extends StatefulWidget {
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
@@ -135,11 +137,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   setState(() {
                                     theButton = Text("loading");
                                   });
-                                  http.post("http://10.0.2.2:8000/api/forgotPassword", body: {
+                                  http.post(Config.url + "/api/forgotPassword", body: {
                                     "email": email,
                                   }).then((r){
                                     theButton = Text("Send New Password");
-                                    notify(r.body, 2000, Colors.blue);
+                                    if(r.body == "email does not exist"){
+                                      notify(r.body, 2000, Colors.red);
+                                      return;
+                                    }
+                                    Navigator.of(context).pop("success");
                                   });
                                 },
                                 child: Container(
