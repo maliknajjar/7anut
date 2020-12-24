@@ -293,13 +293,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.of(context).pushNamed("/forgotpassword").then((value){
-                              if(value == "nothing"){
-                                
-                              }else{
-                                notify(value, 3000, Colors.green);
-                              }
-                            });
+                            
                           },
                           child: Container(
                             margin: EdgeInsets.only(top: 10),

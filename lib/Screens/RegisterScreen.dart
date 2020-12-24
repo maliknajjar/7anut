@@ -327,17 +327,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               InkWell(
                                 onTap: (){
+                                  // adding loading icon or text to the Register button when its pressed
+                                  setState(() {
+                                    registerButtonName = "Loading";
+                                  });
+                                  // check if any of the fields is empty
                                   if(email == "" || fullName == "" || phoneNumber == "" || password == "" || confirmPassword == ""){
                                     notify("You need to fill all fields", 2000, Colors.red);
                                     return;
                                   }
+                                  //check if the paswords are not similar
                                   if(password != confirmPassword){
                                     notify("Password does not match", 2000, Colors.red);
                                     return;
                                   }
-                                  setState(() {
-                                    registerButtonName = "Loading";
-                                  });
+                                  // making the request to the server to create a new user
                                   http.post("http://10.0.2.2:8000/api/createUser", body: {
                                     "email": email,
                                     "fullName": fullName,
@@ -436,7 +440,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Center(
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).pop("nothing");
+                                Navigator.of(context).pop();
                               },
                               child: Container(
                                 constraints: BoxConstraints(maxWidth: 150),
