@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'dart:convert';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -347,23 +348,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     "fullName": fullName,
                                     "phoneNumber": phoneNumber,
                                     "password": password,
-                                  }).then((r){
+                                  }).then((result){
+                                    var response = json.decode(result.body);
                                     setState(() {
                                       registerButtonName = "Register";
                                     });
-                                    if(r.body == "ER_DUP_ENTRY"){
-                                      notify("Email is already in use", 2000, Colors.red);
+                                    if(response["error"] != null){
+                                      notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    if(r.body == "phone number is not valid"){
-                                      notify("phone number is not valid", 2000, Colors.red);
-                                      return;
-                                    }
-                                    if(r.body == "account was successfully created"){
-                                      Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-                                    }else{
-                                      notify(r.body, 2000, Colors.red);
-                                    }
+                                    print(response["message"]);
+                                    
                                   });
                                 },
                                 child: Container(
