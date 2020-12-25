@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'dart:convert';
 
 import '../configuration.dart';
 
@@ -130,22 +131,25 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               ),
                               InkWell(
                                 onTap: (){
+                                  setState(() {
+                                    theButton = Text("loading");
+                                  });
                                   if(email == ""){
                                     notify("fields are not filled", 2000, Colors.red);
                                     return;
                                   }
-                                  setState(() {
-                                    theButton = Text("loading");
-                                  });
-                                  http.post(Config.url + "/api/forgotPassword", body: {
+                                  http.post(Config.url + "/api/forgetpassword", body: {
                                     "email": email,
-                                  }).then((r){
-                                    theButton = Text("Send New Password");
-                                    if(r.body == "email does not exist"){
-                                      notify(r.body, 2000, Colors.red);
+                                  }).then((result){
+                                    setState(() {
+                                      theButton = Text("Send New Password");
+                                    });
+                                    var response = json.decode(result.body);
+                                    if(response["error"] != null){
+                                      notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    Navigator.of(context).pop(r.body);
+                                    Navigator.of(context).pop(response["message"]);
                                   });
                                 },
                                 child: Container(
