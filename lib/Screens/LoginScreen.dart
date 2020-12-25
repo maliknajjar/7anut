@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -175,24 +177,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                     return;
                                   }
                                   theButton = Image.asset("assets/images/loading.png", height: 35);
-                                  http.post("http://10.0.2.2:8000/api/loginUser", body: {
+                                  http.post("http://10.0.2.2:8000/api/signin", body: {
                                     "email": email,
                                     "password": password,
-                                  }).then((r){
+                                  }).then((result){
                                     theButton = Text("login");
-                                    if(r.body == "email does not exist"){
-                                      notify(r.body, 2000, Colors.red);
+                                    var response = json.decode(result.body);
+                                    if(response["error"] != null){
+                                      notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    if(r.body == "password is wrong"){
-                                      notify(r.body, 2000, Colors.red);
-                                      return;
-                                    }
-                                    if(r.body == "successfully loged in"){
-                                      Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-                                      return;
-                                    }
-                                    notify(r.body, 2000, Colors.blue);
+                                    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                   });
                                 },
                                 child: Container(
@@ -293,7 +288,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         InkWell(
                           onTap: (){
-                            
+                            Navigator.of(context).pushNamed("/forgotpassword");
                           },
                           child: Container(
                             margin: EdgeInsets.only(top: 10),

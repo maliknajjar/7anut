@@ -357,8 +357,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    print(response["message"]);
-                                    
+                                    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                   });
                                 },
                                 child: Container(
