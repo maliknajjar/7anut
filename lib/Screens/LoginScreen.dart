@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -187,7 +188,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                    SharedPreferences.getInstance().then((value){
+                                      value.setString("email", email).then((theValue){
+                                        print("email saved");
+                                        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                      });
+                                    });
                                   });
                                 },
                                 child: Container(
@@ -288,8 +294,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.of(context).pushNamed("/forgotpassword").then((value) => {
-                              notify(value, 2000, Colors.green)
+                            Navigator.of(context).pushNamed("/forgotpassword").then((value){
+                              if(value == null) return;
+                              notify(value, 2000, Colors.green);
                             });
                           },
                           child: Container(

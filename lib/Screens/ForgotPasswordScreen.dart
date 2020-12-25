@@ -226,7 +226,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           child: Center(
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).pop("nothing");
+                                Navigator.of(context).pop();
                               },
                               child: Container(
                                 constraints: BoxConstraints(maxWidth: 150),
