@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:password_strength/password_strength.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -335,6 +336,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   // check if any of the fields is empty
                                   if(email == "" || fullName == "" || phoneNumber == "" || password == "" || confirmPassword == ""){
                                     notify("You need to fill all fields", 2000, Colors.red);
+                                    return;
+                                  }
+                                  // check if the password is strong enough
+                                  if(estimatePasswordStrength(password) < 0.3){
+                                    notify("your password is weak", 2000, Colors.red);
                                     return;
                                   }
                                   //check if the paswords are not similar

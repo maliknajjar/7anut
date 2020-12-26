@@ -17,7 +17,7 @@ void main() {
 
 class MyApp extends StatefulWidget {
   bool isLoggedIn = false;
-  
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -29,6 +29,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     SharedPreferences.getInstance().then((prefs){
       setState(() {
+        // prefs.remove("email");
         if(prefs.getString("email") != null) widget.isLoggedIn = true;
         else widget.isLoggedIn = false;
       });
