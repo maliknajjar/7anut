@@ -188,10 +188,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
+                                    // when everything is successful
                                     SharedPreferences.getInstance().then((value){
                                       value.setString("email", email).then((theValue){
                                         print("email saved");
-                                        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                        value.setString("sessionID", response["sessionID"]).then((anotherValue){
+                                          print("sessionID saved: " + response["sessionID"]);
+                                          Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                        });
                                       });
                                     });
                                   });

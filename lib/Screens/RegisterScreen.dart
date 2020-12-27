@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:password_strength/password_strength.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -363,6 +364,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
+                                    // when everything is successful
+                                    SharedPreferences.getInstance().then((value){
+                                      value.setString("email", email).then((theValue){
+                                        print("email saved");
+                                        value.setString("sessionID", response["sessionID"]).then((anotherValue){
+                                          print("sessionID saved: " + response["sessionID"]);
+                                          Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                        });
+                                      });
+                                    });
                                     Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                   });
                                 },
