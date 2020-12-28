@@ -192,10 +192,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SharedPreferences.getInstance().then((value){
                                       value.setString("email", email).then((theValue){
                                         print("email saved");
-                                        value.setString("sessionID", response["sessionID"]).then((anotherValue){
-                                          print("sessionID saved: " + response["sessionID"]);
+                                        value.setString("sessionID", response["session"]).then((anotherValue){
+                                          print("sessionID saved: " + response["session"]);
                                           Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                        }).catchError((error){
+                                          print(error);
                                         });
+                                      }).catchError((error){
+                                          print(error);
                                       });
                                     });
                                   });

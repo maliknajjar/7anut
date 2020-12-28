@@ -27,9 +27,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    
     SharedPreferences.getInstance().then((prefs){
       setState(() {
-        // prefs.remove("email");
         if(prefs.getString("email") != null) widget.isLoggedIn = true;
         else widget.isLoggedIn = false;
       });
