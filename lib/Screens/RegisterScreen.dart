@@ -374,7 +374,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         });
                                       });
                                     });
-                                    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                    // Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                   });
                                 },
                                 child: Container(

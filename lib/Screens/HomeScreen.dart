@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../Classes/Procucts.dart';
+import '../Widgets/DrawerWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var theWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      drawer: TheDrawer(),
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: !dataIsAvailable ? Colors.blue[100] : Color(0xFF303030),
