@@ -364,17 +364,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    // when everything is successful
+                                    // saving these information when everything is successful
                                     SharedPreferences.getInstance().then((value){
                                       value.setString("email", email).then((theValue){
-                                        print("email saved");
+                                        print("email saved: " + response["email"]);
                                         value.setString("sessionID", response["session"]).then((anotherValue){
                                           print("sessionID saved: " + response["session"]);
-                                          Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                          value.setString("fullName", response["fullName"]).then((anotherValue){
+                                            print("fullName saved: " + response["fullName"]);
+                                            value.setString("phoneNumber", response["phoneNumber"]).then((anotherValue){
+                                              print("phoneNumber saved: " + response["phoneNumber"]);
+                                              Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                            });
+                                          });
                                         });
                                       });
                                     });
-                                    // Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                   });
                                 },
                                 child: Container(

@@ -123,13 +123,26 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           fontSize: theWidth * 0.04,
                         ),
                       ),
-                      Text(
-                        item["size"],
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: theWidth * 0.04,
-                          color: Colors.grey
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            item["size"],
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: theWidth * 0.035,
+                              color: Colors.grey
+                            ),
+                          ),
+                          Text(
+                            item["price"].toString() + "DT",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: theWidth * 0.035,
+                              color: Colors.grey
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

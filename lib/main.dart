@@ -12,6 +12,7 @@ import 'Screens/OrdersScreen.dart';
 import 'Screens/ProfileScreen.dart';
 import 'Screens/EditProfileScreen.dart';
 import 'Screens/BasketScreen.dart';
+import 'Screens/LoadingLogoScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -69,7 +70,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: 'Flutter Demo',
-      home: widget.isLoading ? Scaffold(body: Center(child: Text("loading"),),) : widget.isLoggedIn ? HomeScreen() : LoginScreen(),
+      home: widget.isLoading ? LoadingLogo() : widget.isLoggedIn ? HomeScreen() : LoginScreen(),
       routes: {
         "/home": (context) => HomeScreen(),
         "/login": (context) => LoginScreen(),

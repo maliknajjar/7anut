@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../Screens/LoadingLogoScreen.dart';
+
 import '../Classes/Procucts.dart';
+
 import '../Widgets/DrawerWidget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color(0xFF5DA7E6),
       ),
       body: !dataIsAvailable 
-      ? Center(child: Text("Loading"))
+      ? LoadingLogo()
       : Stack(
         children: <Widget>[
           Container(
