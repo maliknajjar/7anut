@@ -15,10 +15,13 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
+    var theMap = (ModalRoute.of(context).settings.arguments as Map);
+    var mapValues = theMap["placeholder"].values.toList();
+    var mapKeys = theMap["placeholder"].keys.toList();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -27,45 +30,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           color: Color(0xFF303030),
         ),
         title: Text(
-          widget.editProfileTitle,
+          theMap["title"],
           style: TextStyle(
             color: Color(0xFF303030),
           ),
         ),
       ),
-      body: GestureDetector(
-        onTap: () {
-          print("clicked global");
-          setState(() {
-            isSelected = false;
-          });
-        },
-        child: Container(
-          padding: EdgeInsets.all(15),
-          height: double.infinity,
-          color: Colors.white.withOpacity(0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                child: Container(
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Container(
+            padding: EdgeInsets.all(15),
+            height: double.infinity,
+            color: Colors.white.withOpacity(0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                for(var index = 0; index < theMap["placeholder"].length; index++)
+                Container(
                   margin: EdgeInsets.only(
-                    top: 7.5,
+                    top: 0,
                     bottom: 20,
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(
-                      color: isSelected ? Colors.blue : Colors.grey,
-                      width: 2,
-                    ),
                     boxShadow: [
                       BoxShadow(
-                        blurRadius: 10,
+                        blurRadius: 7.5,
                         spreadRadius: 0,
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withOpacity(0.25),
                       ),
                     ],
                     borderRadius: BorderRadius.all(
@@ -73,11 +67,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
                   child: TextField(
-                    onTap: () {
-                      setState(() {
-                        isSelected = true;
-                      });
-                      print("clicked input");
+                    onChanged: (string){
+                      mapValues[index] = string;
                     },
                     style: TextStyle(
                       fontSize: 20,
@@ -87,34 +78,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       border: InputBorder.none,
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(vertical: 10),
-                      hintText: widget.editProfilePlaceHolder),
+                      hintText: theMap["placeholder"].keys.toList()[index]),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              print("save pressed");
+            },
+            child: Container(
+              height: 50,
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.blue, 
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: EdgeInsets.all(15),
+              child: Center(
+                child: Text("Save", 
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.white
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: (){
-                  print("save pressed");
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue, 
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(15),
-                  child: Center(
-                    child: Text("Save", 
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

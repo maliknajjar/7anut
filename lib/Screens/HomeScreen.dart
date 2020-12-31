@@ -3,10 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../Screens/LoadingLogoScreen.dart';
-
-import '../Classes/Procucts.dart';
-
 import '../Widgets/DrawerWidget.dart';
+import '../Classes/Procucts.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
