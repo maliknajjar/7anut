@@ -7,18 +7,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  List<String> titles = ["email", "name", "phone number", "password"];
-  var theInputs = [{"new email": "", "confirm password": ""}, {"name": ""}, {"new phone Number": ""}, {"old password": "", "new password": "", "retype new password": ""}];
-  List<String> stringArray = ["", "", "", "*********"];
+  List<String> titles = ["name", "phone number", "password"];
+  var theInputs = [{"new name": ""}, {"new phone Number": ""}, {"old password": "", "new password": "", "retype new password": ""}];
+  List<String> stringArray = ["", "", "************"];
 
   @override
   void initState() {
     super.initState();
     SharedPreferences.getInstance().then((prefs){
       setState(() {
-        stringArray[0] = prefs.getString("email");
-        stringArray[1] = prefs.getString("fullName");
-        stringArray[2] = prefs.getString("phoneNumber");
+        stringArray[0] = prefs.getString("fullName");
+        stringArray[1] = prefs.getString("phoneNumber");
       });
     });
   }
