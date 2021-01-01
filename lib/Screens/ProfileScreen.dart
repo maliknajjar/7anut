@@ -7,7 +7,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  List<String> titles = ["email", "Name", "phone Number", "password"];
+  List<String> titles = ["email", "name", "phone number", "password"];
   var theInputs = [{"new email": "", "confirm password": ""}, {"name": ""}, {"new phone Number": ""}, {"old password": "", "new password": "", "retype new password": ""}];
   List<String> stringArray = ["", "", "", "*********"];
 
@@ -15,9 +15,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     SharedPreferences.getInstance().then((prefs){
-      stringArray[0] = prefs.getString("email");
-      stringArray[1] = prefs.getString("fullName");
-      stringArray[2] = prefs.getString("phoneNumber");
+      setState(() {
+        stringArray[0] = prefs.getString("email");
+        stringArray[1] = prefs.getString("fullName");
+        stringArray[2] = prefs.getString("phoneNumber");
+      });
     });
   }
 
@@ -59,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(titles[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"title": "Edit " + titles[index], "placeholder": theInputs[index]});}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)),
+                      InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} );}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)),
                     ],
                   ),
                   Container(

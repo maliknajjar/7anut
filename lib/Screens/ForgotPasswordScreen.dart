@@ -138,7 +138,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     notify("fields are not filled", 2000, Colors.red);
                                     return;
                                   }
-                                  http.post(Config.url + "/api/forgetpassword", body: {
+                                  http.post(Configuration.url + "/api/forgetpassword", body: {
                                     "email": email,
                                   }).then((result){
                                     setState(() {

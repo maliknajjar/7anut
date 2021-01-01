@@ -70,8 +70,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: 'Flutter Demo',
-      // home: widget.isLoading ? LoadingLogo() : widget.isLoggedIn ? HomeScreen() : LoginScreen(),
-      home: ProfileScreen(),
+      home: widget.isLoading ? LoadingLogo() : widget.isLoggedIn ? HomeScreen() : LoginScreen(),
+      // home: ProfileScreen(),
       routes: {
         "/home": (context) => HomeScreen(),
         "/login": (context) => LoginScreen(),

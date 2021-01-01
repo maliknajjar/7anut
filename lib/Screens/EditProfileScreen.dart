@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../configuration.dart';
 
 //ignore: must_be_immutable
 class EditProfileScreen extends StatefulWidget {
@@ -19,8 +24,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var theMap = (ModalRoute.of(context).settings.arguments as Map);
-    var mapValues = theMap["placeholder"].values.toList();
-    var mapKeys = theMap["placeholder"].keys.toList();
+    var mapValues = theMap["inputs"].values.toList();
+    var mapKeys = theMap["inputs"].keys.toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +51,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                for(var index = 0; index < theMap["placeholder"].length; index++)
+                for(var index = 0; index < theMap["inputs"].length; index++)
                 Container(
                   margin: EdgeInsets.only(
                     top: 0,
@@ -68,7 +73,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   child: TextField(
                     onChanged: (string){
-                      mapValues[index] = string;
+                      theMap["inputs"][mapKeys[index]] = string;
                     },
                     style: TextStyle(
                       fontSize: 20,
@@ -78,7 +83,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       border: InputBorder.none,
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(vertical: 10),
-                      hintText: theMap["placeholder"].keys.toList()[index]),
+                      hintText: mapKeys[index]),
                   ),
                 ),
               ],
@@ -86,7 +91,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           GestureDetector(
             onTap: (){
-              print("save pressed");
+              SharedPreferences.getInstance().then((prefs){
+                theMap["email"] = prefs.getString("email");
+                theMap["sessionID"] = prefs.getString("sessionID");
+
+                // send request
+                http.post(Configuration.url + "/api/editProfile", 
+                headers: {
+                  "content-type": "application/json",
+                }, 
+                body: json.encode(theMap))
+                .then((value){
+                  if(json.decode(value.body)["error"] != null){
+                    print(value.body);
+                    //////////////////////////////
+                    // logout from account here //
+                    //////////////////////////////
+                    return;
+                  }
+                  print(value.body);
+                });
+              });
             },
             child: Container(
               height: 50,
