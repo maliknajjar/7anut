@@ -78,6 +78,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     style: TextStyle(
                       fontSize: 20,
                     ),
+                    obscureText: theMap["type"] == "password" ? true : false,
                     cursorColor: Colors.black54,
                     decoration: InputDecoration(
                       border: InputBorder.none,
