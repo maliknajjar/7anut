@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(titles[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
+                      titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text("edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
                     ],
                   ),
                   Container(
