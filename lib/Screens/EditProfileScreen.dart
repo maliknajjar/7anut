@@ -111,8 +111,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 body: json.encode(theMap))
                 .then((value){
                   if(json.decode(value.body)["error"] != null){
-                    print(value.body);
-                    Functions.logout(context);
+                    if(value.body.contains("session")){
+                      Functions.logout(context);
+                      return;
+                    }
+                    Functions.alert(context, "error", json.decode(value.body)["error"]);
                     return;
                   }
                   if(json.decode(value.body)["value"] != null){

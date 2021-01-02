@@ -13,8 +13,8 @@ abstract class Functions extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => new AlertDialog(
-        title: new Text('input is empty'),
-        content: Text('make sure to fill all the fields'),
+        title: new Text(title),
+        content: Text(content),
         actions: <Widget>[
           new FlatButton(
             onPressed: () {
