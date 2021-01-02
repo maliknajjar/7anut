@@ -30,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color(0xFF5DA7E6),
@@ -50,15 +51,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             for(int index = 0; index < titles.length; index++)
             Container(
               decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey.withOpacity(0.40),
-                    width: 2,
+                // border: Border(
+                //   bottom: BorderSide(
+                //     color: Colors.grey.withOpacity(0.40),
+                //     width: 1.5,
+                //   )
+                // ),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    spreadRadius: 0,
+                    blurRadius: 5,
+                    color: Colors.black.withOpacity(0.1),
+                    offset: Offset(0, 5)
                   )
-                )
+                ]
               ),
-              padding: EdgeInsets.only(bottom: 15),
-              margin: EdgeInsets.only(top: 0, bottom: 15, left: 20, right: 20),
+              padding: EdgeInsets.only(bottom: 30, top: 15, left: 15, right: 15, ),
+              margin: EdgeInsets.only(top: 0, bottom: 25, left: 0, right: 0),
               child: Column(
                 children: [
                   Row(

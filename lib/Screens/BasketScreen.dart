@@ -31,7 +31,7 @@ class _BasketScreenState extends State<BasketScreen> {
             ),
           ),
         ),
-        body: Stack(
+        body: Basket.basketItems.isEmpty ? Center(child: Text("there is no items yet", style: TextStyle(fontSize: 25),)) : Stack(
           children: [
             SingleChildScrollView(
               child: Container(
