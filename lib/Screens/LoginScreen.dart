@@ -193,10 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         print("email saved: " + response["email"]);
                                         value.setString("sessionID", response["session"]).then((anotherValue){
                                           print("sessionID saved: " + response["session"]);
-                                          value.setString("fullName", response["fullName"]).then((anotherValue){
-                                            print("fullName saved: " + response["fullName"]);
-                                            value.setString("phoneNumber", response["phoneNumber"]).then((anotherValue){
-                                              print("phoneNumber saved: " + response["phoneNumber"]);
+                                          value.setString("full name", response["fullName"]).then((anotherValue){
+                                            print("full name saved: " + response["fullName"]);
+                                            value.setString("phone number", response["phoneNumber"]).then((anotherValue){
+                                              print("phone number saved: " + response["phoneNumber"]);
                                               Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                             });
                                           });

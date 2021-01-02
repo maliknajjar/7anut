@@ -7,18 +7,22 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  List<String> titles = ["email", "name", "phone number", "password"];
+  List<String> titles = ["email", "full name", "phone number", "password"];
   var theInputs = [{}, {"new name": ""}, {"new phone Number": ""}, {"old password": "", "new password": ""}];
   List<String> stringArray = ["", "", "", "************"];
 
   @override
   void initState() {
     super.initState();
+    refreshPrefs();
+  }
+
+  void refreshPrefs(){
     SharedPreferences.getInstance().then((prefs){
       setState(() {
         stringArray[0] = prefs.getString("email");
-        stringArray[1] = prefs.getString("fullName");
-        stringArray[2] = prefs.getString("phoneNumber");
+        stringArray[1] = prefs.getString("full name");
+        stringArray[2] = prefs.getString("phone number");
       });
     });
   }
@@ -61,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(titles[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} );}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
+                      titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text("Edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
                     ],
                   ),
                   Container(

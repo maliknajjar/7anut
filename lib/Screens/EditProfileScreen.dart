@@ -110,6 +110,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     //////////////////////////////
                     return;
                   }
+                  if(json.decode(value.body)["value"] != null){
+                    prefs.setString(theMap["type"], json.decode(value.body)["value"]);
+                    print("string was changed");
+                  }
                   print(value.body);
                 });
               });
