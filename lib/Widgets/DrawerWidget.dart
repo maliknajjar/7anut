@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../Classes/Functions.dart';
 
 class TheDrawer extends StatelessWidget {
   @override
@@ -18,11 +18,7 @@ class TheDrawer extends StatelessWidget {
           ListTile(
             title: Text('logout'),
             onTap: () {
-              SharedPreferences.getInstance().then((prefs){
-                prefs.remove("sessionID").then((value){
-                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-                });
-              });
+              Functions.logout(context);
             },
           ),
         ],

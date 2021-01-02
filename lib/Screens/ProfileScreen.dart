@@ -17,7 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     refreshPrefs();
   }
 
-  void refreshPrefs(){
+  void refreshPrefs(){  
     SharedPreferences.getInstance().then((prefs){
       setState(() {
         stringArray[0] = prefs.getString("email");

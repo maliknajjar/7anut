@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../configuration.dart';
+import '../Classes/Functions.dart';
 
 //ignore: must_be_immutable
 class EditProfileScreen extends StatefulWidget {
@@ -24,7 +25,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var theMap = (ModalRoute.of(context).settings.arguments as Map);
-    var mapValues = theMap["inputs"].values.toList();
     var mapKeys = theMap["inputs"].keys.toList();
 
     return Scaffold(
@@ -92,6 +92,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           GestureDetector(
             onTap: (){
+              for (var item in theMap["inputs"].values.toList()) {
+                if(item == ""){
+                  print("input is empty");
+                  Functions.alert(context, "input is empty", "you must fill all the fields");
+                  return;
+                }
+              }
               SharedPreferences.getInstance().then((prefs){
                 theMap["email"] = prefs.getString("email");
                 theMap["sessionID"] = prefs.getString("sessionID");
@@ -105,9 +112,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 .then((value){
                   if(json.decode(value.body)["error"] != null){
                     print(value.body);
-                    //////////////////////////////
-                    // logout from account here //
-                    //////////////////////////////
+                    Functions.logout(context);
                     return;
                   }
                   if(json.decode(value.body)["value"] != null){
@@ -115,6 +120,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     print("string was changed");
                   }
                   print(value.body);
+                  Navigator.of(context).pop();
                 });
               });
             },
