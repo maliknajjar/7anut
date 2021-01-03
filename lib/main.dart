@@ -13,6 +13,7 @@ import 'Screens/ProfileScreen.dart';
 import 'Screens/EditProfileScreen.dart';
 import 'Screens/BasketScreen.dart';
 import 'Screens/LoadingLogoScreen.dart';
+import 'Screens/CheckoutScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -82,6 +83,7 @@ class _MyAppState extends State<MyApp> {
         "/profile": (context) => ProfileScreen(),
         "/editprofile": (context) => EditProfileScreen(),
         "/basket": (context) => BasketScreen(),
+        "/checkout": (context) => CheckoutScreen(),
       },
     );
   }

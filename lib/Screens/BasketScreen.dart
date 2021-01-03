@@ -235,33 +235,39 @@ class _BasketScreenState extends State<BasketScreen> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 60, 
-                decoration: BoxDecoration(
-                  color: Color(0xFFFCF555),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 10,
-                      offset: Offset(0, 0),
-                    ),
-                  ],
+              child: InkWell(
+                onTap: (){
+                  print("tapped on checkout");
+                  Navigator.of(context).pushNamed("/checkout");
+                },
+                child: Container(
+                  height: 60, 
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFCF555),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.15),
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                        offset: Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                          Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                        ],
+                      ),
+                      Icon(Icons.arrow_forward),
+                    ],
+                  )
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                        Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                    Icon(Icons.arrow_forward),
-                  ],
-                )
               ),
             )
           ],
