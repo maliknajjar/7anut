@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
         "/basket": (context) => BasketScreen(),
         "/checkout": (context) => CheckoutScreen(),
         "/adresses": (context) => AdressesScreen(),
-        "/GetLocation": (context) => GetLocationScreen(),
+        "/getlocation": (context) => GetLocationScreen(),
       },
     );
   }
