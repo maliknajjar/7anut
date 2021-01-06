@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CheckoutScreen extends StatelessWidget {
+class GetLocationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +10,7 @@ class CheckoutScreen extends StatelessWidget {
           color: Color(0xFF303030),
         ),
         title: Text(
-          "checkout",
+          "Adresses",
           style: TextStyle(
             color: Color(0xFF303030),
           ),
@@ -19,7 +19,7 @@ class CheckoutScreen extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: Text("this is the checkout page"),
+          child: Text("this is the get location screen page"),
         ),
       ),
     );
