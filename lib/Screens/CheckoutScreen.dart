@@ -18,9 +18,7 @@ class CheckoutScreen extends StatelessWidget {
         backgroundColor: Color(0xFF5DA7E6),
       ),
       body: Container(
-        child: Center(
-          child: Text("this is the checkout page"),
-        ),
+        child: Text("this is the checkout page"),
       ),
     );
   }

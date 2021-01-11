@@ -14,8 +14,6 @@ import 'Screens/EditProfileScreen.dart';
 import 'Screens/BasketScreen.dart';
 import 'Screens/LoadingLogoScreen.dart';
 import 'Screens/CheckoutScreen.dart';
-import 'Screens/AdressesScreen.dart';
-import 'Screens/GetLocationScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -86,8 +84,6 @@ class _MyAppState extends State<MyApp> {
         "/editprofile": (context) => EditProfileScreen(),
         "/basket": (context) => BasketScreen(),
         "/checkout": (context) => CheckoutScreen(),
-        "/adresses": (context) => AdressesScreen(),
-        "/getlocation": (context) => GetLocationScreen(),
       },
     );
   }
