@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import 'dart:async';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 class GetLocationScreen extends StatelessWidget {
-  Completer<GoogleMapController> _controller = Completer();
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(5, 20),
-    zoom: 11,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +18,13 @@ class GetLocationScreen extends StatelessWidget {
         ),
         backgroundColor: Color(0xFF5DA7E6),
       ),
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+      body: MapboxMap(
+        accessToken: "pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqcmFsNjh2M2N6bDJ0cW9xdXprM3dsciJ9.AJyHupCTovVbfLArWFDKEQ",
+        styleString: 'url-to-style',
+        initialCameraPosition: CameraPosition(
+          zoom: 15.0,
+          target: LatLng(14.508, 46.048),
+        ),
       ),
     );
   }
