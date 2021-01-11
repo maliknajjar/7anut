@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:geolocator/geolocator.dart';
 
 class GetLocationScreen extends StatefulWidget {
   @override
@@ -8,6 +9,33 @@ class GetLocationScreen extends StatefulWidget {
 
 class _GetLocationScreenState extends State<GetLocationScreen> {
   MapboxMapController controller;
+
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permantly denied, we cannot request permissions.');
+    }
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse &&
+          permission != LocationPermission.always) {
+        return Future.error(
+            'Location permissions are denied (actual value: $permission).');
+      }
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +94,29 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 ),
                 child: Center(
                   child: Text("+", style: TextStyle(fontSize: 25),),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 155,
+            right: 25,
+            child: InkWell(
+              onTap: (){
+                print("working");
+                determinePosition().then((value){
+                  controller.animateCamera(CameraUpdate.newLatLng(LatLng(value.latitude, value.longitude)));
+                });
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(50)
+                ),
+                child: Center(
+                  child: Text("G", style: TextStyle(fontSize: 25),),
                 ),
               ),
             ),

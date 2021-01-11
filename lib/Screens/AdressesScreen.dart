@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-class AdressesScreen extends StatelessWidget {
+class AdressesScreen extends StatefulWidget {
+  @override
+  _AdressesScreenState createState() => _AdressesScreenState();
+}
+
+class _AdressesScreenState extends State<AdressesScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
