@@ -21,7 +21,7 @@ class AdressesScreen extends StatelessWidget {
         child: Center(
           child: InkWell(
             onTap: (){
-              Navigator.of(context).pushNamed("GetLocation");
+              Navigator.of(context).pushNamed("/GetLocation");
             },
             child: Text("click here to go to the GEt Location page"),
           ),
