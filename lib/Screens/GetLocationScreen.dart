@@ -105,7 +105,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               onTap: (){
                 print("working");
                 determinePosition().then((value){
-                  controller.animateCamera(CameraUpdate.newLatLng(LatLng(value.latitude, value.longitude)));
+                  controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 10)));
                 });
               },
               child: Container(
