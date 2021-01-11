@@ -12,7 +12,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   @override
   Widget build(BuildContext context) {
     final String token = 'pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA';
-    final String style = 'mapbox://styles/malik446644/ckjsbj4s07hy619pa7hbgf2lq';
+    final String style = 'mapbox://styles/malik446644/ckjsiixy57o7r19oa0j65zen3';
     
     return Scaffold(
       body: Stack(
