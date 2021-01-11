@@ -223,7 +223,7 @@ packages:
     dependency: transitive
     description:
       name: matcher
-      url: "https://pub.dartlang.org"
+      url: "https://pub.dartlang.org" 
     source: hosted
     version: "0.12.10-nullsafety.3"
   meta:
