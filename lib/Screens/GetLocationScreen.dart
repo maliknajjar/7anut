@@ -16,6 +16,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     
     return Scaffold(
       body: Stack(
+        alignment: Alignment.center,
         children: [
           MapboxMap(
             accessToken: token,
