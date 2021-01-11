@@ -33,7 +33,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             right: 25,
             child: InkWell(
               onTap: (){
-                controller.moveCamera(CameraUpdate.zoomOut());
+                controller.animateCamera(CameraUpdate.zoomOut());
               },
               child: Container(
                 width: 50,
@@ -53,7 +53,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             right: 25,
             child: InkWell(
               onTap: (){
-                controller.moveCamera(CameraUpdate.zoomIn());
+                controller.animateCamera(CameraUpdate.zoomIn());
                 print("working");
               },
               child: Container(
