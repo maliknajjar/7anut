@@ -9,7 +9,6 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="test_app"
         android:icon="@mipmap/ic_launcher">
-
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -34,7 +33,6 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

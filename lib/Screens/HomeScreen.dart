@@ -167,10 +167,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Icon(Icons.ac_unit),
                   ),
                   // NULL space for design /\ /\ /\ /\ /\
-                  Icon(
-                    Icons.location_on,
-                    size: 35,
-                    color: Color(0xFF303030),
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed("/adresses");
+                    },
+                    child: Icon(
+                      Icons.location_on,
+                      size: 35,
+                      color: Color(0xFF303030),
+                    ),
                   ),
                   InkWell(
                     onTap: (){
