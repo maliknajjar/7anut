@@ -168,8 +168,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                           http.get("https://api.mapbox.com/geocoding/v5/mapbox.places/$string.json?access_token=pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA")
                           .then((value){
                             print("woooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooow");
-                            var coord = jsonDecode(value.body)["features"][0]["bbox"];
-                            controller.animateCamera(CameraUpdate.newLatLngBounds(LatLngBounds(southwest: LatLng(coord[1], coord[0]), northeast: LatLng(coord[3], coord[2]))));
+                            var coord = jsonDecode(value.body)["features"][0]["center"];
+                            controller.animateCamera(CameraUpdate.newLatLng(LatLng(coord[1], coord[0])));
                           });
                         },
                       ),
