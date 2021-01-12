@@ -134,6 +134,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               ),
             ),
           ),
+          Text("+", style: TextStyle(fontSize: 50),),
         ],
       ),
     );
