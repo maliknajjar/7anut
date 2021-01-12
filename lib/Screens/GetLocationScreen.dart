@@ -41,6 +41,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   Widget build(BuildContext context) {
     final String token = 'pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA';
     final String style = 'mapbox://styles/malik446644/ckjsiixy57o7r19oa0j65zen3';
+
+    Circle theCircle;
     
     return Scaffold(
       body: Stack(
@@ -56,6 +58,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             onMapCreated: (MapboxMapController controller){
               this.controller = controller;
             },
+            trackCameraPosition: true,
           ),
           Positioned(
             bottom: 25,
@@ -102,11 +105,21 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             bottom: 155,
             right: 25,
             child: InkWell(
-              onTap: (){
+              onTap: () async {
                 print("working");
-                determinePosition().then((value){
-                  controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 10)));
-                });
+                // determinePosition().then((value){
+                //   controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 15)));
+                // });
+                if (theCircle != null) controller.removeCircle(theCircle);
+                theCircle = await controller.addCircle(
+                  CircleOptions(
+                    circleRadius: 8.0,
+                    circleColor: 'red',
+                    circleOpacity: 0.8,
+                    geometry: controller.cameraPosition.target,
+                    draggable: false,
+                  ),
+                );
               },
               child: Container(
                 width: 50,
