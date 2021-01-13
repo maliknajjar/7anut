@@ -16,7 +16,7 @@ abstract class Functions extends StatelessWidget {
         title: new Text(title),
         content: Text(content),
         actions: <Widget>[
-          new FlatButton(
+          new TextButton(
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop(); // dismisses only the dialog and returns nothing
             },

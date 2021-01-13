@@ -1,8 +1,13 @@
+import 'dart:typed_data';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+import '../Classes/Functions.dart';
 
 class GetLocationScreen extends StatefulWidget {
   @override
@@ -11,6 +16,7 @@ class GetLocationScreen extends StatefulWidget {
 
 class _GetLocationScreenState extends State<GetLocationScreen> {
   MapboxMapController controller;
+  LatLng location;
 
   Future<Position> determinePosition() async {
     bool serviceEnabled;
@@ -39,6 +45,24 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     return await Geolocator.getCurrentPosition();
   }
 
+  var symbol;
+  void addPin({LatLng coord}) async{
+    location = coord;
+    if (symbol != null){
+      controller.removeSymbol(symbol);
+    }
+    final ByteData bytes = await rootBundle.load("assets/images/thepin.png");
+    final Uint8List list = bytes.buffer.asUint8List();
+    await controller.addImage("pin", list);
+    symbol = await controller.addSymbol(
+      SymbolOptions(
+        geometry: coord == null ? controller.cameraPosition.target : coord,
+        iconImage: "pin",
+        iconOffset: Offset(0, -20)
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final String token = 'pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA';
@@ -47,8 +71,6 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    Circle theCircle;
-    
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -66,32 +88,11 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             trackCameraPosition: true,
           ),
           Positioned(
-            bottom: 25,
-            right: 25,
-            child: InkWell(
-              onTap: (){
-                controller.animateCamera(CameraUpdate.zoomOut());
-              },
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50)
-                ),
-                child: Center(
-                  child: Text("-", style: TextStyle(fontSize: 25),),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 90,
+            top: 25 + 110.0,
             right: 25,
             child: InkWell(
               onTap: (){
                 controller.animateCamera(CameraUpdate.zoomIn());
-                print("working");
               },
               child: Container(
                 width: 50,
@@ -107,24 +108,12 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
           ),
           Positioned(
-            bottom: 155,
+            top: 90 + 110.0,
             right: 25,
             child: InkWell(
-              onTap: () async {
+              onTap: (){
+                controller.animateCamera(CameraUpdate.zoomOut());
                 print("working");
-                // determinePosition().then((value){
-                //   controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 15)));
-                // });
-                if (theCircle != null) controller.removeCircle(theCircle);
-                theCircle = await controller.addCircle(
-                  CircleOptions(
-                    circleRadius: 8.0,
-                    circleColor: 'red',
-                    circleOpacity: 0.8,
-                    geometry: controller.cameraPosition.target,
-                    draggable: false,
-                  ),
-                );
               },
               child: Container(
                 width: 50,
@@ -134,7 +123,31 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   borderRadius: BorderRadius.circular(50)
                 ),
                 child: Center(
-                  child: Text("G", style: TextStyle(fontSize: 25),),
+                  child: Text("-", style: TextStyle(fontSize: 25),),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 155 + 110.0,
+            right: 25,
+            child: InkWell(
+              onTap: () async {
+                print("working");
+                determinePosition().then((value){
+                  controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 15)));
+                  addPin(coord: LatLng(value.latitude, value.longitude));
+                });
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(50)
+                ),
+                child: Center(
+                  child: Icon(Icons.gps_fixed)
                 ),
               ),
             ),
@@ -165,17 +178,71 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                           hintText: 'Search'
                         ),
                         onSubmitted: (string){
-                          http.get("https://api.mapbox.com/geocoding/v5/mapbox.places/$string.json?access_token=pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA")
+                          http.get("https://api.mapbox.com/geocoding/v5/mapbox.places/$string.json?country=tn&access_token=pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA")
                           .then((value){
                             print("woooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooow");
-                            var coord = jsonDecode(value.body)["features"][0]["center"];
-                            controller.animateCamera(CameraUpdate.newLatLng(LatLng(coord[1], coord[0])));
+                            if (jsonDecode(value.body)["features"].length == 0){
+                              print("no result");
+                              Functions.alert(context, "no results", "didnt find any results");
+                              return;
+                            }
+                            var coord = jsonDecode(value.body)["features"][0];
+                            addPin(coord: LatLng(coord["center"][1], coord["center"][0]));
+                            coord["bbox"] != null ? controller.animateCamera(CameraUpdate.newLatLngBounds(LatLngBounds(southwest: LatLng(coord["bbox"][1], coord["bbox"][0]), northeast: LatLng(coord["bbox"][3], coord["bbox"][2])))) : controller.animateCamera(CameraUpdate.newLatLng(LatLng(coord["center"][1], coord["center"][0])));
                           });
                         },
                       ),
                     ),
                   ],
                 ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              height: 75,
+              width: width,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: (){
+                        addPin();
+                      },
+                      child: Container(
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.add_location, size: 35,),
+                            Text("Pin your location", style: TextStyle(fontSize: 20,),),
+                          ],
+                        )
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      print("works");
+                    },
+                    child: Container(
+                      height: double.infinity,
+                      margin: EdgeInsets.only(left: 10),
+                      width: 75,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Center(child: Icon(Icons.done, size: 35,),),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
