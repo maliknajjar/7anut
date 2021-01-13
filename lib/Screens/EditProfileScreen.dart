@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../configuration.dart';
+import '../env.dart';
 import '../Classes/Functions.dart';
 
 //ignore: must_be_immutable
@@ -104,7 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 theMap["sessionID"] = prefs.getString("sessionID");
 
                 // send request
-                http.post(Configuration.url + "/api/editProfile", 
+                http.post(env.apiUrl + "/api/editProfile", 
                 headers: {
                   "content-type": "application/json",
                 }, 

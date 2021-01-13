@@ -5,6 +5,7 @@ import 'dart:convert';
 import '../Screens/LoadingLogoScreen.dart';
 import '../Widgets/DrawerWidget.dart';
 import '../Classes/Procucts.dart';
+import '../env.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,11 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
   initState() {
     super.initState();
     
-    http.get("http://10.0.2.2:8000/api/categories").then((r){
+    http.get(env.apiUrl + "/api/categories").then((r){
       products = json.decode(r.body);
       Products.categories= json.decode(r.body);
     }).then((value){
-      http.get("http://10.0.2.2:8000/api/products/").then((r){
+      http.get(env.apiUrl + "/api/products/").then((r){
         if (this.mounted) {
           setState(() {
             dataIsAvailable = true;

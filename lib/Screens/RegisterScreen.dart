@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:password_strength/password_strength.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../env.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -350,7 +353,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     return;
                                   }
                                   // making the request to the server to create a new user
-                                  http.post("http://10.0.2.2:8000/api/createUser", body: {
+                                  http.post(env.apiUrl + "/api/createUser", body: {
                                     "email": email,
                                     "fullName": fullName,
                                     "phoneNumber": phoneNumber,

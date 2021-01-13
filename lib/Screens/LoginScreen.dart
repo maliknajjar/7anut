@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'dart:async';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
+
+import '../env.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -176,8 +179,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     notify("fields are not filled", 2000, Colors.red);
                                     return;
                                   }
-                                  theButton = Image.asset("assets/images/loading.png", height: 35);
-                                  http.post("http://10.0.2.2:8000/api/signin", body: {
+                                  theButton = Image.asset("assets/images/loading.gif", height: 35);
+                                  http.post(env.apiUrl + "/api/signin", body: {
                                     "email": email,
                                     "password": password,
                                   }).then((result){

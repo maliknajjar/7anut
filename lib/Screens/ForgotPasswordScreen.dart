@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-import '../configuration.dart';
+import '../env.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override
@@ -138,7 +138,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     notify("fields are not filled", 2000, Colors.red);
                                     return;
                                   }
-                                  http.post(Configuration.url + "/api/forgetpassword", body: {
+                                  http.post(env.apiUrl + "/api/forgetpassword", body: {
                                     "email": email,
                                   }).then((result){
                                     setState(() {
