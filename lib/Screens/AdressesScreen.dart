@@ -22,6 +22,17 @@ class _AdressesScreenState extends State<AdressesScreen> {
           ),
         ),
         backgroundColor: Color(0xFF5DA7E6),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.add_location_alt_outlined,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.of(context).pushNamed("/addaddress");
+            },
+          )
+        ],
       ),
       body: Container(
         child: Center(
