@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
-class AddAddressScreen extends StatelessWidget {
+class AddAddressScreen extends StatefulWidget {
+  @override
+  _AddAddressScreenState createState() => _AddAddressScreenState();
+}
+
+class _AddAddressScreenState extends State<AddAddressScreen> {
   String title;
   String information;
   LatLng location;
+  String mapButtonText = "Pick Address Location";
 
   @override
   Widget build(BuildContext context) {
@@ -139,28 +145,46 @@ class AddAddressScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: 100,
-                margin: EdgeInsets.only(
-                  top: 0,
-                  bottom: 20,
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/map.PNG"),
-                    fit: BoxFit.cover,
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pushNamed("/GetLocation").then((value){
+                    setState(() {
+                      if (value != null || value != "") mapButtonText = value;
+                    });
+                  });
+                },
+                child: Container(
+                  height: 75,
+                  margin: EdgeInsets.only(
+                    top: 0,
+                    bottom: 20,
                   ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7.5,
-                      spreadRadius: 0,
-                      color: Colors.black.withOpacity(0.25),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      width: 5,
+                      color: Colors.black.withOpacity(0.75),
                     ),
-                  ],
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7.5,
+                        spreadRadius: 0,
+                        color: Colors.black.withOpacity(0.25),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      mapButtonText,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
                 ),
               ),
