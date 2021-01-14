@@ -16,7 +16,7 @@ class GetLocationScreen extends StatefulWidget {
 
 class _GetLocationScreenState extends State<GetLocationScreen> {
   MapboxMapController controller;
-  LatLng location;
+  LatLng theLocation;
 
   Future<Position> determinePosition() async {
     bool serviceEnabled;
@@ -47,7 +47,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
 
   var symbol;
   void addPin({LatLng coord}) async{
-    location = coord;
+    if (coord != null) theLocation = coord;
+    else theLocation = controller.cameraPosition.target;
+
     if (symbol != null){
       controller.removeSymbol(symbol);
     }
@@ -135,8 +137,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               onTap: () async {
                 print("working");
                 determinePosition().then((value){
-                  controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 15)));
                   addPin(coord: LatLng(value.latitude, value.longitude));
+                  controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 15)));
                 });
               },
               child: Container(
@@ -229,7 +231,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      print("works");
+                      if (theLocation != null) Navigator.of(context).pop(theLocation);
+                      else Functions.alert(context, "no location", "you need to specify a location");
                     },
                     child: Container(
                       height: double.infinity,

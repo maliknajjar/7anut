@@ -149,7 +149,11 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 onTap: (){
                   Navigator.of(context).pushNamed("/GetLocation").then((value){
                     setState(() {
-                      if (value != null || value != "") mapButtonText = value;
+                      print(value);
+                      if (value != null) {
+                        location = value;
+                        mapButtonText = "location chosen";
+                      }
                     });
                   });
                 },
@@ -162,7 +166,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      width: 5,
+                      width: 4,
                       color: Colors.black.withOpacity(0.75),
                     ),
                     boxShadow: [
@@ -177,14 +181,22 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     ),
                   ),
                   width: double.infinity,
-                  child: Center(
-                    child: Text(
-                      mapButtonText,
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.black,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: Icon(mapButtonText == "location chosen" ? Icons.done : Icons.add_location_alt, size: 40,)
                       ),
-                    ),
+                      Text(
+                        mapButtonText,
+                        style: TextStyle(
+                          fontSize: 22.5,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
