@@ -36,6 +36,10 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
 
+    /*//////////////////////////////////////////////////////////////
+    // getting user information from storage if its session still //
+    // valid and making http request to the server to gain access //
+    *///////////////////////////////////////////////////////////////
     SharedPreferences.getInstance().then((prefs){
       if(prefs.getString("sessionID") != null){
         http.post("http://10.0.2.2:8000/api/checkUserSession", body: {

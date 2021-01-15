@@ -7,6 +7,8 @@ import '../Widgets/DrawerWidget.dart';
 import '../Classes/Procucts.dart';
 import '../env.dart';
 
+import '../Classes/Adresses.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,6 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   initState() {
     super.initState();
+
+    // adding the stored addresses to the address variable array
+    print("done done done done done done done done done done done done done done done done done ");
+    Addresses();
     
     http.get(env.apiUrl + "/api/categories").then((r){
       products = json.decode(r.body);

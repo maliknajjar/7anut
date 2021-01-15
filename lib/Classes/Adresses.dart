@@ -5,12 +5,26 @@ class Addresses {
   static var addressesBasket = [];
   
   Addresses(){
-    // before anything you should add the addresses in the storage to the addressesBasket static variable
+    SharedPreferences.getInstance().then((prefs){
+      // prefs.setString("addresses", "");
+      print(jsonDecode(prefs.getString("addresses")));
+      addressesBasket = jsonDecode(prefs.getString("addresses"));
+    });
   }
 
-  static void addAddress(address){
+  static void refreshStorage(){
     SharedPreferences.getInstance().then((prefs){
       prefs.setString("addresses", jsonEncode(addressesBasket));
     });
+  }
+
+  static void addAddress(address){
+    addressesBasket.add(address);
+    refreshStorage();
+  }
+
+  static void deleteAddress(addressIndex){
+    addressesBasket.removeAt(addressIndex);
+    refreshStorage();
   }
 }

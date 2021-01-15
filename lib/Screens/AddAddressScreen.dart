@@ -218,8 +218,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   if (location == null || title == null || instructions == null || information == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                   else {
                     print(Addresses.addressesBasket);
-                    // Addresses.addressesBasket.add({"title": title, "information": information, "instructions": instructions, "location": location});
-                    // Navigator.of(context).pop();
+                    Addresses.addAddress({"title": title, "information": information, "instructions": instructions, "location": {"latitude": location.latitude, "longitude": location.longitude}});
+                    Navigator.of(context).pop();
                   }
                 },
                 child: Container(

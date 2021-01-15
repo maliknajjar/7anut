@@ -66,15 +66,22 @@ class _AdressesScreenState extends State<AdressesScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          child: Text("the title of the address", style: TextStyle(fontSize: 25),),
+                          child: Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 25),),
                         ),
                         Container(
-                          child: Text("the lat and longof the chosen location"),
+                          child: Text(Addresses.addressesBasket[i]["location"]["latitude"].toString().substring(0, 6) + ", " + Addresses.addressesBasket[i]["location"]["longitude"].toString().substring(0, 6), style: TextStyle(fontSize: 15),),
                         ),
                       ],
                     ),
-                    Container(
-                      child: Icon(Icons.delete, size: 30, color: Colors.red,),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          Addresses.deleteAddress(i);                        
+                        });
+                      },
+                      child: Container(
+                        child: Icon(Icons.delete, size: 30, color: Colors.red,),
+                      ),
                     ),
                   ],
                 ),
