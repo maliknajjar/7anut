@@ -232,7 +232,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   InkWell(
                     onTap: (){
                       if (theLocation != null) Navigator.of(context).pop(theLocation);
-                      else Functions.alert(context, "no location", "you need to specify a location");
+                      else Functions.alert(context, "choose location", "you need to specify a location");
                     },
                     child: Container(
                       height: double.infinity,

@@ -165,7 +165,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             print(value);
                             if (value != null) {
                               location = value;
-                              mapButtonText = "Lat:     " + location.latitude.toString().substring(0, 6) + "\nLong:  " + location.longitude.toString().substring(0, 6);
+                              mapButtonText = "Location Selected";
                             }
                           });
                         });
@@ -217,7 +217,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   print("save");
                   if (location == null || title == null || instructions == null || information == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                   else {
-                    Addresses();
                     print(Addresses.addressesBasket);
                     // Addresses.addressesBasket.add({"title": title, "information": information, "instructions": instructions, "location": location});
                     // Navigator.of(context).pop();
