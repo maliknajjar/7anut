@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
+import '../Classes/Functions.dart';
+import '../Classes/Adresses.dart';
+
 class AddAddressScreen extends StatefulWidget {
   @override
   _AddAddressScreenState createState() => _AddAddressScreenState();
@@ -9,6 +12,7 @@ class AddAddressScreen extends StatefulWidget {
 class _AddAddressScreenState extends State<AddAddressScreen> {
   String title;
   String information;
+  String instructions;
   LatLng location;
   String mapButtonText = "Add Location";
 
@@ -140,7 +144,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         maxLines: null,
                         minLines: 3,
                         onChanged: (string){
-                          information = string;
+                          instructions = string;
                         },
                         style: TextStyle(
                           fontSize: 20,
@@ -161,7 +165,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             print(value);
                             if (value != null) {
                               location = value;
-                              mapButtonText = "location chosen";
+                              mapButtonText = "Lat:     " + location.latitude.toString().substring(0, 6) + "\nLong:  " + location.longitude.toString().substring(0, 6);
                             }
                           });
                         });
@@ -173,7 +177,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           bottom: 90,
                         ),
                         decoration: BoxDecoration(
-                          color: mapButtonText == "location chosen" ? Colors.blue : Colors.white,
+                          color: location != null ? Colors.green : Colors.white,
                           border: Border.all(
                             width: 4,
                             color: Colors.black.withOpacity(0.75),
@@ -189,13 +193,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           children: [
                             Container(
                               margin: EdgeInsets.only(right: 10),
-                              child: Icon(mapButtonText == "location chosen" ? Icons.done : Icons.add_location_alt, size: 40, color: mapButtonText == "location chosen" ? Colors.white : Colors.black,)
+                              child: Icon(location != null ? Icons.done : Icons.add_location_alt, size: 40, color: location != null ? Colors.white : Colors.black,)
                             ),
                             Text(
                               mapButtonText,
                               style: TextStyle(
                                 fontSize: 22.5,
-                                color: mapButtonText == "location chosen" ? Colors.white : Colors.black,
+                                color: location != null ? Colors.white : Colors.black,
                               ),
                             ),
                           ],
@@ -210,7 +214,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               bottom: 0,
               child: GestureDetector(
                 onTap: (){
-                  print("object");
+                  print("save");
+                  if (location == null || title == null || instructions == null || information == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
+                  else {
+                    Addresses.addressesBasket.add({"title": title, "information": information, "instructions": instructions, "location": location});
+                    print(Addresses.addressesBasket);
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: Container(
                   width: width,
