@@ -35,13 +35,34 @@ class _AdressesScreenState extends State<AdressesScreen> {
         ],
       ),
       body: Container(
-        child: Center(
-          child: InkWell(
-            onTap: (){
-              Navigator.of(context).pushNamed("/GetLocation");
-            },
-            child: Text("click here to go to the GEt Location page"),
-          ),
+        padding: EdgeInsets.all(15),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: Text("the title of the address", style: TextStyle(fontSize: 25),),
+                  ),
+                  Container(
+                    child: Text("the lat and longof the chosen location"),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
