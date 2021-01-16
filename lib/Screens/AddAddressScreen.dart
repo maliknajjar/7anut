@@ -21,7 +21,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

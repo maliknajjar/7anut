@@ -47,43 +47,48 @@ class _AdressesScreenState extends State<AdressesScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               for (var i = 0; i < Addresses.addressesBasket.length; i++)
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(bottom: 15),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1,
+              GestureDetector(
+                onTap: (){
+                  // Navigator.of(context).pushNamed("/addaddress");
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.only(bottom: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10)
                   ),
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 25),),
-                        ),
-                        Container(
-                          child: Text(Addresses.addressesBasket[i]["location"]["latitude"].toString().substring(0, 6) + ", " + Addresses.addressesBasket[i]["location"]["longitude"].toString().substring(0, 6), style: TextStyle(fontSize: 15),),
-                        ),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        setState(() {
-                          Addresses.deleteAddress(i);                        
-                        });
-                      },
-                      child: Container(
-                        child: Icon(Icons.delete, size: 30, color: Colors.red,),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 25),),
+                          ),
+                          Container(
+                            child: Text(Addresses.addressesBasket[i]["location"]["latitude"].toString().substring(0, 6) + ", " + Addresses.addressesBasket[i]["location"]["longitude"].toString().substring(0, 6), style: TextStyle(fontSize: 15),),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            Addresses.deleteAddress(i);                        
+                          });
+                        },
+                        child: Container(
+                          child: Icon(Icons.delete, size: 30, color: Colors.red,),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
