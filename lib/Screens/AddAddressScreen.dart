@@ -78,7 +78,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          hintText: "address name (ex: home)",
+                          hintText: "address name | ex: home",
                         ),
                       ),
                     ),
@@ -116,7 +116,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          hintText: "additional information\nex: apartment number: 21",
+                          hintText: "additional information (optional)\nex: apartment number: 21",
                         ),
                       ),
                     ),
@@ -154,7 +154,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          hintText: "instructions for delivery guy\nex: dont ring the bell",
+                          hintText: "instructions (optional)\nex: dont ring the bell",
                         ),
                       ),
                     ),
@@ -215,7 +215,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               child: GestureDetector(
                 onTap: (){
                   print("save");
-                  if (location == null || title == null || instructions == null || information == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
+                  if (location == null || title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                   else {
                     print(Addresses.addressesBasket);
                     Addresses.addAddress({"title": title, "information": information, "instructions": instructions, "location": {"latitude": location.latitude, "longitude": location.longitude}});

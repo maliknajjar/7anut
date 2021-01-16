@@ -43,6 +43,10 @@ class Basket {
     return totalNumber.toString();
   }
 
+  static String getItemsTotalTypeNumber(){
+    return Basket.basketItems.length.toString();
+  }
+
   static String getQtyById(String id){
     int totalNumber = 0;
     for(int i = 0; i < Basket.basketItems.length; i++){

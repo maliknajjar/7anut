@@ -80,11 +80,11 @@ class _AdressesScreenState extends State<AdressesScreen> {
                       GestureDetector(
                         onTap: (){
                           setState(() {
-                            Addresses.deleteAddress(i);                        
+                            Addresses.deleteAddress(i);
                           });
                         },
                         child: Container(
-                          child: Icon(Icons.delete, size: 30, color: Colors.red,),
+                          child: Icon(Icons.delete_outline, size: 30, color: Colors.red,),
                         ),
                       ),
                     ],

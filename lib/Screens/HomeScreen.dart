@@ -8,6 +8,7 @@ import '../Classes/Procucts.dart';
 import '../env.dart';
 
 import '../Classes/Adresses.dart';
+import '../Classes/Basket.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -83,7 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 for(var item in products)
                 InkWell(
                   onTap: (){
-                    Navigator.of(context).pushNamed("/category", arguments: item["ID"] - 1);
+                    Navigator.of(context).pushNamed("/category", arguments: item["ID"] - 1).then((value){
+                      setState(() {
+                                              
+                      });
+                    });
                   },
                   child: Column(
                     children: <Widget>[
@@ -204,7 +209,11 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.bottomCenter,
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed("/basket");
+                  Navigator.of(context).pushNamed("/basket").then((value){
+                    setState(() {
+                                          
+                    });
+                  });
                 },
                 child: Container(
                   height: 70,
@@ -221,10 +230,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                     shape: BoxShape.circle,  
                   ),
-                  child: Icon(
-                    Icons.shopping_cart,
-                    size: 35,
-                    color: Color(0xFF303030),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Icon(
+                        Icons.shopping_cart,
+                        size: 35,
+                        color: Color(0xFF303030),
+                      ),
+                      int.parse(Basket.getItemsTotalTypeNumber()) == 0 ? Text("") : Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          height: theWidth * 0.05,
+                          width: theWidth * 0.05,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle
+                          ),
+                          child: Center(child: Text(Basket.getItemsTotalTypeNumber(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

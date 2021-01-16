@@ -45,47 +45,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 20),
-        child: Column(
-          children: [
-            for(int index = 0; index < titles.length; index++)
-            Container(
-              decoration: BoxDecoration(
-                // border: Border(
-                //   bottom: BorderSide(
-                //     color: Colors.grey.withOpacity(0.40),
-                //     width: 1.5,
-                //   )
-                // ),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 0,
-                    blurRadius: 5,
-                    color: Colors.black.withOpacity(0.1),
-                    offset: Offset(0, 5)
-                  )
-                ]
-              ),
-              padding: EdgeInsets.only(bottom: 30, top: 15, left: 15, right: 15, ),
-              margin: EdgeInsets.only(top: 0, bottom: 25, left: 0, right: 0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(titles[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                      titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text("edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
-                    ],
+        padding: EdgeInsets.only(top: 5),
+        child: Container(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: [
+              for(int index = 0; index < titles.length; index++)
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Text(stringArray[index], style: TextStyle(fontSize: 20, color: Colors.grey[600]),),
-                  )
-                ],
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.all(15),
+                margin: EdgeInsets.only(bottom: 25),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(titles[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text("edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: Text(stringArray[index], style: TextStyle(fontSize: 20, color: Colors.grey[600]),),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
