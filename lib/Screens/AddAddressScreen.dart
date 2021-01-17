@@ -179,7 +179,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         decoration: BoxDecoration(
                           color: location != null ? Colors.green : Colors.white,
                           border: Border.all(
-                            width: 4,
+                            width: 2,
                             color: Colors.black.withOpacity(0.75),
                           ),
                           borderRadius: BorderRadius.all(
