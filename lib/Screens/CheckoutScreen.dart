@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CheckoutScreen extends StatelessWidget {
+import '../Classes/Adresses.dart';
+
+class CheckoutScreen extends StatefulWidget {
+  @override
+  _CheckoutScreenState createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +56,11 @@ class CheckoutScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.pushNamed(context, "/addaddress");
+                                  Navigator.pushNamed(context, "/addaddress").then((value){
+                                    setState(() {
+                                                                          
+                                    });
+                                  });
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(bottom: 15),
@@ -62,7 +73,7 @@ class CheckoutScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              for (var i = 0; i < 5; i++)
+                              for (var i = 0; i < Addresses.addressesBasket.length; i++)
                               Container(
                                 margin: EdgeInsets.only(
                                   bottom: 10
@@ -76,7 +87,13 @@ class CheckoutScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10)
                                 ),
                                 padding: EdgeInsets.all(15),
-                                child: Text("data", style: TextStyle(fontSize: 20),),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(Addresses.addressesBasket[i]["title"].toString(), style: TextStyle(fontSize: 20),),
+                                    Icon(Icons.location_on_outlined)
+                                  ],
+                                ),
                               ),
                             ],
                           );
