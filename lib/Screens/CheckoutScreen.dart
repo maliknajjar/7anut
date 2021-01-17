@@ -10,11 +10,14 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   var chosenAddress;
   String payWith;
+  String recieveAtTime;
 
   String addressName;
 
   @override
   Widget build(BuildContext context) {
+    var theWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -30,112 +33,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         backgroundColor: Color(0xFF5DA7E6),
       ),
       body: Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(15),
-        child: Column(
+        height: double.infinity,
+        child: Stack(
+          alignment: Alignment.topCenter,
           children: [
-            Container(
-              margin: EdgeInsets.only(
-                bottom: 10
+            SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: 75
               ),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(10)
-              ),
-              padding: EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Deliver to", style: TextStyle(fontSize: 20),),
-                  GestureDetector(
-                    onTap: (){
-                      showDialog(
-                        context: context,
-                        builder: (context){
-                          return StatefulBuilder(
-                            builder: (context, setState){
-                              return SimpleDialog(
-                                contentPadding: EdgeInsets.all(15),
-                                children: [
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.pushNamed(context, "/addaddress").then((value){
-                                        setState(() {
-                                                                              
-                                        });
-                                      });
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                        bottom: 10
-                                      ),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      padding: EdgeInsets.all(15),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Icon(Icons.add_location_alt_outlined, color: Colors.blue,),
-                                          Text("Add Address", style: TextStyle(fontSize: 20, color: Colors.blue),),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  for (var i = 0; i < Addresses.addressesBasket.length; i++)
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.of(context).pop(i);
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                        bottom: 10
-                                      ),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      padding: EdgeInsets.all(15),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 20),),
-                                          Icon(Icons.location_on_outlined)
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-                          );
-                        }
-                      ).then((value){
-                        if(value != null){
-                          setState((){
-                            chosenAddress = Addresses.addressesBasket[value];
-                            addressName = Addresses.addressesBasket[value]["title"];
-                            print(chosenAddress);
-                          });
-                        }
-                      });
-                    },
-                    child: Container(
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        bottom: 20
+                      ),
                       width: double.infinity,
-                      margin: EdgeInsets.only(top: 15),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.grey,
@@ -144,111 +59,120 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         borderRadius: BorderRadius.circular(10)
                       ),
                       padding: EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(addressName == null ? "Choose Address" : addressName, style: TextStyle(fontSize: 20),),
-                          Icon(Icons.arrow_drop_down)
+                          Text("Deliver to", style: TextStyle(fontSize: 20),),
+                          GestureDetector(
+                            onTap: (){
+                              showDialog(
+                                context: context,
+                                builder: (context){
+                                  return StatefulBuilder(
+                                    builder: (context, setState){
+                                      return SimpleDialog(
+                                        contentPadding: EdgeInsets.all(15),
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.pushNamed(context, "/addaddress").then((value){
+                                                setState(() {
+                                                                                      
+                                                });
+                                              });
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                bottom: 10
+                                              ),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              padding: EdgeInsets.all(15),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(Icons.add_location_alt_outlined, color: Colors.blue,),
+                                                  Text("Add Address", style: TextStyle(fontSize: 20, color: Colors.blue),),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          for (var i = 0; i < Addresses.addressesBasket.length; i++)
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.of(context).pop(i);
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                bottom: 10
+                                              ),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              padding: EdgeInsets.all(15),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 20),),
+                                                  Icon(Icons.location_on_outlined)
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                  );
+                                }
+                              ).then((value){
+                                if(value != null){
+                                  setState((){
+                                    chosenAddress = Addresses.addressesBasket[value];
+                                    addressName = Addresses.addressesBasket[value]["title"];
+                                    print(chosenAddress);
+                                  });
+                                }
+                              });
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(top: 15),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(addressName == null ? "Choose Address" : addressName, style: TextStyle(fontSize: 20),),
+                                  Icon(Icons.arrow_drop_down)
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                bottom: 10
-              ),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(10)
-              ),
-              padding: EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Pay With", style: TextStyle(fontSize: 20),),
-                  GestureDetector(
-                    onTap: (){
-                      showDialog(
-                        context: context,
-                        builder: (context){
-                          return StatefulBuilder(
-                            builder: (context, setState){
-                              return SimpleDialog(
-                                contentPadding: EdgeInsets.all(15),
-                                children: [
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.of(context).pop("Cash");
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                        bottom: 10
-                                      ),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      padding: EdgeInsets.all(15),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Cash", style: TextStyle(fontSize: 20),),
-                                          Icon(Icons.payments_outlined)
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: (){
-                                      // Navigator.of(context).pop("Credit Card");
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                        bottom: 10
-                                      ),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      padding: EdgeInsets.all(15),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Credit Card (coming soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
-                                          Icon(Icons.payment_outlined, color: Colors.grey,)
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-                          );
-                        }
-                      ).then((value){
-                        setState((){
-                          payWith = value;
-                        });
-                      });
-                    },
-                    child: Container(
+                    Container(
+                      margin: EdgeInsets.only(
+                        bottom: 20
+                      ),
                       width: double.infinity,
-                      margin: EdgeInsets.only(top: 15),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.grey,
@@ -257,20 +181,248 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         borderRadius: BorderRadius.circular(10)
                       ),
                       padding: EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(payWith == null ? "Choose Payment" : payWith, style: TextStyle(fontSize: 20),),
-                          Icon(Icons.arrow_drop_down)
+                          Text("Pay With", style: TextStyle(fontSize: 20),),
+                          GestureDetector(
+                            onTap: (){
+                              showDialog(
+                                context: context,
+                                builder: (context){
+                                  return StatefulBuilder(
+                                    builder: (context, setState){
+                                      return SimpleDialog(
+                                        contentPadding: EdgeInsets.all(15),
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.of(context).pop("Cash");
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                bottom: 10
+                                              ),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              padding: EdgeInsets.all(15),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text("Cash", style: TextStyle(fontSize: 20),),
+                                                  Icon(Icons.payments_outlined)
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: (){
+                                              // Navigator.of(context).pop("Credit Card");
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                bottom: 10
+                                              ),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              padding: EdgeInsets.all(15),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text("Credit Card (coming soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
+                                                  Icon(Icons.payment_outlined, color: Colors.grey,)
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                  );
+                                }
+                              ).then((value){
+                                setState((){
+                                  payWith = value;
+                                });
+                              });
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(top: 15),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(payWith == null ? "Choose Payment" : payWith, style: TextStyle(fontSize: 20),),
+                                  Icon(Icons.arrow_drop_down)
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                  )
-                ],
+                    Container(
+                      margin: EdgeInsets.only(
+                        bottom: 20
+                      ),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Recieve at", style: TextStyle(fontSize: 20),),
+                          GestureDetector(
+                            onTap: (){
+                              showDialog(
+                                context: context,
+                                builder: (context){
+                                  return StatefulBuilder(
+                                    builder: (context, setState){
+                                      return SimpleDialog(
+                                        contentPadding: EdgeInsets.all(15),
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.of(context).pop("Tomorrow");
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                bottom: 10
+                                              ),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              padding: EdgeInsets.all(15),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text("Tomorrow", style: TextStyle(fontSize: 20),),
+                                                  Icon(Icons.date_range_outlined)
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: (){
+                                              // Navigator.of(context).pop("Now");
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                bottom: 10
+                                              ),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ),
+                                              padding: EdgeInsets.all(15),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text("Now (coming soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
+                                                  Icon(Icons.timer, color: Colors.grey,)
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                  );
+                                }
+                              ).then((value){
+                                setState((){
+                                  recieveAtTime = value;
+                                });
+                              });
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(top: 15),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(recieveAtTime == null ? "Choose Time" : recieveAtTime, style: TextStyle(fontSize: 20),),
+                                  Icon(Icons.arrow_drop_down)
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                )
               ),
             ),
+            Positioned(
+              bottom: 15,
+              child: GestureDetector(
+                onTap: (){
+                  print("object");
+                },
+                child: Container(
+                  width: theWidth - 25,
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Colors.yellow,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 2,
+                      color: Colors.black
+                    )
+                  ),
+                  child: Center(
+                    child: Text("Order", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  ),
+                ),
+              ),
+            )
           ],
-        )
+        ),
       ),
     );
   }
