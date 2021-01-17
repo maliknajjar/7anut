@@ -6,7 +6,6 @@ class Addresses {
   
   Addresses(){
     SharedPreferences.getInstance().then((prefs){
-      // prefs.setString("addresses", "");
       print(jsonDecode(prefs.getString("addresses")));
       addressesBasket = jsonDecode(prefs.getString("addresses"));
     });
