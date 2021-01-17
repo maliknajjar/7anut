@@ -8,7 +8,10 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  String chosenAddress;
+  var chosenAddress;
+  String payWith;
+
+  String addressName;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +94,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   for (var i = 0; i < Addresses.addressesBasket.length; i++)
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.of(context).pop(Addresses.addressesBasket[i]["title"]);
+                                      Navigator.of(context).pop(i);
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(
@@ -121,9 +124,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           );
                         }
                       ).then((value){
-                        setState((){
-                          chosenAddress = value;
-                        });
+                        if(value != null){
+                          setState((){
+                            chosenAddress = Addresses.addressesBasket[value];
+                            addressName = Addresses.addressesBasket[value]["title"];
+                            print(chosenAddress);
+                          });
+                        }
                       });
                     },
                     child: Container(
@@ -140,7 +147,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(chosenAddress == null ? "Choose Address" : chosenAddress, style: TextStyle(fontSize: 20),),
+                          Text(addressName == null ? "Choose Address" : addressName, style: TextStyle(fontSize: 20),),
                           Icon(Icons.arrow_drop_down)
                         ],
                       ),
@@ -178,7 +185,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.of(context).pop(Addresses.addressesBasket[0]["title"]);
+                                      Navigator.of(context).pop("Cash");
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(
@@ -196,8 +203,34 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(Addresses.addressesBasket[0]["title"], style: TextStyle(fontSize: 20),),
-                                          Icon(Icons.location_on_outlined)
+                                          Text("Cash", style: TextStyle(fontSize: 20),),
+                                          Icon(Icons.payments_outlined)
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      // Navigator.of(context).pop("Credit Card");
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        bottom: 10
+                                      ),
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.grey,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      padding: EdgeInsets.all(15),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Credit Card (coming soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
+                                          Icon(Icons.payment_outlined, color: Colors.grey,)
                                         ],
                                       ),
                                     ),
@@ -209,7 +242,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         }
                       ).then((value){
                         setState((){
-                          chosenAddress = value;
+                          payWith = value;
                         });
                       });
                     },
@@ -227,7 +260,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(chosenAddress == null ? "Choose Payment" : chosenAddress, style: TextStyle(fontSize: 20),),
+                          Text(payWith == null ? "Choose Payment" : payWith, style: TextStyle(fontSize: 20),),
                           Icon(Icons.arrow_drop_down)
                         ],
                       ),
