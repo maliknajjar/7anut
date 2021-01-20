@@ -417,6 +417,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ]);
                 },
                 child: Container(
+                  height: 60,
                   width: theWidth,
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(

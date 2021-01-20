@@ -32,14 +32,29 @@ class ConfirmationScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("address"),
-                    Column(
-                      children: [
-                        Text(args[i]["title"]),
-                        Text(args[i]["information"]),
-                        Text(args[i]["instructions"]),
-                        Text(args[i]["location"]["latitude"].toString() + "   " + args[i]["location"]["longitude"].toString()),
-                      ],
+                    Text("Address", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.only(
+                        bottom: 10,
+                        top: 10
+                      ),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          width: 2
+                        )
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("title: " + args[i]["title"], style: TextStyle(fontSize: 16),),
+                          Text("information: " + (args[i]["information"] == null ? "none" : args[i]["information"]), style: TextStyle(fontSize: 16),),
+                          Text("instructions: " + (args[i]["instructions"] == null ? "none" : args[i]["instructions"]), style: TextStyle(fontSize: 16),),
+                          Text("location: " + args[i]["location"]["latitude"].toString().substring(0, 7) + "   " + args[i]["location"]["longitude"].toString().substring(0, 7), style: TextStyle(fontSize: 16),),
+                        ],
+                      ),
                     ),
                   ],
                 )
@@ -47,9 +62,26 @@ class ConfirmationScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("payment type"),
+                    Text("Payment", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     Container(
-                      child: Text(args[i]),
+                      width: double.infinity,
+                      margin: EdgeInsets.only(
+                        bottom: 10,
+                        top: 10
+                      ),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          width: 2
+                        )
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Payment type: " + args[i], style: TextStyle(fontSize: 16),),
+                        ]
+                      ),
                     ),
                   ],
                 )
@@ -57,9 +89,26 @@ class ConfirmationScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("recieve date"),
+                    Text("Arrival date", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     Container(
-                      child: Text(args[i]),
+                      width: double.infinity,
+                      margin: EdgeInsets.only(
+                        bottom: 10,
+                        top: 10
+                      ),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          width: 2
+                        )
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("date: " + args[i] + " (tomorrow)", style: TextStyle(fontSize: 16),),
+                        ]
+                      ),
                     ),
                   ],
                 )
