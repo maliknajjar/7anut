@@ -10,12 +10,17 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   var chosenAddress;
   String payWith;
-  String recieveAtTime;
+  String recieveAtTimeDate;
 
   String addressName;
+  String recieveAtTime;
+
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    DateTime tomorrow = DateTime(now.year, now.month, now.day + 1);
+
     var theWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -255,6 +260,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ).then((value){
                                 setState((){
                                   payWith = value;
+                                  print(payWith);
                                 });
                               });
                             },
@@ -328,7 +334,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text("Tomorrow", style: TextStyle(fontSize: 20),),
+                                                  Text("Tomorrow (" + tomorrow.toString().substring(0, 10) + ")", style: TextStyle(fontSize: 20),),
                                                   Icon(Icons.date_range_outlined)
                                                 ],
                                               ),
@@ -368,6 +374,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ).then((value){
                                 setState((){
                                   recieveAtTime = value;
+                                  recieveAtTimeDate = tomorrow.toString().substring(0, 10);
+                                  print(recieveAtTimeDate);
                                 });
                               });
                             },
@@ -399,24 +407,29 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             ),
             Positioned(
-              bottom: 15,
+              bottom: 0,
               child: GestureDetector(
                 onTap: (){
-                  print("object");
+                  Navigator.of(context).pushNamed("/confirmation", arguments: [
+                    chosenAddress,
+                    payWith,
+                    recieveAtTimeDate,
+                  ]);
                 },
                 child: Container(
-                  width: theWidth - 25,
+                  width: theWidth,
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.yellow,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      width: 2,
-                      color: Colors.black
+                    border: Border(
+                      top: BorderSide(
+                        width: 2,
+                        color: Colors.black
+                      )
                     )
                   ),
                   child: Center(
-                    child: Text("Order", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    child: Text("Next", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   ),
                 ),
               ),

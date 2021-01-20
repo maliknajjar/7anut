@@ -17,6 +17,7 @@ import 'Screens/CheckoutScreen.dart';
 import 'Screens/AdressesScreen.dart';
 import 'Screens/GetLocationScreen.dart';
 import 'Screens/AddAddressScreen.dart';
+import 'Screens/ConfirmationScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -94,6 +95,7 @@ class _MyAppState extends State<MyApp> {
         "/adresses": (context) => AdressesScreen(),
         "/GetLocation": (context) => GetLocationScreen(),
         "/addaddress": (context) => AddAddressScreen(),
+        "/confirmation": (context) => ConfirmationScreen(),
       },
     );
   }
