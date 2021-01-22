@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../Classes/Basket.dart';
 
 class ConfirmationScreen extends StatelessWidget {
+  double theFee = 6.550;
+
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments as List;
@@ -74,6 +76,36 @@ class ConfirmationScreen extends StatelessWidget {
                             ]
                           )
                         ],
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 10),
+                        margin: EdgeInsets.only(top: 10),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: BorderDirectional(
+                            top: BorderSide(
+                              width: 1,
+                            )
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("transport fee:", style: TextStyle(fontSize: 16),),
+                                Text(theFee.toStringAsFixed(3), style: TextStyle(fontSize: 16),),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("total price:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                Text((Basket.getUltimateTotal() + theFee).toStringAsFixed(3), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   )
