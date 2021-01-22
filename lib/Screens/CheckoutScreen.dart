@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../Classes/Adresses.dart';
 
+import '../Classes/Functions.dart';
+
 class CheckoutScreen extends StatefulWidget {
   @override
   _CheckoutScreenState createState() => _CheckoutScreenState();
@@ -410,6 +412,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               bottom: 0,
               child: GestureDetector(
                 onTap: (){
+                  if(chosenAddress == null || payWith == null || recieveAtTimeDate == null){
+                    Functions.alert(context, "fill the fields", "you need to fill all the fields");
+                    return;
+                  }
                   Navigator.of(context).pushNamed("/confirmation", arguments: [
                     chosenAddress,
                     payWith,

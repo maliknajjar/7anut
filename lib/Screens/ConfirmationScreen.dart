@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ConfirmationScreen extends StatelessWidget {
+import '../Classes/Basket.dart';
 
+class ConfirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments as List;
-    print(args);
+    print(Basket.basketItems);
     
     return Scaffold(
       appBar: AppBar(
@@ -27,6 +28,58 @@ class ConfirmationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Orders", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(
+                    bottom: 10,
+                    top: 10
+                  ),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 2
+                    )
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Table(
+                          children: [
+                            TableRow(
+                              children: [
+                                Text("Name", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                Text("size", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                Text("qty", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                Text("price", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                              ]
+                            ),
+                          ],
+                        ),
+                      ),
+                      Table(
+                        children: [
+                          for (var i = 0; i < Basket.basketItems.length; i++)
+                          TableRow(
+                            children: [
+                              Text(Basket.basketItems[i]["Name"], style: TextStyle(fontSize: 18),),
+                              Text(Basket.basketItems[i]["size"], style: TextStyle(fontSize: 18),),
+                              Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 18),),
+                              Text((double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(3), style: TextStyle(fontSize: 18),),
+                            ]
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                ),
+              ],
+            ),
             for (var i = 0; i < 3; i++)
               if (i == 0) 
                 Column(

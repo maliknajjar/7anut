@@ -19,14 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var products;
   bool dataIsAvailable = false;
 
-  @override
-  initState() {
-    super.initState();
-
-    // adding the stored addresses to the address variable array
-    print("done done done done done done done done done done done done done done done done done ");
-    Addresses();
-    
+  void requestData(){
     http.get(env.apiUrl + "/api/categories").then((r){
       products = json.decode(r.body);
       Products.categories= json.decode(r.body);
@@ -40,6 +33,17 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       });
     });
+  }
+
+  @override
+  initState() {
+    super.initState();
+
+    // adding the stored addresses to the address variable array
+    Addresses();
+
+    // request categories and products from the server
+    requestData();
   }
 
   @override
@@ -58,6 +62,17 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 25,
         ),
         backgroundColor: Color(0xFF5DA7E6),
+        actions: [
+          GestureDetector(
+            onTap: (){
+
+            },
+            child: Container(
+              margin: EdgeInsets.only(right: 10),
+              child: Icon(Icons.refresh),
+            ),
+          )
+        ],
       ),
       body: !dataIsAvailable 
       ? LoadingLogo()
