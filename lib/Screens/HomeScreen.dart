@@ -20,6 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   bool dataIsAvailable = false;
 
   void requestData(){
+    setState(() {
+      dataIsAvailable = false;
+    });
     http.get(env.apiUrl + "/api/categories").then((r){
       products = json.decode(r.body);
       Products.categories= json.decode(r.body);
@@ -54,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: TheDrawer(),
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: !dataIsAvailable ? Colors.blue[100] : Color(0xFF303030),
+          color: Color(0xFF303030),
         ),
         centerTitle: true,
         title: Image.asset(
@@ -65,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           GestureDetector(
             onTap: (){
-
+              requestData();
             },
             child: Container(
               margin: EdgeInsets.only(right: 10),
@@ -74,11 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: !dataIsAvailable 
-      ? LoadingLogo()
-      : Stack(
+      body: Stack(
         children: <Widget>[
-          Container(
+          !dataIsAvailable
+          ? LoadingLogo()
+          : Container(
             padding: EdgeInsets.only(
               bottom: 54.5,
             ),
@@ -100,8 +103,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 InkWell(
                   onTap: (){
                     Navigator.of(context).pushNamed("/category", arguments: item["ID"] - 1).then((value){
+                      if(value == "refresh"){
+                        requestData();
+                        return;
+                      }
                       setState(() {
-                                              
+                                            
                       });
                     });
                   },

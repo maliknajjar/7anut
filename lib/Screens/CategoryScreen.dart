@@ -35,6 +35,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
             "assets/images/logo-01.png", 
             height: 25,
           ),
+          actions: [
+            GestureDetector(
+              onTap: (){
+                Navigator.of(context).pop("refresh");
+              },
+              child: Container(
+                margin: EdgeInsets.only(right: 10),
+                child: Icon(Icons.refresh),
+              ),
+            )
+          ],
           backgroundColor: Color(0xFF5DA7E6),
           bottom: TabBar(
             labelColor: Color(0xFF303030),
