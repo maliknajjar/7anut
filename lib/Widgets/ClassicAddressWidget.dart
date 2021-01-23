@@ -10,12 +10,15 @@ class ClassicAddressWidget extends StatefulWidget {
 
 class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
   String title;
+  String streetAddress;
+  String streetAddress2;
+  String city;
+  String province;
   String instructions;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return Container(
       height: double.infinity,
@@ -63,6 +66,146 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         isDense: true,
                         contentPadding: EdgeInsets.symmetric(vertical: 10),
                         hintText: "address name | ex: home",
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 0,
+                      bottom: 20,
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 7.5,
+                          spreadRadius: 0,
+                          color: Colors.black.withOpacity(0.25),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: TextField(
+                      onChanged: (string){
+                        streetAddress = string;
+                      },
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      cursorColor: Colors.black54,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                        hintText: "Street Address",
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 0,
+                      bottom: 20,
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 7.5,
+                          spreadRadius: 0,
+                          color: Colors.black.withOpacity(0.25),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: TextField(
+                      onChanged: (string){
+                        streetAddress2 = string;
+                      },
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      cursorColor: Colors.black54,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                        hintText: "Street Address 2 (optional)",
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 0,
+                      bottom: 20,
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 7.5,
+                          spreadRadius: 0,
+                          color: Colors.black.withOpacity(0.25),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: TextField(
+                      onChanged: (string){
+                        city = string;
+                      },
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      cursorColor: Colors.black54,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                        hintText: "City",
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 0,
+                      bottom: 20,
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 7.5,
+                          spreadRadius: 0,
+                          color: Colors.black.withOpacity(0.25),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: TextField(
+                      onChanged: (string){
+                        province = string;
+                      },
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      cursorColor: Colors.black54,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                        hintText: "Province",
                       ),
                     ),
                   ),
