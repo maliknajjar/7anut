@@ -10,7 +10,6 @@ class ClassicAddressWidget extends StatefulWidget {
 
 class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
   String title;
-  String information;
   String instructions;
 
   @override
@@ -89,44 +88,6 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                     child: TextField(
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      minLines: 5,
-                      onChanged: (string){
-                        information = string;
-                      },
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      cursorColor: Colors.black54,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        hintText: "additional information (optional)\nex: apartment number: 21",
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 0,
-                      bottom: 20,
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 7.5,
-                          spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
                       minLines: 3,
                       onChanged: (string){
                         instructions = string;
@@ -155,7 +116,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                 if (title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
-                  Addresses.addAddress({"title": title, "information": information, "instructions": instructions});
+                  Addresses.addAddress({"title": title, "instructions": instructions});
                   Navigator.of(context).pop();
                 }
               },

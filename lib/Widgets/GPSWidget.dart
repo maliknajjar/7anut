@@ -206,7 +206,6 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
             bottom: 0,
             child: GestureDetector(
               onTap: (){
-                print("save");
                 if (location == null || title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
