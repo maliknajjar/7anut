@@ -42,6 +42,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           alignment: Alignment.topCenter,
           children: [
             SingleChildScrollView(
+              padding: EdgeInsets.only(
+                top: 5
+              ),
               child: Container(
                 padding: EdgeInsets.all(15),
                 child: Column(
@@ -79,6 +82,57 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 10),
                           hintText: "address name | ex: home",
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pushNamed("/GetLocation").then((value){
+                          setState(() {
+                            print(value);
+                            if (value != null) {
+                              location = value;
+                              mapButtonText = "Location Selected";
+                            }
+                          });
+                        });
+                      },
+                      child: Container(
+                        height: 60,
+                        margin: EdgeInsets.only(
+                          top: 0,
+                          bottom: 20,
+                        ),
+                        decoration: BoxDecoration(
+                          color: location != null ? Colors.green : Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 0,
+                              color: Colors.black.withOpacity(0.25),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        width: double.infinity,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: 10),
+                              child: Icon(location != null ? Icons.done : Icons.add_location_alt, size: 30, color: location != null ? Colors.white : Colors.black,)
+                            ),
+                            Text(
+                              mapButtonText,
+                              style: TextStyle(
+                                fontSize: 22.5,
+                                color: location != null ? Colors.white : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -158,54 +212,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).pushNamed("/GetLocation").then((value){
-                          setState(() {
-                            print(value);
-                            if (value != null) {
-                              location = value;
-                              mapButtonText = "Location Selected";
-                            }
-                          });
-                        });
-                      },
-                      child: Container(
-                        height: 75,
-                        margin: EdgeInsets.only(
-                          top: 0,
-                          bottom: 90,
-                        ),
-                        decoration: BoxDecoration(
-                          color: location != null ? Colors.green : Colors.white,
-                          border: Border.all(
-                            width: 2,
-                            color: Colors.black.withOpacity(0.75),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        width: double.infinity,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 10),
-                              child: Icon(location != null ? Icons.done : Icons.add_location_alt, size: 40, color: location != null ? Colors.white : Colors.black,)
-                            ),
-                            Text(
-                              mapButtonText,
-                              style: TextStyle(
-                                fontSize: 22.5,
-                                color: location != null ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -232,9 +238,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(right: 5),
-                        child: Icon(Icons.save, size: 40,),
+                        child: Icon(Icons.save, size: 30,),
                       ),
-                      Text("Save", style: TextStyle(fontSize: 25),),
+                      Text("Save", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     ],
                   ),
                 ),
