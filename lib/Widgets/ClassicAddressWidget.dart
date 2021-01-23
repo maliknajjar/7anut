@@ -140,6 +140,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                     ),
                   ),
                   Container(
+                    width: double.infinity,
                     margin: EdgeInsets.only(
                       top: 0,
                       bottom: 20,
@@ -158,20 +159,17 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         Radius.circular(10),
                       ),
                     ),
-                    child: TextField(
-                      onChanged: (string){
-                        city = string;
+                    child: DropdownButton(
+                      hint:  Text("City", style: TextStyle(fontSize: 20),),
+                      onChanged: (var value) {
+                        city = value;
                       },
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      cursorColor: Colors.black54,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        hintText: "City",
-                      ),
+                      items: [
+                        DropdownMenuItem(
+                          value: "Tunis",
+                          child: Text("Tunis", style: TextStyle(fontSize: 20),)
+                        ),
+                      ],
                     ),
                   ),
                   Container(
@@ -259,7 +257,14 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                 if (title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
-                  Addresses.addAddress({"title": title, "instructions": instructions});
+                  Addresses.addAddress({
+                    "title": title, 
+                    "streetAddress": streetAddress, 
+                    "streetAddress2": streetAddress2, 
+                    "city": city, 
+                    "province": province, 
+                    "instructions": instructions
+                  });
                   Navigator.of(context).pop();
                 }
               },
