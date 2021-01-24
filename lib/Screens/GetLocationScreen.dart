@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:math' as Math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +18,8 @@ class GetLocationScreen extends StatefulWidget {
 class _GetLocationScreenState extends State<GetLocationScreen> {
   MapboxMapController controller;
   LatLng theLocation;
-
+  Circle circles;
+  
   Future<Position> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -84,17 +86,27 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               zoom: 10.0,
               target: LatLng(36.8065, 10.1815),
             ),
-            onMapCreated: (MapboxMapController controller){
+            onMapCreated: (MapboxMapController controller) async{
               this.controller = controller;
-              // controller.addCircle(
-              //   CircleOptions(
-              //     circleRadius: 8.0,
-              //     circleColor: '#006992',
-              //     circleOpacity: 0.8,
-              //     geometry: LatLng(36.8065, 10.1815),
-              //     draggable: false,
-              //   ),
-              // );
+              await this.controller.addFill(FillOptions(
+                fillColor: '#fff700',
+                fillOpacity: 0.5,
+                geometry: [
+                  CircleToPolygon().map((e){
+                    return LatLng(e.Y, e.X);
+                  }).toList(),
+                ]
+              ));
+              await this.controller.addLine(LineOptions(
+                lineColor: '#fff700',
+                lineWidth: 2,
+                geometry: [
+                  LatLng(36.940269251071356,10.199157563969461),
+                  LatLng(36.9460864181691,10.291168062016336),
+                  LatLng(36.864056366753644,10.257934402674405),
+                  LatLng(36.940269251071356,10.199157563969461),
+                ]
+              ));
             },
             trackCameraPosition: true,
           ),
@@ -102,8 +114,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             top: 25 + 110.0,
             right: 25,
             child: InkWell(
-              onTap: (){
-                controller.animateCamera(CameraUpdate.zoomIn());
+              onTap: () async {
+                await controller.animateCamera(CameraUpdate.zoomIn());
+                print(controller.cameraPosition.zoom);
               },
               child: Container(
                 width: 50,
@@ -122,8 +135,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             top: 90 + 110.0,
             right: 25,
             child: InkWell(
-              onTap: (){
-                controller.animateCamera(CameraUpdate.zoomOut());
+              onTap: () async {
+                await controller.animateCamera(CameraUpdate.zoomOut());
                 print("working");
               },
               child: Container(
@@ -304,3 +317,37 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     );
   }
 }
+
+List<Point> CircleToPolygon(){
+    List<Point> coords = [];
+    for(double i = 0; i < 360; i += 10) {
+      coords.add(rotate_point(0, 0, i, Point(X: 5, Y: 5)));
+    }
+    return coords;
+  }
+
+  Point rotate_point(double cx, double cy, double degree, Point p) {
+    double s = Math.sin(degree * Math.pi/180);
+    double c = Math.cos(degree * Math.pi/180);
+    // translate point back to origin:
+    p.X -= cx;
+    p.Y -= cy;
+    // rotate point
+    double Xnew = p.X * c - p.Y * s;
+    double Ynew = p.X * s + p.Y * c;
+    // translate point back:
+    p.X = Xnew + cx;
+    p.Y = Ynew + cy;
+    return p;
+  }
+
+  class Point{
+    double X;
+    double Y;
+    
+    Point({this.X, this.Y});
+    
+    void Print(){
+      print(this.X.toString() + " " + this.Y.toString());
+    }
+  }
