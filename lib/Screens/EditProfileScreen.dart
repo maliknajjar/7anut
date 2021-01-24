@@ -110,20 +110,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 }, 
                 body: json.encode(theMap))
                 .then((value){
-                  if(json.decode(value.body)["error"] != null){
-                    if(value.body.contains("session")){
-                      Functions.logout(context);
+                  if(value.statusCode == 200){
+                    if(json.decode(value.body)["error"] != null){
+                      if(value.body.contains("session")){
+                        Functions.logout(context);
+                        return;
+                      }
+                      Functions.alert(context, "error", json.decode(value.body)["error"]);
                       return;
                     }
-                    Functions.alert(context, "error", json.decode(value.body)["error"]);
-                    return;
+                    if(json.decode(value.body)["value"] != null){
+                      prefs.setString(theMap["type"], json.decode(value.body)["value"]);
+                      print("string was changed");
+                    }
+                    print(value.body);
+                    Navigator.of(context).pop();
                   }
-                  if(json.decode(value.body)["value"] != null){
-                    prefs.setString(theMap["type"], json.decode(value.body)["value"]);
-                    print("string was changed");
-                  }
-                  print(value.body);
-                  Navigator.of(context).pop();
                 });
               });
             },

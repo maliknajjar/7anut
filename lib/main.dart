@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import './env.dart';
 
 import 'Screens/HomeScreen.dart';
 import 'Screens/LoginScreen.dart';
@@ -24,14 +25,14 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  bool isLoggedIn = false;
-  bool isLoading = true;
 
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  bool isLoggedIn = false;
+  bool isLoading = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -43,32 +44,30 @@ class _MyAppState extends State<MyApp> {
     *///////////////////////////////////////////////////////////////
     SharedPreferences.getInstance().then((prefs){
       if(prefs.getString("sessionID") != null){
-        http.post("http://10.0.2.2:8000/api/checkUserSession", body: {
+        http.post(env.apiUrl + "/api/checkUserSession", body: {
           "email": prefs.getString("email"),
           "sessionID": prefs.getString("sessionID"),
         }).then((result){
           var response = json.decode(result.body);
-          print(response);
           if(response["error"] != null){
             print(response["error"]);
             prefs.remove("sessionID");
             setState(() {
-              widget.isLoading = false;
-              widget.isLoggedIn = false;
+              isLoading = false;
+              isLoggedIn = false;
             });
             return;
           }
-          print("success");
           setState(() {
-            widget.isLoggedIn = true;
-            widget.isLoading = false;
+            isLoggedIn = true;
+            isLoading = false;
           });
         });
       }
       else{
         setState(() {
-          widget.isLoading = false;
-          widget.isLoggedIn = false;
+          isLoading = false;
+          isLoggedIn = false;
         });
       }
     });
@@ -79,7 +78,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: 'Flutter Demo',
-      home: widget.isLoading ? LoadingLogo() : widget.isLoggedIn ? HomeScreen() : LoginScreen(),
+      home: isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen(),
       // home: ProfileScreen(),
       routes: {
         "/home": (context) => HomeScreen(),
