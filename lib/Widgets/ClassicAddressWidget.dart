@@ -160,9 +160,11 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                       ),
                     ),
                     child: DropdownButton(
-                      hint:  Text("City", style: TextStyle(fontSize: 20),),
+                      hint:  Text(city == null ? "City" : city, style: TextStyle(fontSize: 20),),
                       onChanged: (var value) {
-                        city = value;
+                        setState(() {
+                          city = value;                        
+                        });
                       },
                       items: [
                         DropdownMenuItem(

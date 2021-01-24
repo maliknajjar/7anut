@@ -86,6 +86,15 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
             onMapCreated: (MapboxMapController controller){
               this.controller = controller;
+              // controller.addCircle(
+              //   CircleOptions(
+              //     circleRadius: 8.0,
+              //     circleColor: '#006992',
+              //     circleOpacity: 0.8,
+              //     geometry: LatLng(36.8065, 10.1815),
+              //     draggable: false,
+              //   ),
+              // );
             },
             trackCameraPosition: true,
           ),

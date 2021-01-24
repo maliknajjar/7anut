@@ -124,39 +124,6 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                     ),
                   ),
                   Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(
-                      top: 0,
-                      bottom: 20,
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 7.5,
-                          spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: DropdownButton(
-                      hint:  Text("City", style: TextStyle(fontSize: 20),),
-                      onChanged: (var value) {
-                        city = value;
-                      },
-                      items: [
-                        DropdownMenuItem(
-                          value: "Tunis",
-                          child: Text("Tunis", style: TextStyle(fontSize: 20),)
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
                     margin: EdgeInsets.only(
                       top: 0,
                       bottom: 20,
