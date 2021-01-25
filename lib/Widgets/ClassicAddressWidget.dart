@@ -260,7 +260,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
             child: GestureDetector(
               onTap: (){
                 print("save");
-                if (title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
+                if (title == null || streetAddress == null || streetAddress2 == null || city == null || province == null || instructions == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
                   Addresses.addAddress({
