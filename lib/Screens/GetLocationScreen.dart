@@ -67,6 +67,21 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     );
   }
 
+  void addTheCircle({LatLng geometri, double radius}) async {
+    await this.controller.addFill(FillOptions(
+      fillColor: '#fff700',
+      fillOpacity: 0.2,
+      geometry: [
+        CircleToPolygon(geometri, radius),
+      ]
+    ));
+    await this.controller.addLine(LineOptions(
+      lineColor: '#fff700',
+      lineWidth: 3,
+      geometry: CircleToPolygon(geometri, radius, forLine: true),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     final String token = 'pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA';
@@ -74,6 +89,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+    double radius = 0.1;
 
     return Scaffold(
       body: Stack(
@@ -88,25 +105,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
             onMapCreated: (MapboxMapController controller) async{
               this.controller = controller;
-              await this.controller.addFill(FillOptions(
-                fillColor: '#fff700',
-                fillOpacity: 0.5,
-                geometry: [
-                  CircleToPolygon().map((e){
-                    return LatLng(e.Y, e.X);
-                  }).toList(),
-                ]
-              ));
-              await this.controller.addLine(LineOptions(
-                lineColor: '#fff700',
-                lineWidth: 2,
-                geometry: [
-                  LatLng(36.940269251071356,10.199157563969461),
-                  LatLng(36.9460864181691,10.291168062016336),
-                  LatLng(36.864056366753644,10.257934402674405),
-                  LatLng(36.940269251071356,10.199157563969461),
-                ]
-              ));
+              addTheCircle(geometri: LatLng(36.8065, 10.1815),radius: 0.1);
             },
             trackCameraPosition: true,
           ),
@@ -318,36 +317,41 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   }
 }
 
-List<Point> CircleToPolygon(){
-    List<Point> coords = [];
-    for(double i = 0; i < 360; i += 10) {
-      coords.add(rotate_point(0, 0, i, Point(X: 5, Y: 5)));
-    }
-    return coords;
+List<LatLng> CircleToPolygon(LatLng center, double radius, {bool forLine = false}){
+  List<LatLng> coords = [];
+  for(double i = 0; i < 360; i += 10) {
+    Point thePoint = rotate_point(center.longitude, center.latitude, i, Point(X: center.longitude + radius, Y: center.latitude + radius));
+    coords.add(LatLng(thePoint.Y, thePoint.X),);
   }
+  if(forLine){
+    Point thePoint = rotate_point(center.longitude, center.latitude, 0, Point(X: center.longitude + radius, Y: center.latitude + radius));
+    coords.add(LatLng(thePoint.Y, thePoint.X),);
+  }
+  return coords;
+}
 
-  Point rotate_point(double cx, double cy, double degree, Point p) {
-    double s = Math.sin(degree * Math.pi/180);
-    double c = Math.cos(degree * Math.pi/180);
-    // translate point back to origin:
-    p.X -= cx;
-    p.Y -= cy;
-    // rotate point
-    double Xnew = p.X * c - p.Y * s;
-    double Ynew = p.X * s + p.Y * c;
-    // translate point back:
-    p.X = Xnew + cx;
-    p.Y = Ynew + cy;
-    return p;
-  }
+Point rotate_point(double cx, double cy, double degree, Point p) {
+  double s = Math.sin(degree * Math.pi/180);
+  double c = Math.cos(degree * Math.pi/180);
+  // translate point back to origin:
+  p.X -= cx;
+  p.Y -= cy;
+  // rotate point
+  double Xnew = p.X * c - p.Y * s;
+  double Ynew = p.X * s + p.Y * c;
+  // translate point back:
+  p.X = Xnew + cx;
+  p.Y = Ynew + cy;
+  return p;
+}
 
-  class Point{
-    double X;
-    double Y;
-    
-    Point({this.X, this.Y});
-    
-    void Print(){
-      print(this.X.toString() + " " + this.Y.toString());
-    }
+class Point{
+  double X;
+  double Y;
+  
+  Point({this.X, this.Y});
+  
+  void Print(){
+    print(this.X.toString() + " " + this.Y.toString());
   }
+}
