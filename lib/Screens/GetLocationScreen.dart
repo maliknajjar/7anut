@@ -12,6 +12,10 @@ import 'package:http/http.dart' as http;
 import '../Classes/Functions.dart';
 
 class GetLocationScreen extends StatefulWidget {
+  List<dynamic> cities;
+  GetLocationScreen(List<dynamic> theCities){
+    cities = theCities;
+  }
   @override
   _GetLocationScreenState createState() => _GetLocationScreenState();
 }
@@ -20,68 +24,6 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   MapboxMapController controller;
   LatLng theLocation;
   Circle circles;
-  
-  Future<Position> determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permantly denied, we cannot request permissions.');
-    }
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission != LocationPermission.whileInUse &&
-          permission != LocationPermission.always) {
-        return Future.error(
-            'Location permissions are denied (actual value: $permission).');
-      }
-    }
-
-    return await Geolocator.getCurrentPosition();
-  }
-
-  var symbol;
-  void addPin({LatLng coord}) async{
-    if (coord != null) theLocation = coord;
-    else theLocation = controller.cameraPosition.target;
-
-    if (symbol != null){
-      controller.removeSymbol(symbol);
-    }
-    final ByteData bytes = await rootBundle.load("assets/images/thepin.png");
-    final Uint8List list = bytes.buffer.asUint8List();
-    await controller.addImage("pin", list);
-    symbol = await controller.addSymbol(
-      SymbolOptions(
-        geometry: coord == null ? controller.cameraPosition.target : coord,
-        iconImage: "pin",
-        iconOffset: Offset(0, -20)
-      ),
-    );
-  }
-
-  void addTheCircle({LatLng geometri, double radius}) async {
-    await this.controller.addFill(FillOptions(
-      fillColor: '#fff700',
-      fillOpacity: 0.2,
-      geometry: [
-        CircleToPolygon(geometri, radius),
-      ]
-    ));
-    await this.controller.addLine(LineOptions(
-      lineColor: '#fff700',
-      lineWidth: 3,
-      geometry: CircleToPolygon(geometri, radius, forLine: true),
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +32,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
-    double radius = 0.1;
-
+    
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -106,8 +46,10 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
             onMapCreated: (MapboxMapController controller) async{
               this.controller = controller;
-              Timer(Duration(seconds: 0), (){
-                addTheCircle(geometri: LatLng(36.8065, 10.1815),radius: 0.1);
+              Timer(Duration(milliseconds: 100), (){
+                for (var i = 0; i < widget.cities.length; i++){
+                  addTheCircle(controller, geometri: LatLng(widget.cities[i]["latitude"], widget.cities[i]["longitude"]),radius: widget.cities[i]["radius"]);
+                }
               });
             },
             trackCameraPosition: true,
@@ -318,6 +260,68 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
       ),
     );
   }
+
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permantly denied, we cannot request permissions.');
+    }
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse &&
+          permission != LocationPermission.always) {
+        return Future.error(
+            'Location permissions are denied (actual value: $permission).');
+      }
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
+  var symbol;
+  void addPin({LatLng coord}) async{
+    if (coord != null) theLocation = coord;
+    else theLocation = controller.cameraPosition.target;
+
+    if (symbol != null){
+      controller.removeSymbol(symbol);
+    }
+    final ByteData bytes = await rootBundle.load("assets/images/thepin.png");
+    final Uint8List list = bytes.buffer.asUint8List();
+    await controller.addImage("pin", list);
+    symbol = await controller.addSymbol(
+      SymbolOptions(
+        geometry: coord == null ? controller.cameraPosition.target : coord,
+        iconImage: "pin",
+        iconOffset: Offset(0, -20)
+      ),
+    );
+  }
+}
+
+void addTheCircle(MapboxMapController controller, {LatLng geometri, double radius}) async {
+  await controller.addFill(FillOptions(
+    fillColor: '#fff700',
+    fillOpacity: 0.2,
+    geometry: [
+      CircleToPolygon(geometri, radius),
+    ]
+  ));
+  await controller.addLine(LineOptions(
+    lineColor: '#fff700',
+    lineWidth: 3,
+    geometry: CircleToPolygon(geometri, radius, forLine: true),
+  ));
 }
 
 List<LatLng> CircleToPolygon(LatLng center, double radius, {bool forLine = false}){

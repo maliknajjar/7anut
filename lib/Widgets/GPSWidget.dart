@@ -3,8 +3,13 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
+import '../Screens/GetLocationScreen.dart';
 
 class GPSAddAddress extends StatefulWidget {
+  List<dynamic> cities;
+  GPSAddAddress(List<dynamic> theCities){
+    cities = theCities;
+  }
   @override
   _GPSAddAddressState createState() => _GPSAddAddressState();
 }
@@ -74,7 +79,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Navigator.of(context).pushNamed("/GetLocation").then((value){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => GetLocationScreen(widget.cities))).then((value){
                         setState(() {
                           print(value);
                           if (value != null) {

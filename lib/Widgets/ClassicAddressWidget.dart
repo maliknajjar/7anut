@@ -4,6 +4,10 @@ import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
 
 class ClassicAddressWidget extends StatefulWidget {
+  List<dynamic> cities;
+  ClassicAddressWidget(List<dynamic> theCities){
+    cities = theCities;
+  }
   @override
   _ClassicAddressWidgetState createState() => _ClassicAddressWidgetState();
 }

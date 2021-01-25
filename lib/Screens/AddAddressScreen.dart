@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
-
-import '../Classes/Functions.dart';
-import '../Classes/Adresses.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../Widgets/GPSWidget.dart';
 import '../Widgets/ClassicAddressWidget.dart';
+
+import './LoadingLogoScreen.dart';
+
+import '../env.dart';
 
 class AddAddressScreen extends StatefulWidget {
   @override
@@ -13,14 +15,29 @@ class AddAddressScreen extends StatefulWidget {
 }
 
 class _AddAddressScreenState extends State<AddAddressScreen> {
+  bool isDataHere = false;
+  List<dynamic> r;
+
+  @override
+    void initState() {
+      super.initState();
+
+      http.get(env.apiUrl + "/api/cities")
+      .then((value){
+        r = jsonDecode(value.body);
+        setState(() {
+          isDataHere = true;
+        });
+      });
+    }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
+      child: !isDataHere ? LoadingLogo() : Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: Color(0xFF303030),
@@ -43,8 +60,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         ),
         body: TabBarView(
           children: [
-            GPSAddAddress(),
-            ClassicAddressWidget(),
+            GPSAddAddress(r),
+            ClassicAddressWidget(r),
           ],
         ),
       ),
