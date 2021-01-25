@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:math' as Math;
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -105,7 +106,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
             onMapCreated: (MapboxMapController controller) async{
               this.controller = controller;
-              addTheCircle(geometri: LatLng(36.8065, 10.1815),radius: 0.1);
+              Timer(Duration(seconds: 0), (){
+                addTheCircle(geometri: LatLng(36.8065, 10.1815),radius: 0.1);
+              });
             },
             trackCameraPosition: true,
           ),
@@ -319,7 +322,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
 
 List<LatLng> CircleToPolygon(LatLng center, double radius, {bool forLine = false}){
   List<LatLng> coords = [];
-  for(double i = 0; i < 360; i += 10) {
+  for(double i = 0; i < 360; i += 5) {
     Point thePoint = rotate_point(center.longitude, center.latitude, i, Point(X: center.longitude + radius, Y: center.latitude + radius));
     coords.add(LatLng(thePoint.Y, thePoint.X),);
   }
