@@ -170,12 +170,12 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                           city = value;                        
                         });
                       },
-                      items: [
-                        DropdownMenuItem(
-                          value: "Tunis",
-                          child: Text("Tunis", style: TextStyle(fontSize: 20),)
-                        ),
-                      ],
+                      items: widget.cities.map((e){
+                        return DropdownMenuItem(
+                          value: e["city"],
+                          child: Text(e["city"], style: TextStyle(fontSize: 20),)
+                        );
+                      }).toList(),
                     ),
                   ),
                   Container(

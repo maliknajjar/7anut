@@ -53,7 +53,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                 },
                 child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(15),
                   margin: EdgeInsets.only(bottom: 15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -66,16 +66,8 @@ class _AdressesScreenState extends State<AdressesScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 25),),
-                          ),
-                          Container(
-                            child: Text(Addresses.addressesBasket[i]["location"]["latitude"].toString().substring(0, 6) + ", " + Addresses.addressesBasket[i]["location"]["longitude"].toString().substring(0, 6), style: TextStyle(fontSize: 15),),
-                          ),
-                        ],
+                      Container(
+                        child: Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 25),),
                       ),
                       GestureDetector(
                         onTap: (){
