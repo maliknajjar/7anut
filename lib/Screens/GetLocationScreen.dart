@@ -44,13 +44,13 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               zoom: 10.0,
               target: LatLng(36.8065, 10.1815),
             ),
+            onStyleLoadedCallback: (){
+              for (var i = 0; i < widget.cities.length; i++){
+                drawTheCircle(controller, LatLng(widget.cities[i]["latitude"], widget.cities[i]["longitude"]), widget.cities[i]["radius"]);
+              }
+            },
             onMapCreated: (MapboxMapController controller) async{
               this.controller = controller;
-              Timer(Duration(milliseconds: 100), (){
-                for (var i = 0; i < widget.cities.length; i++){
-                  addTheCircle(controller, geometri: LatLng(widget.cities[i]["latitude"], widget.cities[i]["longitude"]), radius: widget.cities[i]["radius"]);
-                }
-              });
             },
             trackCameraPosition: true,
           ),
@@ -103,6 +103,19 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               onTap: () async {
                 print("working");
                 determinePosition().then((value){
+                  for (var i = 0; i < widget.cities.length; i++){
+                    var cityCoord = widget.cities[i];
+                    var radius = widget.cities[i]["radius"];
+                    var distance = distanceBetweenTwoPoints(value.longitude, value.latitude, cityCoord["longitude"], cityCoord["latitude"]);
+                    if(distance > radius){
+                      if(i == widget.cities.length - 1){
+                        Functions.alert(context, "Not covered", "your location is not covered");
+                        return;
+                      }
+                    }else{
+                      break;
+                    }
+                  }
                   addPin(coord: LatLng(value.latitude, value.longitude));
                   controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 15)));
                 });
@@ -298,13 +311,15 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   void addPin({LatLng coord}) async{
     for (var i = 0; i < widget.cities.length; i++){
       var cityCoord = widget.cities[i];
-      var radius = widget.cities[i]["radius"] + 0.04;
+      var radius = widget.cities[i]["radius"];
       var distance = distanceBetweenTwoPoints(coord.longitude, coord.latitude, cityCoord["longitude"], cityCoord["latitude"]);
       if(distance > radius){
-        Functions.alert(context, "too far", "this place is too far");
-        print(distance);
-        print(radius);
-        return;
+        if(i == widget.cities.length - 1){
+          Functions.alert(context, "Not covered", "your location is not covered");
+          return;
+        }
+      }else{
+        break;
       }
     }
 
@@ -321,59 +336,41 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
         iconOffset: Offset(0, -20)
       ),
     );
+    theLocation = coord;
   }
 }
 
-void addTheCircle(MapboxMapController controller, {LatLng geometri, double radius}) async {
+void drawTheCircle(MapboxMapController controller, LatLng center, double radius) async {
   await controller.addFill(FillOptions(
     fillColor: '#fff700',
     fillOpacity: 0.2,
     geometry: [
-      CircleToPolygon(geometri, radius),
+      circlePoints(center, radius),
     ]
   ));
   await controller.addLine(LineOptions(
     lineColor: '#fff700',
     lineWidth: 3,
-    geometry: CircleToPolygon(geometri, radius, forLine: true),
+    geometry: circlePoints(center, radius),
   ));
 }
 
-List<LatLng> CircleToPolygon(LatLng center, double radius, {bool forLine = false}){
-  List<LatLng> coords = [];
-  for(double i = 0; i < 360; i += 5) {
-    Point thePoint = rotate_point(center.longitude, center.latitude, i, Point(X: center.longitude + radius, Y: center.latitude + radius));
-    coords.add(LatLng(thePoint.Y, thePoint.X),);
-  }
-  if(forLine){
-    Point thePoint = rotate_point(center.longitude, center.latitude, 0, Point(X: center.longitude + radius, Y: center.latitude + radius));
-    coords.add(LatLng(thePoint.Y, thePoint.X),);
+List<LatLng> circlePoints(LatLng center, double radius){
+  List<LatLng> coords = [LatLng(center.latitude + radius, center.longitude)];
+  LatLng newPoint = coords[0];
+  double circleResolution = 1; // the smaller the better (only devided by two)
+  for (double i = 0; i < 360; i += circleResolution) {
+    newPoint = rotatePoint(center.longitude, center.latitude, newPoint.longitude, newPoint.latitude, circleResolution.toDouble());
+    coords.add(newPoint);
   }
   return coords;
 }
 
-Point rotate_point(double cx, double cy, double degree, Point p) {
-  double s = Math.sin(degree * Math.pi/180);
-  double c = Math.cos(degree * Math.pi/180);
-  // translate point back to origin:
-  p.X -= cx;
-  p.Y -= cy;
-  // rotate point
-  double Xnew = p.X * c - p.Y * s;
-  double Ynew = p.X * s + p.Y * c;
-  // translate point back:
-  p.X = Xnew + cx;
-  p.Y = Ynew + cy;
-  return p;
-}
+LatLng rotatePoint(double cx, double cy, double px, double py, double degree) {
+  double radians = degree * Math.pi / 180;
 
-class Point{
-  double X;
-  double Y;
-  
-  Point({this.X, this.Y});
-  
-  void Print(){
-    print(this.X.toString() + " " + this.Y.toString());
-  }
+  var x1 = (px - cx) * Math.cos(radians) - (py - cy) * Math.sin(radians) + cx;
+  var y1 = (px - cx) * Math.sin(radians) + (py - cy) * Math.cos(radians) + cy;
+
+  return LatLng(y1, x1);
 }
