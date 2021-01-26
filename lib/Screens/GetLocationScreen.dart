@@ -48,7 +48,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               this.controller = controller;
               Timer(Duration(milliseconds: 100), (){
                 for (var i = 0; i < widget.cities.length; i++){
-                  addTheCircle(controller, geometri: LatLng(widget.cities[i]["latitude"], widget.cities[i]["longitude"]),radius: widget.cities[i]["radius"]);
+                  addTheCircle(controller, geometri: LatLng(widget.cities[i]["latitude"], widget.cities[i]["longitude"]), radius: widget.cities[i]["radius"]);
                 }
               });
             },
@@ -177,7 +177,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        addPin();
+                        addPin(coord: controller.cameraPosition.target);
                       },
                       child: Container(
                         height: double.infinity,
@@ -288,10 +288,25 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     return await Geolocator.getCurrentPosition();
   }
 
+  double distanceBetweenTwoPoints(double x1, double y1, double x2, double y2){
+    double x = x1 - x2;
+    double y = y1 - y2;
+    return Math.sqrt((x*x)+(y*y));
+  }
+
   var symbol;
   void addPin({LatLng coord}) async{
-    if (coord != null) theLocation = coord;
-    else theLocation = controller.cameraPosition.target;
+    for (var i = 0; i < widget.cities.length; i++){
+      var cityCoord = widget.cities[i];
+      var radius = widget.cities[i]["radius"] + 0.04;
+      var distance = distanceBetweenTwoPoints(coord.longitude, coord.latitude, cityCoord["longitude"], cityCoord["latitude"]);
+      if(distance > radius){
+        Functions.alert(context, "too far", "this place is too far");
+        print(distance);
+        print(radius);
+        return;
+      }
+    }
 
     if (symbol != null){
       controller.removeSymbol(symbol);
