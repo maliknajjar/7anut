@@ -39,6 +39,11 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     var theWidth = MediaQuery.of(context).size.width;
     Map<String, dynamic> args = ModalRoute.of(context).settings.arguments as Map;
     List address = args["Address"].values.toList();
+    if(args["Address"].containsKey("location")){
+      for (var i = 0; i < address.length; i++) {
+        if(i == 1) address[i] = address[i]["latitude"].toStringAsFixed(5) + ", " + address[i]["longitude"].toStringAsFixed(5);
+      }
+    }
     address.removeAt(0);
     
     return !isDataHere 
@@ -198,7 +203,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         ],
                       ),
                     ),
-                    Text("Address", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text("Recieve Date", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
@@ -227,7 +232,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
               bottom: 0,
               child: GestureDetector(
                 onTap: (){
-                  print("object");
+                  print("woooow");
                 },
                 child: Container(
                   height: 60,

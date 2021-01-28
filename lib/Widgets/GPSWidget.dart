@@ -34,7 +34,8 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
         children: [
           SingleChildScrollView(
             padding: EdgeInsets.only(
-              top: 5
+              top: 5,
+              bottom: 50
             ),
             child: Container(
               padding: EdgeInsets.all(15),
@@ -214,7 +215,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                 if (location == null || title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
-                  Addresses.addAddress({"title": title, "information": information, "instructions": instructions, "location": {"latitude": location.latitude, "longitude": location.longitude}});
+                  Addresses.addAddress({"title": title, "location": {"latitude": location.latitude, "longitude": location.longitude}, "information": information, "instructions": instructions});
                   Navigator.of(context).pop();
                 }
               },

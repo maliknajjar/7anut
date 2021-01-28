@@ -23,7 +23,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
+    DateTime now = DateTime.now().toUtc().add(Duration(hours: 1));
     DateTime tomorrow = DateTime(now.year, now.month, now.day + 1);
 
     var theWidth = MediaQuery.of(context).size.width;
