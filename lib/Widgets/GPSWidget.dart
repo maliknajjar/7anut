@@ -19,7 +19,6 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
   String information;
   String instructions;
   LatLng location;
-  String city;
   
   String mapButtonText = "Add Location";
 
@@ -215,7 +214,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                 if (location == null || title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
-                  Addresses.addAddress({"title": title, "information": information, "instructions": instructions, "location": {"latitude": location.latitude, "longitude": location.longitude}, "city": city});
+                  Addresses.addAddress({"title": title, "information": information, "instructions": instructions, "location": {"latitude": location.latitude, "longitude": location.longitude}});
                   Navigator.of(context).pop();
                 }
               },

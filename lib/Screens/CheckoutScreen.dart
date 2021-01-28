@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../Classes/Adresses.dart';
 
@@ -416,11 +419,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     Functions.alert(context, "fill the fields", "you need to fill all the fields");
                     return;
                   }
-                  Navigator.of(context).pushNamed("/confirmation", arguments: [
-                    chosenAddress,
-                    payWith,
-                    recieveAtTimeDate,
-                  ]);
+                  var information = {"Address": chosenAddress, "Payment Type": payWith, "Recieve Date": recieveAtTimeDate};
+                  Navigator.of(context).pushNamed("/confirmation", arguments: information);
                 },
                 child: Container(
                   height: 60,
