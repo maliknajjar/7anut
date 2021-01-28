@@ -60,6 +60,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("Successfully sent"),
+            Icon(Icons.done_outline),
           ],
         ),
       ),
