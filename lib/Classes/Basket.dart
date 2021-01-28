@@ -1,5 +1,9 @@
 class Basket {
-  static var basketItems = [];
+  static List basketItems = [];
+
+  static void clearBasket(){
+    basketItems.clear();
+  }
 
   static void printAllSelectedItems(){
     print(Basket.basketItems);
