@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Classes/Basket.dart';
 import '../env.dart';
@@ -14,6 +15,7 @@ class ConfirmationScreen extends StatefulWidget {
 
 class _ConfirmationScreenState extends State<ConfirmationScreen> {
   bool isDataHere = false;
+  bool isSentRequest = false;
   double theFee;
   
   @override
@@ -48,6 +50,20 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     
     return !isDataHere 
     ? LoadingLogo()
+    : isSentRequest
+    ? Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Successfully sent"),
+          ],
+        ),
+      ),
+    )
     : Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -232,7 +248,26 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
               bottom: 0,
               child: GestureDetector(
                 onTap: (){
-                  print("woooow");
+                  SharedPreferences.getInstance().then((prefs){
+                    http.post(env.apiUrl + "/api/addOrder",
+                    headers: {"Content-Type": "application/json"},
+                    body: json.encode({
+                      "sessionID": prefs.getString("sessionID"),
+                      "email": prefs.getString("email"),
+                      "orders": jsonEncode(Basket.basketItems),
+                      "transportFee": double.parse(theFee.toStringAsFixed(3)),
+                      "totalPrice": double.parse((Basket.getUltimateTotal() + theFee).toStringAsFixed(3)),
+                      "address": jsonEncode(address),
+                      "paymentType": args["Payment Type"].toString(),
+                      "recieveDate": args["Recieve Date"].toString(),
+                    }))
+                    .then((value){
+                      setState(() {
+                        isSentRequest = !isSentRequest;
+                      });
+                      print(value.body);
+                    });
+                  });
                 },
                 child: Container(
                   height: 60,
