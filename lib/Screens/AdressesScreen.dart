@@ -47,9 +47,36 @@ class _AdressesScreenState extends State<AdressesScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               for (var i = 0; i < Addresses.addressesBasket.length; i++)
-              GestureDetector(
+              InkWell(
+                hoverColor: Colors.white.withOpacity(0),
+                focusColor: Colors.white.withOpacity(0),
+                highlightColor: Colors.white.withOpacity(0),
+                splashColor: Colors.white.withOpacity(0),
                 onTap: (){
-                  // Navigator.of(context).pushNamed("/addaddress");
+                  print(Addresses.addressesBasket[i].values);
+                  showDialog(
+                    context: context,
+                    builder: (context) => new AlertDialog(
+                      content: IntrinsicHeight(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var item in Addresses.addressesBasket[i].values)
+                            if (item != null)
+                            Text(item),
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        new TextButton(
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true).pop(); // dismisses only the dialog and returns nothing
+                          },
+                          child: Text("OK")
+                        ),
+                      ],
+                    ),
+                  );
                 },
                 child: Container(
                   width: double.infinity,
