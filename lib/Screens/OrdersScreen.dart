@@ -18,12 +18,32 @@ class OrdersScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(15),
         child: Column(
           children: [
             for(var n = 0; n < 10; n++)
             Container(
-              child: Text("data"),
+              padding: EdgeInsets.all(15),
+              margin: EdgeInsets.only(bottom: 15),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 1,
+                  color: Colors.black.withOpacity(0.5)
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("data"),
+                      Text("10-15-2021"),
+                    ],
+                  )
+                ],
+              ),
             )
           ],
         ),
