@@ -251,7 +251,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text("Credit Card (soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
+                                                  Text("Credit Card (coming soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
                                                   Icon(Icons.payment_outlined, color: Colors.grey,)
                                                 ],
                                               ),

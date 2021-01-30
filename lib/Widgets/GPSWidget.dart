@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
@@ -28,21 +27,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return kIsWeb 
-    ? Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(Icons.cancel_outlined, size: 100, color: Colors.black.withOpacity(0.5)),
-        Container(
-          margin: EdgeInsets.only(
-            top: 10
-          ),
-          child: Text("Map doesnt work on the Web version", style: TextStyle(fontSize: 18),),
-        ),
-      ],
-    )
-    : Container(
+    return Container(
       height: double.infinity,
       child: Stack(
         alignment: Alignment.topCenter,
@@ -60,7 +45,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 15,
+                      bottom: 20,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -108,7 +93,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                       height: 60,
                       margin: EdgeInsets.only(
                         top: 0,
-                        bottom: 15,
+                        bottom: 20,
                       ),
                       decoration: BoxDecoration(
                         color: location != null ? Colors.green : Colors.white,
@@ -146,7 +131,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 15,
+                      bottom: 20,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -184,7 +169,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 15,
+                      bottom: 20,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
 
 import '../Widgets/GPSWidget.dart';
@@ -38,7 +37,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
     return DefaultTabController(
       length: 2,
-      initialIndex: kIsWeb ? 1 : 0,
       child: !isDataHere ? LoadingLogo() : Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
