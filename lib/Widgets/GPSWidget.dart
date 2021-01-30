@@ -60,7 +60,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -108,7 +108,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                       height: 60,
                       margin: EdgeInsets.only(
                         top: 0,
-                        bottom: 20,
+                        bottom: 15,
                       ),
                       decoration: BoxDecoration(
                         color: location != null ? Colors.green : Colors.white,
@@ -146,7 +146,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -184,7 +184,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(

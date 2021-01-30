@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.of(context).pushNamed("/profile");
                     },
                     child: Icon(
-                      Icons.person,
+                      Icons.person_outline,
                       size: 35,
                       color: Color(0xFF303030),
                     ),
@@ -206,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.of(context).pushNamed("/adresses");
                     },
                     child: Icon(
-                      Icons.location_on,
+                      Icons.location_on_outlined,
                       size: 35,
                       color: Color(0xFF303030),
                     ),
@@ -256,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     alignment: Alignment.center,
                     children: [
                       Icon(
-                        Icons.shopping_cart,
+                        Icons.shopping_cart_outlined,
                         size: 35,
                         color: Color(0xFF303030),
                       ),
