@@ -41,7 +41,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -77,7 +77,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                     width: double.infinity,
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -111,7 +111,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -146,7 +146,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -181,7 +181,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
@@ -216,7 +216,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 20,
+                      bottom: 15,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
