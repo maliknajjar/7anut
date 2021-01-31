@@ -1,6 +1,6 @@
 {
-    "name": "test_app",
-    "short_name": "test_app",
+    "name": "hanut",
+    "short_name": "hanut",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
