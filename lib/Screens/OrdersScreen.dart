@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../env.dart';
+import '../Classes/Functions.dart';
 import '../Classes/UserInformation.dart';
 
 import './LoadingLogoScreen.dart';
+import './OrderInformation.dart';
 
 class OrdersScreen extends StatefulWidget {
   @override
@@ -25,7 +27,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
       "sessionID": UserInformation.sessionID,
     })
     .then((value){
+      print({
+      "email": UserInformation.email,
+      "sessionID": UserInformation.sessionID,
+      });
       print(value.body);
+      if(value.body.contains("error")){
+        Functions.logout(context);
+      }
       setState(() {
         isDataHere = true;
         data = jsonDecode(value.body);
@@ -35,6 +44,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget space = Container(height: 10,);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -54,62 +65,132 @@ class _OrdersScreenState extends State<OrdersScreen> {
         child: Column(
           children: [
             for(var n = 0; n < data.length; n++)
-            Container(
-              // padding: EdgeInsets.all(15),
-              margin: EdgeInsets.only(bottom: 15),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1,
-                  color: Colors.black.withOpacity(0.5)
+            InkWell(
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context) => OrderInformation(data[n])),);
+              },
+              child: Container(
+                // padding: EdgeInsets.all(15),
+                margin: EdgeInsets.only(bottom: 15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.black.withOpacity(0.5)
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("10-15-2021", style: TextStyle(fontSize: 18),),
-                        Row(
-                          children: [
-                            Text("Active", style: TextStyle(fontSize: 18),),
-                            Container(
-                              margin: EdgeInsets.only(
-                                left: 5
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(
+                        bottom: 10,
+                        top: 10,
+                        left: 15,
+                        right: 15,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(data[n]["status"], style: TextStyle(fontSize: 16),),
+                              Container(
+                                margin: EdgeInsets.only(
+                                  left: 5
+                                ),
+                                width: 10,
+                                height: 10,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.green,
+                                ),
+                              )
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(data[n]["orderTime"].split(" ")[0], style: TextStyle(fontSize: 16),),
+                              Text(data[n]["orderTime"].split(" ")[1], style: TextStyle(fontSize: 14),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: BorderDirectional(bottom: BorderSide(width: 1, color: Colors.black.withOpacity(0.5),),)
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Order ID:"),
+                              Container(
+                                child: Text(data[n]["orderID"]),
+                                margin: EdgeInsets.only(
+                                  left: 10
+                                ),
                               ),
-                              width: 10,
-                              height: 10,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.green,
+                            ],
+                          ),
+                          space,
+                          Row(
+                            children: [
+                              Text("Total amount:"),
+                              Container(
+                                child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
+                                margin: EdgeInsets.only(
+                                  left: 10
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: BorderDirectional(bottom: BorderSide(width: 1, color: Colors.black.withOpacity(0.5),),)
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    child: Column(
-                      children: [
-                        Text("data"),
-                        Text("data"),
-                        Text("data"),
-                        Text("data"),
-                        Text("data"),
-                      ],
-                    ),
-                  )
-                ],
+                            ],
+                          ),
+                          space,
+                          Row(
+                            children: [
+                              Text("Address:"),
+                              Container(
+                                child: Text(jsonDecode(data[n]["address"])["title"]),
+                                margin: EdgeInsets.only(
+                                  left: 10
+                                ),
+                              ),
+                            ],
+                          ),
+                          space,
+                          Row(
+                            children: [
+                              Text("Payment Type:"),
+                              Container(
+                                child: Text(data[n]["paymentType"]),
+                                margin: EdgeInsets.only(
+                                  left: 10
+                                ),
+                              ),
+                            ],
+                          ),
+                          space,
+                          Row(
+                            children: [
+                              Text("delivery time:"),
+                              Container(
+                                child: Text(data[n]["recieveDate"] != "Now" ? data[n]["recieveDate"] + " (Tommorrow)" : data[n]["recieveDate"]),
+                                margin: EdgeInsets.only(
+                                  left: 10
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           ],

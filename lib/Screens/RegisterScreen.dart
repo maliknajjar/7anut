@@ -7,6 +7,7 @@ import 'package:password_strength/password_strength.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../env.dart';
+import '../Classes/UserInformation.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -377,6 +378,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             print("full name saved: " + response["fullName"]);
                                             value.setString("phone number", response["phoneNumber"]).then((anotherValue){
                                               print("phone number saved: " + response["phoneNumber"]);
+                                              UserInformation();  // saving logged in user information
                                               Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                             });
                                           });

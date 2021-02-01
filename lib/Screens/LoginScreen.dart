@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../env.dart';
+import '../Classes/UserInformation.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -200,6 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             print("full name saved: " + response["fullName"]);
                                             value.setString("phone number", response["phoneNumber"]).then((anotherValue){
                                               print("phone number saved: " + response["phoneNumber"]);
+                                              UserInformation();  // saving logged in user information
                                               Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                             });
                                           });

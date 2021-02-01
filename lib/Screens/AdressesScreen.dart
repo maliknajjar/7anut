@@ -101,7 +101,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                           children: [
                             for (var item in Addresses.addressesBasket[i].values)
                             if (item != null)
-                            Text(item),
+                            Text(item.toString()),
                           ],
                         ),
                       ),

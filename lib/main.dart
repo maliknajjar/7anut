@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './env.dart';
-import './Classes/UserInformation.dart';
 
 import 'Screens/HomeScreen.dart';
 import 'Screens/LoginScreen.dart';
@@ -17,7 +16,6 @@ import 'Screens/BasketScreen.dart';
 import 'Screens/LoadingLogoScreen.dart';
 import 'Screens/CheckoutScreen.dart';
 import 'Screens/AdressesScreen.dart';
-import 'Screens/GetLocationScreen.dart';
 import 'Screens/AddAddressScreen.dart';
 import 'Screens/ConfirmationScreen.dart';
 
@@ -59,8 +57,6 @@ class _MyAppState extends State<MyApp> {
             });
             return;
           }
-          // saving logged in user information
-          UserInformation();
           setState(() {
             isLoggedIn = true;
             isLoading = false;

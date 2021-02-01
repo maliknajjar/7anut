@@ -248,7 +248,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       "orders": jsonEncode(Basket.basketItems),
                       "transportFee": double.parse(theFee.toStringAsFixed(3)),
                       "totalPrice": double.parse((Basket.getUltimateTotal() + theFee).toStringAsFixed(3)),
-                      "address": jsonEncode(address),
+                      "address": jsonEncode(args["Address"]),
                       "paymentType": args["Payment Type"].toString(),
                       "recieveDate": args["Recieve Date"].toString(),
                     }))
