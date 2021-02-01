@@ -31,7 +31,8 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
         children: [
           SingleChildScrollView(
             padding: EdgeInsets.only(
-              top: 5
+              top: 5,
+              bottom: 50,
             ),
             child: Container(
               padding: EdgeInsets.all(15),

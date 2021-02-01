@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import '../Classes/Adresses.dart';
 
@@ -15,16 +12,14 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   var chosenAddress;
   String payWith;
-  String recieveAtTimeDate;
+  String recieveAtTime;
 
   String addressName;
-  String recieveAtTime;
 
 
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now().toUtc().add(Duration(hours: 1));
-    DateTime tomorrow = DateTime(now.year, now.month, now.day + 1);
 
     var theWidth = MediaQuery.of(context).size.width;
 
@@ -319,9 +314,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       return SimpleDialog(
                                         contentPadding: EdgeInsets.all(15),
                                         children: [
+                                          for (var i = 1; i < 8; i++)
                                           GestureDetector(
                                             onTap: (){
-                                              Navigator.of(context).pop("Tomorrow");
+                                              Navigator.of(context).pop(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10));
                                             },
                                             child: Container(
                                               margin: EdgeInsets.only(
@@ -339,34 +335,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text("Tomorrow (" + tomorrow.toString().substring(0, 10) + ")", style: TextStyle(fontSize: 20),),
+                                                  Text(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10) + (i == 1 ? " (Tomorrow)" : ""), style: TextStyle(fontSize: 20),),
                                                   Icon(Icons.date_range_outlined)
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          GestureDetector(
-                                            onTap: (){
-                                              // Navigator.of(context).pop("Now");
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                bottom: 10
-                                              ),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.grey,
-                                                  width: 1,
-                                                ),
-                                                borderRadius: BorderRadius.circular(10)
-                                              ),
-                                              padding: EdgeInsets.all(15),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text("Now (coming soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
-                                                  Icon(Icons.timer, color: Colors.grey,)
                                                 ],
                                               ),
                                             ),
@@ -379,8 +349,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ).then((value){
                                 setState((){
                                   recieveAtTime = value;
-                                  recieveAtTimeDate = tomorrow.toString().substring(0, 10);
-                                  print(recieveAtTimeDate);
                                 });
                               });
                             },
@@ -415,11 +383,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               bottom: 0,
               child: GestureDetector(
                 onTap: (){
-                  if(chosenAddress == null || payWith == null || recieveAtTimeDate == null){
+                  if(chosenAddress == null || payWith == null || recieveAtTime == null){
                     Functions.alert(context, "fill the fields", "you need to fill all the fields");
                     return;
                   }
-                  var information = {"Address": chosenAddress, "Payment Type": payWith, "Recieve Date": recieveAtTimeDate};
+                  var information = {"Address": chosenAddress, "Payment Type": payWith, "Recieve Date": recieveAtTime};
                   Navigator.of(context).pushNamed("/confirmation", arguments: information);
                 },
                 child: Container(

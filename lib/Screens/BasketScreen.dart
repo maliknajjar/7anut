@@ -31,7 +31,44 @@ class _BasketScreenState extends State<BasketScreen> {
             ),
           ),
         ),
-        body: Basket.basketItems.isEmpty ? Center(child: Text("there is no items yet", style: TextStyle(fontSize: 25),)) : Stack(
+        body: Basket.basketItems.isEmpty 
+        ? InkWell(
+          onTap: (){
+            Navigator.of(context).pushNamed("/category", arguments: 0).then((value){
+              setState(() {
+                              
+              });
+            });
+          },
+          child: Container(
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("Basket is empty", style: TextStyle(fontSize: 20),),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.yellow.withOpacity(0.5),
+                    border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: IntrinsicWidth(
+                    child: Row(
+                      children: [
+                        Text("Go to Market", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+                        Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),)
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+        : Stack(
           children: [
             SingleChildScrollView(
               child: Container(

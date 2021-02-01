@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 
 class OrderInformation extends StatelessWidget {
   Map data;
+  List orders;
+  Map address;
 
   OrderInformation(var theData){
     data = theData;
-    data.remove("userEmail");
+    orders = jsonDecode(data["orders"]);
+    address = jsonDecode(data["address"]);
   }
 
   @override
@@ -33,14 +36,58 @@ class OrderInformation extends StatelessWidget {
             children: [
               Table(
                 columnWidths: {
-                  0: FlexColumnWidth(1),
+                  0: FlexColumnWidth(1.5),
                   1: FlexColumnWidth(4),
                 },
-                // textDirection: TextDirection.rtl,
-                // defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
                 border:TableBorder.all(width: 1.0, color: Colors.black.withOpacity(0.5)),
                 children: [
+                  TableRow(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        child: Text("orders"),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var i = 0; i < orders.length; i++)
+                            Text(
+                              "Name: " + orders[i]["Name"] 
+                              + "\nSize: " + orders[i]["size"].toString()
+                              + "\nEach Price: " + orders[i]["price"].toString() + " DT"
+                              + "\ntotal Price: " + (double.parse(orders[i]["price"]) * orders[i]["qty"]).toStringAsFixed(3) + " DT"
+                              + "\nqty: " + orders[i]["qty"].toString()
+                              + "\n"
+                            ),
+                          ],
+                        ),
+                      )
+                    ]
+                  ),
+                  TableRow(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        child: Text("Address"),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (int i = 0; i < address.length; i++)
+                            Text(
+                              address.keys.toList()[i].toString() + ": " + address.values.toList()[i].toString()
+                            ),
+                          ],
+                        ),
+                      )
+                    ]
+                  ),
                   for (var i = 0; i < data.length; i++)
+                  if(data.keys.toList()[i].toString() != "address" && data.keys.toList()[i].toString() != "orders")
                   TableRow(
                     children: [
                       Container(

@@ -37,7 +37,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       }
       setState(() {
         isDataHere = true;
-        data = jsonDecode(value.body);
+        data = jsonDecode(value.body).reversed.toList();
       });
     });
   }
@@ -129,7 +129,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         children: [
                           Row(
                             children: [
-                              Text("Order ID:"),
+                              Text("Order ID:", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text(data[n]["orderID"]),
                                 margin: EdgeInsets.only(
@@ -141,7 +141,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("Total amount:"),
+                              Text("Total + transport fee:", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
                                 margin: EdgeInsets.only(
@@ -153,7 +153,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("Address:"),
+                              Text("Address:", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text(jsonDecode(data[n]["address"])["title"]),
                                 margin: EdgeInsets.only(
@@ -165,7 +165,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("Payment Type:"),
+                              Text("Payment Type:", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text(data[n]["paymentType"]),
                                 margin: EdgeInsets.only(
@@ -177,9 +177,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("delivery time:"),
+                              Text("delivery date:", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
-                                child: Text(data[n]["recieveDate"] != "Now" ? data[n]["recieveDate"] + " (Tommorrow)" : data[n]["recieveDate"]),
+                                child: Text(data[n]["recieveDate"]),
                                 margin: EdgeInsets.only(
                                   left: 10
                                 ),
