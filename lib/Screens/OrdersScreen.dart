@@ -34,6 +34,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       print(value.body);
       if(value.body.contains("error")){
         Functions.logout(context);
+        return;
       }
       setState(() {
         isDataHere = true;
@@ -141,7 +142,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("Total + transport fee:", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text("Total", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
                                 margin: EdgeInsets.only(

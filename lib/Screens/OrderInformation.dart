@@ -87,12 +87,12 @@ class OrderInformation extends StatelessWidget {
                     ]
                   ),
                   for (var i = 0; i < data.length; i++)
-                  if(data.keys.toList()[i].toString() != "address" && data.keys.toList()[i].toString() != "orders")
+                  if(data.keys.toList()[i].toString() != "address" && data.keys.toList()[i].toString() != "orders" && data.keys.toList()[i].toString() != "ID")
                   TableRow(
                     children: [
                       Container(
                         margin: EdgeInsets.all(10),
-                        child: Text(data.keys.toList()[i].toString()),
+                        child: Text(data.keys.toList()[i].toString() == "totalPrice" ? "Subtotal" : data.keys.toList()[i].toString()),
                       ),
                       Container(
                         margin: EdgeInsets.all(10),

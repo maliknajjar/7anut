@@ -144,6 +144,13 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
+                                        Text("Subtotal:", style: TextStyle(fontSize: 16),),
+                                        Text(Basket.getUltimateTotal().toStringAsFixed(3) + " DT", style: TextStyle(fontSize: 16),),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
                                         Text("transport fee:", style: TextStyle(fontSize: 16),),
                                         Text(theFee.toStringAsFixed(3) + " DT", style: TextStyle(fontSize: 16),),
                                       ],
@@ -151,7 +158,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("total price:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        Text("total:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                                         Text((Basket.getUltimateTotal() + theFee).toStringAsFixed(3) + " DT", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                                       ],
                                     ),
