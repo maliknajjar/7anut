@@ -214,7 +214,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         ],
                       ),
                     ),
-                    Text("Recieve Date", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text("Delivery Date", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(

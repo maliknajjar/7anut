@@ -99,10 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisCount: 4,
               childAspectRatio: 0.75,
               children: <Widget>[
-                for(var item in products)
+                for (var i = 0; i < products.length; i++)
                 InkWell(
                   onTap: (){
-                    Navigator.of(context).pushNamed("/category", arguments: item["ID"] - 1).then((value){
+                    Navigator.of(context).pushNamed("/category", arguments: i).then((value){
                       if(value == "refresh"){
                         requestData();
                         return;
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(item["imageUrl"]),
+                              image: NetworkImage(products[i]["imageUrl"]),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.all(
@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              item["name"],
+                              products[i]["name"],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theWidth * 0.04,
