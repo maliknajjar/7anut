@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './env.dart';
+import './Classes/UserInformation.dart';
 
 import 'Screens/HomeScreen.dart';
 import 'Screens/LoginScreen.dart';
@@ -18,6 +19,7 @@ import 'Screens/CheckoutScreen.dart';
 import 'Screens/AdressesScreen.dart';
 import 'Screens/AddAddressScreen.dart';
 import 'Screens/ConfirmationScreen.dart';
+import 'Screens/SearchScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,6 +59,7 @@ class _MyAppState extends State<MyApp> {
             });
             return;
           }
+          UserInformation();  // saving logged in user information
           setState(() {
             isLoggedIn = true;
             isLoading = false;
@@ -93,6 +96,7 @@ class _MyAppState extends State<MyApp> {
         "/adresses": (context) => AdressesScreen(),
         "/addaddress": (context) => AddAddressScreen(),
         "/confirmation": (context) => ConfirmationScreen(),
+        "/search": (context) => SearchScreen(),
       },
     );
   }

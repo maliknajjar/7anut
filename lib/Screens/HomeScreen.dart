@@ -190,10 +190,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Color(0xFF303030),
                     ),
                   ),
-                  Icon(
-                    Icons.search,
-                    size: 35,
-                    color: Color(0xFF303030),
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed("/search");
+                    },
+                    child: Icon(
+                      Icons.search,
+                      size: 35,
+                      color: Color(0xFF303030),
+                    ),
                   ),
                   // NULL space for design \/ \/ \/ \/ \/
                   Container(
