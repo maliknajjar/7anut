@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../Classes/Functions.dart';
@@ -16,9 +18,15 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
   String title;
   String streetAddress;
   String streetAddress2;
+  String state;
   String city;
-  String province;
   String instructions;
+
+  int indexOfState(String stateName){
+    for (var i = 0; i < widget.cities.length; i++) {
+      if(stateName == widget.cities[i]["state"]) return i;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,22 +102,26 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         Radius.circular(10),
                       ),
                     ),
-                    child: DropdownButton(
-                      hint:  Text(city == null ? "City" : city, style: TextStyle(fontSize: 20),),
-                      onChanged: (var value) {
-                        setState(() {
-                          city = value;                        
-                        });
-                      },
-                      items: widget.cities.map((e){
-                        return DropdownMenuItem(
-                          value: e["city"],
-                          child: Text(e["city"], style: TextStyle(fontSize: 20),)
-                        );
-                      }).toList(),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        hint:  Text(state == null ? "state" : state, style: TextStyle(fontSize: 20),),
+                        onChanged: (var value) {
+                          setState(() {
+                            state = value; 
+                            city = null;                       
+                          });
+                        },
+                        items: widget.cities.map((e){
+                          return DropdownMenuItem(
+                            value: e["state"],
+                            child: Text(e["state"], style: TextStyle(fontSize: 20),)
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                   Container(
+                    width: double.infinity,
                     margin: EdgeInsets.only(
                       top: 0,
                       bottom: 15,
@@ -128,19 +140,27 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         Radius.circular(10),
                       ),
                     ),
-                    child: TextField(
-                      onChanged: (string){
-                        province = string;
-                      },
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      cursorColor: Colors.black54,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        hintText: "Province",
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        hint:  Text(city == null ? "city" : city, style: TextStyle(fontSize: 20),),
+                        onChanged: (var value) {
+                          setState(() {
+                            city = value;                        
+                          });
+                        },
+                        items: state == null 
+                        ? [
+                          DropdownMenuItem(
+                            value: null,
+                            child: Text("Choose state", style: TextStyle(fontSize: 20),)
+                          ),
+                        ]
+                        : jsonDecode(widget.cities[indexOfState(state)]["cities"]).map<DropdownMenuItem>((e){
+                          return DropdownMenuItem(
+                            value: e,
+                            child: Text(e, style: TextStyle(fontSize: 20),)
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
@@ -261,13 +281,13 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
             child: GestureDetector(
               onTap: (){
                 print("save");
-                if (title == null || streetAddress == null ||  city == null || province == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
+                if (title == null || streetAddress == null ||  state == null || city == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
                   Addresses.addAddress({
                     "title": title,
+                    "state": state,
                     "city": city,
-                    "province": province,
                     "streetAddress": streetAddress,
                     "streetAddress2": streetAddress2,
                     "instructions": instructions
