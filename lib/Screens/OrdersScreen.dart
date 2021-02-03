@@ -33,7 +33,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       });
       print(value.body);
       if(value.body.contains("error")){
-        Functions.logout(context);
+        Functions.logout(context, "Session is expired", Colors.red);
         return;
       }
       setState(() {

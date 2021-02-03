@@ -113,7 +113,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   if(value.statusCode == 200){
                     if(json.decode(value.body)["error"] != null){
                       if(value.body.contains("session")){
-                        Functions.logout(context);
+                        Functions.logout(context, "Session is expired", Colors.red);
                         return;
                       }
                       Functions.alert(context, "error", json.decode(value.body)["error"]);

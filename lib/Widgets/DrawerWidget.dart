@@ -18,7 +18,7 @@ class TheDrawer extends StatelessWidget {
           ListTile(
             title: Text('logout'),
             onTap: () {
-              Functions.logout(context);
+              Functions.logout(context, null, null);
             },
           ),
         ],

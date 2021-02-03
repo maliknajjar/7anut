@@ -9,6 +9,9 @@ import '../env.dart';
 import '../Classes/UserInformation.dart';
 
 class LoginScreen extends StatefulWidget {
+  String message;
+  Color theColor;
+  LoginScreen({this.message, this.theColor});
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -34,8 +37,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    if(widget.message != null){
+      notify(widget.message, 3000, widget.theColor);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // var args = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       body: Stack(

@@ -261,7 +261,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     }))
                     .then((value){
                       if(jsonDecode(value.body)["error"] != null){
-                        Functions.logout(context);
+                        Functions.logout(context, "Session is expired", Colors.red);
                         return;
                       }
                       Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessWidget(),));
