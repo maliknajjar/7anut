@@ -200,7 +200,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     theButton = Text("login");
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
-                                      notify(response["error"], 2000, Colors.red);
+                                      print(response["error"].toString());
+                                      notify(response["error"].toString(), 2000, Colors.red);
                                       return;
                                     }
                                     // saving these information when everything is successful

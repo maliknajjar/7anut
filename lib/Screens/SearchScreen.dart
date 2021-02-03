@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../Classes/Procucts.dart';
+import '../Classes/Basket.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  String searchTerm;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -37,8 +45,10 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
               child: TextField(
-                onChanged: (string){
-                  
+                onSubmitted: (string){
+                  setState(() {
+                    searchTerm = string;                  
+                  });
                 },
                 style: TextStyle(
                   fontSize: 20,
@@ -52,10 +62,18 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            searchTerm == null 
+            ? Expanded(
+              child: Container(
+                child: Icon(Icons.search, size: 0.3 * width, color: Colors.black.withOpacity(0.25),),
+              ),
+            )
+            : Container(
               padding: EdgeInsets.only(top: 20),
               child: Column(
-                children: Products.searchProductsByName("chocotom").map((e){
+                children: Products.searchProductsByName(searchTerm).contains("no resluts")
+                ? [Text("No Results", style: TextStyle(fontSize: 22),)]
+                : Products.searchProductsByName(searchTerm).map((e){
                   return Container(
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
@@ -85,6 +103,18 @@ class SearchScreen extends StatelessWidget {
                                 ),
                                 borderRadius: BorderRadius.circular(10)
                               ),
+                              child: FittedBox(
+                                child: Text(
+                                  Basket.getQtyById(
+                                    e["ID"].toString(),
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 110,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                ),
+                              ),
                             ),
                             Container(
                               margin: EdgeInsets.only(left: 10),
@@ -109,31 +139,45 @@ class SearchScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: Colors.black.withOpacity(0.5),
-                                    width: 1
+                              InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    Basket.addItem(e["ID"].toString(), e["Name"], e["size"], e["imageUrl"], e["price"].toString());
+                                  });
+                                },
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Colors.black.withOpacity(0.5),
+                                      width: 1
+                                    ),
                                   ),
+                                  child: Center(child: Text("+", style: TextStyle(fontSize: 25),)),
                                 ),
-                                child: Center(child: Text("+", style: TextStyle(fontSize: 25),)),
                               ),
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: Colors.black.withOpacity(0.5),
-                                    width: 1
+                              InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    Basket.removeItem(e["ID"].toString());
+                                  });
+                                },
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Colors.black.withOpacity(0.5),
+                                      width: 1
+                                    ),
                                   ),
+                                  child: Center(child: Text("-", style: TextStyle(fontSize: 25),)),
                                 ),
-                                child: Center(child: Text("-", style: TextStyle(fontSize: 25),)),
                               ),
                             ],
                           ),

@@ -192,7 +192,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      Navigator.of(context).pushNamed("/search");
+                      Navigator.of(context).pushNamed("/search").then((value){
+                        setState(() {
+                                                  
+                        });
+                      });
                     },
                     child: Icon(
                       Icons.search,

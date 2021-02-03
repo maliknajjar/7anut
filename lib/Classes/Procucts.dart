@@ -7,6 +7,7 @@ class Products {
     for (var i = 0; i < products.length; i++) {
       if(Products.products[i]["Name"] == productName) searchedItems.add(Products.products[i]);
     }
+    if(searchedItems.isEmpty) searchedItems.add("no resluts");
     return searchedItems;
   }
 
