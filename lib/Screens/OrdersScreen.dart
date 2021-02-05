@@ -17,11 +17,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   bool isDataHere = false;
   List data;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
+  void requestData(){
     http.post(env.apiUrl + "/api/getuserorders", body: {
       "email": UserInformation.email,
       "sessionID": UserInformation.sessionID,
@@ -44,8 +40,18 @@ class _OrdersScreenState extends State<OrdersScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    requestData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget space = Container(height: 10,);
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -60,10 +66,39 @@ class _OrdersScreenState extends State<OrdersScreen> {
             color: Color(0xFF303030),
           ),
         ),
+        actions: [
+          GestureDetector(
+            onTap: (){
+              requestData();
+            },
+            child: Container(
+              margin: EdgeInsets.only(right: 10),
+              child: Icon(Icons.refresh),
+            ),
+          )
+        ],
       ),
-      body: !isDataHere ? LoadingLogo() : SingleChildScrollView(
+      body: !isDataHere 
+      ? LoadingLogo() 
+      : SingleChildScrollView(
         padding: EdgeInsets.all(15),
-        child: Column(
+        child: data.isEmpty 
+        ? Container(
+          height: height - 100,
+          width: width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Icon(Icons.cancel_outlined, size: 75, color: Colors.black.withOpacity(0.75),),
+              ),
+              Text("You have no orders yet", style: TextStyle(fontSize: 22),),
+            ],
+          )
+        )
+        : Column(
           children: [
             for(var n = 0; n < data.length; n++)
             InkWell(
@@ -95,7 +130,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         children: [
                           Row(
                             children: [
-                              Text(data[n]["status"], style: TextStyle(fontSize: 16),),
+                              Text(jsonDecode(data[n]["status"])["status"], style: TextStyle(fontSize: 16),),
                               Container(
                                 margin: EdgeInsets.only(
                                   left: 5
@@ -103,10 +138,30 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 width: 10,
                                 height: 10,
                                 decoration: BoxDecoration(
+                                  border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
                                   shape: BoxShape.circle,
-                                  color: Colors.green,
+                                  color: Color.fromRGBO(jsonDecode(data[n]["status"])["color"]["r"], jsonDecode(data[n]["status"])["color"]["g"], jsonDecode(data[n]["status"])["color"]["b"], 1),
                                 ),
-                              )
+                              ),
+                              jsonDecode(data[n]["status"])["message"] == null 
+                              ? Text("")
+                              : InkWell(
+                                onTap: (){
+                                  Functions.alert(context, "Information", jsonDecode(data[n]["status"])["message"]);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: 15
+                                  ),
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(width: 1.5, color: Colors.black.withOpacity(0.75)),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(child: Text("?", style: TextStyle(fontWeight: FontWeight.bold),)),
+                                ),
+                              ),
                             ],
                           ),
                           Column(

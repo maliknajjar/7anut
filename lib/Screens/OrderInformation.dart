@@ -23,7 +23,7 @@ class OrderInformation extends StatelessWidget {
           color: Color(0xFF303030),
         ),
         title: Text(
-          "Order Information",
+          "Order Details",
           style: TextStyle(
             color: Color(0xFF303030),
           ),

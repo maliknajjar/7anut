@@ -7,7 +7,7 @@ class SuccessWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        color: Colors.yellow.withOpacity(0.2),
+        color: Colors.green.withOpacity(0.2),
         width: double.infinity,
         height: double.infinity,
         child: Column(
@@ -37,7 +37,7 @@ class SuccessWidget extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10,bottom: 10,left: 20,right: 20,),
                 margin: EdgeInsets.only(top: 25),
                 decoration: BoxDecoration(
-                  color: Colors.yellow[100],
+                  color: Colors.green[100],
                   border: Border.all(
                     width: 1,
                     color: Colors.black.withOpacity(0.5)
