@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = "";
   String password = "";
-  Widget theButton = Text("login");
+  Widget theButton = Center(child: Text("Sign In", style: TextStyle(fontSize: 18),));
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Container(
                                 margin: EdgeInsets.only(
-                                  top: 7.5,
+                                  top: 10,
                                   bottom: 20, 
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -192,12 +192,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     notify("fields are not filled", 2000, Colors.red);
                                     return;
                                   }
-                                  theButton = Image.asset("assets/images/loading.gif", height: 35);
+                                  setState(() {
+                                    theButton = Container(
+                                      child: Center(child: Image.asset("assets/images/theLoading.gif", height: 30)),
+                                    );
+                                  });
                                   http.post(env.apiUrl + "/api/signin", body: {
                                     "email": email,
                                     "password": password,
                                   }).then((result){
-                                    theButton = Text("login");
+                                    theButton = Center(child: Text("Sign In", style: TextStyle(fontSize: 18),));
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
                                       print(response["error"].toString());
@@ -225,22 +229,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child: Container(
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(10),
+                                  height: 40,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                         BoxShadow(
                                         blurRadius: 10,
                                         spreadRadius: 3,
-                                        color: Colors.black.withOpacity(0.25)
+                                        color: Colors.black.withOpacity(0.15)
                                       ),
                                     ],
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(15)
+                                      Radius.circular(50)
                                     ),
                                     gradient: LinearGradient(
                                       colors: [
-                                        Colors.yellow[300],
-                                        Colors.yellow,
+                                        Colors.yellow[200],
+                                        Colors.yellow[400],
                                       ],
                                       begin: FractionalOffset(0.0, 0.0),
                                       end: FractionalOffset(0.0, 1.0),

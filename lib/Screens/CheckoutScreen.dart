@@ -108,7 +108,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               ),
                                             ),
                                           ),
-                                          for (var i = 0; i < Addresses.addressesBasket.length; i++)
+                                          for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
                                           GestureDetector(
                                             onTap: (){
                                               Navigator.of(context).pop(i);
@@ -129,7 +129,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 20),),
+                                                  Text(Addresses.getCurrentUserAddresses()[i]["title"], style: TextStyle(fontSize: 20),),
                                                   Icon(Icons.location_on_outlined)
                                                 ],
                                               ),
@@ -143,8 +143,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ).then((value){
                                 if(value != null){
                                   setState((){
-                                    chosenAddress = Addresses.addressesBasket[value];
-                                    addressName = Addresses.addressesBasket[value]["title"];
+                                    chosenAddress = Addresses.getCurrentUserAddresses()[value];
+                                    addressName = Addresses.getCurrentUserAddresses()[value]["title"];
                                     print(chosenAddress);
                                   });
                                 }

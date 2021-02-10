@@ -7,6 +7,7 @@ class AdressesScreen extends StatefulWidget {
 }
 
 class _AdressesScreenState extends State<AdressesScreen> {
+  List<dynamic> currentUsersAddresses = Addresses.getCurrentUserAddresses();
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +33,14 @@ class _AdressesScreenState extends State<AdressesScreen> {
             onPressed: () {
               Navigator.of(context).pushNamed("/addaddress").then((value){
                 setState(() {
-                                  
+                  currentUsersAddresses = Addresses.getCurrentUserAddresses();
                 });
               });
             },
           )
         ],
       ),
-      body: Addresses.addressesBasket.isEmpty 
+      body: !Addresses.isEmpty()
         ? InkWell(
           onTap: (){
             Navigator.of(context).pushNamed("/addaddress").then((value){
@@ -83,14 +84,14 @@ class _AdressesScreenState extends State<AdressesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              for (var i = 0; i < Addresses.addressesBasket.length; i++)
+              for (var i = 0; i < currentUsersAddresses.length; i++)
               InkWell(
                 hoverColor: Colors.white.withOpacity(0),
                 focusColor: Colors.white.withOpacity(0),
                 highlightColor: Colors.white.withOpacity(0),
                 splashColor: Colors.white.withOpacity(0),
                 onTap: (){
-                  print(Addresses.addressesBasket[i].values);
+                  print(currentUsersAddresses[i].values);
                   showDialog(
                     context: context,
                     builder: (context) => new AlertDialog(
@@ -99,7 +100,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (var item in Addresses.addressesBasket[i].values)
+                            for (var item in currentUsersAddresses[i].values)
                             if (item != null)
                             Text(item.toString()),
                           ],
@@ -132,7 +133,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        child: Text(Addresses.addressesBasket[i]["title"], style: TextStyle(fontSize: 25),),
+                        child: Text(currentUsersAddresses[i]["title"], style: TextStyle(fontSize: 25),),
                       ),
                       GestureDetector(
                         onTap: (){

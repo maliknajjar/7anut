@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
+import '../Classes/UserInformation.dart';
 
 class ClassicAddressWidget extends StatefulWidget {
   List<dynamic> cities;
@@ -290,7 +291,8 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                     "city": city,
                     "streetAddress": streetAddress,
                     "streetAddress2": streetAddress2,
-                    "instructions": instructions
+                    "instructions": instructions,
+                    "email": UserInformation.email
                   });
                   Navigator.of(context).pop();
                 }

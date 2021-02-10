@@ -15,7 +15,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  String registerButtonName = "Register";
+  Widget registerButtonName = Text("Register", style: TextStyle(fontSize: 18),);
 
   String email = "";
   String fullName = "";
@@ -334,10 +334,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               InkWell(
                                 onTap: (){
-                                  // adding loading icon or text to the Register button when its pressed
-                                  setState(() {
-                                    registerButtonName = "Loading";
-                                  });
                                   // check if any of the fields is empty
                                   if(email == "" || fullName == "" || phoneNumber == "" || password == "" || confirmPassword == ""){
                                     notify("You need to fill all fields", 2000, Colors.red);
@@ -353,6 +349,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     notify("Password does not match", 2000, Colors.red);
                                     return;
                                   }
+                                  // adding loading icon or text to the Register button when its pressed
+                                  setState(() {
+                                    registerButtonName = Image.asset("assets/images/theLoading.gif", height: 30);
+                                  });
                                   // making the request to the server to create a new user
                                   http.post(env.apiUrl + "/api/createUser", body: {
                                     "email": email,
@@ -362,7 +362,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   }).then((result){
                                     var response = json.decode(result.body);
                                     setState(() {
-                                      registerButtonName = "Register";
+                                      registerButtonName = Text("Register", style: TextStyle(fontSize: 18),);
                                     });
                                     if(response["error"] != null){
                                       notify(response["error"], 2000, Colors.red);
@@ -389,22 +389,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 },
                                 child: Container(
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(10),
+                                  height: 40,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                         BoxShadow(
                                         blurRadius: 10,
                                         spreadRadius: 3,
-                                        color: Colors.black.withOpacity(0.25)
+                                        color: Colors.black.withOpacity(0.15)
                                       ),
                                     ],
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(15)
+                                      Radius.circular(50)
                                     ),
                                     gradient: LinearGradient(
                                       colors: [
-                                        Colors.yellow[300],
-                                        Colors.yellow,
+                                        Colors.yellow[200],
+                                        Colors.yellow[400],
                                       ],
                                       begin: FractionalOffset(0.0, 0.0),
                                       end: FractionalOffset(0.0, 1.0),
@@ -413,7 +413,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ), 
                                   ),
                                   child: Center(
-                                    child: Text(registerButtonName),
+                                    child: registerButtonName,
                                   ),
                                 ),
                               )

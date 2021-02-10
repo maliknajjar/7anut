@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
+import '../Classes/UserInformation.dart';
 import '../Screens/GetLocationScreen.dart';
 
 class GPSAddAddress extends StatefulWidget {
@@ -230,7 +231,13 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                 if (location == null || title == null) Functions.alert(context, "Fields are empty", "You need to fill all the fields");
                 else {
                   print(Addresses.addressesBasket);
-                  Addresses.addAddress({"title": title, "location": {"latitude": location.latitude, "longitude": location.longitude}, "information": information, "instructions": instructions});
+                  Addresses.addAddress({
+                    "title": title, 
+                    "location": {"latitude": location.latitude, "longitude": location.longitude}, 
+                    "information": information, 
+                    "instructions": instructions,
+                    "email": UserInformation.email,
+                  });
                   Navigator.of(context).pop();
                 }
               },
