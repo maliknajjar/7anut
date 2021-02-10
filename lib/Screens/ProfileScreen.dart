@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
         iconTheme: IconThemeData(
           color: Color(0xFF303030),
         ),
@@ -53,12 +55,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               for(int index = 0; index < titles.length; index++)
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7.5,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.15),
+                      offset: Offset(2.5, 2.5),
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
+                  // color: Colors.yellow[50],
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.yellow[50], Colors.yellow[100]],
+                  ),
                 ),
                 padding: EdgeInsets.all(15),
                 margin: EdgeInsets.only(bottom: 25),

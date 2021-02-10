@@ -57,14 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: TheDrawer(),
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         centerTitle: true,
         title: Image.asset(
           "assets/images/logo-01.png", 
           height: 25,
         ),
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
         actions: [
           GestureDetector(
             onTap: (){
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(
               bottom: 54.5,
             ),
-            color: Color(0xFF5DA7E6).withOpacity(0.1),
+            color: Colors.white,
             width: double.infinity,
             child: GridView.count(
               padding: EdgeInsets.only(
@@ -166,12 +166,12 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 55,
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFF5DA7E6),
+                color: Colors.yellow[200],
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withOpacity(0.25),
                     spreadRadius: 1,
-                    blurRadius: 10,
+                    blurRadius: 5,
                     offset: Offset(0, 0),
                   ),
                 ],
@@ -250,12 +250,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 70,
                   width: 70,
                   decoration: BoxDecoration(
-                    color: Color(0xFFFCF555),
+                    color: Colors.yellow[100],
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withOpacity(0.25),
                         spreadRadius: 1,
-                        blurRadius: 10,
+                        blurRadius: 5,
                         offset: Offset(0, 0),
                       ),
                     ],
@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icon(
                         Icons.shopping_cart_outlined,
                         size: 35,
-                        color: Color(0xFF303030),
+                        color: Colors.black.withOpacity(0.75),
                       ),
                       int.parse(Basket.getItemsTotalTypeNumber()) == 0 ? Text("") : Positioned(
                         top: 0,
