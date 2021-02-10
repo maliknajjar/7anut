@@ -12,98 +12,168 @@ class _BasketScreenState extends State<BasketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back),
-            onPressed: (){
-              Navigator.of(context).pop();
-            } 
-          ),
-          centerTitle: true,
-          backgroundColor: Color(0xFF5DA7E6),
-          iconTheme: IconThemeData(
-            color: Color(0xFF303030),
-          ),
-          title: Text(
-            "Basket",
-            style: TextStyle(
-              color: Color(0xFF303030),
-            ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.of(context).pop();
+          } 
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.yellow[200],
+        iconTheme: IconThemeData(
+          color: Colors.black.withOpacity(0.75),
+        ),
+        title: Text(
+          "Basket",
+          style: TextStyle(
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
-        body: Basket.basketItems.isEmpty 
-        ? InkWell(
-          onTap: (){
-            Navigator.of(context).pushNamed("/category", arguments: 0).then((value){
-              setState(() {
-                              
-              });
+      ),
+      body: Basket.basketItems.isEmpty 
+      ? InkWell(
+        onTap: (){
+          Navigator.of(context).pushNamed("/category", arguments: 0).then((value){
+            setState(() {
+                            
             });
-          },
-          child: Container(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Basket is empty", style: TextStyle(fontSize: 20),),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.yellow.withOpacity(0.5),
-                    border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
-                    borderRadius: BorderRadius.circular(10)
+          });
+        },
+        child: Container(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("Basket is empty", style: TextStyle(fontSize: 20),),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.yellow.withOpacity(0.5),
+                  border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: IntrinsicWidth(
+                  child: Row(
+                    children: [
+                      Text("Go to Market", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+                      Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),)
+                    ],
                   ),
-                  child: IntrinsicWidth(
-                    child: Row(
-                      children: [
-                        Text("Go to Market", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
-                        Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),)
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
-        )
-        : Stack(
-          children: [
-            SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(bottom: 100),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < Basket.basketItems.length; i++)
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: Colors.grey[200],
-                            ),
+        ),
+      )
+      : Stack(
+        children: [
+          SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(bottom: 100),
+              child: Column(
+                children: [
+                  for (int i = 0; i < Basket.basketItems.length; i++)
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                          bottom: BorderSide(
+                            width: 2,
+                            color: Colors.grey[200],
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                height: 100,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      Basket.basketItems[i]["imageUrl"],
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                height: 90,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          Basket.basketItems[i]["Name"],
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        Text(
+                                          Basket.basketItems[i]["price"] + " DT",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.grey[700]
+                                          ),
+                                        ),
+                                        Text(
+                                          Basket.basketItems[i]["size"],
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.grey[700]
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.grey[900],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            height: 100,
+                            width: 90,
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  height: 100,
-                                  width: 100,
+                                  width: double.infinity,
+                                  height: 55,
                                   decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        Basket.basketItems[i]["imageUrl"],
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
+                                      Radius.circular(10),
                                     ),
                                     color: Colors.white,
                                     boxShadow: [
@@ -115,43 +185,76 @@ class _BasketScreenState extends State<BasketScreen> {
                                       ),
                                     ],
                                   ),
+                                  child: Center(child: Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 30),)),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  height: 90,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            Basket.basketItems[i]["Name"],
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          Text(
-                                            Basket.basketItems[i]["price"] + " DT",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey[700]
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString());
+                                          });
+                                        },
+                                        child: Container(
+                                          width: 40,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10),
                                             ),
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(2, 2),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            Basket.basketItems[i]["size"],
+                                          child: Text(
+                                            "+",
                                             style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey[700]
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold,
                                             ),
+                                            textAlign: TextAlign.center,
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                      Center(
-                                        child: Text(
-                                          "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.grey[900],
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            Basket.removeItem(Basket.basketItems[i]["ID"]);
+                                          });
+                                        },
+                                        child: Container(
+                                          width: 40,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(2, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Text(
+                                            "-",
+                                            style: TextStyle(
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                       ),
@@ -160,112 +263,10 @@ class _BasketScreenState extends State<BasketScreen> {
                                 )
                               ],
                             ),
-                            Container(
-                              height: 100,
-                              width: 90,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    height: 55,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(2, 2),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Center(child: Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 30),)),
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString());
-                                            });
-                                          },
-                                          child: Container(
-                                            width: 40,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(2, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Text(
-                                              "+",
-                                              style: TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              Basket.removeItem(Basket.basketItems[i]["ID"]);
-                                            });
-                                          },
-                                          child: Container(
-                                            width: 40,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(2, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Text(
-                                              "-",
-                                              style: TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -280,10 +281,10 @@ class _BasketScreenState extends State<BasketScreen> {
                 child: Container(
                   height: 60, 
                   decoration: BoxDecoration(
-                    color: Color(0xFFFCF555),
+                    color: Colors.yellow[200],
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
+                        color: Colors.black.withOpacity(0.2),
                         spreadRadius: 1,
                         blurRadius: 10,
                         offset: Offset(0, 0),
@@ -297,8 +298,8 @@ class _BasketScreenState extends State<BasketScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                          Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                          Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
+                          Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                         ],
                       ),
                       Icon(Icons.arrow_forward),
@@ -308,6 +309,7 @@ class _BasketScreenState extends State<BasketScreen> {
               ),
             )
           ],
-        ));
+        ),
+      );
   }
 }

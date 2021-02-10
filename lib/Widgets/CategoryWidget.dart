@@ -44,7 +44,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         mainAxisSpacing: 15,
         crossAxisSpacing: theWidth * 0.05,
         crossAxisCount: 3 * columnMultiplier,
-        childAspectRatio: 0.69,
+        childAspectRatio: 0.65,
         children: <Widget>[
           for (var item in Products.getProductsByCategory(category))
             Column(
