@@ -75,15 +75,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            blurRadius: 100,
+                            blurRadius: 40,
                             spreadRadius: 0,
-                            color: Colors.black.withOpacity(0.2),
-                          ),
-                          BoxShadow(
-                            blurRadius: 7.5,
-                            spreadRadius: 7.5,
-                            color: Colors.white,
-                            offset: Offset(-2.5, -2.5)
+                            color: Colors.black.withOpacity(0.1),
                           ),
                         ],
                         borderRadius: BorderRadius.circular(10)
@@ -98,13 +92,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 color: Colors.yellow[50],
                               ),
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withOpacity(0.2),
                               ),
                               BoxShadow(
-                                spreadRadius: -2,
+                                spreadRadius: 4,
                                 blurRadius: 5,
-                                color: Colors.yellow[50],
-                                offset: Offset(2.5, 2.5)
+                                color: Colors.white,
+                                offset: Offset(10, 10)
+                              ),
+                              BoxShadow(
+                                spreadRadius: -5,
+                                blurRadius: 20,
+                                color: Colors.yellow[100],
+                                offset: Offset(0, 0)
                               ),
                             ],
                             borderRadius: BorderRadius.all(
