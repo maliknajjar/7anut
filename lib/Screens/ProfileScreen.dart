@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     BoxShadow(
                       blurRadius: 7.5,
                       spreadRadius: 1,
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withOpacity(0.25),
                       offset: Offset(2.5, 2.5),
                     )
                   ],

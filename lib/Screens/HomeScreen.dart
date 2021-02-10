@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisSpacing: 15,
               crossAxisSpacing: theWidth * 0.05,
               crossAxisCount: 4,
-              childAspectRatio: 0.75,
+              childAspectRatio: 0.64,
               children: <Widget>[
                 for (var i = 0; i < products.length; i++)
                 InkWell(
@@ -137,19 +137,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            top: 7.5,
-                          ),
-                          child: Center(
-                            child: Text(
-                              products[i]["name"],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: theWidth * 0.04,
-                              ),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          top: 7.5,
+                        ),
+                        child: Center(
+                          child: Text(
+                            products[i]["name"],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: theWidth * 0.04,
                             ),
                           ),
                         ),

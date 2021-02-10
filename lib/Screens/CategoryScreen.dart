@@ -28,7 +28,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       child: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
           centerTitle: true,
           title: Image.asset(
@@ -46,15 +46,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
             )
           ],
-          backgroundColor: Color(0xFF5DA7E6),
+          backgroundColor: Colors.yellow[200],
           bottom: TabBar(
-            labelColor: Color(0xFF303030),
-            unselectedLabelColor: Color(0xFF303030),
-            indicatorColor: Color(0xFFFCF555),
+            labelColor: Colors.black.withOpacity(0.75),
+            unselectedLabelColor: Colors.black.withOpacity(0.75),
+            indicatorColor: Colors.black.withOpacity(0.75),
             isScrollable: true,
             tabs: [
               for(var item in Products.categories)
-              Tab(icon: Text(item["name"])),
+              Tab(icon: Text(item["name"], style: TextStyle(color: Colors.black.withOpacity(0.75)),)),
             ],
           ),
         ),
@@ -68,7 +68,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
             AnimatedPositioned(
               bottom: int.parse(Basket.getItemsTotalNumber()) >= 1 ? 15 : -80,
-              left: theWidth / 2 - (200 / 2),
+              left: theWidth / 2 - (225 / 2),
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOut,
               child: InkWell(
@@ -77,16 +77,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 },
                 child: Container(
                   height: 60,
-                  width: 200,
+                  width: 225,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                    color: Color(0xFFFCF555),
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    color: Colors.yellow[200],
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 10,
-                        offset: Offset(0, 0),
+                        spreadRadius: -10,
+                        blurRadius: 15,
+                        offset: Offset(5, 5),
                       ),
                     ],
                   ),
@@ -96,9 +96,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       Icon(
                         Icons.shopping_cart,
                         size: 35,
-                        color: Color(0xFF303030),
+                        color: Colors.black.withOpacity(0.75),
                       ),
-                      Text(" Go to Basket", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
+                      Text(" Go to Basket", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                     ],
                   ),
                 ),
