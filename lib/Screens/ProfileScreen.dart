@@ -9,6 +9,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  List<String> hintText = ["Email", "Full Name", "Phone Number", "Password"];
   List<String> titles = ["email", "full name", "phone number", "password"];
   var theInputs = [{}, {"new name": ""}, {"new phone Number": ""}, {"old password": "", "new password": ""}];
   List<String> stringArray = ["", "", "", "************"];
@@ -37,12 +38,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         centerTitle: true,
         backgroundColor: Colors.yellow[200],
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
           "Profile",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
       ),
@@ -64,12 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     )
                   ],
                   borderRadius: BorderRadius.circular(10),
-                  // color: Colors.yellow[50],
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.yellow[50], Colors.yellow[100]],
-                  ),
+                  color: Colors.yellow[50],
                 ),
                 padding: EdgeInsets.all(15),
                 margin: EdgeInsets.only(bottom: 25),
@@ -78,8 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(titles[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + titles[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text("edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
+                        Text(hintText[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": "Edit " + hintText[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text("edit", style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
                       ],
                     ),
                     Container(

@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = "";
   String password = "";
-  Widget theButton = Center(child: Text("Sign In", style: TextStyle(fontSize: 18),));
+  Widget theButton = Text("Sign In", style: TextStyle(fontSize: 18),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -193,15 +193,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     return;
                                   }
                                   setState(() {
-                                    theButton = Container(
-                                      child: Center(child: Image.asset("assets/images/theLoading.gif", height: 30)),
-                                    );
+                                    theButton = Image.asset("assets/images/theLoading.gif", height: 30);
                                   });
                                   http.post(env.apiUrl + "/api/signin", body: {
                                     "email": email,
                                     "password": password,
                                   }).then((result){
-                                    theButton = Center(child: Text("Sign In", style: TextStyle(fontSize: 18),));
+                                    theButton = Text("Sign In", style: TextStyle(fontSize: 18),);
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
                                       print(response["error"].toString());
