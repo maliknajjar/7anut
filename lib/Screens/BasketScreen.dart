@@ -47,19 +47,27 @@ class _BasketScreenState extends State<BasketScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Basket is empty", style: TextStyle(fontSize: 20),),
+              Text("Basket is empty", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
               Container(
-                margin: EdgeInsets.only(top: 10),
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                margin: EdgeInsets.only(top: 15),
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.yellow.withOpacity(0.5),
-                  border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
-                  borderRadius: BorderRadius.circular(10)
+                  color: Colors.yellow[200],
+                  borderRadius: BorderRadius.circular(100),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: -5,
+                      color: Colors.black.withOpacity(0.35),
+                      offset: Offset(5, 5),
+                    )
+                  ]
                 ),
                 child: IntrinsicWidth(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Go to Market", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+                      Text("Go to Market", style: TextStyle(color: Colors.black.withOpacity(0.75), fontSize: 20),),
                       Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),)
                     ],
                   ),
@@ -72,21 +80,37 @@ class _BasketScreenState extends State<BasketScreen> {
       : Stack(
         children: [
           SingleChildScrollView(
+            padding: EdgeInsets.only(top: 10),
             child: Container(
               padding: EdgeInsets.only(bottom: 100),
               child: Column(
                 children: [
                   for (int i = 0; i < Basket.basketItems.length; i++)
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(15),
+                      margin: EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border(
-                          bottom: BorderSide(
-                            width: 2,
-                            color: Colors.grey[200],
-                          ),
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.white,
+                            Colors.yellow[50],
+                          ],
+                          stops: [
+                            0.3,
+                            1,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: -5,
+                            color: Colors.black.withOpacity(0.10),
+                            offset: Offset(0, 15),
+                          )
+                        ]
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,10 +130,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(20),
                                   ),
-                                  color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
+                                      color: Colors.grey.withOpacity(0.25),
                                       spreadRadius: 2,
                                       blurRadius: 5,
                                       offset: Offset(2, 2),
@@ -175,13 +198,18 @@ class _BasketScreenState extends State<BasketScreen> {
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(10),
                                     ),
-                                    color: Colors.white,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
+                                        color: Colors.yellow[50],
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.075),
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.yellow[50],
                                         blurRadius: 5,
-                                        offset: Offset(2, 2),
+                                        spreadRadius: -2.5,
+                                        offset: Offset(2.5, 2.5),
                                       ),
                                     ],
                                   ),
