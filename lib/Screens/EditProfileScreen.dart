@@ -75,9 +75,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            blurRadius: 40,
+                            blurRadius: 10,
                             spreadRadius: 0,
                             color: Colors.black.withOpacity(0.1),
+                            offset: Offset(5, 5)
                           ),
                         ],
                         borderRadius: BorderRadius.circular(10)
@@ -104,7 +105,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 spreadRadius: -5,
                                 blurRadius: 20,
                                 color: Colors.yellow[100],
-                                offset: Offset(0, 0)
+                                offset: Offset(-5, -2.5)
                               ),
                             ],
                             borderRadius: BorderRadius.all(
