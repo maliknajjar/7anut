@@ -7,11 +7,12 @@ class AdressesScreen extends StatefulWidget {
 }
 
 class _AdressesScreenState extends State<AdressesScreen> {
-  List<dynamic> currentUsersAddresses = Addresses.getCurrentUserAddresses();
+  // List<dynamic> currentUsersAddresses = Addresses.getCurrentUserAddresses();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         iconTheme: IconThemeData(
@@ -33,7 +34,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
             onPressed: () {
               Navigator.of(context).pushNamed("/addaddress").then((value){
                 setState(() {
-                  currentUsersAddresses = Addresses.getCurrentUserAddresses();
+                  
                 });
               });
             },
@@ -50,32 +51,40 @@ class _AdressesScreenState extends State<AdressesScreen> {
             });
           },
           child: Container(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("No Addresses Available", style: TextStyle(fontSize: 20),),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.yellow.withOpacity(0.5),
-                    border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
-                    borderRadius: BorderRadius.circular(10)
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("No Addresses", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.yellow[200],
+                  borderRadius: BorderRadius.circular(100),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: -5,
+                      color: Colors.black.withOpacity(0.35),
+                      offset: Offset(5, 5),
+                    )
+                  ]
+                ),
+                child: IntrinsicWidth(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Add Addresses", style: TextStyle(color: Colors.black.withOpacity(0.75), fontSize: 20),),
+                      Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),)
+                    ],
                   ),
-                  child: IntrinsicWidth(
-                    child: Row(
-                      children: [
-                        Text("Add Address", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
-                        Icon(Icons.add_outlined, color: Colors.black.withOpacity(0.75),)
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
+        ),
         )
         : SingleChildScrollView(
         child: Container(
@@ -89,14 +98,14 @@ class _AdressesScreenState extends State<AdressesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              for (var i = 0; i < currentUsersAddresses.length; i++)
+              for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
               InkWell(
                 hoverColor: Colors.white.withOpacity(0),
                 focusColor: Colors.white.withOpacity(0),
                 highlightColor: Colors.white.withOpacity(0),
                 splashColor: Colors.white.withOpacity(0),
                 onTap: (){
-                  print(currentUsersAddresses[i].values);
+                  print(Addresses.getCurrentUserAddresses()[i].values);
                   showDialog(
                     context: context,
                     builder: (context) => new AlertDialog(
@@ -105,7 +114,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (var item in currentUsersAddresses[i].values)
+                            for (var item in Addresses.getCurrentUserAddresses()[i].values)
                             if (item != null)
                             Text(item.toString()),
                           ],
@@ -147,7 +156,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        child: Text(currentUsersAddresses[i]["title"], style: TextStyle(fontSize: 25),),
+                        child: Text(Addresses.getCurrentUserAddresses()[i]["title"], style: TextStyle(fontSize: 25),),
                       ),
                       GestureDetector(
                         onTap: (){
@@ -182,25 +191,38 @@ class _AdressesScreenState extends State<AdressesScreen> {
                             }else{
                               setState(() {
                                 Addresses.deleteAddress(i);
+                                print("done");
                               });
                             }
                           });
                         },
                         child: Container(
+                          padding: EdgeInsets.all(2),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.yellow[50],
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 10,
-                                spreadRadius: 0,
-                                color: Colors.black.withOpacity(0.25),
-                                offset: Offset(2.5, 2.5),
-                              )
-                            ],
+                            color: Colors.white,
+                            gradient: LinearGradient(
+                              colors: [Colors.red.withOpacity(0.5), Colors.red[50].withOpacity(0.5)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
                           ),
-                          padding: EdgeInsets.all(5),
-                          child: Icon(Icons.delete_outline, size: 30, color: Colors.red,),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red[50],
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  color: Colors.black.withOpacity(0.25),
+                                  offset: Offset(2.5, 2.5),
+                                )
+                              ],
+                            ),
+                            padding: EdgeInsets.all(5),
+                            child: Icon(Icons.delete_outline, size: 30, color: Colors.red,),
+                          ),
                         ),
                       ),
                     ],

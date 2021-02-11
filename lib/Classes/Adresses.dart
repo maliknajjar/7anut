@@ -38,6 +38,7 @@ class Addresses {
     SharedPreferences.getInstance().then((prefs){
       prefs.setString("addresses", jsonEncode(addressesBasket));
     });
+    print("refreshed");
   }
 
   static void addAddress(address){

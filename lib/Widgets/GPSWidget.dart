@@ -131,7 +131,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                         children: [
                           Container(
                             margin: EdgeInsets.only(right: 10),
-                            child: Icon(location != null ? Icons.done : Icons.add_location_alt, size: 30, color: location != null ? Colors.white : Colors.black,)
+                            child: Icon(location != null ? Icons.done : Icons.add_location_alt_outlined, size: 30, color: location != null ? Colors.white : Colors.black,)
                           ),
                           Text(
                             mapButtonText,
