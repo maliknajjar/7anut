@@ -12,7 +12,7 @@ class _BasketScreenState extends State<BasketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back),

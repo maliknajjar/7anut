@@ -15,15 +15,15 @@ class _AdressesScreenState extends State<AdressesScreen> {
       appBar: AppBar(
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
           "Adresses",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -79,7 +79,12 @@ class _AdressesScreenState extends State<AdressesScreen> {
         )
         : SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.only(
+            top: 20,
+            bottom: 15,
+            left: 15,
+            right: 15,
+          ),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,15 +124,24 @@ class _AdressesScreenState extends State<AdressesScreen> {
                 },
                 child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.only(
+                    bottom: 10,
+                    top: 10,
+                    left: 15,
+                    right: 15,
+                  ),
                   margin: EdgeInsets.only(bottom: 15),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(10)
+                    color: Colors.yellow[50],
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7.5,
+                        spreadRadius: 1,
+                        color: Colors.black.withOpacity(0.25),
+                        offset: Offset(2.5, 2.5),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(15)
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +153,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                         onTap: (){
                           showDialog(
                             context: context,
-                            builder: (context) => new AlertDialog(
+                            builder: (context) => AlertDialog(
                               content: Container(
                                 constraints: BoxConstraints(
                                   maxWidth: 100
@@ -173,6 +187,18 @@ class _AdressesScreenState extends State<AdressesScreen> {
                           });
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.yellow[50],
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 10,
+                                spreadRadius: 0,
+                                color: Colors.black.withOpacity(0.25),
+                                offset: Offset(2.5, 2.5),
+                              )
+                            ],
+                          ),
                           padding: EdgeInsets.all(5),
                           child: Icon(Icons.delete_outline, size: 30, color: Colors.red,),
                         ),

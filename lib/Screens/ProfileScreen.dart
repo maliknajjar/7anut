@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       offset: Offset(2.5, 2.5),
                     )
                   ],
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(15),
                   color: Colors.yellow[50],
                 ),
                 padding: EdgeInsets.all(15),

@@ -54,7 +54,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(
-                        bottom: 20
+                        bottom: 25
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -191,7 +191,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                        bottom: 20
+                        bottom: 25
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
