@@ -27,15 +27,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       appBar: AppBar(
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
           "checkout",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
       ),
       body: Container(
         height: double.infinity,
@@ -44,7 +44,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           children: [
             SingleChildScrollView(
               padding: EdgeInsets.only(
-                bottom: 75
+                top: 7.5,
+                bottom: 75,
               ),
               child: Container(
                 width: double.infinity,
@@ -57,11 +58,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10)
+                        color: Colors.yellow[100],
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7.5,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.25),
+                            offset: Offset(2.5, 2.5),
+                          )
+                        ]
                       ),
                       padding: EdgeInsets.all(15),
                       child: Column(
@@ -154,10 +160,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               width: double.infinity,
                               margin: EdgeInsets.only(top: 15),
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1,
-                                ),
+                                color: Colors.yellow[50],
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 7.5,
+                                    spreadRadius: 1,
+                                    color: Colors.black.withOpacity(0.25),
+                                    offset: Offset(2.5, 2.5),
+                                  )
+                                ],
                                 borderRadius: BorderRadius.circular(10)
                               ),
                               padding: EdgeInsets.all(15),
@@ -179,10 +190,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1,
-                        ),
+                        color: Colors.yellow[100],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7.5,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.25),
+                            offset: Offset(2.5, 2.5),
+                          )
+                        ],
                         borderRadius: BorderRadius.circular(10)
                       ),
                       padding: EdgeInsets.all(15),
@@ -268,10 +284,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               width: double.infinity,
                               margin: EdgeInsets.only(top: 15),
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1,
-                                ),
+                                color: Colors.yellow[50],
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 7.5,
+                                    spreadRadius: 1,
+                                    color: Colors.black.withOpacity(0.25),
+                                    offset: Offset(2.5, 2.5),
+                                  )
+                                ],
                                 borderRadius: BorderRadius.circular(10)
                               ),
                               padding: EdgeInsets.all(15),
@@ -293,10 +314,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1,
-                        ),
+                        color: Colors.yellow[100],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7.5,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.25),
+                            offset: Offset(2.5, 2.5),
+                          )
+                        ],
                         borderRadius: BorderRadius.circular(10)
                       ),
                       padding: EdgeInsets.all(15),
@@ -356,10 +382,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               width: double.infinity,
                               margin: EdgeInsets.only(top: 15),
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1,
-                                ),
+                                color: Colors.yellow[50],
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 7.5,
+                                    spreadRadius: 1,
+                                    color: Colors.black.withOpacity(0.25),
+                                    offset: Offset(2.5, 2.5),
+                                  )
+                                ],
                                 borderRadius: BorderRadius.circular(10)
                               ),
                               padding: EdgeInsets.all(15),
@@ -395,13 +426,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   width: theWidth,
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.yellow,
-                    border: Border(
-                      top: BorderSide(
-                        width: 2,
-                        color: Colors.black
-                      )
-                    )
+                    color: Colors.yellow[200],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        spreadRadius: 0,
+                        blurRadius: 7.5,
+                        offset: Offset(0, 0),
+                      ),
+                    ]
                   ),
                   child: Center(
                     child: Text("Next", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),

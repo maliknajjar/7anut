@@ -82,7 +82,7 @@ class _BasketScreenState extends State<BasketScreen> {
           SingleChildScrollView(
             padding: EdgeInsets.only(top: 10),
             child: Container(
-              padding: EdgeInsets.only(bottom: 100),
+              padding: EdgeInsets.only(bottom: 40),
               child: Column(
                 children: [
                   for (int i = 0; i < Basket.basketItems.length; i++)
@@ -235,8 +235,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                             color: Colors.white,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
+                                                color: Colors.grey.withOpacity(0.5),
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: Offset(2, 2),
