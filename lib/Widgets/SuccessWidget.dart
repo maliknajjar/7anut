@@ -7,24 +7,34 @@ class SuccessWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        color: Colors.green.withOpacity(0.2),
         width: double.infinity,
         height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            colors: [Colors.green[50], Colors.green[200]],
+            radius: 0.75
+          )
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+              padding: EdgeInsets.all(50),
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(width: 2, color: Colors.black.withOpacity(0.5))),
-              ),
-              child: Column(
-                children: [
-                  Icon(Icons.done_outline, size: 100, color: Colors.black.withOpacity(0.5),),
-                  Text("Successfully Ordered", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+                color: Colors.green[100],
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 7.5,
+                    spreadRadius: 1,
+                    color: Colors.black.withOpacity(0.25),
+                    offset: Offset(2.5, 2.5),
+                  )
                 ],
+                shape: BoxShape.circle
+                // borderRadius: BorderRadius.circular(15)
               ),
+              child: Icon(Icons.done_outline, size: 100, color: Colors.black.withOpacity(0.5),),
             ),
             GestureDetector(
               onTap: (){
@@ -35,13 +45,17 @@ class SuccessWidget extends StatelessWidget {
               child: Container(
                 width: 240,
                 padding: EdgeInsets.only(top: 10,bottom: 10,left: 20,right: 20,),
-                margin: EdgeInsets.only(top: 25),
+                margin: EdgeInsets.only(top: 30),
                 decoration: BoxDecoration(
                   color: Colors.green[100],
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.black.withOpacity(0.5)
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7.5,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(2.5, 2.5),
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(10)
                 ),
                 child: Row(

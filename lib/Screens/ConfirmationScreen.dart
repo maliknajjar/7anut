@@ -53,6 +53,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     return !isDataHere 
     ? LoadingLogo()
     : Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.yellow[200],
