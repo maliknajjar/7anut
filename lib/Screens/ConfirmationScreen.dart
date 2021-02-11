@@ -55,14 +55,14 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     : Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
           "Confirmation",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
       ),
@@ -88,21 +88,37 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         Container(
                           width: double.infinity,
                           margin: EdgeInsets.only(
-                            bottom: 10,
-                            top: 10
+                            bottom: 20,
+                            top: 10,
                           ),
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.only(
+                            top: 15,
+                            bottom: 15,
+                          ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              width: 2
-                            )
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.yellow[100],
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 7.5,
+                                spreadRadius: 1,
+                                color: Colors.black.withOpacity(0.25),
+                                offset: Offset(2.5, 2.5),
+                              )
+                            ],
                           ),
                           child: Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(bottom: 10),
+                                padding: EdgeInsets.symmetric(horizontal: 15),
                                 child: Table(
+                                  columnWidths: {
+                                    0: FlexColumnWidth(2.0),
+                                    1: FlexColumnWidth(1.0),
+                                    2: FlexColumnWidth(1.0),
+                                    3: FlexColumnWidth(1.0),
+                                  },
                                   children: [
                                     TableRow(
                                       children: [
@@ -115,30 +131,64 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                   ],
                                 ),
                               ),
-                              Table(
-                                children: [
-                                  for (var i = 0; i < Basket.basketItems.length; i++)
-                                  TableRow(
+                              ClipRRect(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    bottom: 20
+                                  ),
+                                  padding: EdgeInsets.only(
+                                    left: 15,
+                                    right: 15,
+                                    bottom: 15
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.yellow[100],
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.yellow[100],
+                                        Colors.yellow[50].withOpacity(0.25)
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      stops: [0.0, 1]
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 7.5,
+                                        spreadRadius: -0,
+                                        color: Colors.black.withOpacity(0.25),
+                                        offset: Offset(0, 5),
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.yellow[100],
+                                      )
+                                    ],
+                                  ),
+                                  child: Table(
+                                    columnWidths: {
+                                      0: FlexColumnWidth(2.0),
+                                      1: FlexColumnWidth(1.0),
+                                      2: FlexColumnWidth(1.0),
+                                      3: FlexColumnWidth(1.0),
+                                    },
                                     children: [
-                                      Text(Basket.basketItems[i]["Name"], style: TextStyle(fontSize: 18),),
-                                      Text(Basket.basketItems[i]["size"], style: TextStyle(fontSize: 18),),
-                                      Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 18),),
-                                      Text((double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(3), style: TextStyle(fontSize: 18),),
-                                    ]
-                                  )
-                                ],
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(top: 10),
-                                margin: EdgeInsets.only(top: 10),
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  border: BorderDirectional(
-                                    top: BorderSide(
-                                      width: 1,
-                                    )
+                                      for (var i = 0; i < Basket.basketItems.length; i++)
+                                      TableRow(
+                                        children: [
+                                          Text(Basket.basketItems[i]["Name"], style: TextStyle(fontSize: 18),),
+                                          Text(Basket.basketItems[i]["size"], style: TextStyle(fontSize: 18),),
+                                          Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 18),),
+                                          Text((double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(3), style: TextStyle(fontSize: 18),),
+                                        ]
+                                      )
+                                    ],
                                   ),
                                 ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                margin: EdgeInsets.only(top: 0),
+                                width: double.infinity,
                                 child: Column(
                                   children: [
                                     Row(
@@ -174,15 +224,21 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
-                        bottom: 10,
+                        bottom: 20,
                         top: 10
                       ),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          width: 2
-                        )
+                        color: Colors.yellow[100],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7.5,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.25),
+                            offset: Offset(2.5, 2.5),
+                          )
+                        ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,15 +253,21 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
-                        bottom: 10,
+                        bottom: 20,
                         top: 10
                       ),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          width: 2
-                        )
+                        color: Colors.yellow[100],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7.5,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.25),
+                            offset: Offset(2.5, 2.5),
+                          )
+                        ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,9 +286,15 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          width: 2
-                        )
+                        color: Colors.yellow[100],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7.5,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.25),
+                            offset: Offset(2.5, 2.5),
+                          )
+                        ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,13 +341,15 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                   width: theWidth,
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.yellow,
-                    border: Border(
-                      top: BorderSide(
-                        width: 2,
-                        color: Colors.black
-                      )
-                    )
+                    color: Colors.yellow[200],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        spreadRadius: 0,
+                        blurRadius: 7.5,
+                        offset: Offset(0, 0),
+                      ),
+                    ]
                   ),
                   child: Center(
                     child: Text(isPressed ? "Loading..." : "Order", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),

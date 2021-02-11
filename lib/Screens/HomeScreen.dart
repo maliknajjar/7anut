@@ -89,13 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
             width: double.infinity,
             child: GridView.count(
               padding: EdgeInsets.only(
-                top: theWidth * 0.05,
                 bottom: 15,
-                right: theWidth * 0.025,
-                left: theWidth * 0.025,
+                top: theWidth * 0.025,
+                right: theWidth * 0.015,
+                left: theWidth * 0.015,
               ),
-              mainAxisSpacing: 15,
-              crossAxisSpacing: theWidth * 0.05,
+              mainAxisSpacing: 0,
+              crossAxisSpacing: 0,
               crossAxisCount: 4,
               childAspectRatio: 0.64,
               children: <Widget>[
@@ -112,47 +112,50 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     });
                   },
-                  child: Column(
-                    children: <Widget>[
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(products[i]["imageUrl"]),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(2, 2),
+                  child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: Container(
+                            margin: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(products[i]["imageUrl"]),
+                                fit: BoxFit.cover,
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                          top: 7.5,
-                        ),
-                        child: Center(
-                          child: Text(
-                            products[i]["name"],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: theWidth * 0.04,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                            top: 2.5,
+                          ),
+                          child: Center(
+                            child: Text(
+                              products[i]["name"],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: theWidth * 0.04,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

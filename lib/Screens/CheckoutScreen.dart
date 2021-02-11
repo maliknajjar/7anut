@@ -69,7 +69,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           )
                         ]
                       ),
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.only(
+                        top: 15,
+                        bottom: 20,
+                        left: 15,
+                        right: 15,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -201,7 +206,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         ],
                         borderRadius: BorderRadius.circular(10)
                       ),
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.only(
+                        top: 15,
+                        bottom: 20,
+                        left: 15,
+                        right: 15,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -325,7 +335,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         ],
                         borderRadius: BorderRadius.circular(10)
                       ),
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.only(
+                        top: 15,
+                        bottom: 20,
+                        left: 15,
+                        right: 15,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

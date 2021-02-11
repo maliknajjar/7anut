@@ -12,7 +12,7 @@ class _BasketScreenState extends State<BasketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back),
@@ -90,15 +90,14 @@ class _BasketScreenState extends State<BasketScreen> {
                       padding: EdgeInsets.all(15),
                       margin: EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
                         gradient: LinearGradient(
                           colors: [
-                            Colors.white,
                             Colors.yellow[50],
+                            Colors.white.withOpacity(0.75),
                           ],
                           stops: [
-                            0.3,
-                            1,
+                            0,
+                            0.5,
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -109,6 +108,9 @@ class _BasketScreenState extends State<BasketScreen> {
                             spreadRadius: -5,
                             color: Colors.black.withOpacity(0.10),
                             offset: Offset(0, 15),
+                          ),
+                          BoxShadow(
+                            color: Colors.yellow[50],
                           )
                         ]
                       ),
@@ -200,13 +202,19 @@ class _BasketScreenState extends State<BasketScreen> {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.yellow[50],
+                                        color: Colors.yellow[100],
                                       ),
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.075),
+                                        color: Colors.black.withOpacity(0.1),
                                       ),
                                       BoxShadow(
-                                        color: Colors.yellow[50],
+                                        color: Colors.white,
+                                        blurRadius: 5,
+                                        spreadRadius: -2.5,
+                                        offset: Offset(2.5, 2.5),
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.yellow[100].withOpacity(0.75),
                                         blurRadius: 5,
                                         spreadRadius: -2.5,
                                         offset: Offset(2.5, 2.5),
