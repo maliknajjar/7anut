@@ -202,7 +202,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                             shape: BoxShape.circle,
                             color: Colors.white,
                             gradient: LinearGradient(
-                              colors: [Colors.red.withOpacity(0.5), Colors.red[50].withOpacity(0.5)],
+                              colors: [Colors.red.withOpacity(0.25), Colors.red[50].withOpacity(0.25)],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),

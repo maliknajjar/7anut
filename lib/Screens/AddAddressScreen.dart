@@ -40,6 +40,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       length: 2,
       initialIndex: kIsWeb ? 1 : 0,
       child: !isDataHere ? LoadingLogo() : Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black.withOpacity(0.75),
