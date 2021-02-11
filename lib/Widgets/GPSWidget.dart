@@ -34,7 +34,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(Icons.cancel_outlined, size: 100, color: Colors.black.withOpacity(0.5)),
+        Icon(Icons.cancel_outlined, size: 100, color: Colors.black.withOpacity(0.25)),
         Container(
           margin: EdgeInsets.only(
             top: 10

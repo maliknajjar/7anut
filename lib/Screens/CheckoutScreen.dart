@@ -58,7 +58,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.yellow[100],
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.yellow[50],
+                            Colors.yellow[100], 
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
@@ -195,7 +202,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.yellow[100],
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.yellow[50],
+                            Colors.yellow[100], 
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 7.5,
@@ -324,7 +338,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.yellow[100],
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.yellow[50],
+                            Colors.yellow[100], 
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 7.5,
@@ -344,7 +365,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Recieve at", style: TextStyle(fontSize: 20),),
+                          Text("Deliver at", style: TextStyle(fontSize: 20),),
                           GestureDetector(
                             onTap: (){
                               showDialog(

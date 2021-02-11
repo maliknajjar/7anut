@@ -12,7 +12,7 @@ class _BasketScreenState extends State<BasketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Basket.basketItems.isEmpty ? Colors.white : Colors.yellow[50],
+      backgroundColor: Basket.basketItems.isEmpty ? Colors.white : Colors.white,
       appBar: AppBar(
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back),
@@ -80,15 +80,16 @@ class _BasketScreenState extends State<BasketScreen> {
       : Stack(
         children: [
           SingleChildScrollView(
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(top: 0),
             child: Container(
-              padding: EdgeInsets.only(bottom: 40),
+              color: Colors.yellow[50],
+              padding: EdgeInsets.only(bottom: 0, top: 10),
               child: Column(
                 children: [
                   for (int i = 0; i < Basket.basketItems.length; i++)
                     Container(
                       padding: EdgeInsets.all(15),
-                      margin: EdgeInsets.only(bottom: 20),
+                      margin: EdgeInsets.only(bottom: i == Basket.basketItems.length - 1 ? 0 : 20),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
@@ -301,7 +302,7 @@ class _BasketScreenState extends State<BasketScreen> {
                           )
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
