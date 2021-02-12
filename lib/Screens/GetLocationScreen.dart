@@ -72,7 +72,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     BoxShadow(
                       blurRadius: 10,
                       spreadRadius: 0,
-                      color: Colors.black.withOpacity(0.25),
+                      color: Colors.black.withOpacity(0.5),
                       offset: Offset(5, 5)
                     ),
                   ],
@@ -100,7 +100,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     BoxShadow(
                       blurRadius: 10,
                       spreadRadius: 0,
-                      color: Colors.black.withOpacity(0.25),
+                      color: Colors.black.withOpacity(0.5),
                       offset: Offset(5, 5)
                     ),
                   ],
@@ -145,7 +145,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     BoxShadow(
                       blurRadius: 10,
                       spreadRadius: 0,
-                      color: Colors.black.withOpacity(0.25),
+                      color: Colors.black.withOpacity(0.5),
                       offset: Offset(5, 5)
                     ),
                   ],
@@ -170,7 +170,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     BoxShadow(
                       blurRadius: 10,
                       spreadRadius: 0,
-                      color: Colors.black.withOpacity(0.25),
+                      color: Colors.black.withOpacity(0.5),
                       offset: Offset(5, 5)
                     ),
                   ],
@@ -232,7 +232,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                             BoxShadow(
                               blurRadius: 10,
                               spreadRadius: 0,
-                              color: Colors.black.withOpacity(0.25),
+                              color: Colors.black.withOpacity(0.5),
                               offset: Offset(5, 5)
                             ),
                           ],
@@ -263,7 +263,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                           BoxShadow(
                             blurRadius: 10,
                             spreadRadius: 0,
-                            color: Colors.black.withOpacity(0.25),
+                            color: Colors.black.withOpacity(0.5),
                             offset: Offset(5, 5)
                           ),
                         ],

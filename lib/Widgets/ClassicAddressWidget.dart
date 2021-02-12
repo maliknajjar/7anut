@@ -51,225 +51,393 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 15,
+                      bottom: 20,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 7.5,
+                          blurRadius: 10,
                           spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
+                          color: Colors.black.withOpacity(0.1),
+                          offset: Offset(5, 5)
                         ),
                       ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
+                      borderRadius: BorderRadius.circular(10)
                     ),
-                    child: TextField(
-                      onChanged: (string){
-                        title = string;
-                      },
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      cursorColor: Colors.black54,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        hintText: "address name | ex: home",
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(
-                      top: 0,
-                      bottom: 15,
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 7.5,
-                          spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        hint:  Text(state == null ? "state" : state, style: TextStyle(fontSize: 20),),
-                        onChanged: (var value) {
-                          setState(() {
-                            state = value; 
-                            city = null;                       
-                          });
-                        },
-                        items: widget.cities.map((e){
-                          return DropdownMenuItem(
-                            value: e["state"],
-                            child: Text(e["state"], style: TextStyle(fontSize: 20),)
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(
-                      top: 0,
-                      bottom: 15,
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 7.5,
-                          spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        hint:  Text(city == null ? "city" : city, style: TextStyle(fontSize: 20),),
-                        onChanged: (var value) {
-                          setState(() {
-                            city = value;                        
-                          });
-                        },
-                        items: state == null 
-                        ? [
-                          DropdownMenuItem(
-                            value: null,
-                            child: Text("Choose state", style: TextStyle(fontSize: 20),)
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.yellow[50],
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            BoxShadow(
+                              spreadRadius: 4,
+                              blurRadius: 5,
+                              color: Colors.white,
+                              offset: Offset(10, 10)
+                            ),
+                            BoxShadow(
+                              spreadRadius: -5,
+                              blurRadius: 20,
+                              color: Colors.yellow[100],
+                              offset: Offset(-5, -2.5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
                           ),
-                        ]
-                        : jsonDecode(widget.cities[indexOfState(state)]["cities"]).map<DropdownMenuItem>((e){
-                          return DropdownMenuItem(
-                            value: e,
-                            child: Text(e, style: TextStyle(fontSize: 20),)
-                          );
-                        }).toList(),
+                        ),
+                        child: TextField(
+                          onChanged: (string){
+                            title = string;
+                          },
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                          cursorColor: Colors.black54,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                            hintText: "address name | ex: home",
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 15,
+                      bottom: 20,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 7.5,
+                          blurRadius: 10,
                           spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
+                          color: Colors.black.withOpacity(0.1),
+                          offset: Offset(5, 5)
                         ),
                       ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
+                      borderRadius: BorderRadius.circular(10)
                     ),
-                    child: TextField(
-                      onChanged: (string){
-                        streetAddress = string;
-                      },
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      cursorColor: Colors.black54,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        hintText: "Street Address",
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.yellow[50],
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            BoxShadow(
+                              spreadRadius: 4,
+                              blurRadius: 5,
+                              color: Colors.white,
+                              offset: Offset(10, 10)
+                            ),
+                            BoxShadow(
+                              spreadRadius: -5,
+                              blurRadius: 20,
+                              color: Colors.yellow[100],
+                              offset: Offset(-5, -2.5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            hint:  Text(state == null ? "state" : state, style: TextStyle(fontSize: 20),),
+                            onChanged: (var value) {
+                              setState(() {
+                                state = value; 
+                                city = null;                       
+                              });
+                            },
+                            items: widget.cities.map((e){
+                              return DropdownMenuItem(
+                                value: e["state"],
+                                child: Text(e["state"], style: TextStyle(fontSize: 20),)
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 15,
+                      bottom: 20,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 7.5,
+                          blurRadius: 10,
                           spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
+                          color: Colors.black.withOpacity(0.1),
+                          offset: Offset(5, 5)
                         ),
                       ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
+                      borderRadius: BorderRadius.circular(10)
                     ),
-                    child: TextField(
-                      onChanged: (string){
-                        streetAddress2 = string;
-                      },
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      cursorColor: Colors.black54,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        hintText: "Street Address 2 (optional)",
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.yellow[50],
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            BoxShadow(
+                              spreadRadius: 4,
+                              blurRadius: 5,
+                              color: Colors.white,
+                              offset: Offset(10, 10)
+                            ),
+                            BoxShadow(
+                              spreadRadius: -5,
+                              blurRadius: 20,
+                              color: Colors.yellow[100],
+                              offset: Offset(-5, -2.5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            hint:  Text(city == null ? "city" : city, style: TextStyle(fontSize: 20),),
+                            onChanged: (var value) {
+                              setState(() {
+                                city = value;                        
+                              });
+                            },
+                            items: state == null 
+                            ? [
+                              DropdownMenuItem(
+                                value: null,
+                                child: Text("Choose state", style: TextStyle(fontSize: 20),)
+                              ),
+                            ]
+                            : jsonDecode(widget.cities[indexOfState(state)]["cities"]).map<DropdownMenuItem>((e){
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e, style: TextStyle(fontSize: 20),)
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(
                       top: 0,
-                      bottom: 15,
+                      bottom: 20,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 7.5,
+                          blurRadius: 10,
                           spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.25),
+                          color: Colors.black.withOpacity(0.1),
+                          offset: Offset(5, 5)
                         ),
                       ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.yellow[50],
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            BoxShadow(
+                              spreadRadius: 4,
+                              blurRadius: 5,
+                              color: Colors.white,
+                              offset: Offset(10, 10)
+                            ),
+                            BoxShadow(
+                              spreadRadius: -5,
+                              blurRadius: 20,
+                              color: Colors.yellow[100],
+                              offset: Offset(-5, -2.5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: TextField(
+                          onChanged: (string){
+                            streetAddress = string;
+                          },
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                          cursorColor: Colors.black54,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                            hintText: "Street Address",
+                          ),
+                        ),
                       ),
                     ),
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      minLines: 3,
-                      onChanged: (string){
-                        instructions = string;
-                      },
-                      style: TextStyle(
-                        fontSize: 20,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 0,
+                      bottom: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                          color: Colors.black.withOpacity(0.1),
+                          offset: Offset(5, 5)
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.yellow[50],
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            BoxShadow(
+                              spreadRadius: 4,
+                              blurRadius: 5,
+                              color: Colors.white,
+                              offset: Offset(10, 10)
+                            ),
+                            BoxShadow(
+                              spreadRadius: -5,
+                              blurRadius: 20,
+                              color: Colors.yellow[100],
+                              offset: Offset(-5, -2.5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: TextField(
+                          onChanged: (string){
+                            streetAddress2 = string;
+                          },
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                          cursorColor: Colors.black54,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                            hintText: "Street Address 2 (optional)",
+                          ),
+                        ),
                       ),
-                      cursorColor: Colors.black54,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        hintText: "instructions (optional)\nex: dont ring the bell",
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 0,
+                      bottom: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                          color: Colors.black.withOpacity(0.1),
+                          offset: Offset(5, 5)
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.yellow[50],
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            BoxShadow(
+                              spreadRadius: 4,
+                              blurRadius: 5,
+                              color: Colors.white,
+                              offset: Offset(10, 10)
+                            ),
+                            BoxShadow(
+                              spreadRadius: -5,
+                              blurRadius: 20,
+                              color: Colors.yellow[100],
+                              offset: Offset(-5, -2.5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: TextField(
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          minLines: 3,
+                          onChanged: (string){
+                            instructions = string;
+                          },
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                          cursorColor: Colors.black54,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                            hintText: "instructions (optional)\nex: dont ring the bell",
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -300,7 +468,17 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
               child: Container(
                 width: width,
                 padding: EdgeInsets.all(15),
-                color: Colors.yellow,
+                decoration: BoxDecoration(
+                  color: Colors.yellow[200],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      spreadRadius: 0,
+                      blurRadius: 7.5,
+                      offset: Offset(0, 0),
+                    ),
+                  ]
+                ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

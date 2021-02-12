@@ -46,10 +46,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             color: Colors.black.withOpacity(0.75),
           ),
           centerTitle: true,
-          title: Image.asset(
-            "assets/images/logo-01.png", 
-            height: 25,
-          ),
+          title: Text("Add Address", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
           backgroundColor: Colors.yellow[200],
           bottom: TabBar(
             labelColor: Colors.black.withOpacity(0.75),
