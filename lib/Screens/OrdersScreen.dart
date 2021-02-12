@@ -56,14 +56,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
           "Orders",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
         actions: [
