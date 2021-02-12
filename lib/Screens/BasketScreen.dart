@@ -93,12 +93,12 @@ class _BasketScreenState extends State<BasketScreen> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            Colors.yellow[50],
                             Colors.white.withOpacity(0.75),
+                            Colors.yellow[50],
                           ],
                           stops: [
                             0,
-                            0.5,
+                            1,
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
