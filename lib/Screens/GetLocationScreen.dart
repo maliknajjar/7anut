@@ -241,7 +241,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.add_location, size: 35,),
+                            Icon(Icons.add_location_outlined, size: 35,),
                             Text("Pin your location", style: TextStyle(fontSize: 20,),),
                           ],
                         )

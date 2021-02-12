@@ -17,16 +17,16 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         centerTitle: true,
         title: Text(
           "Search",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
       ),
       body: Container(
         padding: EdgeInsets.all(15),
