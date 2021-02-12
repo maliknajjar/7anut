@@ -66,8 +66,16 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50)
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.yellow[50],
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 0,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(5, 5)
+                    ),
+                  ],
                 ),
                 child: Center(
                   child: Text("+", style: TextStyle(fontSize: 25),),
@@ -87,7 +95,15 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.yellow[50],
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 0,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(5, 5)
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(50)
                 ),
                 child: Center(
@@ -124,7 +140,15 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.yellow[50],
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 0,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(5, 5)
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(50)
                 ),
                 child: Center(
@@ -141,8 +165,16 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 height: 60,
                 width: width - 20,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10)
+                  color: Colors.yellow[50],
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 0,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(5, 5)
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(15)
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,8 +227,16 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       child: Container(
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)
+                          color: Colors.yellow[50],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 0,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(5, 5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(15)
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -218,8 +258,16 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       margin: EdgeInsets.only(left: 10),
                       width: 75,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)
+                        color: Colors.yellow[50],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            color: Colors.black.withOpacity(0.25),
+                            offset: Offset(5, 5)
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(15)
                       ),
                       child: Center(child: Icon(Icons.done, size: 35,),),
                     ),

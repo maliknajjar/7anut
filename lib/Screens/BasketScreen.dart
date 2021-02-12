@@ -80,7 +80,7 @@ class _BasketScreenState extends State<BasketScreen> {
       : Stack(
         children: [
           SingleChildScrollView(
-            padding: EdgeInsets.only(top: 0),
+            padding: EdgeInsets.only(bottom: 60),
             child: Container(
               color: Colors.yellow[50],
               padding: EdgeInsets.only(bottom: 0, top: 10),
