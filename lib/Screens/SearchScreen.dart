@@ -29,8 +29,8 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.yellow[200],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.all(15),
           children: [
             Container(
               decoration: BoxDecoration(
@@ -94,31 +94,32 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             searchTerm == null 
-            ? Expanded(
-              child: Container(),
-            )
+            ? Container()
             : Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.yellow[50],
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 7.5,
-                    spreadRadius: 1,
-                    color: Colors.black.withOpacity(0.25),
-                    offset: Offset(2.5, 2.5),
-                  )
-                ],
-              ),
               margin: EdgeInsets.only(top: 20),
               child: Column(
-                children: Products.searchProductsByName(searchTerm).contains("no resluts")
-                ? [Text("No Results", style: TextStyle(fontSize: 22),)]
+                children: Products.searchProductsByName(searchTerm).contains("no results")
+                ? [
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    child: Text("No Results", style: TextStyle(fontSize: 22),),
+                  )
+                ]
                 : Products.searchProductsByName(searchTerm).map((e){
                   return Container(
                     padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15)
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.yellow[50],
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 7.5,
+                          spreadRadius: 1,
+                          color: Colors.black.withOpacity(0.25),
+                          offset: Offset(2.5, 2.5),
+                        )
+                      ],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,6 +141,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                     spreadRadius: 1,
                                     color: Colors.black.withOpacity(0.25),
                                     offset: Offset(2.5, 2.5),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.white,
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(10)

@@ -5,9 +5,10 @@ class Products {
   static List searchProductsByName(String productName){
     List searchedItems = [];
     for (var i = 0; i < products.length; i++) {
-      if(Products.products[i]["Name"] == productName) searchedItems.add(Products.products[i]);
+      // if(Products.products[i]["Name"] == productName) searchedItems.add(Products.products[i]);
+      if(Products.products[i]["Name"].contains(productName)) searchedItems.add(Products.products[i]);
     }
-    if(searchedItems.isEmpty) searchedItems.add("no resluts");
+    if(searchedItems.isEmpty) searchedItems.add("no results");
     return searchedItems;
   }
 
