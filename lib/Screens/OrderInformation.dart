@@ -18,14 +18,14 @@ class OrderInformation extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0xFF5DA7E6),
+        backgroundColor: Colors.yellow[200],
         iconTheme: IconThemeData(
-          color: Color(0xFF303030),
+          color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
           "Order Details",
           style: TextStyle(
-            color: Color(0xFF303030),
+            color: Colors.black.withOpacity(0.75),
           ),
         ),
       ),
@@ -39,15 +39,42 @@ class OrderInformation extends StatelessWidget {
                   0: FlexColumnWidth(1.5),
                   1: FlexColumnWidth(4),
                 },
-                border:TableBorder.all(width: 1.0, color: Colors.black.withOpacity(0.5)),
                 children: [
                   TableRow(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.only(
+                          top: 10
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.yellow[50],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.all(10),
                         child: Text("orders"),
                       ),
                       Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.yellow[100],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                        ),
                         margin: EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,10 +96,38 @@ class OrderInformation extends StatelessWidget {
                   TableRow(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.only(
+                          top: 10
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.yellow[50],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.all(10),
                         child: Text("Address"),
                       ),
                       Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.yellow[100],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                        ),
                         margin: EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,10 +146,38 @@ class OrderInformation extends StatelessWidget {
                   TableRow(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.only(
+                          top: 10
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.yellow[50],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.all(10),
                         child: Text(data.keys.toList()[i].toString() == "totalPrice" ? "Subtotal" : data.keys.toList()[i].toString()),
                       ),
                       Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.yellow[100],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                        ),
                         margin: EdgeInsets.all(10),
                         child: Text(data.values.toList()[i].toString()),
                       )

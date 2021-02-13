@@ -110,11 +110,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 margin: EdgeInsets.only(bottom: 15),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.black.withOpacity(0.5)
-                  ),
+                  color: Colors.yellow[50],
                   borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7.5,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(2.5, 2.5),
+                    )
+                  ],
                 ),
                 child: Column(
                   children: [
@@ -124,6 +129,21 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         top: 10,
                         left: 15,
                         right: 15,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[50],
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7.5,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.15),
+                            offset: Offset(2.5, 2.5),
+                          )
+                        ],
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,11 +192,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             ],
                           ),
                         ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: BorderDirectional(bottom: BorderSide(width: 1, color: Colors.black.withOpacity(0.5),),)
                       ),
                     ),
                     Container(

@@ -157,7 +157,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                       BoxShadow(
                                         blurRadius: 7.5,
                                         spreadRadius: -0,
-                                        color: Colors.black.withOpacity(0.25),
+                                        color: Colors.black.withOpacity(0.15),
                                         offset: Offset(0, 5),
                                       ),
                                       BoxShadow(
