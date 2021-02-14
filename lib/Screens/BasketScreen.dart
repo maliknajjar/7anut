@@ -106,8 +106,8 @@ class _BasketScreenState extends State<BasketScreen> {
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 10,
-                            spreadRadius: -5,
-                            color: Colors.black.withOpacity(0.10),
+                            spreadRadius: -10,
+                            color: Colors.black.withOpacity(0.2),
                             offset: Offset(0, 15),
                           ),
                           BoxShadow(

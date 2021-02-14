@@ -105,31 +105,108 @@ class _AdressesScreenState extends State<AdressesScreen> {
                 highlightColor: Colors.white.withOpacity(0),
                 splashColor: Colors.white.withOpacity(0),
                 onTap: (){
-                  print(Addresses.getCurrentUserAddresses()[i].values);
-                  showDialog(
-                    context: context,
-                    builder: (context) => new AlertDialog(
-                      title: Text("Address Information"),
-                      content: IntrinsicHeight(
+                  showDialog(context: context, builder: (BuildContext context){
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0,
+                      backgroundColor: Colors.yellow[50],
+                      child: Container(
+                        padding: EdgeInsets.all(15),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (var item in Addresses.getCurrentUserAddresses()[i].values)
-                            if (item != null)
-                            Text(item.toString()),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 40,),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 20, top: 20),
+                                    child: Text("Address Information", style: TextStyle(fontSize: 20),),
+                                  ),
+                                  for (var item in Addresses.getCurrentUserAddresses()[i].values)
+                                  if (item != null)
+                                  Text(item.toString()),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.of(context, rootNavigator: true).pop();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.black.withOpacity(0.1),
+                                          Colors.black.withOpacity(0.025),
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      )
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 5,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow[100],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text("Ok", style: TextStyle(fontSize: 16),),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
-                      ),
-                      actions: <Widget>[
-                        new TextButton(
-                          onPressed: () {
-                            Navigator.of(context, rootNavigator: true).pop();
-                          },
-                          child: Text("OK")
-                        ),
-                      ],
-                    ),
-                  );
+                      )
+                    );
+                  }).then((value){
+                    print(i);
+                    if (value == null) return;
+                    if (value){
+                      setState(() {
+                        Addresses.deleteAddress(i);
+                        print("done");
+                      });
+                    }
+                  });
+
+                  // showDialog(
+                  //   context: context,
+                  //   builder: (context) => new AlertDialog(
+                  //     title: Text("Address Information"),
+                  //     content: IntrinsicHeight(
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           for (var item in Addresses.getCurrentUserAddresses()[i].values)
+                  //           if (item != null)
+                  //           Text(item.toString()),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     actions: <Widget>[
+                  //       new TextButton(
+                  //         onPressed: () {
+                  //           Navigator.of(context, rootNavigator: true).pop();
+                  //         },
+                  //         child: Text("OK")
+                  //       ),
+                  //     ],
+                  //   ),
+                  // );
                 },
                 child: Container(
                   width: double.infinity,
@@ -256,42 +333,6 @@ class _AdressesScreenState extends State<AdressesScreen> {
                               });
                             }
                           });
-                          
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (context) => AlertDialog(
-                          //     content: Container(
-                          //       constraints: BoxConstraints(
-                          //         maxWidth: 100
-                          //       ),
-                          //       child: Text("are you sure you want to delete the Address?"),
-                          //     ),
-                          //     actions: <Widget>[
-                          //       TextButton(
-                          //         onPressed: () {
-                          //           Navigator.of(context, rootNavigator: true).pop(false);
-                          //         },
-                          //         child: Text("Cancel")
-                          //       ),
-                          //       TextButton(
-                          //         onPressed: () {
-                          //           Navigator.of(context, rootNavigator: true).pop(true);
-                          //         },
-                          //         child: Text("OK")
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ).then((value){
-                          //   if (value == null) return;
-                          //   if (!value){
-                          //     return;
-                          //   }else{
-                          //     setState(() {
-                          //       Addresses.deleteAddress(i);
-                          //       print("done");
-                          //     });
-                          //   }
-                          // });
                         },
                         child: Container(
                           padding: EdgeInsets.all(2),
