@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'dart:async';
-
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 import '../env.dart';
-import '../Classes/UserInformation.dart';
 
-class LoginScreen extends StatefulWidget {
-  String message;
-  Color theColor;
-  LoginScreen({this.message, this.theColor});
+class PinScreen extends StatefulWidget {
+  String email = "";
+  PinScreen(String this.email);
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _PinScreenState createState() => _PinScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  String email = "";
-  String password = "";
-  Widget theButton = Text("Sign In", style: TextStyle(fontSize: 18),);
+class _PinScreenState extends State<PinScreen> {
+  String pin = "";
+  String newPassword = "";
+  Widget theButton = Text("Change Password", style: TextStyle(fontSize: 18),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -37,20 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    if(widget.message != null){
-      notify(widget.message, 3000, widget.theColor);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -106,9 +90,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(
-                                  bottom: 10, 
+                                padding: EdgeInsets.all(10),
+                                width: double.infinity,
+                                margin: EdgeInsets.only(bottom: 25),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue.withOpacity(0.1),
+                                  border: Border.all(width: 2, color: Colors.black.withOpacity(0.1))
                                 ),
+                                child: Text("Check your email for the pin", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 10),
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
@@ -118,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       offset: Offset(5, 5)
                                     ),
                                   ],
-                                  borderRadius: BorderRadius.circular(10)
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
@@ -151,15 +145,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     child: TextField(
                                       onChanged: (string){
-                                        email = string;
+                                        pin = string;
                                       },
-                                      style: TextStyle(fontSize: 15),
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
                                       cursorColor: Colors.black54,
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Email'
+                                        hintText: 'Pin'
                                       ),
                                     ),
                                   ),
@@ -208,9 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     child: TextField(
                                       onChanged: (string){
-                                        password = string;
+                                        newPassword = string;
                                       },
-                                      obscureText: true,
                                       style: TextStyle(
                                         fontSize: 15,
                                       ),
@@ -219,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Password'
+                                        hintText: 'New Password'
                                       ),
                                     ),
                                   ),
@@ -227,49 +222,35 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               InkWell(
                                 onTap: (){
-                                  if(email == "" || password == ""){
+                                  if(pin == "" || newPassword == ""){
                                     notify("fields are not filled", 2000, Colors.red);
                                     return;
                                   }
                                   setState(() {
                                     theButton = Image.asset("assets/images/theLoading.gif", height: 30);
                                   });
-                                  http.post(env.apiUrl + "/api/signin", body: {
-                                    "email": email,
-                                    "password": password,
+                                  http.post(env.apiUrl + "/api/changeforgottenPassword", body: {
+                                    "email": widget.email,
+                                    "newPassword": newPassword,
+                                    "pin": pin
                                   }).then((result){
-                                    theButton = Text("Sign In", style: TextStyle(fontSize: 18),);
+                                    setState(() {
+                                      theButton = Text("Change Password", style: TextStyle(fontSize: 18),);
+                                    });
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
-                                      print(response["error"].toString());
-                                      notify(response["error"].toString(), 2000, Colors.red);
+                                      notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    // saving these information when everything is successful
-                                    SharedPreferences.getInstance().then((value){
-                                      value.setString("email", email).then((theValue){
-                                        print("email saved: " + response["email"]);
-                                        value.setString("sessionID", response["session"]).then((anotherValue){
-                                          print("sessionID saved: " + response["session"]);
-                                          value.setString("full name", response["fullName"]).then((anotherValue){
-                                            print("full name saved: " + response["fullName"]);
-                                            value.setString("phone number", response["phoneNumber"]).then((anotherValue){
-                                              print("phone number saved: " + response["phoneNumber"]);
-                                              UserInformation();  // saving logged in user information
-                                              Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-                                            });
-                                          });
-                                        });
-                                      });
-                                    });
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop(response["message"]);
                                   });
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
-                                  height: 40,
+                                  padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                    color: Colors.yellow[100],
                                     boxShadow: [
                                       BoxShadow(
                                         blurRadius: 7.5,
@@ -279,8 +260,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       )
                                     ],
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(50)
+                                      Radius.circular(15)
                                     ),
+                                    color: Colors.yellow[100],
                                   ),
                                   child: Center(
                                     child: theButton,
@@ -290,82 +272,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         ),
-                        Container(
-                          constraints: BoxConstraints(maxWidth: 300),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Container(
-                                  height: 2,
-                                  margin: EdgeInsets.only(left: 20, top: 30, bottom: 30),
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.25),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  child: Center(child: Text("or")),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: Container(
-                                  height: 2,
-                                  margin: EdgeInsets.only(right: 20, top: 30, bottom: 30),
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.25),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          constraints: BoxConstraints(maxWidth: 300),
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: Center(
-                            child: InkWell(
-                              onTap: (){
-                                Navigator.of(context).pushNamed("/register");
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                decoration: BoxDecoration(
-                                  color: Colors.yellow[100],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15)
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 7.5,
-                                      spreadRadius: 1,
-                                      color: Colors.black.withOpacity(0.25),
-                                      offset: Offset(2.5, 2.5),
-                                    )
-                                  ],
-                                ),
-                                child: Text("Create New Account"),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: (){
-                            Navigator.of(context).pushNamed("/forgotpassword").then((value){
-                              if(value == null) return;
-                              notify(value, 2000, Colors.green);
-                            });
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(top: 10),
-                            child: Text("Forget Password?", style: TextStyle(color: Colors.black.withOpacity(0.75), decoration: TextDecoration.underline)),
-                          ),
-                        )
                       ],
                     ),
                   ),
@@ -381,13 +287,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: notificationColor,
                 boxShadow: [
-                  BoxShadow(
-                    blurRadius: 7.5,
-                    spreadRadius: 1,
-                    color: Colors.black.withOpacity(0.25),
-                    offset: Offset(2.5, 2.5),
-                  )
-                ],
+                    BoxShadow(
+                      blurRadius: 7.5,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(2.5, 2.5),
+                    )
+                  ],
               ),
               child: Align(
                 alignment: Alignment.center,

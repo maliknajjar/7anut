@@ -353,7 +353,9 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     ]
                   ),
                   child: Center(
-                    child: Text(isPressed ? "Loading..." : "Order", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    child: isPressed 
+                    ? Image.asset("assets/images/theLoading.gif", height: 30)
+                    : Text("Order", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   ),
                 ),
               ),

@@ -160,41 +160,57 @@ class _AdressesScreenState extends State<AdressesScreen> {
                       ),
                       GestureDetector(
                         onTap: (){
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              content: Container(
-                                constraints: BoxConstraints(
-                                  maxWidth: 100
-                                ),
-                                child: Text("are you sure you want to delete the Address?"),
+                          print("object");
+                          showDialog(context: context, builder: (BuildContext context){
+                            return Dialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context, rootNavigator: true).pop(false);
-                                  },
-                                  child: Text("Cancel")
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context, rootNavigator: true).pop(true);
-                                  },
-                                  child: Text("OK")
-                                ),
-                              ],
-                            ),
-                          ).then((value){
-                            if (value == null) return;
-                            if (!value){
-                              return;
-                            }else{
-                              setState(() {
-                                Addresses.deleteAddress(i);
-                                print("done");
-                              });
-                            }
+                              elevation: 0,
+                              backgroundColor: Colors.yellow[50],
+                              child: Container(
+                                height: 200,
+                                width: 200,
+                                child: Text("data"),
+                              )
+                            );
                           });
+                          
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (context) => AlertDialog(
+                          //     content: Container(
+                          //       constraints: BoxConstraints(
+                          //         maxWidth: 100
+                          //       ),
+                          //       child: Text("are you sure you want to delete the Address?"),
+                          //     ),
+                          //     actions: <Widget>[
+                          //       TextButton(
+                          //         onPressed: () {
+                          //           Navigator.of(context, rootNavigator: true).pop(false);
+                          //         },
+                          //         child: Text("Cancel")
+                          //       ),
+                          //       TextButton(
+                          //         onPressed: () {
+                          //           Navigator.of(context, rootNavigator: true).pop(true);
+                          //         },
+                          //         child: Text("OK")
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ).then((value){
+                          //   if (value == null) return;
+                          //   if (!value){
+                          //     return;
+                          //   }else{
+                          //     setState(() {
+                          //       Addresses.deleteAddress(i);
+                          //       print("done");
+                          //     });
+                          //   }
+                          // });
                         },
                         child: Container(
                           padding: EdgeInsets.all(2),

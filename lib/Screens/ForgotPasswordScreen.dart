@@ -5,6 +5,8 @@ import 'dart:convert';
 
 import '../env.dart';
 
+import './PinScreen.dart';
+
 class ForgotPasswordScreen extends StatefulWidget {
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
@@ -12,7 +14,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   String email = "";
-  Widget theButton = Text("Send New Password");
+  Widget theButton = Text("Send Pin", style: TextStyle(fontSize: 18),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -41,8 +43,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             decoration: BoxDecoration(
               gradient: RadialGradient(
                 colors: [
-                  Color(0xFF5DA7E6).withOpacity(0.75),
-                  Color(0xFF3C9DE5),
+                  Colors.white,
+                  Colors.yellow[50],
                 ],
                 stops: [0.0, 1.0],
                 radius: 1,
@@ -62,17 +64,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
-                            color: Colors.yellow,
+                            color: Colors.yellow[100],
                             borderRadius: BorderRadius.all(
                               Radius.circular(15)
                             ),
                             boxShadow: [
-                                BoxShadow(
-                                blurRadius: 10,
-                                spreadRadius: 3,
-                                color: Colors.grey[800].withOpacity(0.5)
-                              ),
-                            ]
+                              BoxShadow(
+                                blurRadius: 7.5,
+                                spreadRadius: 1,
+                                color: Colors.black.withOpacity(0.25),
+                                offset: Offset(2.5, 2.5),
+                              )
+                            ],
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,96 +89,104 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(
-                                  top: 7.5,
-                                  bottom: 20, 
-                                ),
-                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                   boxShadow: [
-                                      BoxShadow(
-                                      blurRadius: 10,
+                                    BoxShadow(
+                                      blurRadius: 5,
                                       spreadRadius: 0,
-                                      color: Colors.black.withOpacity(0.1)
+                                      color: Colors.black.withOpacity(0.05),
+                                      offset: Offset(5, 5)
                                     ),
                                   ],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFFFFCE1),
-                                      Color(0xFFFFF6A4),
-                                    ],
-                                    begin: FractionalOffset(0.0, 0.0),
-                                    end: FractionalOffset(0.0, 1.0),
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp
-                                  ),
+                                  borderRadius: BorderRadius.circular(10)
                                 ),
-                                child: TextField(
-                                  onChanged: (string){
-                                    email = string;
-                                  },
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  cursorColor: Colors.black54,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                    hintText: 'Email'
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.yellow[50],
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: 4,
+                                          blurRadius: 5,
+                                          color: Colors.white,
+                                          offset: Offset(10, 10)
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: -5,
+                                          blurRadius: 20,
+                                          color: Colors.yellow[100],
+                                          offset: Offset(-5, -2.5)
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: TextField(
+                                      onChanged: (string){
+                                        email = string;
+                                      },
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      cursorColor: Colors.black54,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                        hintText: 'Email'
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                               InkWell(
                                 onTap: (){
-                                  setState(() {
-                                    theButton = Text("loading");
-                                  });
                                   if(email == ""){
                                     notify("fields are not filled", 2000, Colors.red);
                                     return;
                                   }
+                                  setState(() {
+                                    theButton = Image.asset("assets/images/theLoading.gif", height: 30);
+                                  });
                                   http.post(env.apiUrl + "/api/forgetpassword", body: {
                                     "email": email,
                                   }).then((result){
                                     setState(() {
-                                      theButton = Text("Send New Password");
+                                      theButton = Text("Send Pin", style: TextStyle(fontSize: 18),);
                                     });
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
-                                    Navigator.of(context).pop(response["message"]);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => PinScreen(email)));
                                   });
                                 },
                                 child: Container(
+                                  margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     boxShadow: [
-                                        BoxShadow(
-                                        blurRadius: 10,
-                                        spreadRadius: 3,
-                                        color: Colors.black.withOpacity(0.25)
-                                      ),
+                                      BoxShadow(
+                                        blurRadius: 7.5,
+                                        spreadRadius: 1,
+                                        color: Colors.black.withOpacity(0.25),
+                                        offset: Offset(2.5, 2.5),
+                                      )
                                     ],
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(15)
                                     ),
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.yellow[300],
-                                        Colors.yellow,
-                                      ],
-                                      begin: FractionalOffset(0.0, 0.0),
-                                      end: FractionalOffset(0.0, 1.0),
-                                      stops: [0.0, 1.0],
-                                      tileMode: TileMode.clamp
-                                    ), 
+                                    color: Colors.yellow[100],
                                   ),
                                   child: Center(
                                     child: theButton,
@@ -232,17 +243,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 constraints: BoxConstraints(maxWidth: 150),
                                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow[400],
+                                  color: Colors.yellow[100],
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(15)
+                                    Radius.circular(100)
                                   ),
                                   boxShadow: [
-                                      BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 3,
-                                      color: Colors.grey[800].withOpacity(0.5)
-                                    ),
-                                  ]
+                                    BoxShadow(
+                                      blurRadius: 7.5,
+                                      spreadRadius: 1,
+                                      color: Colors.black.withOpacity(0.25),
+                                      offset: Offset(2.5, 2.5),
+                                    )
+                                  ],
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -274,7 +286,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: notificationColor,
-                border: Border.all(color: Colors.black.withOpacity(0.3), width: 2.5)
+                boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7.5,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(2.5, 2.5),
+                    )
+                  ],
               ),
               child: Align(
                 alignment: Alignment.center,

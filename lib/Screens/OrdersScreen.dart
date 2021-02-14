@@ -90,10 +90,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                margin: EdgeInsets.only(bottom: 10),
-                child: Icon(Icons.cancel_outlined, size: 75, color: Colors.black.withOpacity(0.75),),
-              ),
               Text("You have no orders yet", style: TextStyle(fontSize: 22),),
             ],
           )

@@ -51,8 +51,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             decoration: BoxDecoration(
               gradient: RadialGradient(
                 colors: [
-                  Color(0xFF5DA7E6).withOpacity(0.75),
-                  Color(0xFF3C9DE5),
+                  Colors.white,
+                  Colors.yellow[50],
                 ],
                 stops: [0.0, 1.0],
                 radius: 1,
@@ -72,17 +72,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
-                            color: Colors.yellow,
+                            color: Colors.yellow[100],
                             borderRadius: BorderRadius.all(
                               Radius.circular(15)
                             ),
                             boxShadow: [
-                                BoxShadow(
-                                blurRadius: 10,
-                                spreadRadius: 3,
-                                color: Colors.grey[800].withOpacity(0.5)
-                              ),
-                            ]
+                              BoxShadow(
+                                blurRadius: 7.5,
+                                spreadRadius: 1,
+                                color: Colors.black.withOpacity(0.25),
+                                offset: Offset(2.5, 2.5),
+                              )
+                            ],
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,239 +97,361 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                margin: EdgeInsets.only(
+                                  bottom: 10, 
+                                ),
                                 decoration: BoxDecoration(
                                   boxShadow: [
-                                      BoxShadow(
-                                      blurRadius: 10,
+                                    BoxShadow(
+                                      blurRadius: 5,
                                       spreadRadius: 0,
-                                      color: Colors.black.withOpacity(0.1)
+                                      color: Colors.black.withOpacity(0.05),
+                                      offset: Offset(5, 5)
                                     ),
                                   ],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFFFFCE1),
-                                      Color(0xFFFFF6A4),
-                                    ],
-                                    begin: FractionalOffset(0.0, 0.0),
-                                    end: FractionalOffset(0.0, 1.0),
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp
-                                  ), 
+                                  borderRadius: BorderRadius.circular(10)
                                 ),
-                                child: TextField(
-                                  onChanged: (string){
-                                    email = string;
-                                  },
-                                  style: TextStyle(fontSize: 15),
-                                  cursorColor: Colors.black54,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                    hintText: 'Email'
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 7.5,),
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                      BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 0,
-                                      color: Colors.black.withOpacity(0.1)
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFFFFCE1),
-                                      Color(0xFFFFF6A4),
-                                    ],
-                                    begin: FractionalOffset(0.0, 0.0),
-                                    end: FractionalOffset(0.0, 1.0),
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp
-                                  ), 
-                                ),
-                                child: TextField(
-                                  onChanged: (string){
-                                    fullName = string;
-                                  },
-                                  style: TextStyle(fontSize: 15),
-                                  cursorColor: Colors.black54,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                    hintText: 'Full Name'
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 35,
-                                    margin: EdgeInsets.only(top: 7.5, right: 7.5),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
                                     padding: EdgeInsets.symmetric(horizontal: 10),
                                     decoration: BoxDecoration(
                                       boxShadow: [
-                                          BoxShadow(
-                                          blurRadius: 10,
-                                          spreadRadius: 0,
-                                          color: Colors.black.withOpacity(0.1)
+                                        BoxShadow(
+                                          color: Colors.yellow[50],
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: 4,
+                                          blurRadius: 5,
+                                          color: Colors.white,
+                                          offset: Offset(10, 10)
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: -5,
+                                          blurRadius: 20,
+                                          color: Colors.yellow[100],
+                                          offset: Offset(-5, -2.5)
                                         ),
                                       ],
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10),
                                       ),
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Color(0xFFFFFCE1),
-                                          Color(0xFFFFF6A4),
-                                        ],
-                                        begin: FractionalOffset(0.0, 0.0),
-                                        end: FractionalOffset(0.0, 1.0),
-                                        stops: [0.0, 1.0],
-                                        tileMode: TileMode.clamp
-                                      ), 
                                     ),
-                                    child: Center(child: Text("+216"))
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      margin: EdgeInsets.only(top: 7.5,),
-                                      padding: EdgeInsets.symmetric(horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                            BoxShadow(
-                                            blurRadius: 10,
-                                            spreadRadius: 0,
-                                            color: Colors.black.withOpacity(0.1)
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFFFFFCE1),
-                                            Color(0xFFFFF6A4),
-                                          ],
-                                          begin: FractionalOffset(0.0, 0.0),
-                                          end: FractionalOffset(0.0, 1.0),
-                                          stops: [0.0, 1.0],
-                                          tileMode: TileMode.clamp
-                                        ), 
-                                      ),
-                                      child: TextField(
-                                        onChanged: (string){
-                                          phoneNumber = string;
-                                        },
-                                        style: TextStyle(fontSize: 15),
-                                        cursorColor: Colors.black54,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          isDense: true,
-                                          contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                          hintText: 'Phone Number'
-                                        ),
+                                    child: TextField(
+                                      onChanged: (string){
+                                        email = string;
+                                      },
+                                      style: TextStyle(fontSize: 15),
+                                      cursorColor: Colors.black54,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                        hintText: 'Email'
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 7.5,),
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                      BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 0,
-                                      color: Colors.black.withOpacity(0.1)
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFFFFCE1),
-                                      Color(0xFFFFF6A4),
-                                    ],
-                                    begin: FractionalOffset(0.0, 0.0),
-                                    end: FractionalOffset(0.0, 1.0),
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp
-                                  ),
-                                ),
-                                child: TextField(
-                                  onChanged: (string){
-                                    password = string;
-                                  },
-                                  obscureText: true,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  cursorColor: Colors.black54,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                    hintText: 'Password'
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.only(
-                                  top: 7.5,
-                                  bottom: 20, 
+                                  bottom: 10, 
                                 ),
-                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                   boxShadow: [
-                                      BoxShadow(
-                                      blurRadius: 10,
+                                    BoxShadow(
+                                      blurRadius: 5,
                                       spreadRadius: 0,
-                                      color: Colors.black.withOpacity(0.1)
+                                      color: Colors.black.withOpacity(0.05),
+                                      offset: Offset(5, 5)
                                     ),
                                   ],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFFFFCE1),
-                                      Color(0xFFFFF6A4),
-                                    ],
-                                    begin: FractionalOffset(0.0, 0.0),
-                                    end: FractionalOffset(0.0, 1.0),
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.yellow[50],
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: 4,
+                                          blurRadius: 5,
+                                          color: Colors.white,
+                                          offset: Offset(10, 10)
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: -5,
+                                          blurRadius: 20,
+                                          color: Colors.yellow[100],
+                                          offset: Offset(-5, -2.5)
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: TextField(
+                                      onChanged: (string){
+                                        fullName = string;
+                                      },
+                                      style: TextStyle(fontSize: 15),
+                                      cursorColor: Colors.black54,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                        hintText: 'Full Name'
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                child: TextField(
-                                  onChanged: (string){
-                                    confirmPassword = string;
-                                  },
-                                  obscureText: true,
-                                  style: TextStyle(
-                                    fontSize: 15,
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(
+                                  bottom: 10, 
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        right: 10, 
+                                      ),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 5,
+                                            spreadRadius: 0,
+                                            color: Colors.black.withOpacity(0.05),
+                                            offset: Offset(5, 5)
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.yellow[50],
+                                              ),
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.2),
+                                              ),
+                                              BoxShadow(
+                                                spreadRadius: 4,
+                                                blurRadius: 5,
+                                                color: Colors.white,
+                                                offset: Offset(10, 10)
+                                              ),
+                                              BoxShadow(
+                                                spreadRadius: -5,
+                                                blurRadius: 20,
+                                                color: Colors.yellow[100],
+                                                offset: Offset(-5, -2.5)
+                                              ),
+                                            ],
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: Center(child: Text("+216"))
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 5,
+                                              spreadRadius: 0,
+                                              color: Colors.black.withOpacity(0.05),
+                                              offset: Offset(5, 5)
+                                            ),
+                                          ],
+                                          borderRadius: BorderRadius.circular(10)
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 10),
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.yellow[50],
+                                                ),
+                                                BoxShadow(
+                                                  color: Colors.black.withOpacity(0.2),
+                                                ),
+                                                BoxShadow(
+                                                  spreadRadius: 4,
+                                                  blurRadius: 5,
+                                                  color: Colors.white,
+                                                  offset: Offset(10, 10)
+                                                ),
+                                                BoxShadow(
+                                                  spreadRadius: -5,
+                                                  blurRadius: 20,
+                                                  color: Colors.yellow[100],
+                                                  offset: Offset(-5, -2.5)
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10),
+                                              ),
+                                            ),
+                                            child: TextField(
+                                              onChanged: (string){
+                                                phoneNumber = string;
+                                              },
+                                              style: TextStyle(fontSize: 15),
+                                              cursorColor: Colors.black54,
+                                              decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                isDense: true,
+                                                contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                                hintText: 'Phone Number'
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(
+                                  bottom: 10, 
+                                ),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      spreadRadius: 0,
+                                      color: Colors.black.withOpacity(0.05),
+                                      offset: Offset(5, 5)
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.yellow[50],
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: 4,
+                                          blurRadius: 5,
+                                          color: Colors.white,
+                                          offset: Offset(10, 10)
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: -5,
+                                          blurRadius: 20,
+                                          color: Colors.yellow[100],
+                                          offset: Offset(-5, -2.5)
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: TextField(
+                                      onChanged: (string){
+                                        password = string;
+                                      },
+                                      obscureText: true,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      cursorColor: Colors.black54,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                        hintText: 'Password'
+                                      ),
+                                    ),
                                   ),
-                                  cursorColor: Colors.black54,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                    hintText: 'Confirm Password'
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      spreadRadius: 0,
+                                      color: Colors.black.withOpacity(0.05),
+                                      offset: Offset(5, 5)
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.yellow[50],
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: 4,
+                                          blurRadius: 5,
+                                          color: Colors.white,
+                                          offset: Offset(10, 10)
+                                        ),
+                                        BoxShadow(
+                                          spreadRadius: -5,
+                                          blurRadius: 20,
+                                          color: Colors.yellow[100],
+                                          offset: Offset(-5, -2.5)
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: TextField(
+                                      onChanged: (string){
+                                        confirmPassword = string;
+                                      },
+                                      obscureText: true,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      cursorColor: Colors.black54,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                        hintText: 'Confirm Password'
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -388,29 +511,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   });
                                 },
                                 child: Container(
+                                  margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
                                   height: 40,
                                   decoration: BoxDecoration(
+                                    color: Colors.yellow[100],
                                     boxShadow: [
-                                        BoxShadow(
-                                        blurRadius: 10,
-                                        spreadRadius: 3,
-                                        color: Colors.black.withOpacity(0.15)
-                                      ),
+                                      BoxShadow(
+                                        blurRadius: 7.5,
+                                        spreadRadius: 1,
+                                        color: Colors.black.withOpacity(0.25),
+                                        offset: Offset(2.5, 2.5),
+                                      )
                                     ],
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(50)
                                     ),
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.yellow[200],
-                                        Colors.yellow[400],
-                                      ],
-                                      begin: FractionalOffset(0.0, 0.0),
-                                      end: FractionalOffset(0.0, 1.0),
-                                      stops: [0.0, 1.0],
-                                      tileMode: TileMode.clamp
-                                    ), 
                                   ),
                                   child: Center(
                                     child: registerButtonName,
@@ -467,17 +583,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 constraints: BoxConstraints(maxWidth: 150),
                                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow[400],
+                                  color: Colors.yellow[100],
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(15)
+                                    Radius.circular(100)
                                   ),
                                   boxShadow: [
-                                      BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 3,
-                                      color: Colors.grey[800].withOpacity(0.5)
-                                    ),
-                                  ]
+                                    BoxShadow(
+                                      blurRadius: 7.5,
+                                      spreadRadius: 1,
+                                      color: Colors.black.withOpacity(0.25),
+                                      offset: Offset(2.5, 2.5),
+                                    )
+                                  ],
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -509,7 +626,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: notificationColor,
-                border: Border.all(color: Colors.black.withOpacity(0.3), width: 2.5)
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 7.5,
+                    spreadRadius: 1,
+                    color: Colors.black.withOpacity(0.25),
+                    offset: Offset(2.5, 2.5),
+                  )
+                ],
               ),
               child: Align(
                 alignment: Alignment.center,
