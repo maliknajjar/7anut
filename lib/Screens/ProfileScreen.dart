@@ -11,7 +11,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  List<String> hintText = [Dictionairy.words["Email"][UserInformation.language], Dictionairy.words["Full Name"][UserInformation.language], Dictionairy.words["Phone Number"][UserInformation.language], Dictionairy.words["Password"][UserInformation.language]];
+  List<String> hintText = [ Dictionairy.words["Email"][UserInformation.language], Dictionairy.words["Full Name"][UserInformation.language], Dictionairy.words["Phone Number"][UserInformation.language], Dictionairy.words["Password"][UserInformation.language]];
   List<String> titles = ["email", "full name", "phone number", "password"];
   var theInputs = [{}, {"new name": ""}, {"new phone Number": ""}, {"old password": "", "new password": ""}];
   List<String> stringArray = ["", "", "", "************"];

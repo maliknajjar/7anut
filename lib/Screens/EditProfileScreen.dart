@@ -26,7 +26,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
 
-  Widget button = Text("Save", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black.withOpacity(0.75)),);
+  Widget button = Text(Dictionairy.words["Save"][UserInformation.language], style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black.withOpacity(0.75)),);
 
   String translateInputs(String input){
     if (input == "new name") return Dictionairy.words["New Name"][UserInformation.language];
@@ -175,7 +175,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 body: json.encode(theMap))
                 .then((value){
                   setState(() {
-                    button = Text("Save", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black.withOpacity(0.75)),);
+                    button = Text(Dictionairy.words["Save"][UserInformation.language], style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black.withOpacity(0.75)),);
                   });
                   if(value.statusCode == 200){
                     if(json.decode(value.body)["error"] != null){

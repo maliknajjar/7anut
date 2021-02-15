@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 // classes
 import '../Classes/Basket.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class BasketScreen extends StatefulWidget {
   @override
@@ -26,7 +28,7 @@ class _BasketScreenState extends State<BasketScreen> {
           color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
-          "Basket",
+          Dictionairy.words["Basket"][UserInformation.language],
           style: TextStyle(
             color: Colors.black.withOpacity(0.75),
           ),
@@ -47,7 +49,7 @@ class _BasketScreenState extends State<BasketScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Basket is empty", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+              Text(Dictionairy.words["Basket is empty"][UserInformation.language], style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
               Container(
                 margin: EdgeInsets.only(top: 15),
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
@@ -67,8 +69,8 @@ class _BasketScreenState extends State<BasketScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Go to Market", style: TextStyle(color: Colors.black.withOpacity(0.75), fontSize: 20),),
-                      Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),)
+                      Text(Dictionairy.words["Go to Market"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75), fontSize: 20),),
+                      Container(child: Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75)), margin: EdgeInsets.only(left: 10),)
                     ],
                   ),
                 ),
@@ -334,11 +336,11 @@ class _BasketScreenState extends State<BasketScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Checkout  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
+                          Text(Dictionairy.words["Checkout"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
                           Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                         ],
                       ),
-                      Icon(Icons.arrow_forward),
+                      Container(child: Icon(Icons.arrow_forward), margin: EdgeInsets.only(left: 10),),
                     ],
                   )
                 ),

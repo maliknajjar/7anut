@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../Classes/Procucts.dart';
 import '../Classes/Basket.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -21,7 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         centerTitle: true,
         title: Text(
-          "Search",
+          Dictionairy.words["Search"][UserInformation.language],
           style: TextStyle(
             color: Colors.black.withOpacity(0.75),
           ),
@@ -87,7 +89,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       border: InputBorder.none,
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(vertical: 10),
-                      hintText: "Search"
+                      hintText: Dictionairy.words["Search"][UserInformation.language]
                     ),
                   ),
                 ),
