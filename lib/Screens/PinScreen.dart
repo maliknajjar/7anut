@@ -268,8 +268,84 @@ class _PinScreenState extends State<PinScreen> {
                                     child: theButton,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
+                          ),
+                        ),
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 300),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: Container(
+                                  height: 2,
+                                  margin: EdgeInsets.only(left: 20, top: 30, bottom: 30),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.25),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  child: Center(child: Text("or")),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 4,
+                                child: Container(
+                                  height: 2,
+                                  margin: EdgeInsets.only(right: 20, top: 30, bottom: 30),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.25),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          constraints: BoxConstraints(maxWidth: 300),
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Center(
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                              },
+                              child: Container(
+                                constraints: BoxConstraints(maxWidth: 175),
+                                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow[100],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(100)
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 7.5,
+                                      spreadRadius: 1,
+                                      color: Colors.black.withOpacity(0.25),
+                                      offset: Offset(2.5, 2.5),
+                                    )
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_back
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: Text("Go back to Login"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],

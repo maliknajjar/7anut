@@ -182,31 +182,6 @@ class _AdressesScreenState extends State<AdressesScreen> {
                       });
                     }
                   });
-
-                  // showDialog(
-                  //   context: context,
-                  //   builder: (context) => new AlertDialog(
-                  //     title: Text("Address Information"),
-                  //     content: IntrinsicHeight(
-                  //       child: Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: [
-                  //           for (var item in Addresses.getCurrentUserAddresses()[i].values)
-                  //           if (item != null)
-                  //           Text(item.toString()),
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     actions: <Widget>[
-                  //       new TextButton(
-                  //         onPressed: () {
-                  //           Navigator.of(context, rootNavigator: true).pop();
-                  //         },
-                  //         child: Text("OK")
-                  //       ),
-                  //     ],
-                  //   ),
-                  // );
                 },
                 child: Container(
                   width: double.infinity,

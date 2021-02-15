@@ -6,6 +6,7 @@ import 'package:password_strength/password_strength.dart';
 
 import '../env.dart';
 import '../Classes/Functions.dart';
+import '../Classes/UserInformation.dart';
 
 //ignore: must_be_immutable
 class EditProfileScreen extends StatefulWidget {
@@ -188,6 +189,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       print("string was changed");
                     }
                     print(value.body);
+                    UserInformation();
                     Navigator.of(context).pop();
                   }
                 });

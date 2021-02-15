@@ -68,7 +68,10 @@ class TheDrawer extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(UserInformation.fullName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
+                              Container(
+                                width: 182.5,
+                                child: Text(UserInformation.fullName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),), overflow: TextOverflow.fade, maxLines: 2, softWrap: true,),
+                              ),
                               Text(UserInformation.email)
                             ],
                           ),

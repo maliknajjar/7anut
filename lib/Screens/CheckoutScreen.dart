@@ -88,77 +88,133 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           Text("Deliver to", style: TextStyle(fontSize: 20),),
                           GestureDetector(
                             onTap: (){
-                              showDialog(
-                                context: context,
-                                builder: (context){
-                                  return StatefulBuilder(
-                                    builder: (context, setState){
-                                      return SimpleDialog(
-                                        contentPadding: EdgeInsets.all(15),
-                                        children: [
-                                          GestureDetector(
-                                            onTap: (){
-                                              Navigator.pushNamed(context, "/addaddress").then((value){
-                                                setState(() {
-                                                                                      
-                                                });
-                                              });
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                bottom: 10
-                                              ),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.grey,
-                                                  width: 1,
+                              showDialog(context: context, builder: (BuildContext context){
+                                return StatefulBuilder(
+                                  builder: (context, setState){
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      elevation: 0,
+                                      backgroundColor: Colors.yellow[100],
+                                      child: SingleChildScrollView(
+                                        child: Container(
+                                          padding: EdgeInsets.all(15),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: (){
+                                                        Navigator.pushNamed(context, "/addaddress").then((value){
+                                                          setState(() {
+                                                            
+                                                          });
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        padding: EdgeInsets.all(3),
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(12),
+                                                          gradient: LinearGradient(
+                                                            colors: [
+                                                              Colors.black.withOpacity(0.1),
+                                                              Colors.black.withOpacity(0.05),
+                                                            ],
+                                                            begin: Alignment.topLeft,
+                                                            end: Alignment.bottomRight,
+                                                          ),
+                                                        ),
+                                                        child: Container(
+                                                          alignment: Alignment.center,
+                                                          padding: EdgeInsets.symmetric(
+                                                            vertical: 10,
+                                                          ),
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.white.withOpacity(0.8),
+                                                            borderRadius: BorderRadius.circular(10),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors.yellow
+                                                              )
+                                                            ]
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Text("Add Address", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+                                                              Icon(Icons.add_location_outlined, color: Colors.black.withOpacity(0.75),)
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Addresses.getCurrentUserAddresses().length != 0
+                                                    ? Container(
+                                                      margin: EdgeInsets.only(bottom: 10, top: 20),
+                                                      child: Text("Addresses: ", style: TextStyle(fontSize: 20),),
+                                                    ) 
+                                                    : Container(
+                                                      padding: EdgeInsets.all(30),
+                                                      alignment: Alignment.center,
+                                                      child: Text("There are no Addesses", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.5)),)
+                                                    ),
+                                                    for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        Navigator.of(context).pop(i);
+                                                      },
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                          bottom: 10
+                                                        ),
+                                                        width: double.infinity,
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.yellow[50],
+                                                          gradient: LinearGradient(
+                                                            colors: [
+                                                              Colors.yellow[50],
+                                                              Colors.yellow[100],
+                                                            ],
+                                                            begin: Alignment.topCenter,
+                                                            end: Alignment.bottomCenter,
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 5,
+                                                              spreadRadius: 1,
+                                                              color: Colors.black.withOpacity(0.2),
+                                                              offset: Offset(2.5, 2.5),
+                                                            )
+                                                          ],
+                                                          borderRadius: BorderRadius.circular(10)
+                                                        ),
+                                                        padding: EdgeInsets.all(15),
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text(Addresses.getCurrentUserAddresses()[i]["title"], style: TextStyle(fontSize: 20),),
+                                                            Icon(Icons.location_on_outlined)
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                borderRadius: BorderRadius.circular(10)
                                               ),
-                                              padding: EdgeInsets.all(15),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(Icons.add_location_alt_outlined, color: Colors.blue,),
-                                                  Text("Add Address", style: TextStyle(fontSize: 20, color: Colors.blue),),
-                                                ],
-                                              ),
-                                            ),
+                                            ],
                                           ),
-                                          for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
-                                          GestureDetector(
-                                            onTap: (){
-                                              Navigator.of(context).pop(i);
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                bottom: 10
-                                              ),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.grey,
-                                                  width: 1,
-                                                ),
-                                                borderRadius: BorderRadius.circular(10)
-                                              ),
-                                              padding: EdgeInsets.all(15),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text(Addresses.getCurrentUserAddresses()[i]["title"], style: TextStyle(fontSize: 20),),
-                                                  Icon(Icons.location_on_outlined)
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    }
-                                  );
-                                }
-                              ).then((value){
+                                        ),
+                                      )
+                                    );
+                                  },
+                                );
+                              }).then((value){
                                 if(value != null){
                                   setState((){
                                     chosenAddress = Addresses.getCurrentUserAddresses()[value];
@@ -237,62 +293,112 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 builder: (context){
                                   return StatefulBuilder(
                                     builder: (context, setState){
-                                      return SimpleDialog(
-                                        contentPadding: EdgeInsets.all(15),
-                                        children: [
-                                          GestureDetector(
-                                            onTap: (){
-                                              Navigator.of(context).pop("Cash");
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                bottom: 10
-                                              ),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.grey,
-                                                  width: 1,
+                                      return Dialog(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        elevation: 0,
+                                        backgroundColor: Colors.yellow[100],
+                                        child: SingleChildScrollView(
+                                          child: Container(
+                                            padding: EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: (){
+                                                          Navigator.of(context).pop("Cash");
+                                                        },
+                                                        child: Container(
+                                                          margin: EdgeInsets.only(
+                                                            bottom: 10
+                                                          ),
+                                                          width: double.infinity,
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.yellow[50],
+                                                            gradient: LinearGradient(
+                                                              colors: [
+                                                                Colors.yellow[50],
+                                                                Colors.yellow[100],
+                                                              ],
+                                                              begin: Alignment.topCenter,
+                                                              end: Alignment.bottomCenter,
+                                                            ),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                blurRadius: 5,
+                                                                spreadRadius: 1,
+                                                                color: Colors.black.withOpacity(0.2),
+                                                                offset: Offset(2.5, 2.5),
+                                                              )
+                                                            ],
+                                                            borderRadius: BorderRadius.circular(10)
+                                                          ),
+                                                          padding: EdgeInsets.all(15),
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text("Cash", style: TextStyle(fontSize: 20),),
+                                                              Icon(Icons.payments_outlined)
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                borderRadius: BorderRadius.circular(10)
-                                              ),
-                                              padding: EdgeInsets.all(15),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text("Cash", style: TextStyle(fontSize: 20),),
-                                                  Icon(Icons.payments_outlined)
-                                                ],
-                                              ),
+                                                Container(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: (){
+                                                          // Navigator.of(context).pop("Credit Card");
+                                                        },
+                                                        child: Container(
+                                                          width: double.infinity,
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.yellow[50],
+                                                            gradient: LinearGradient(
+                                                              colors: [
+                                                                Colors.yellow[50],
+                                                                Colors.yellow[100],
+                                                              ],
+                                                              begin: Alignment.topCenter,
+                                                              end: Alignment.bottomCenter,
+                                                            ),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                blurRadius: 5,
+                                                                spreadRadius: 1,
+                                                                color: Colors.black.withOpacity(0.2),
+                                                                offset: Offset(2.5, 2.5),
+                                                              )
+                                                            ],
+                                                            borderRadius: BorderRadius.circular(10)
+                                                          ),
+                                                          padding: EdgeInsets.all(15),
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text("Credit Card (soon)", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.5)),),
+                                                              Icon(Icons.payment_outlined, color: Colors.black.withOpacity(0.5)),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          GestureDetector(
-                                            onTap: (){
-                                              // Navigator.of(context).pop("Credit Card");
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                bottom: 10
-                                              ),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.grey,
-                                                  width: 1,
-                                                ),
-                                                borderRadius: BorderRadius.circular(10)
-                                              ),
-                                              padding: EdgeInsets.all(15),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text("Credit Card (soon)", style: TextStyle(fontSize: 20, color: Colors.grey),),
-                                                  Icon(Icons.payment_outlined, color: Colors.grey,)
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        )
                                       );
                                     }
                                   );
@@ -373,37 +479,70 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 builder: (context){
                                   return StatefulBuilder(
                                     builder: (context, setState){
-                                      return SimpleDialog(
-                                        contentPadding: EdgeInsets.all(15),
-                                        children: [
-                                          for (var i = 1; i < 8; i++)
-                                          GestureDetector(
-                                            onTap: (){
-                                              Navigator.of(context).pop(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10));
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                bottom: 10
-                                              ),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.grey,
-                                                  width: 1,
+                                      return Dialog(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        elevation: 0,
+                                        backgroundColor: Colors.yellow[100],
+                                        child: SingleChildScrollView(
+                                          child: Container(
+                                            padding: EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                for (var i = 1; i < 8; i++)
+                                                Container(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: (){
+                                                          Navigator.of(context).pop(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10));
+                                                        },
+                                                        child: Container(
+                                                          margin: EdgeInsets.only(
+                                                            bottom: 10
+                                                          ),
+                                                          width: double.infinity,
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.yellow[50],
+                                                            gradient: LinearGradient(
+                                                              colors: [
+                                                                Colors.yellow[50],
+                                                                Colors.yellow[100],
+                                                              ],
+                                                              begin: Alignment.topCenter,
+                                                              end: Alignment.bottomCenter,
+                                                            ),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                blurRadius: 5,
+                                                                spreadRadius: 1,
+                                                                color: Colors.black.withOpacity(0.2),
+                                                                offset: Offset(2.5, 2.5),
+                                                              )
+                                                            ],
+                                                            borderRadius: BorderRadius.circular(10)
+                                                          ),
+                                                          padding: EdgeInsets.all(15),
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10) + (i == 1 ? " (Tomorrow)" : ""), style: TextStyle(fontSize: 20),),
+                                                              Icon(Icons.date_range_outlined)
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                borderRadius: BorderRadius.circular(10)
-                                              ),
-                                              padding: EdgeInsets.all(15),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10) + (i == 1 ? " (Tomorrow)" : ""), style: TextStyle(fontSize: 20),),
-                                                  Icon(Icons.date_range_outlined)
-                                                ],
-                                              ),
+                                              ],
                                             ),
                                           ),
-                                        ],
+                                        )
                                       );
                                     }
                                   );
@@ -433,7 +572,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(recieveAtTime == null ? "Choose Time" : recieveAtTime, style: TextStyle(fontSize: 20),),
+                                  Text(recieveAtTime == null ? "Choose Date" : recieveAtTime, style: TextStyle(fontSize: 20),),
                                   Icon(Icons.arrow_drop_down)
                                 ],
                               ),
