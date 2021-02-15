@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         AspectRatio(
                           aspectRatio: 1,
                           child: Container(
-                            margin: EdgeInsets.all(6),
+                            margin: EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: NetworkImage(products[i]["imageUrl"]),
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              products[i]["name"],
+                              jsonDecode(products[i]["name"])["en"],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theWidth * 0.04,

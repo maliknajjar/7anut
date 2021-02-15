@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 import "../Widgets/CategoryWidget.dart";
 import "../Classes/Basket.dart";
@@ -54,7 +55,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             isScrollable: true,
             tabs: [
               for(var item in Products.categories)
-              Tab(icon: Text(item["name"], style: TextStyle(color: Colors.black.withOpacity(0.75)),)),
+              Tab(icon: Text(jsonDecode(item["name"])["en"], style: TextStyle(color: Colors.black.withOpacity(0.75)),)),
             ],
           ),
         ),
@@ -63,7 +64,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             TabBarView(
               children: [
                 for(var item in Products.categories)
-                CategoryWidget(item["name"], refresh),
+                CategoryWidget(jsonDecode(item["name"])["en"], refresh),
               ],
             ),
             AnimatedPositioned(

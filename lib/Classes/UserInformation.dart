@@ -5,6 +5,7 @@ class UserInformation {
   static String sessionID;
   static String fullName;
   static String phoneNumber;
+  static String language;
 
   UserInformation(){
     SharedPreferences.getInstance().then((prefs){
@@ -12,6 +13,7 @@ class UserInformation {
       sessionID = prefs.getString("sessionID");
       fullName = prefs.getString("full name");
       phoneNumber = prefs.getString("phone number");
+      language = prefs.getString("language");
     });
   }
 }

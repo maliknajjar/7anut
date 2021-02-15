@@ -20,6 +20,7 @@ import 'Screens/AdressesScreen.dart';
 import 'Screens/AddAddressScreen.dart';
 import 'Screens/ConfirmationScreen.dart';
 import 'Screens/SearchScreen.dart';
+import 'Screens/ChooseLanguageScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +35,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool isLoggedIn = false;
   bool isLoading = true;
+  bool isLanguageChosen = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -44,6 +46,11 @@ class _MyAppState extends State<MyApp> {
     // valid and making http request to the server to gain access //
     *///////////////////////////////////////////////////////////////
     SharedPreferences.getInstance().then((prefs){
+      if(prefs.getString("language") == null){
+        setState(() {
+          isLanguageChosen = false;
+        });
+      }
       if(prefs.getString("sessionID") != null){
         http.post(env.apiUrl + "/api/checkUserSession", body: {
           "email": prefs.getString("email"),
@@ -80,7 +87,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: 'Flutter Demo',
-      home: isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen(),
+      home: isLanguageChosen ? isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen() : ChooseLanguageScreen(),
       // home: ProfileScreen(),
       routes: {
         "/home": (context) => HomeScreen(),
