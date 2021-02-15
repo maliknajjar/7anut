@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../env.dart';
 import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class LoginScreen extends StatefulWidget {
   String message;
@@ -19,7 +20,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = "";
   String password = "";
-  Widget theButton = Text("Sign In", style: TextStyle(fontSize: 18),);
+  Widget theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], style: TextStyle(fontSize: 18),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -159,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Email'
+                                        hintText: Dictionairy.words["Email"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -219,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Password'
+                                        hintText: Dictionairy.words["Password"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -228,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               InkWell(
                                 onTap: (){
                                   if(email == "" || password == ""){
-                                    notify("fields are not filled", 2000, Colors.red);
+                                    notify(Dictionairy.words["fields are not filled"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }
                                   setState(() {
@@ -238,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     "email": email,
                                     "password": password,
                                   }).then((result){
-                                    theButton = Text("Sign In", style: TextStyle(fontSize: 18),);
+                                    theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], style: TextStyle(fontSize: 18),);
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
                                       print(response["error"].toString());
@@ -307,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Container(
-                                  child: Center(child: Text("or")),
+                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language])),
                                 ),
                               ),
                               Expanded(
@@ -349,7 +350,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     )
                                   ],
                                 ),
-                                child: Text("Create New Account"),
+                                child: Text(Dictionairy.words["Create New Account"][UserInformation.language]),
                               ),
                             ),
                           ),
@@ -363,12 +364,45 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Container(
                             margin: EdgeInsets.only(top: 10),
-                            child: Text("Forget Password?", style: TextStyle(color: Colors.black.withOpacity(0.75), decoration: TextDecoration.underline)),
+                            padding: EdgeInsets.only(bottom: 75),
+                            child: Text(Dictionairy.words["Forget Password ?"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75), decoration: TextDecoration.underline)),
                           ),
                         )
                       ],
                     ),
                   ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            child: InkWell(
+              onTap: (){
+                Navigator.of(context).pushNamed("/language");
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.25),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7.5,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.15),
+                      offset: Offset(2.5, 2.5),
+                    ),
+                    BoxShadow(
+                      color: Colors.yellow[50],
+                    )
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Text(Dictionairy.words["choose a language"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                    Container(child: Icon(Icons.language_outlined), margin: EdgeInsets.only(left: 10),)
+                  ],
                 ),
               ),
             ),

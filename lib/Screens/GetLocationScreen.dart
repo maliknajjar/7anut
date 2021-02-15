@@ -10,6 +10,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
 import '../Classes/Functions.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class GetLocationScreen extends StatefulWidget {
   List<dynamic> cities;
@@ -125,7 +127,73 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     var distance = distanceBetweenTwoPoints(value.longitude, value.latitude, cityCoord["longitude"], cityCoord["latitude"]);
                     if(distance > radius){
                       if(i == widget.cities.length - 1){
-                        Functions.alert(context, "Not covered", "your location is not covered");
+                        // Functions.alert(context, "Not covered", "your location is not covered");
+                        showDialog(context: context, builder: (BuildContext context){
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 0,
+                            backgroundColor: Colors.yellow[50],
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 40,),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(bottom: 20, top: 20),
+                                          child: Text(Dictionairy.words["your location is not covered"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        onTap: (){
+                                          Navigator.of(context, rootNavigator: true).pop();
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12),
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Colors.black.withOpacity(0.1),
+                                                Colors.black.withOpacity(0.025),
+                                              ],
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                            )
+                                          ),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                              vertical: 5,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Colors.yellow[100],
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          );
+                        });
                         return;
                       }
                     }else{
@@ -188,7 +256,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Search'
+                          hintText: Dictionairy.words["Search"][UserInformation.language]
                         ),
                         onSubmitted: (string){
                           http.get("https://api.mapbox.com/geocoding/v5/mapbox.places/$string.json?access_token=pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA")
@@ -196,7 +264,72 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                             print("woooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooow");
                             if (jsonDecode(value.body)["features"].length == 0){
                               print("no result");
-                              Functions.alert(context, "no results", "didnt find any results");
+                              // Functions.alert(context, "no results", "didnt find any results");
+                              showDialog(context: context, builder: (BuildContext context){
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  elevation: 0,
+                                  backgroundColor: Colors.yellow[50],
+                                  child: Container(
+                                    padding: EdgeInsets.all(15),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(bottom: 40,),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(bottom: 20, top: 20),
+                                                child: Text(Dictionairy.words["didn not find any results"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            InkWell(
+                                              onTap: (){
+                                                Navigator.of(context, rootNavigator: true).pop();
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.all(2),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(12),
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Colors.black.withOpacity(0.1),
+                                                      Colors.black.withOpacity(0.025),
+                                                    ],
+                                                    begin: Alignment.topLeft,
+                                                    end: Alignment.bottomRight,
+                                                  )
+                                                ),
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 15,
+                                                    vertical: 5,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.yellow[100],
+                                                    borderRadius: BorderRadius.circular(10),
+                                                  ),
+                                                  child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                );
+                              });
                               return;
                             }
                             var coord = jsonDecode(value.body)["features"][0];
@@ -242,7 +375,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.add_location_outlined, size: 35,),
-                            Text("Pin your location", style: TextStyle(fontSize: 20,),),
+                            Text(Dictionairy.words["choose this location"][UserInformation.language], style: TextStyle(fontSize: 20,),),
                           ],
                         )
                       ),
@@ -251,7 +384,74 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   InkWell(
                     onTap: (){
                       if (theLocation != null) Navigator.of(context).pop(theLocation);
-                      else Functions.alert(context, "choose location", "you need to specify a location");
+                      // else Functions.alert(context, "choose location", "you need to specify a location");
+                      else{
+                        showDialog(context: context, builder: (BuildContext context){
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 0,
+                            backgroundColor: Colors.yellow[50],
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 40,),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(bottom: 20, top: 20),
+                                          child: Text(Dictionairy.words["you need to specify a location"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        onTap: (){
+                                          Navigator.of(context, rootNavigator: true).pop();
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12),
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Colors.black.withOpacity(0.1),
+                                                Colors.black.withOpacity(0.025),
+                                              ],
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                            )
+                                          ),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                              vertical: 5,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Colors.yellow[100],
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          );
+                        });
+                      }
                     },
                     child: Container(
                       height: double.infinity,
@@ -363,7 +563,73 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
       var distance = distanceBetweenTwoPoints(coord.longitude, coord.latitude, cityCoord["longitude"], cityCoord["latitude"]);
       if(distance > radius){
         if(i == widget.cities.length - 1){
-          Functions.alert(context, "Not covered", "your location is not covered");
+          // Functions.alert(context, "Not covered", "your location is not covered");
+          showDialog(context: context, builder: (BuildContext context){
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              elevation: 0,
+              backgroundColor: Colors.yellow[50],
+              child: Container(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 40,),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(bottom: 20, top: 20),
+                            child: Text(Dictionairy.words["your location is not covered"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            Navigator.of(context, rootNavigator: true).pop();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.black.withOpacity(0.1),
+                                  Colors.black.withOpacity(0.025),
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              )
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 15,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.yellow[100],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            );
+          });
           return;
         }
       }else{

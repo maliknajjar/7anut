@@ -4,6 +4,9 @@ import 'dart:convert';
 import "../Widgets/CategoryWidget.dart";
 import "../Classes/Basket.dart";
 import '../Classes/Procucts.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
 
 class CategoryScreen extends StatefulWidget {
   
@@ -94,12 +97,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.shopping_cart,
-                        size: 35,
-                        color: Colors.black.withOpacity(0.75),
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: Icon(
+                          Icons.shopping_cart,
+                          size: 35,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
                       ),
-                      Text(" Go to Basket", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
+                      Text(Dictionairy.words["Go to Basket"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                     ],
                   ),
                 ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 import '../env.dart';
 
@@ -15,7 +17,7 @@ class PinScreen extends StatefulWidget {
 class _PinScreenState extends State<PinScreen> {
   String pin = "";
   String newPassword = "";
-  Widget theButton = Text("Change Password", style: TextStyle(fontSize: 18),);
+  Widget theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: TextStyle(fontSize: 18),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -99,7 +101,7 @@ class _PinScreenState extends State<PinScreen> {
                                   color: Colors.blue.withOpacity(0.1),
                                   border: Border.all(width: 2, color: Colors.black.withOpacity(0.1))
                                 ),
-                                child: Text("Check your email for the pin", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+                                child: Text(Dictionairy.words["Check your email for the pin"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75)),),
                               ),
                               Container(
                                 margin: EdgeInsets.only(bottom: 10),
@@ -214,7 +216,7 @@ class _PinScreenState extends State<PinScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'New Password'
+                                        hintText: Dictionairy.words["New Password"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -223,7 +225,7 @@ class _PinScreenState extends State<PinScreen> {
                               InkWell(
                                 onTap: (){
                                   if(pin == "" || newPassword == ""){
-                                    notify("fields are not filled", 2000, Colors.red);
+                                    notify(Dictionairy.words["fields are not filled"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }
                                   setState(() {
@@ -235,21 +237,25 @@ class _PinScreenState extends State<PinScreen> {
                                     "pin": pin
                                   }).then((result){
                                     setState(() {
-                                      theButton = Text("Change Password", style: TextStyle(fontSize: 18),);
+                                      theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: TextStyle(fontSize: 18),);
                                     });
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
+                                      if(response["error"] == "pin is not correct"){
+                                        notify(Dictionairy.words["pin is not correct"][UserInformation.language], 2000, Colors.red);
+                                        return;
+                                      }
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
                                     Navigator.of(context).pop();
-                                    Navigator.of(context).pop(response["message"]);
+                                    Navigator.of(context).pop(Dictionairy.words[response["message"]][UserInformation.language]);
                                   });
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -260,7 +266,7 @@ class _PinScreenState extends State<PinScreen> {
                                       )
                                     ],
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(15)
+                                      Radius.circular(100)
                                     ),
                                     color: Colors.yellow[100],
                                   ),
@@ -289,7 +295,7 @@ class _PinScreenState extends State<PinScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Container(
-                                  child: Center(child: Text("or")),
+                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language])),
                                 ),
                               ),
                               Expanded(
@@ -340,7 +346,7 @@ class _PinScreenState extends State<PinScreen> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
-                                      child: Text("Go back to Login"),
+                                      child: Text(Dictionairy.words["Go Back"][UserInformation.language]),
                                     ),
                                   ],
                                 ),

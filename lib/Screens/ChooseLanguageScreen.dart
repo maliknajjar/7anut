@@ -74,7 +74,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          constraints: BoxConstraints(maxWidth: 250),
+                          constraints: BoxConstraints(maxWidth: 300),
                           padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
@@ -127,7 +127,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                   SharedPreferences.getInstance().then((value){
                                     value.setString("language", "ar").then((theValue){
                                       UserInformation();    // refresh the UserInformation class
-                                      Navigator.of(context).pushNamed("/login");
+                                      Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                                     });
                                   });
                                 },

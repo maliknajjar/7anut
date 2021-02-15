@@ -594,7 +594,73 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               child: GestureDetector(
                 onTap: (){
                   if(chosenAddress == null || payWith == null || recieveAtTime == null){
-                    Functions.alert(context, "fill the fields", "you need to fill all the fields");
+                    // Functions.alert(context, "fill the fields", "you need to fill all the fields");
+                    showDialog(context: context, builder: (BuildContext context){
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 0,
+                        backgroundColor: Colors.yellow[50],
+                        child: Container(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(bottom: 40,),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 20, top: 20),
+                                      child: Text(Dictionairy.words["Make sure to fill all the fields"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.of(context, rootNavigator: true).pop();
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.black.withOpacity(0.1),
+                                            Colors.black.withOpacity(0.025),
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        )
+                                      ),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                          vertical: 5,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.yellow[100],
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      );
+                    });
                     return;
                   }
                   var information = {"Address": chosenAddress, "Payment Type": payWith, "Recieve Date": recieveAtTime};

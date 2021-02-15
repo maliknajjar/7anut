@@ -9,6 +9,7 @@ import '../env.dart';
 
 import '../Classes/Adresses.dart';
 import '../Classes/Basket.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

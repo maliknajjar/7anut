@@ -415,5 +415,125 @@ class Dictionairy {
       "fr": "temps de commande",
       "ar": "وقت الطلب",
     },
+    "Sign In": {
+      "en": "Sign In",
+      "fr": "connexion",
+      "ar": "تسجيل الدخول",
+    },
+    "fields are not filled": {
+      "en": "fields are not filled",
+      "fr": "les champs ne sont pas remplis",
+      "ar": "بعض الخانات فارغة",
+    },
+    "or": {
+      "en": "or",
+      "fr": "ou",
+      "ar": "أو",
+    },
+    "Create New Account": {
+      "en": "Create New Account",
+      "fr": "Créer un nouveau compte",
+      "ar": "انشاء حساب جديد",
+    },
+    "Forget Password ?": {
+      "en": "Forget Password ?",
+      "fr": "Mot de passe oublié ?",
+      "ar": "نسيت الرمز السري",
+    },
+    "choose a language": {
+      "en": "Change the language",
+      "fr": "choisissez une langue",
+      "ar": "اختر اللغة",
+    },
+    "Register": {
+      "en": "Create an Account",
+      "fr": "Créer un compte",
+      "ar": "انشاء حساب",
+    },
+    "Confirm Password": {
+      "en": "Confirm Password",
+      "fr": "Confirmez le mot de passe",
+      "ar": "تأكيد الرمز السري",
+    },
+    "your password is weak": {
+      "en": "your password is weak",
+      "fr": "votre mot de passe est faible",
+      "ar": "رمزك السري ضعيف",
+    },
+    "Password does not match": {
+      "en": "Password does not match",
+      "fr": "Le mot de passe ne correspond pas",
+      "ar": "رمزك السري غير متطابق",
+    },
+    "Go Back": {
+      "en": "Go Back",
+      "fr": "Retourner",
+      "ar": "الرجوع",
+    },
+    "Email has already been taken": {
+      "en": "Email has already been taken",
+      "fr": "cet e-mail a déjà été pris",
+      "ar": "لقد اخذ هذا الايميل من قبل",
+    },
+    "Send Pin": {
+      "en": "Send Pin",
+      "fr": "Envoyer pin",
+      "ar": "pinارسل ال",
+    },
+    "email does not exist": {
+      "en": "email does not exist",
+      "fr": "l'email n'existe pas",
+      "ar": "البريد الالكتروني غير موجود",
+    },
+    "Change Password": {
+      "en": "Change Password",
+      "fr": "Changer le mot de passe",
+      "ar": "تغيير الرمز السري",
+    },
+    "Check your email for the pin": {
+      "en": "Check your email for the pin",
+      "fr": "Vérifiez votre e-mail pour le pin",
+      "ar": "pinتحقق من بريدك الإلكتروني للحصول على رقم ال",
+    },
+    "pin is not correct": {
+      "en": "pin is not correct",
+      "fr": "pin n'est pas correcte",
+      "ar": "غير صحيح pinرقم ال",
+    },
+    "Successfully Changed Password": {
+      "en": "Successfully Changed Password",
+      "fr": "Mot de passe modifié avec succès",
+      "ar": "تم تغيير الرمز السري بنجاح",
+    },
+    "Go to Basket": {
+      "en": "Go to Basket",
+      "fr": "Aller au panier",
+      "ar": "اذهب إلى السلة",
+    },
+    "Make sure to fill all the fields": {
+      "en": "Make sure to fill all the fields",
+      "fr": "Assurez-vous de remplir tous les champs",
+      "ar": "تأكد من ملأ جميع الخانات",
+    },
+    "your location is not covered": {
+      "en": "your location is not covered",
+      "fr": "votre emplacement n'est pas couvert",
+      "ar": "موقعك ليس ضمن التغطية",
+    },
+    "didn not find any results": {
+      "en": "didn not find any results",
+      "fr": "je n'ai trouvé aucun résultat",
+      "ar": "لم يتم العثور على أي نتائج",
+    },
+    "choose this location": {
+      "en": "choose this location",
+      "fr": "choisissez cet endroit",
+      "ar": "اختر هذا الموقع",
+    },
+    "you need to specify a location": {
+      "en": "you need to specify a location",
+      "fr": "vous devez spécifier un emplacement",
+      "ar": "عليك إلى تحديد الموقع",
+    },
   };
 }

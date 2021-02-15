@@ -74,6 +74,7 @@ class _MyAppState extends State<MyApp> {
         });
       }
       else{
+        UserInformation();  // saving logged in user information
         setState(() {
           isLoading = false;
           isLoggedIn = false;
@@ -104,6 +105,7 @@ class _MyAppState extends State<MyApp> {
         "/addaddress": (context) => AddAddressScreen(),
         "/confirmation": (context) => ConfirmationScreen(),
         "/search": (context) => SearchScreen(),
+        "/language": (context) => ChooseLanguageScreen(),
       },
     );
   }

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../env.dart';
 import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  Widget registerButtonName = Text("Register", style: TextStyle(fontSize: 18),);
+  Widget registerButtonName = Text(Dictionairy.words["Register"][UserInformation.language], style: TextStyle(fontSize: 18),);
 
   String email = "";
   String fullName = "";
@@ -150,7 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Email'
+                                        hintText: Dictionairy.words["Email"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -210,7 +211,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Full Name'
+                                        hintText: Dictionairy.words["Full Name"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -322,7 +323,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 border: InputBorder.none,
                                                 isDense: true,
                                                 contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                                hintText: 'Phone Number'
+                                                hintText: Dictionairy.words["Phone Number"][UserInformation.language]
                                               ),
                                             ),
                                           ),
@@ -389,7 +390,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Password'
+                                        hintText: Dictionairy.words["Password"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -449,7 +450,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Confirm Password'
+                                        hintText: Dictionairy.words["Confirm Password"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -459,17 +460,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 onTap: (){
                                   // check if any of the fields is empty
                                   if(email == "" || fullName == "" || phoneNumber == "" || password == "" || confirmPassword == ""){
-                                    notify("You need to fill all fields", 2000, Colors.red);
+                                    notify(Dictionairy.words["fields are not filled"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }
                                   // check if the password is strong enough
                                   if(estimatePasswordStrength(password) < 0.3){
-                                    notify("your password is weak", 2000, Colors.red);
+                                    notify(Dictionairy.words["your password is weak"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }
                                   //check if the paswords are not similar
                                   if(password != confirmPassword){
-                                    notify("Password does not match", 2000, Colors.red);
+                                    notify(Dictionairy.words["Password does not match"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }
                                   // adding loading icon or text to the Register button when its pressed
@@ -485,9 +486,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   }).then((result){
                                     var response = json.decode(result.body);
                                     setState(() {
-                                      registerButtonName = Text("Register", style: TextStyle(fontSize: 18),);
+                                      registerButtonName = Text(Dictionairy.words["Register"][UserInformation.language], style: TextStyle(fontSize: 18),);
                                     });
                                     if(response["error"] != null){
+                                      if (response["error"] == "ER_DUP_ENTRY"){
+                                        notify(Dictionairy.words["Email has already been taken"][UserInformation.language], 2000, Colors.red);
+                                        return;
+                                      }
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
@@ -553,7 +558,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Container(
-                                  child: Center(child: Text("or")),
+                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language])),
                                 ),
                               ),
                               Expanded(
@@ -604,7 +609,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
-                                      child: Text("Go Back"),
+                                      child: Text(Dictionairy.words["Go Back"][UserInformation.language]),
                                     ),
                                   ],
                                 ),

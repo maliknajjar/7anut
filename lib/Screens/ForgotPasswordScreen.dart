@@ -6,6 +6,8 @@ import 'dart:convert';
 import '../env.dart';
 
 import './PinScreen.dart';
+import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   String email = "";
-  Widget theButton = Text("Send Pin", style: TextStyle(fontSize: 18),);
+  Widget theButton = Text(Dictionairy.words["Send Pin"][UserInformation.language], style: TextStyle(fontSize: 18),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -141,7 +143,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Email'
+                                        hintText: Dictionairy.words["Email"][UserInformation.language]
                                       ),
                                     ),
                                   ),
@@ -150,7 +152,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               InkWell(
                                 onTap: (){
                                   if(email == ""){
-                                    notify("fields are not filled", 2000, Colors.red);
+                                    notify(Dictionairy.words["fields are not filled"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }
                                   setState(() {
@@ -160,10 +162,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     "email": email,
                                   }).then((result){
                                     setState(() {
-                                      theButton = Text("Send Pin", style: TextStyle(fontSize: 18),);
+                                      theButton = Text(Dictionairy.words["Send Pin"][UserInformation.language], style: TextStyle(fontSize: 18),);
                                     });
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
+                                      if(response["error"] == "email does not exist"){
+                                        notify(Dictionairy.words["email does not exist"][UserInformation.language], 2000, Colors.red);
+                                        return;
+                                      }
                                       notify(response["error"], 2000, Colors.red);
                                       return;
                                     }
@@ -173,7 +179,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 child: Container(
                                   margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -184,7 +190,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       )
                                     ],
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(15)
+                                      Radius.circular(100)
                                     ),
                                     color: Colors.yellow[100],
                                   ),
@@ -213,7 +219,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Container(
-                                  child: Center(child: Text("or")),
+                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language])),
                                 ),
                               ),
                               Expanded(
@@ -264,7 +270,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
-                                      child: Text("Go Back"),
+                                      child: Text(Dictionairy.words["Go Back"][UserInformation.language]),
                                     ),
                                   ],
                                 ),
