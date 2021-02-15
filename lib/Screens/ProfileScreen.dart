@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/Classes/UserInformation.dart';
-
 import '../Classes/Dictionairy.dart';
 
 class ProfileScreen extends StatefulWidget {

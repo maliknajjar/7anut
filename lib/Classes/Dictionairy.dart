@@ -35,5 +35,26 @@ class Dictionairy {
       "ar": "الرمز السري",
       "fr": "mot de passe",
     },
+    ////////////////////////////////////////////////
+    "New Name": {
+      "en": "New Name",
+      "ar": "الاسم الجديد",
+      "fr": "Nouveau Non",
+    },
+    "New Phone Number": {
+      "en": "New Phone Number",
+      "ar": "رقم الهاتف الجديد",
+      "fr": "Nouveau numéro de téléphone",
+    },
+    "Old Password": {
+      "en": "Old Password",
+      "ar": "الرمز السري القديم",
+      "fr": "Vieil mot de passe",
+    },
+    "New Password": {
+      "en": "New Password",
+      "ar": "الرمز السري الجديد",
+      "fr": "Nouveau mot de passe",
+    },
   };
 }

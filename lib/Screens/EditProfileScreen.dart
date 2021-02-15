@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:password_strength/password_strength.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
 
 import '../env.dart';
 import '../Classes/Functions.dart';
 import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 //ignore: must_be_immutable
 class EditProfileScreen extends StatefulWidget {
@@ -27,10 +29,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget button = Text("Save", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black.withOpacity(0.75)),);
 
   String translateInputs(String input){
-    if (input == "new name") return "New Name";
-    else if (input == "new phone Number") return "New Phone Number";
-    else if (input == "old password") return "Old Password";
-    else if (input == "new password") return "New Password";
+    if (input == "new name") return Dictionairy.words["New Name"][UserInformation.language];
+    else if (input == "new phone Number") return Dictionairy.words["New Phone Number"][UserInformation.language];
+    else if (input == "old password") return Dictionairy.words["Old Password"][UserInformation.language];
+    else if (input == "new password") return Dictionairy.words["New Password"][UserInformation.language];
   }
 
   @override
