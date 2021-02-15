@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Classes/Basket.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class SuccessWidget extends StatelessWidget {
   @override
@@ -27,7 +29,7 @@ class SuccessWidget extends StatelessWidget {
                   BoxShadow(
                     blurRadius: 7.5,
                     spreadRadius: 1,
-                    color: Colors.black.withOpacity(0.25),
+                    color: Colors.black.withOpacity(0.1),
                     offset: Offset(2.5, 2.5),
                   )
                 ],
@@ -61,7 +63,7 @@ class SuccessWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Go to Orders Screen", style: TextStyle(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
+                    Text(Dictionairy.words["Go to Orders Page"][UserInformation.language], style: TextStyle(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
                     Icon(Icons.arrow_forward)
                   ],
                 ),
@@ -76,7 +78,7 @@ class SuccessWidget extends StatelessWidget {
                 margin: EdgeInsets.only(top: 10),
                 child: Column(
                   children: [
-                    Text("Go to Home Screen", style: TextStyle(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
+                    Text(Dictionairy.words["Go to Home Screen"][UserInformation.language], style: TextStyle(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
                   ],
                 ),
               ),

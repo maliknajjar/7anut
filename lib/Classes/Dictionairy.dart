@@ -155,5 +155,80 @@ class Dictionairy {
       "fr": "Demain",
       "ar": "غدا",
     },
+    "Orders": {
+      "en": "Orders",
+      "fr": "Ordres",
+      "ar": "الطلبات",
+    },
+    "Payment Type": {
+      "en": "Payment Type",
+      "fr": "Type de paiement",
+      "ar": "طريقة الدفع",
+    },
+    "Delivery Date": {
+      "en": "Delivery Date",
+      "fr": "La date de livraison",
+      "ar": "موعد التسليم",
+    },
+    "Name": {
+      "en": "Name",
+      "fr": "Nom",
+      "ar": "الاسم",
+    },
+    "size": {
+      "en": "size",
+      "fr": "Taille",
+      "ar": "حجم",
+    },
+    "price": {
+      "en": "price",
+      "fr": "le prix",
+      "ar": "الثمن",
+    },
+    "qty": {
+      "en": "qty",
+      "fr": "qté",
+      "ar": "الكمية",
+    },
+    "Subtotal": {
+      "en": "Subtotal",
+      "fr": "Subtotal",
+      "ar": "المجموع الفرعي",
+    },
+    "transport fee": {
+      "en": "transport fee",
+      "fr": "frais de transport",
+      "ar": "مصاريف الشحن",
+    },
+    "total": {
+      "en": "total",
+      "fr": "total",
+      "ar": "مجموع",
+    },
+    "Order": {
+      "en": "Order",
+      "fr": "Ordre",
+      "ar": "اطلب",
+    },
+    "Address": {
+      "en": "Address",
+      "fr": "Adresse",
+      "ar": "العنوان",
+    },
+    "Confirmation": {
+      "en": "Confirmation",
+      "fr": "Confirmation",
+      "ar": "تأكيد",
+    },
+    "Go to Orders Page": {
+      "en": "Go to Orders Page",
+      "fr": "Aller à la page des commandes",
+      "ar": "انتقل إلى صفحة الطلبات",
+    },
+    "Go to Home Screen": {
+      "en": "Go to Home Screen",
+      "fr": "Aller à la page d'accueil",
+      "ar": "اذهب إلى الصفحة الرئيسية",
+    },
   };
 }

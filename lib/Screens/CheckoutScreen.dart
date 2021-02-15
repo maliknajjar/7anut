@@ -32,7 +32,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
-          "checkout",
+          Dictionairy.words["Checkout"][UserInformation.language],
           style: TextStyle(
             color: Colors.black.withOpacity(0.75),
           ),
@@ -407,6 +407,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 }
                               ).then((value){
                                 setState((){
+                                  if(value == null) return;
                                   payWith = value;
                                   payWithText = Dictionairy.words[value][UserInformation.language];
                                   print(payWith);

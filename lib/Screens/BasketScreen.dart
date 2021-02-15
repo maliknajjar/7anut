@@ -142,6 +142,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                       blurRadius: 5,
                                       offset: Offset(2, 2),
                                     ),
+                                    BoxShadow(
+                                      color: Colors.white,
+                                    ),
                                   ],
                                 ),
                               ),
