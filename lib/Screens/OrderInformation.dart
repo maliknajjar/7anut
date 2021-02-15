@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class OrderInformation extends StatelessWidget {
   Map data;
@@ -23,7 +25,7 @@ class OrderInformation extends StatelessWidget {
           color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
-          "Order Details",
+          Dictionairy.words["Order Details"][UserInformation.language],
           style: TextStyle(
             color: Colors.black.withOpacity(0.75),
           ),
@@ -59,7 +61,7 @@ class OrderInformation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.all(10),
-                        child: Text("orders"),
+                        child: Text(Dictionairy.words["Orders"][UserInformation.language]),
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -81,11 +83,11 @@ class OrderInformation extends StatelessWidget {
                           children: [
                             for (var i = 0; i < orders.length; i++)
                             Text(
-                              "Name: " + orders[i]["Name"] 
-                              + "\nSize: " + orders[i]["size"].toString()
-                              + "\nEach Price: " + orders[i]["price"].toString() + " DT"
-                              + "\ntotal Price: " + (double.parse(orders[i]["price"]) * orders[i]["qty"]).toStringAsFixed(3) + " DT"
-                              + "\nqty: " + orders[i]["qty"].toString()
+                              Dictionairy.words["Name"][UserInformation.language] + ": " + orders[i]["Name"] 
+                              + "\n" + Dictionairy.words["size"][UserInformation.language] + ": " + orders[i]["size"].toString()
+                              + "\n" + Dictionairy.words["price"][UserInformation.language] + ": " + orders[i]["price"].toString() + " DT"
+                              + "\n" + Dictionairy.words["total"][UserInformation.language] + ": " + (double.parse(orders[i]["price"]) * orders[i]["qty"]).toStringAsFixed(3) + " DT"
+                              + "\n" + Dictionairy.words["qty"][UserInformation.language] + ": " + orders[i]["qty"].toString()
                               + "\n"
                             ),
                           ],
@@ -112,7 +114,7 @@ class OrderInformation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.all(10),
-                        child: Text("Address"),
+                        child: Text(Dictionairy.words["Address"][UserInformation.language]),
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -134,7 +136,7 @@ class OrderInformation extends StatelessWidget {
                           children: [
                             for (int i = 0; i < address.length; i++)
                             Text(
-                              address.keys.toList()[i].toString() + ": " + address.values.toList()[i].toString()
+                              Dictionairy.words[address.keys.toList()[i].toString()][UserInformation.language] + ": " + address.values.toList()[i].toString()
                             ),
                           ],
                         ),
@@ -162,7 +164,7 @@ class OrderInformation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.all(10),
-                        child: Text(data.keys.toList()[i].toString() == "totalPrice" ? "Subtotal" : data.keys.toList()[i].toString()),
+                        child: Text(data.keys.toList()[i].toString() == "totalPrice" ? Dictionairy.words["Subtotal"][UserInformation.language] : Dictionairy.words[data.keys.toList()[i].toString()][UserInformation.language]),
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -179,7 +181,7 @@ class OrderInformation extends StatelessWidget {
                           ],
                         ),
                         margin: EdgeInsets.all(10),
-                        child: Text(data.values.toList()[i].toString()),
+                        child: Text(data.values.toList()[i].toString() == "Cash" ? Dictionairy.words[data.values.toList()[i].toString()][UserInformation.language] : data.values.toList()[i].toString().contains('"status":') ? Dictionairy.words[jsonDecode(data.values.toList()[i].toString())["status"]][UserInformation.language] : data.values.toList()[i].toString()),
                       )
                     ]
                   ),

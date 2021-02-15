@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Classes/Functions.dart';
 import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class TheDrawer extends StatelessWidget {
   @override
@@ -108,7 +109,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.person_outline, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text("Profile", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Profile"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -129,7 +130,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.search, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text("Search", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Search"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -150,7 +151,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.shopping_cart_outlined, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text("Basket", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Basket"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -171,7 +172,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.location_on_outlined, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text("Addresses", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Addresses"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -192,7 +193,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.access_time, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text("Orders", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Orders"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -211,7 +212,7 @@ class TheDrawer extends StatelessWidget {
                               Icon(Icons.logout, size: 32, color: Colors.black.withOpacity(0.75),),
                               Container(
                                 margin: EdgeInsets.only(left: 30),
-                                child: Text("Sign Out", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                child: Text(Dictionairy.words["Sign Out"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                               )
                             ],
                           ),

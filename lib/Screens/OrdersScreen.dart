@@ -4,6 +4,7 @@ import 'dart:convert';
 import '../env.dart';
 import '../Classes/Functions.dart';
 import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 import './LoadingLogoScreen.dart';
 import './OrderInformation.dart';
@@ -61,7 +62,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
           color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
-          "Orders",
+          Dictionairy.words["Orders"][UserInformation.language],
           style: TextStyle(
             color: Colors.black.withOpacity(0.75),
           ),
@@ -90,7 +91,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("You have no orders yet", style: TextStyle(fontSize: 22),),
+              Text(Dictionairy.words["You have no orders"][UserInformation.language], style: TextStyle(fontSize: 22),),
             ],
           )
         )
@@ -146,7 +147,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         children: [
                           Row(
                             children: [
-                              Text(jsonDecode(data[n]["status"])["status"], style: TextStyle(fontSize: 16),),
+                              Text(Dictionairy.words[jsonDecode(data[n]["status"])["status"]][UserInformation.language], style: TextStyle(fontSize: 16),),
                               Container(
                                 margin: EdgeInsets.only(
                                   left: 5
@@ -196,7 +197,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         children: [
                           Row(
                             children: [
-                              Text("Order ID:", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Order ID"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text(data[n]["orderID"]),
                                 margin: EdgeInsets.only(
@@ -208,7 +209,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("Total", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["total"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
                                 margin: EdgeInsets.only(
@@ -220,7 +221,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("Address:", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Address"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text(jsonDecode(data[n]["address"])["title"]),
                                 margin: EdgeInsets.only(
@@ -232,9 +233,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("Payment Type:", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Payment Type"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
-                                child: Text(data[n]["paymentType"]),
+                                child: Text(Dictionairy.words[data[n]["paymentType"]][UserInformation.language]),
                                 margin: EdgeInsets.only(
                                   left: 10
                                 ),
@@ -244,7 +245,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text("delivery date:", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Delivery Date"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text(data[n]["recieveDate"]),
                                 margin: EdgeInsets.only(

@@ -18,6 +18,16 @@ class Dictionairy {
     "Email": {
       "en": "Email",
       "ar": "البريد الالكتروني",
+      "fr": "Email",
+    },
+    "email": {
+      "en": "email",
+      "ar": "البريد الالكتروني",
+      "fr": "email",
+    },
+    "userEmail": {
+      "en": "email",
+      "ar": "البريد الالكتروني",
       "fr": "email",
     },
     "Full Name": {
@@ -110,6 +120,11 @@ class Dictionairy {
       "fr": "Date de livraison",
       "ar": "تاريخ التسليم",
     },
+    "recieveDate": {
+      "en": "Deliver at",
+      "fr": "Date de livraison",
+      "ar": "تاريخ التسليم",
+    },
     "Choose Date": {
       "en": "Choose Date",
       "fr": "Choisissez la date",
@@ -128,10 +143,10 @@ class Dictionairy {
     "Addresses": {
       "en": "Addresses",
       "fr": "Adresses",
-      "ar": "العنوانين",
+      "ar": "العناوين",
     },
     "There are no Addesses": {
-      "en": "There are no Addesses",
+      "en": "There are no Addresses",
       "fr": "Il n'y a pas d'adresses",
       "ar": "لا توجد عناوين",
     },
@@ -161,6 +176,11 @@ class Dictionairy {
       "ar": "الطلبات",
     },
     "Payment Type": {
+      "en": "Payment Type",
+      "fr": "Type de paiement",
+      "ar": "طريقة الدفع",
+    },
+    "paymentType": {
       "en": "Payment Type",
       "fr": "Type de paiement",
       "ar": "طريقة الدفع",
@@ -200,6 +220,11 @@ class Dictionairy {
       "fr": "frais de transport",
       "ar": "مصاريف الشحن",
     },
+    "transportFee": {
+      "en": "transport fee",
+      "fr": "frais de transport",
+      "ar": "مصاريف الشحن",
+    },
     "total": {
       "en": "total",
       "fr": "total",
@@ -229,6 +254,166 @@ class Dictionairy {
       "en": "Go to Home Screen",
       "fr": "Aller à la page d'accueil",
       "ar": "اذهب إلى الصفحة الرئيسية",
+    },
+    "Address Information": {
+      "en": "Address Information",
+      "fr": "Informations d'adresse",
+      "ar": "معلومات العنوان",
+    },
+    "Ok": {
+      "en": "Ok",
+      "fr": "Ok",
+      "ar": "حسنا",
+    },
+    "Cancel": {
+      "en": "Cancel",
+      "fr": "Annuler",
+      "ar": "الغاء",
+    },
+    "Are you sure you want to delete this address ?": {
+      "en": "Are you sure you want to delete this address ?",
+      "fr": "Voulez-vous vraiment supprimer cette adresse ?",
+      "ar": "هل أنت متأكد من حذف هذا العنوان ؟",
+    },
+    "Yes": {
+      "en": "Yes",
+      "fr": "Oui",
+      "ar": "نعم",
+    },
+    "GPS Address": {
+      "en": "GPS Address",
+      "fr": "Adresse GPS",
+      "ar": "GPS عنوان",
+    },
+    "Classic Address": {
+      "en": "Classic Address",
+      "fr": "Adresse classique",
+      "ar": "عنوان كلاسيكي",
+    },
+    "Map doesnt work on the Web version": {
+      "en": "Map doesnt work on the Web version",
+      "fr": "La carte ne fonctionne pas sur la version Web",
+      "ar": "الخريطة لا تعمل على إصدار الويب",
+    },
+    "Add Location": {
+      "en": "Add Location",
+      "fr": "Ajouter un emplacement",
+      "ar": "أضف الموقع",
+    },
+    "Location Selected": {
+      "en": "Location Selected",
+      "fr": "Emplacement sélectionné",
+      "ar": "تم تحديد الموقع",
+    },
+    "address name | ex: home": {
+      "en": "address name | ex: home",
+      "fr": "nom d'adresse | ex: maison",
+      "ar": "اسم العنوان | مثال: المنزل",
+    },
+    "additional information (optional)\nex: apartment number: 21": {
+      "en": "additional information (optional)\nex: apartment number: 21",
+      "fr": "informations complémentaires (optionnel)\nex: numéro d'appartement: 21",
+      "ar": "معلومات إضافية (اختيارية) \nمثال: رقم الشقة 21",
+    },
+    "instructions (optional)\nex: dont ring the bell": {
+      "en": "instructions (optional)\nex: dont ring the bell",
+      "fr": "instructions (optionnel)\n ex: ne pas sonner la cloche",
+      "ar": "تعليمات (اختيارية)\n مثال: لا ترن الجرس",
+    },
+    "state": {
+      "en": "state",
+      "fr": "Région",
+      "ar": "منطقة",
+    },
+    "city": {
+      "en": "city",
+      "fr": "Ville",
+      "ar": "مدينة",
+    },
+    "Address 2 (optional)": {
+      "en": "Address 2 (optional)",
+      "fr": "Adresse 2 (optionnel)",
+      "ar": "العنوان 2 (اختياري)",
+    },
+    "Choose state": {
+      "en": "Choose state",
+      "fr": "Choisissez une région",
+      "ar": "اختر المنطقة",
+    },
+    "Sign Out": {
+      "en": "Sign Out",
+      "fr": "Se déconnecter",
+      "ar": "تسجيل الخروج",
+    },
+    "You have no orders": {
+      "en": "You have no orders",
+      "fr": "Vous n'avez aucune Ordres",
+      "ar": "لا توجد طلبات",
+    },
+    "Pending": {
+      "en": "Pending",
+      "fr": "En attente",
+      "ar": "قيد الانتظار",
+    },
+    "Canceled": {
+      "en": "Canceled",
+      "fr": "Annulé",
+      "ar": "ملغية",
+    },
+    "Delivered": {
+      "en": "Delivered",
+      "fr": "Livré",
+      "ar": "تم التوصيل",
+    },
+    "Approved": {
+      "en": "Approved",
+      "fr": "Approuvé",
+      "ar": "تم القبول",
+    },
+    "Order ID": {
+      "en": "Order ID",
+      "fr": "numéro de commande",
+      "ar": "رقم الطلب",
+    },
+    "orderID": {
+      "en": "Order ID",
+      "fr": "numéro de commande",
+      "ar": "رقم الطلب",
+    },
+    "Order Details": {
+      "en": "Order Details",
+      "fr": "détails de la commande",
+      "ar": "تفاصيل الطلب",
+    },
+    "title": {
+      "en": "Address title",
+      "fr": "Titre de l'adresse",
+      "ar": "اسم العنوان",
+    },
+    "instructions": {
+      "en": "instructions",
+      "fr": "instructions",
+      "ar": "تعليمات",
+    },
+    "streetAddress": {
+      "en": "Address",
+      "fr": "Addresse",
+      "ar": "العنوان",
+    },
+    "streetAddress2": {
+      "en": "Address 2",
+      "fr": "Addresse 2",
+      "ar": "العنوان 2",
+    },
+    "status": {
+      "en": "status",
+      "fr": "statut",
+      "ar": "الحالة",
+    },
+    "orderTime": {
+      "en": "order Time",
+      "fr": "temps de commande",
+      "ar": "وقت الطلب",
     },
   };
 }

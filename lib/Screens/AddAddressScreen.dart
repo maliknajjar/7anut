@@ -8,6 +8,8 @@ import '../Widgets/ClassicAddressWidget.dart';
 
 import './LoadingLogoScreen.dart';
 
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 import '../env.dart';
 
 class AddAddressScreen extends StatefulWidget {
@@ -46,15 +48,15 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             color: Colors.black.withOpacity(0.75),
           ),
           centerTitle: true,
-          title: Text("Add Address", style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+          title: Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75)),),
           backgroundColor: Colors.yellow[200],
           bottom: TabBar(
             labelColor: Colors.black.withOpacity(0.75),
             unselectedLabelColor: Colors.black.withOpacity(0.75),
             indicatorColor: Colors.black.withOpacity(0.75),
             tabs: [
-              Tab(icon: Text("GPS Address")),
-              Tab(icon: Text("Classic Address")),
+              Tab(icon: Text(Dictionairy.words["GPS Address"][UserInformation.language])),
+              Tab(icon: Text(Dictionairy.words["Classic Address"][UserInformation.language])),
             ],
           ),
         ),

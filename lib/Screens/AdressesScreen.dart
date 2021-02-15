@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Classes/Adresses.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class AdressesScreen extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
           color: Colors.black.withOpacity(0.75),
         ),
         title: Text(
-          "Adresses",
+          Dictionairy.words["Addresses"][UserInformation.language],
           style: TextStyle(
             color: Colors.black.withOpacity(0.75),
           ),
@@ -56,7 +58,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("No Addresses", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+              Text(Dictionairy.words["There are no Addesses"][UserInformation.language], style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
               Container(
                 margin: EdgeInsets.only(top: 15),
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
@@ -76,8 +78,8 @@ class _AdressesScreenState extends State<AdressesScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Add Addresses", style: TextStyle(color: Colors.black.withOpacity(0.75), fontSize: 20),),
-                      Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),)
+                      Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75), fontSize: 20),),
+                      Container(child: Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75),), margin: EdgeInsets.only(left: 10),)
                     ],
                   ),
                 ),
@@ -125,7 +127,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(bottom: 20, top: 20),
-                                    child: Text("Address Information", style: TextStyle(fontSize: 20),),
+                                    child: Text(Dictionairy.words["Address Information"][UserInformation.language], style: TextStyle(fontSize: 20),),
                                   ),
                                   for (var item in Addresses.getCurrentUserAddresses()[i].values)
                                   if (item != null)
@@ -162,7 +164,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                         color: Colors.yellow[100],
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: Text("Ok", style: TextStyle(fontSize: 16),),
+                                      child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
                                     ),
                                   ),
                                 ),
@@ -226,7 +228,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                   children: [
                                     Container(
                                       margin: EdgeInsets.only(bottom: 40, top: 20),
-                                      child: Text("Are you sure you want to delete this address ?", style: TextStyle(fontSize: 16),),
+                                      child: Text(Dictionairy.words["Are you sure you want to delete this address ?"][UserInformation.language], style: TextStyle(fontSize: 16),),
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
@@ -258,7 +260,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                                 color: Colors.yellow[100],
                                                 borderRadius: BorderRadius.circular(10),
                                               ),
-                                              child: Text("Cancel", style: TextStyle(fontSize: 16),),
+                                              child: Text(Dictionairy.words["Cancel"][UserInformation.language], style: TextStyle(fontSize: 16),),
                                             ),
                                           ),
                                         ),
@@ -288,7 +290,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                                 color: Colors.yellow[100],
                                                 borderRadius: BorderRadius.circular(10),
                                               ),
-                                              child: Text("Ok", style: TextStyle(fontSize: 16),),
+                                              child: Text(Dictionairy.words["Yes"][UserInformation.language], style: TextStyle(fontSize: 16),),
                                             ),
                                           ),
                                         ),

@@ -6,6 +6,8 @@ import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
 import '../Screens/GetLocationScreen.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class GPSAddAddress extends StatefulWidget {
   List<dynamic> cities;
@@ -22,7 +24,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
   String instructions;
   LatLng location;
   
-  String mapButtonText = "Add Location";
+  String mapButtonText = Dictionairy.words["Add Location"][UserInformation.language];
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
           margin: EdgeInsets.only(
             top: 10
           ),
-          child: Text("Map doesnt work on the Web version", style: TextStyle(fontSize: 18),),
+          child: Text(Dictionairy.words["Map doesnt work on the Web version"][UserInformation.language], style: TextStyle(fontSize: 18),),
         ),
       ],
     )
@@ -115,7 +117,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: "address name | ex: home",
+                            hintText: Dictionairy.words["address name | ex: home"][UserInformation.language],
                           ),
                         ),
                       ),
@@ -128,7 +130,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                           print(value);
                           if (value != null) {
                             location = value;
-                            mapButtonText = "Location Selected";
+                            mapButtonText = Dictionairy.words["Location Selected"][UserInformation.language];
                           }
                         });
                       });
@@ -260,7 +262,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: "additional information (optional)\nex: apartment number: 21",
+                            hintText: Dictionairy.words["additional information (optional)\nex: apartment number: 21"][UserInformation.language],
                           ),
                         ),
                       ),
@@ -326,7 +328,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: "instructions (optional)\nex: dont ring the bell",
+                            hintText: Dictionairy.words["instructions (optional)\nex: dont ring the bell"][UserInformation.language],
                           ),
                         ),
                       ),
@@ -375,7 +377,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                       margin: EdgeInsets.only(right: 5),
                       child: Icon(Icons.save, size: 30, color: Colors.black.withOpacity(0.75),),
                     ),
-                    Text("Save", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
+                    Text(Dictionairy.words["Save"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
                   ],
                 ),
               ),

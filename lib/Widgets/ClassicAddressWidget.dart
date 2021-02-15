@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 
 class ClassicAddressWidget extends StatefulWidget {
   List<dynamic> cities;
@@ -105,7 +106,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: "address name | ex: home",
+                            hintText: Dictionairy.words["address name | ex: home"][UserInformation.language],
                           ),
                         ),
                       ),
@@ -159,7 +160,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                            hint:  Text(state == null ? "state" : state, style: TextStyle(fontSize: 20),),
+                            hint:  Text(state == null ? Dictionairy.words["state"][UserInformation.language] : state, style: TextStyle(fontSize: 20),),
                             onChanged: (var value) {
                               setState(() {
                                 state = value; 
@@ -225,7 +226,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                            hint:  Text(city == null ? "city" : city, style: TextStyle(fontSize: 20),),
+                            hint:  Text(city == null ? Dictionairy.words["city"][UserInformation.language] : city, style: TextStyle(fontSize: 20),),
                             onChanged: (var value) {
                               setState(() {
                                 city = value;                        
@@ -235,7 +236,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                             ? [
                               DropdownMenuItem(
                                 value: null,
-                                child: Text("Choose state", style: TextStyle(fontSize: 20),)
+                                child: Text(Dictionairy.words["Choose state"][UserInformation.language], style: TextStyle(fontSize: 20),)
                               ),
                             ]
                             : jsonDecode(widget.cities[indexOfState(state)]["cities"]).map<DropdownMenuItem>((e){
@@ -306,7 +307,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: "Street Address",
+                            hintText: Dictionairy.words["Address"][UserInformation.language],
                           ),
                         ),
                       ),
@@ -369,7 +370,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: "Street Address 2 (optional)",
+                            hintText: Dictionairy.words["Address 2 (optional)"][UserInformation.language],
                           ),
                         ),
                       ),
@@ -435,7 +436,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: "instructions (optional)\nex: dont ring the bell",
+                            hintText: Dictionairy.words["instructions (optional)\nex: dont ring the bell"][UserInformation.language],
                           ),
                         ),
                       ),
@@ -487,7 +488,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                       margin: EdgeInsets.only(right: 5),
                       child: Icon(Icons.save, size: 30,),
                     ),
-                    Text("Save", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(Dictionairy.words["Save"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   ],
                 ),
               ),
