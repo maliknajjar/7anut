@@ -255,7 +255,7 @@ class _PinScreenState extends State<PinScreen> {
                                 child: Container(
                                   margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(5),
+                                  padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(

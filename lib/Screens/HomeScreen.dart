@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.all(
-                                Radius.circular(20),
+                                Radius.circular(theWidth * 0.04),
                               ),
                               color: Colors.white,
                               boxShadow: [
@@ -147,10 +147,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              jsonDecode(products[i]["name"])["en"],
+                              jsonDecode(products[i]["name"])[UserInformation.language],
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: theWidth * 0.04,
+                                fontSize: theWidth * 0.035,
                               ),
                             ),
                           ),

@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 
 import '../env.dart';
 import '../Classes/UserInformation.dart';
@@ -20,7 +21,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = "";
   String password = "";
-  Widget theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], style: TextStyle(fontSize: 18),);
+  Widget theButton = Text("عربي", style: GoogleFonts.cairo(fontSize: 18));
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;

@@ -58,7 +58,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             isScrollable: true,
             tabs: [
               for(var item in Products.categories)
-              Tab(icon: Text(jsonDecode(item["name"])["en"], style: TextStyle(color: Colors.black.withOpacity(0.75)),)),
+              Tab(icon: Text(jsonDecode(item["name"])[UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75)),)),
             ],
           ),
         ),
@@ -67,7 +67,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             TabBarView(
               children: [
                 for(var item in Products.categories)
-                CategoryWidget(jsonDecode(item["name"])["en"], refresh),
+                CategoryWidget(jsonDecode(item["name"])[UserInformation.language], refresh),
               ],
             ),
             AnimatedPositioned(
