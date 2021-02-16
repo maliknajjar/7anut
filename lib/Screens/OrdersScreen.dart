@@ -8,6 +8,7 @@ import '../Classes/Dictionairy.dart';
 
 import './LoadingLogoScreen.dart';
 import './OrderInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OrdersScreen extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
         ),
         title: Text(
           Dictionairy.words["Orders"][UserInformation.language],
-          style: TextStyle(
+          style: GoogleFonts.almarai(
             color: Colors.black.withOpacity(0.75),
           ),
         ),
@@ -91,7 +92,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(Dictionairy.words["You have no orders"][UserInformation.language], style: TextStyle(fontSize: 22),),
+              Text(Dictionairy.words["You have no orders"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 22),),
             ],
           )
         )
@@ -147,7 +148,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         children: [
                           Row(
                             children: [
-                              Text(Dictionairy.words[jsonDecode(data[n]["status"])["status"]][UserInformation.language], style: TextStyle(fontSize: 16),),
+                              Text(Dictionairy.words[jsonDecode(data[n]["status"])["status"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                               Container(
                                 margin: EdgeInsets.only(
                                   left: 5
@@ -176,7 +177,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                     border: Border.all(width: 1.5, color: Colors.black.withOpacity(0.75)),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Center(child: Text("?", style: TextStyle(fontWeight: FontWeight.bold),)),
+                                  child: Center(child: Text("?", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),)),
                                 ),
                               ),
                             ],
@@ -184,8 +185,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(data[n]["orderTime"].split(" ")[0], style: TextStyle(fontSize: 16),),
-                              Text(data[n]["orderTime"].split(" ")[1], style: TextStyle(fontSize: 14),),
+                              Text(data[n]["orderTime"].split(" ")[0], style: GoogleFonts.almarai(fontSize: 16),),
+                              Text(data[n]["orderTime"].split(" ")[1], style: GoogleFonts.almarai(fontSize: 14),),
                             ],
                           ),
                         ],
@@ -197,9 +198,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         children: [
                           Row(
                             children: [
-                              Text(Dictionairy.words["Order ID"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Order ID"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
                               Container(
-                                child: Text(data[n]["orderID"]),
+                                child: Text(data[n]["orderID"], style: GoogleFonts.almarai(),),
                                 margin: EdgeInsets.only(
                                   left: 10
                                 ),
@@ -209,7 +210,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text(Dictionairy.words["total"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["total"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
                               Container(
                                 child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
                                 margin: EdgeInsets.only(
@@ -221,9 +222,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text(Dictionairy.words["Address"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Address"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
                               Container(
-                                child: Text(jsonDecode(data[n]["address"])["title"]),
+                                child: Text(jsonDecode(data[n]["address"])["title"], style: GoogleFonts.almarai(),),
                                 margin: EdgeInsets.only(
                                   left: 10
                                 ),
@@ -233,9 +234,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text(Dictionairy.words["Payment Type"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Payment Type"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
                               Container(
-                                child: Text(Dictionairy.words[data[n]["paymentType"]][UserInformation.language]),
+                                child: Text(Dictionairy.words[data[n]["paymentType"]][UserInformation.language], style: GoogleFonts.almarai(),),
                                 margin: EdgeInsets.only(
                                   left: 10
                                 ),
@@ -245,9 +246,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           space,
                           Row(
                             children: [
-                              Text(Dictionairy.words["Delivery Date"][UserInformation.language] + ":", style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Dictionairy.words["Delivery Date"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
                               Container(
-                                child: Text(data[n]["recieveDate"]),
+                                child: Text(data[n]["recieveDate"], style: GoogleFonts.almarai(),),
                                 margin: EdgeInsets.only(
                                   left: 10
                                 ),

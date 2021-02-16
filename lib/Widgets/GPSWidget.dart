@@ -8,6 +8,7 @@ import '../Classes/UserInformation.dart';
 import '../Screens/GetLocationScreen.dart';
 import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GPSAddAddress extends StatefulWidget {
   List<dynamic> cities;
@@ -41,7 +42,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
           margin: EdgeInsets.only(
             top: 10
           ),
-          child: Text(Dictionairy.words["Map doesnt work on the Web version"][UserInformation.language], style: TextStyle(fontSize: 18),),
+          child: Text(Dictionairy.words["Map doesnt work on the Web version"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18),),
         ),
       ],
     )
@@ -109,7 +110,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                           onChanged: (string){
                             title = string;
                           },
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 20,
                           ),
                           cursorColor: Colors.black54,
@@ -191,7 +192,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                               ),
                               Text(
                                 mapButtonText,
-                                style: TextStyle(
+                                style: GoogleFonts.almarai(
                                   fontSize: 22.5,
                                   color: Colors.black.withOpacity(0.75),
                                 ),
@@ -254,7 +255,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                           onChanged: (string){
                             information = string;
                           },
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 20,
                           ),
                           cursorColor: Colors.black54,
@@ -320,7 +321,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                           onChanged: (string){
                             instructions = string;
                           },
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 20,
                           ),
                           cursorColor: Colors.black54,
@@ -377,7 +378,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                       margin: EdgeInsets.only(right: 5),
                       child: Icon(Icons.save, size: 30, color: Colors.black.withOpacity(0.75),),
                     ),
-                    Text(Dictionairy.words["Save"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
+                    Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
                   ],
                 ),
               ),

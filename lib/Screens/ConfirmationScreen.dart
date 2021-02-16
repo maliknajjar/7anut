@@ -1,16 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Classes/Basket.dart';
 import '../Classes/Functions.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
-import '../env.dart';
-
 import './LoadingLogoScreen.dart';
 import '../Widgets/SuccessWidget.dart';
+import '../env.dart';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmationScreen extends StatefulWidget {
   @override
@@ -64,7 +65,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
         ),
         title: Text(
           Dictionairy.words["Confirmation"][UserInformation.language],
-          style: TextStyle(
+          style: GoogleFonts.almarai(
             color: Colors.black.withOpacity(0.75),
           ),
         ),
@@ -87,7 +88,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(Dictionairy.words["Orders"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                        Text(Dictionairy.words["Orders"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                         Container(
                           width: double.infinity,
                           margin: EdgeInsets.only(
@@ -125,10 +126,10 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                   children: [
                                     TableRow(
                                       children: [
-                                        Text(Dictionairy.words["Name"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text(Dictionairy.words["size"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text(Dictionairy.words["qty"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text(Dictionairy.words["price"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        Text(Dictionairy.words["Name"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        Text(Dictionairy.words["size"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        Text(Dictionairy.words["qty"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        Text(Dictionairy.words["price"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
                                       ]
                                     ),
                                   ],
@@ -178,10 +179,10 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                       for (var i = 0; i < Basket.basketItems.length; i++)
                                       TableRow(
                                         children: [
-                                          Text(Basket.basketItems[i]["Name"], style: TextStyle(fontSize: 18),),
-                                          Text(Basket.basketItems[i]["size"], style: TextStyle(fontSize: 18),),
-                                          Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 18),),
-                                          Text((double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(3), style: TextStyle(fontSize: 18),),
+                                          Text(Basket.basketItems[i]["Name"], style: GoogleFonts.almarai(fontSize: 18),),
+                                          Text(Basket.basketItems[i]["size"], style: GoogleFonts.almarai(fontSize: 18),),
+                                          Text(Basket.basketItems[i]["qty"].toString(), style: GoogleFonts.almarai(fontSize: 18),),
+                                          Text((double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(3), style: GoogleFonts.almarai(fontSize: 18),),
                                         ]
                                       )
                                     ],
@@ -197,22 +198,22 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(Dictionairy.words["Subtotal"][UserInformation.language] + ":", style: TextStyle(fontSize: 16),),
-                                        Text(Basket.getUltimateTotal().toStringAsFixed(3) + " DT", style: TextStyle(fontSize: 16),),
+                                        Text(Dictionairy.words["Subtotal"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 16),),
+                                        Text(Basket.getUltimateTotal().toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 16),),
                                       ],
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(Dictionairy.words["transport fee"][UserInformation.language] + ":", style: TextStyle(fontSize: 16),),
-                                        Text(theFee.toStringAsFixed(3) + " DT", style: TextStyle(fontSize: 16),),
+                                        Text(Dictionairy.words["transport fee"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 16),),
+                                        Text(theFee.toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 16),),
                                       ],
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(Dictionairy.words["total"][UserInformation.language] + ":", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text((Basket.getUltimateTotal() + theFee).toStringAsFixed(3) + " DT", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        Text(Dictionairy.words["total"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        Text((Basket.getUltimateTotal() + theFee).toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
                                       ],
                                     ),
                                   ],
@@ -223,7 +224,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         ),
                       ],
                     ),
-                    Text(Dictionairy.words["Address"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(Dictionairy.words["Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
@@ -248,11 +249,11 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         children: [
                           for (var item in address)
                           if(item.toString() != "null")
-                          Text(item.toString(), style: TextStyle(fontSize: 18),),
+                          Text(item.toString(), style: GoogleFonts.almarai(fontSize: 18),),
                         ],
                       ),
                     ),
-                    Text(Dictionairy.words["Payment Type"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(Dictionairy.words["Payment Type"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
@@ -275,11 +276,11 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(Dictionairy.words[args["Payment Type"].toString()][UserInformation.language], style: TextStyle(fontSize: 18),),
+                          Text(Dictionairy.words[args["Payment Type"].toString()][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18),),
                         ],
                       ),
                     ),
-                    Text(Dictionairy.words["Delivery Date"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(Dictionairy.words["Delivery Date"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
@@ -302,7 +303,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(args["Recieve Date"].toString(), style: TextStyle(fontSize: 18),),
+                          Text(args["Recieve Date"].toString(), style: GoogleFonts.almarai(fontSize: 18),),
                         ],
                       ),
                     ),
@@ -357,7 +358,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                   child: Center(
                     child: isPressed 
                     ? Image.asset("assets/images/theLoading.gif", height: 30)
-                    : Text(Dictionairy.words["Order"][UserInformation.language] + "  ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    : Text(Dictionairy.words["Order"][UserInformation.language] + "  ", style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                   ),
                 ),
               ),

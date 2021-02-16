@@ -31,7 +31,7 @@ class _BasketScreenState extends State<BasketScreen> {
         ),
         title: Text(
           Dictionairy.words["Basket"][UserInformation.language],
-          style: TextStyle(
+          style: GoogleFonts.almarai(
             color: Colors.black.withOpacity(0.75),
           ),
         ),
@@ -51,7 +51,7 @@ class _BasketScreenState extends State<BasketScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(Dictionairy.words["Basket is empty"][UserInformation.language], style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+              Text(Dictionairy.words["Basket is empty"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
               Container(
                 margin: EdgeInsets.only(top: 15),
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
@@ -71,7 +71,7 @@ class _BasketScreenState extends State<BasketScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(Dictionairy.words["Go to Market"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75), fontSize: 20),),
+                      Text(Dictionairy.words["Go to Market"][UserInformation.language], style: GoogleFonts.almarai(color: Colors.black.withOpacity(0.75), fontSize: 20),),
                       Container(child: Icon(Icons.arrow_forward, color: Colors.black.withOpacity(0.75)), margin: EdgeInsets.only(left: 10),)
                     ],
                   ),
@@ -162,7 +162,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                       children: [
                                         Text(
                                           Basket.basketItems[i]["Name"],
-                                          style: TextStyle(fontSize: 20),
+                                          style: GoogleFonts.almarai(fontSize: 20),
                                         ),
                                         Text(
                                           Basket.basketItems[i]["price"] + " DT",
@@ -173,7 +173,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                         ),
                                         Text(
                                           Basket.basketItems[i]["size"],
-                                          style: TextStyle(
+                                          style: GoogleFonts.almarai(
                                             fontSize: 15,
                                             color: Colors.grey[700]
                                           ),
@@ -341,8 +341,8 @@ class _BasketScreenState extends State<BasketScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(Dictionairy.words["Checkout"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
-                          Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
+                          Text(Dictionairy.words["Checkout"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
+                          Container(margin: EdgeInsets.only(top: 5), child: Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),))
                         ],
                       ),
                       Container(child: Icon(Icons.arrow_forward), margin: EdgeInsets.only(left: 10),),

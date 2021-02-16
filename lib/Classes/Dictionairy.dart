@@ -320,6 +320,11 @@ class Dictionairy {
       "fr": "instructions (optionnel)\n ex: ne pas sonner la cloche",
       "ar": "تعليمات (اختيارية)\n مثال: لا ترن الجرس",
     },
+    "information": {
+      "en": "information",
+      "fr": "informations",
+      "ar": "معلومات",
+    },
     "state": {
       "en": "state",
       "fr": "Région",
@@ -534,6 +539,11 @@ class Dictionairy {
       "en": "you need to specify a location",
       "fr": "vous devez spécifier un emplacement",
       "ar": "عليك إلى تحديد الموقع",
+    },
+    "location": {
+      "en": "Coordinates",
+      "fr": "Coordonnées",
+      "ar": "احداثيات",
     },
   };
 }

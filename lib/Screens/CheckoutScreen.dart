@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../Classes/Adresses.dart';
-import '../Classes/Functions.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+
+import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CheckoutScreen extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
         title: Text(
           Dictionairy.words["Checkout"][UserInformation.language],
-          style: TextStyle(
+          style: GoogleFonts.almarai(
             color: Colors.black.withOpacity(0.75),
           ),
         ),
@@ -87,7 +88,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(Dictionairy.words["Deliver to"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                          Text(Dictionairy.words["Deliver to"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                           GestureDetector(
                             onTap: (){
                               showDialog(context: context, builder: (BuildContext context){
@@ -149,7 +150,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           child: Row(
                                                             mainAxisSize: MainAxisSize.min,
                                                             children: [
-                                                              Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+                                                              Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
                                                               Container(child: Icon(Icons.add_location_outlined, color: Colors.black.withOpacity(0.75),), margin: EdgeInsets.only(left: 10),)
                                                             ],
                                                           ),
@@ -159,12 +160,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                     Addresses.getCurrentUserAddresses().length != 0
                                                     ? Container(
                                                       margin: EdgeInsets.only(bottom: 10, top: 20),
-                                                      child: Text(Dictionairy.words["Addresses"][UserInformation.language] + ":", style: TextStyle(fontSize: 20),),
+                                                      child: Text(Dictionairy.words["Addresses"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 20),),
                                                     ) 
                                                     : Container(
                                                       padding: EdgeInsets.all(30),
                                                       alignment: Alignment.center,
-                                                      child: Text(Dictionairy.words["There are no Addesses"][UserInformation.language], style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.5)),)
+                                                      child: Text(Dictionairy.words["There are no Addesses"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.5)),)
                                                     ),
                                                     for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
                                                     GestureDetector(
@@ -200,7 +201,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                         child: Row(
                                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: [
-                                                            Text(Addresses.getCurrentUserAddresses()[i]["title"], style: TextStyle(fontSize: 20),),
+                                                            Text(Addresses.getCurrentUserAddresses()[i]["title"], style: GoogleFonts.almarai(fontSize: 20),),
                                                             Icon(Icons.location_on_outlined)
                                                           ],
                                                         ),
@@ -245,7 +246,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(addressName == null ? Dictionairy.words["Choose Address"][UserInformation.language] : addressName, style: TextStyle(fontSize: 20),),
+                                  Text(addressName == null ? Dictionairy.words["Choose Address"][UserInformation.language] : addressName, style: GoogleFonts.almarai(fontSize: 20),),
                                   Icon(Icons.arrow_drop_down)
                                 ],
                               ),
@@ -287,7 +288,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(Dictionairy.words["Pay With"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                          Text(Dictionairy.words["Pay With"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                           GestureDetector(
                             onTap: (){
                               showDialog(
@@ -345,7 +346,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           child: Row(
                                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                             children: [
-                                                              Text(Dictionairy.words["Cash"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                                              Text(Dictionairy.words["Cash"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                                               Icon(Icons.payments_outlined)
                                                             ],
                                                           ),
@@ -388,7 +389,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           child: Row(
                                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                             children: [
-                                                              Text(Dictionairy.words["payment card"][UserInformation.language] + " (${Dictionairy.words['soon'][UserInformation.language]})", style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.5)),),
+                                                              Text(Dictionairy.words["payment card"][UserInformation.language] + " (${Dictionairy.words['soon'][UserInformation.language]})", style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.5)),),
                                                               Icon(Icons.payment_outlined, color: Colors.black.withOpacity(0.5)),
                                                             ],
                                                           ),
@@ -433,7 +434,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(payWithText == null ? Dictionairy.words["Choose Payment"][UserInformation.language] : payWithText, style: TextStyle(fontSize: 20),),
+                                  Text(payWithText == null ? Dictionairy.words["Choose Payment"][UserInformation.language] : payWithText, style: GoogleFonts.almarai(fontSize: 20),),
                                   Icon(Icons.arrow_drop_down)
                                 ],
                               ),
@@ -475,7 +476,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(Dictionairy.words["Deliver at"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                          Text(Dictionairy.words["Deliver at"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                           GestureDetector(
                             onTap: (){
                               showDialog(
@@ -534,7 +535,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           child: Row(
                                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                             children: [
-                                                              Text(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10) + (i == 1 ? " (${Dictionairy.words["Tomorrow"][UserInformation.language]})" : ""), style: TextStyle(fontSize: 20),),
+                                                              Text(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10) + (i == 1 ? " (${Dictionairy.words["Tomorrow"][UserInformation.language]})" : ""), style: GoogleFonts.almarai(fontSize: 20),),
                                                               Icon(Icons.date_range_outlined)
                                                             ],
                                                           ),
@@ -576,7 +577,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(recieveAtTime == null ? Dictionairy.words["Choose Date"][UserInformation.language] : recieveAtTime, style: TextStyle(fontSize: 20),),
+                                  Text(recieveAtTime == null ? Dictionairy.words["Choose Date"][UserInformation.language] : recieveAtTime, style: GoogleFonts.almarai(fontSize: 20),),
                                   Icon(Icons.arrow_drop_down)
                                 ],
                               ),
@@ -616,7 +617,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   children: [
                                     Container(
                                       margin: EdgeInsets.only(bottom: 20, top: 20),
-                                      child: Text(Dictionairy.words["Make sure to fill all the fields"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                      child: Text(Dictionairy.words["Make sure to fill all the fields"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                     ),
                                   ],
                                 ),
@@ -650,7 +651,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           color: Colors.yellow[100],
                                           borderRadius: BorderRadius.circular(10),
                                         ),
-                                        child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                        child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                                       ),
                                     ),
                                   ),
@@ -682,7 +683,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ]
                   ),
                   child: Center(
-                    child: Text(Dictionairy.words["Next"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    child: Text(Dictionairy.words["Next"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                   ),
                 ),
               ),

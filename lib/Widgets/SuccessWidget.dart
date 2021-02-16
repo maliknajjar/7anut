@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
 import '../Classes/Basket.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+
+import 'package:flutter/material.dart';
+import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SuccessWidget extends StatelessWidget {
   @override
@@ -63,7 +65,7 @@ class SuccessWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(Dictionairy.words["Go to Orders Page"][UserInformation.language], style: TextStyle(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
+                    Text(Dictionairy.words["Go to Orders Page"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
                     Icon(Icons.arrow_forward)
                   ],
                 ),
@@ -78,7 +80,7 @@ class SuccessWidget extends StatelessWidget {
                 margin: EdgeInsets.only(top: 10),
                 child: Column(
                   children: [
-                    Text(Dictionairy.words["Go to Home Screen"][UserInformation.language], style: TextStyle(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
+                    Text(Dictionairy.words["Go to Home Screen"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
                   ],
                 ),
               ),

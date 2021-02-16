@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OrderInformation extends StatelessWidget {
   Map data;
@@ -26,7 +27,7 @@ class OrderInformation extends StatelessWidget {
         ),
         title: Text(
           Dictionairy.words["Order Details"][UserInformation.language],
-          style: TextStyle(
+          style: GoogleFonts.almarai(
             color: Colors.black.withOpacity(0.75),
           ),
         ),
@@ -61,7 +62,7 @@ class OrderInformation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.all(10),
-                        child: Text(Dictionairy.words["Orders"][UserInformation.language]),
+                        child: Text(Dictionairy.words["Orders"][UserInformation.language], style: GoogleFonts.almarai(),),
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -88,7 +89,7 @@ class OrderInformation extends StatelessWidget {
                               + "\n" + Dictionairy.words["price"][UserInformation.language] + ": " + orders[i]["price"].toString() + " DT"
                               + "\n" + Dictionairy.words["total"][UserInformation.language] + ": " + (double.parse(orders[i]["price"]) * orders[i]["qty"]).toStringAsFixed(3) + " DT"
                               + "\n" + Dictionairy.words["qty"][UserInformation.language] + ": " + orders[i]["qty"].toString()
-                              + "\n"
+                              + "\n", style: GoogleFonts.almarai(),
                             ),
                           ],
                         ),
@@ -114,7 +115,7 @@ class OrderInformation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.all(10),
-                        child: Text(Dictionairy.words["Address"][UserInformation.language]),
+                        child: Text(Dictionairy.words["Address"][UserInformation.language], style: GoogleFonts.almarai(),),
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -136,7 +137,7 @@ class OrderInformation extends StatelessWidget {
                           children: [
                             for (int i = 0; i < address.length; i++)
                             Text(
-                              Dictionairy.words[address.keys.toList()[i].toString()][UserInformation.language] + ": " + address.values.toList()[i].toString()
+                              Dictionairy.words[address.keys.toList()[i].toString()][UserInformation.language] + ": " + (address.values.toList()[i].toString().contains("{latitude: ") ? address.values.toList()[i].toString().toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", " ") : address.values.toList()[i].toString()), style: GoogleFonts.almarai(),
                             ),
                           ],
                         ),
@@ -164,7 +165,7 @@ class OrderInformation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.all(10),
-                        child: Text(data.keys.toList()[i].toString() == "totalPrice" ? Dictionairy.words["Subtotal"][UserInformation.language] : Dictionairy.words[data.keys.toList()[i].toString()][UserInformation.language]),
+                        child: Text(data.keys.toList()[i].toString() == "totalPrice" ? Dictionairy.words["Subtotal"][UserInformation.language] : Dictionairy.words[data.keys.toList()[i].toString()][UserInformation.language], style: GoogleFonts.almarai(),),
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -181,7 +182,7 @@ class OrderInformation extends StatelessWidget {
                           ],
                         ),
                         margin: EdgeInsets.all(10),
-                        child: Text(data.values.toList()[i].toString() == "Cash" ? Dictionairy.words[data.values.toList()[i].toString()][UserInformation.language] : data.values.toList()[i].toString().contains('"status":') ? Dictionairy.words[jsonDecode(data.values.toList()[i].toString())["status"]][UserInformation.language] : data.values.toList()[i].toString()),
+                        child: Text(data.values.toList()[i].toString() == "Cash" ? Dictionairy.words[data.values.toList()[i].toString()][UserInformation.language] : data.values.toList()[i].toString().contains('"status":') ? Dictionairy.words[jsonDecode(data.values.toList()[i].toString())["status"]][UserInformation.language] : data.values.toList()[i].toString(), style: GoogleFonts.almarai(),),
                       )
                     ]
                   ),

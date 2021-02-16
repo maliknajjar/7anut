@@ -6,6 +6,7 @@ import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ClassicAddressWidget extends StatefulWidget {
   List<dynamic> cities;
@@ -98,7 +99,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                           onChanged: (string){
                             title = string;
                           },
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 20,
                           ),
                           cursorColor: Colors.black54,
@@ -160,7 +161,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                            hint:  Text(state == null ? Dictionairy.words["state"][UserInformation.language] : state, style: TextStyle(fontSize: 20),),
+                            hint:  Text(state == null ? Dictionairy.words["state"][UserInformation.language] : state, style: GoogleFonts.almarai(fontSize: 20),),
                             onChanged: (var value) {
                               setState(() {
                                 state = value; 
@@ -170,7 +171,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                             items: widget.cities.map((e){
                               return DropdownMenuItem(
                                 value: e["state"],
-                                child: Text(e["state"], style: TextStyle(fontSize: 20),)
+                                child: Text(e["state"], style: GoogleFonts.almarai(fontSize: 20),)
                               );
                             }).toList(),
                           ),
@@ -226,7 +227,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                            hint:  Text(city == null ? Dictionairy.words["city"][UserInformation.language] : city, style: TextStyle(fontSize: 20),),
+                            hint:  Text(city == null ? Dictionairy.words["city"][UserInformation.language] : city, style: GoogleFonts.almarai(fontSize: 20),),
                             onChanged: (var value) {
                               setState(() {
                                 city = value;                        
@@ -236,13 +237,13 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                             ? [
                               DropdownMenuItem(
                                 value: null,
-                                child: Text(Dictionairy.words["Choose state"][UserInformation.language], style: TextStyle(fontSize: 20),)
+                                child: Text(Dictionairy.words["Choose state"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),)
                               ),
                             ]
                             : jsonDecode(widget.cities[indexOfState(state)]["cities"]).map<DropdownMenuItem>((e){
                               return DropdownMenuItem(
                                 value: e,
-                                child: Text(e, style: TextStyle(fontSize: 20),)
+                                child: Text(e, style: GoogleFonts.almarai(fontSize: 20),)
                               );
                             }).toList(),
                           ),
@@ -299,7 +300,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                           onChanged: (string){
                             streetAddress = string;
                           },
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 20,
                           ),
                           cursorColor: Colors.black54,
@@ -362,7 +363,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                           onChanged: (string){
                             streetAddress2 = string;
                           },
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 20,
                           ),
                           cursorColor: Colors.black54,
@@ -428,7 +429,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                           onChanged: (string){
                             instructions = string;
                           },
-                          style: TextStyle(
+                          style: GoogleFonts.almarai(
                             fontSize: 20,
                           ),
                           cursorColor: Colors.black54,
@@ -488,7 +489,7 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                       margin: EdgeInsets.only(right: 5),
                       child: Icon(Icons.save, size: 30,),
                     ),
-                    Text(Dictionairy.words["Save"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                   ],
                 ),
               ),

@@ -9,6 +9,7 @@ import '../Widgets/ClassicAddressWidget.dart';
 import './LoadingLogoScreen.dart';
 
 import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../Classes/Dictionairy.dart';
 import '../env.dart';
 
@@ -48,15 +49,15 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             color: Colors.black.withOpacity(0.75),
           ),
           centerTitle: true,
-          title: Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+          title: Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(color: Colors.black.withOpacity(0.75)),),
           backgroundColor: Colors.yellow[200],
           bottom: TabBar(
             labelColor: Colors.black.withOpacity(0.75),
             unselectedLabelColor: Colors.black.withOpacity(0.75),
             indicatorColor: Colors.black.withOpacity(0.75),
             tabs: [
-              Tab(icon: Text(Dictionairy.words["GPS Address"][UserInformation.language])),
-              Tab(icon: Text(Dictionairy.words["Classic Address"][UserInformation.language])),
+              Tab(icon: Text(Dictionairy.words["GPS Address"][UserInformation.language], style: GoogleFonts.almarai(),)),
+              Tab(icon: Text(Dictionairy.words["Classic Address"][UserInformation.language], style: GoogleFonts.almarai(),)),
             ],
           ),
         ),
