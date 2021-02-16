@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 
-import '../env.dart';
 import '../Classes/UserInformation.dart';
 
 class ChooseLanguageScreen extends StatefulWidget {
@@ -113,12 +111,9 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text("اختر لغتك"),
-                                    Text("Select your Language"),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 5),
-                                      child: Text("Choisissez votre langue"),
-                                    ),
+                                    Text("اختر لغتك", style: GoogleFonts.almarai()),
+                                    Text("Select your Language", style: GoogleFonts.roboto(),),
+                                    Text("Choisissez votre langue", style: GoogleFonts.roboto(),),
                                   ],
                                 ),
                               ),
@@ -153,7 +148,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text("عربي", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                      Text("عربي", style: GoogleFonts.almarai()),
                                       Container(child: Icon(Icons.language_outlined, color: Colors.black.withOpacity(0.5)), margin: EdgeInsets.only(left: 10),)
                                     ],
                                   )
@@ -190,7 +185,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text("English", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                      Text("English", style: GoogleFonts.roboto()),
                                       Container(child: Icon(Icons.language_outlined, color: Colors.black.withOpacity(0.5)), margin: EdgeInsets.only(left: 10),)
                                     ],
                                   )
@@ -227,7 +222,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text("Français", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                      Text("Français", style: GoogleFonts.roboto()),
                                       Container(child: Icon(Icons.language_outlined, color: Colors.black.withOpacity(0.5),), margin: EdgeInsets.only(left: 10),)
                                     ],
                                   )
@@ -261,7 +256,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(notificationMessage, style: TextStyle(fontSize: 20, color: Colors.white),)
+                child: Text(notificationMessage, style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto())
               ),
             ), 
             duration: Duration(milliseconds: 500),

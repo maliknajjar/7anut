@@ -21,7 +21,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = "";
   String password = "";
-  Widget theButton = Text("عربي", style: GoogleFonts.cairo(fontSize: 18));
+  Widget theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], 
+    style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18),
+  );
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -161,7 +163,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: Dictionairy.words["Email"][UserInformation.language]
+                                        hintText: Dictionairy.words["Email"][UserInformation.language],
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()
                                       ),
                                     ),
                                   ),
@@ -221,7 +224,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: Dictionairy.words["Password"][UserInformation.language]
+                                        hintText: Dictionairy.words["Password"][UserInformation.language],
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()
                                       ),
                                     ),
                                   ),
@@ -240,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     "email": email,
                                     "password": password,
                                   }).then((result){
-                                    theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], style: TextStyle(fontSize: 18),);
+                                    theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18));
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
                                       print(response["error"].toString());
@@ -309,7 +313,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Container(
-                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language])),
+                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto(),)),
                                 ),
                               ),
                               Expanded(
@@ -351,7 +355,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     )
                                   ],
                                 ),
-                                child: Text(Dictionairy.words["Create New Account"][UserInformation.language]),
+                                child: Text(Dictionairy.words["Create New Account"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto(),),
                               ),
                             ),
                           ),
@@ -366,7 +370,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Container(
                             margin: EdgeInsets.only(top: 10),
                             padding: EdgeInsets.only(bottom: 75),
-                            child: Text(Dictionairy.words["Forget Password ?"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75), decoration: TextDecoration.underline)),
+                            child: Text(Dictionairy.words["Forget Password ?"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(decoration: TextDecoration.underline) : GoogleFonts.roboto(decoration: TextDecoration.underline)),
                           ),
                         )
                       ],
@@ -380,7 +384,12 @@ class _LoginScreenState extends State<LoginScreen> {
             bottom: 20,
             child: InkWell(
               onTap: (){
-                Navigator.of(context).pushNamed("/language");
+                Navigator.of(context).pushNamed("/language")
+                .then((value){
+                  setState(() {
+
+                  });
+                });
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -401,7 +410,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: Row(
                   children: [
-                    Text(Dictionairy.words["choose a language"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                    Text(Dictionairy.words["choose a language"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 16) : GoogleFonts.roboto(fontSize: 16)),
                     Container(child: Icon(Icons.language_outlined), margin: EdgeInsets.only(left: 10),)
                   ],
                 ),
@@ -426,7 +435,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(notificationMessage, style: TextStyle(fontSize: 20, color: Colors.white),)
+                child: Text(notificationMessage, style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18, color: Colors.white) : GoogleFonts.roboto(fontSize: 18, color: Colors.white))
               ),
             ), 
             duration: Duration(milliseconds: 500),

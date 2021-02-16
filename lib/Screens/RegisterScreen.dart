@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:password_strength/password_strength.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../env.dart';
 import '../Classes/UserInformation.dart';
@@ -16,7 +17,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  Widget registerButtonName = Text(Dictionairy.words["Register"][UserInformation.language], style: TextStyle(fontSize: 18),);
+  Widget registerButtonName = Text(Dictionairy.words["Register"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18));
 
   String email = "";
   String fullName = "";
@@ -151,7 +152,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: Dictionairy.words["Email"][UserInformation.language]
+                                        hintText: Dictionairy.words["Email"][UserInformation.language],
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()
                                       ),
                                     ),
                                   ),
@@ -211,7 +213,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: Dictionairy.words["Full Name"][UserInformation.language]
+                                        hintText: Dictionairy.words["Full Name"][UserInformation.language],
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()
                                       ),
                                     ),
                                   ),
@@ -241,7 +244,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -323,7 +326,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 border: InputBorder.none,
                                                 isDense: true,
                                                 contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                                hintText: Dictionairy.words["Phone Number"][UserInformation.language]
+                                                hintText: Dictionairy.words["Phone Number"][UserInformation.language],
+                                                hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()
                                               ),
                                             ),
                                           ),
@@ -390,7 +394,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: Dictionairy.words["Password"][UserInformation.language]
+                                        hintText: Dictionairy.words["Password"][UserInformation.language],
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()
                                       ),
                                     ),
                                   ),
@@ -450,7 +455,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: Dictionairy.words["Confirm Password"][UserInformation.language]
+                                        hintText: Dictionairy.words["Confirm Password"][UserInformation.language],
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()
                                       ),
                                     ),
                                   ),
@@ -486,7 +492,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   }).then((result){
                                     var response = json.decode(result.body);
                                     setState(() {
-                                      registerButtonName = Text(Dictionairy.words["Register"][UserInformation.language], style: TextStyle(fontSize: 18),);
+                                      registerButtonName = Text(Dictionairy.words["Register"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18));
                                     });
                                     if(response["error"] != null){
                                       if (response["error"] == "ER_DUP_ENTRY"){
@@ -558,7 +564,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Container(
-                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language])),
+                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto(),)),
                                 ),
                               ),
                               Expanded(
@@ -609,7 +615,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
-                                      child: Text(Dictionairy.words["Go Back"][UserInformation.language]),
+                                      child: Text(Dictionairy.words["Go Back"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto(),),
                                     ),
                                   ],
                                 ),
@@ -642,7 +648,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(notificationMessage, style: TextStyle(fontSize: 20, color: Colors.white),)
+                child: Text(notificationMessage, style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18, color: Colors.white) : GoogleFonts.roboto(fontSize: 18, color: Colors.white),)
               ),
             ), 
             duration: Duration(milliseconds: 500),

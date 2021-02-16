@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:shop_app/Classes/UserInformation.dart';
@@ -17,7 +18,7 @@ class PinScreen extends StatefulWidget {
 class _PinScreenState extends State<PinScreen> {
   String pin = "";
   String newPassword = "";
-  Widget theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: TextStyle(fontSize: 18),);
+  Widget theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18));
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -101,7 +102,7 @@ class _PinScreenState extends State<PinScreen> {
                                   color: Colors.blue.withOpacity(0.1),
                                   border: Border.all(width: 2, color: Colors.black.withOpacity(0.1))
                                 ),
-                                child: Text(Dictionairy.words["Check your email for the pin"][UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75)),),
+                                child: Text(Dictionairy.words["Check your email for the pin"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()),
                               ),
                               Container(
                                 margin: EdgeInsets.only(bottom: 10),
@@ -157,7 +158,8 @@ class _PinScreenState extends State<PinScreen> {
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: 'Pin'
+                                        hintText: 'Pin',
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto(),
                                       ),
                                     ),
                                   ),
@@ -211,12 +213,14 @@ class _PinScreenState extends State<PinScreen> {
                                       style: TextStyle(
                                         fontSize: 15,
                                       ),
+                                      obscureText: true,
                                       cursorColor: Colors.black54,
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         isDense: true,
                                         contentPadding: EdgeInsets.symmetric(vertical: 10),
-                                        hintText: Dictionairy.words["New Password"][UserInformation.language]
+                                        hintText: Dictionairy.words["New Password"][UserInformation.language],
+                                        hintStyle: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto(),
                                       ),
                                     ),
                                   ),
@@ -237,7 +241,7 @@ class _PinScreenState extends State<PinScreen> {
                                     "pin": pin
                                   }).then((result){
                                     setState(() {
-                                      theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: TextStyle(fontSize: 18),);
+                                      theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto());
                                     });
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
@@ -295,7 +299,7 @@ class _PinScreenState extends State<PinScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Container(
-                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language])),
+                                  child: Center(child: Text(Dictionairy.words["or"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto(),)),
                                 ),
                               ),
                               Expanded(
@@ -319,7 +323,8 @@ class _PinScreenState extends State<PinScreen> {
                           child: Center(
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
                               },
                               child: Container(
                                 constraints: BoxConstraints(maxWidth: 175),
@@ -346,7 +351,7 @@ class _PinScreenState extends State<PinScreen> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
-                                      child: Text(Dictionairy.words["Go Back"][UserInformation.language]),
+                                      child: Text(Dictionairy.words["Go Back"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()),
                                     ),
                                   ],
                                 ),
@@ -379,7 +384,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(notificationMessage, style: TextStyle(fontSize: 20, color: Colors.white),)
+                child: Text(notificationMessage, style: UserInformation.language == "ar" ? GoogleFonts.almarai(color: Colors.white, fontSize: 18) : GoogleFonts.roboto(color: Colors.white, fontSize: 18))
               ),
             ), 
             duration: Duration(milliseconds: 500),

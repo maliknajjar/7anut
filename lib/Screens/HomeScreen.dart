@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 
 import '../Screens/LoadingLogoScreen.dart';
@@ -149,9 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               jsonDecode(products[i]["name"])[UserInformation.language],
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: theWidth * 0.035,
-                              ),
+                              style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: theWidth * 0.035) : GoogleFonts.roboto(fontSize: theWidth * 0.035),
                             ),
                           ),
                         ),

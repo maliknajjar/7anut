@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../Classes/Functions.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
@@ -59,7 +61,7 @@ class TheDrawer extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: Text(UserInformation.fullName.substring(0, 1), style: TextStyle(fontSize: 50, color: Colors.black.withOpacity(0.75)),),
+                          child: Text(UserInformation.fullName.substring(0, 1), style: GoogleFonts.almarai(fontSize: 50)),
                         ),
                         Container(
                           margin: EdgeInsets.only(
@@ -71,9 +73,9 @@ class TheDrawer extends StatelessWidget {
                             children: [
                               Container(
                                 width: 182.5,
-                                child: Text(UserInformation.fullName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),), overflow: TextOverflow.fade, maxLines: 2, softWrap: true,),
+                                child: Text(UserInformation.fullName, style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),), overflow: TextOverflow.fade, maxLines: 2, softWrap: true,),
                               ),
-                              Text(UserInformation.email)
+                              Text(UserInformation.email, style: GoogleFonts.almarai(),)
                             ],
                           ),
                         )
@@ -109,7 +111,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.person_outline, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text(Dictionairy.words["Profile"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Profile"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -130,7 +132,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.search, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text(Dictionairy.words["Search"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Search"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -151,7 +153,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.shopping_cart_outlined, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text(Dictionairy.words["Basket"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Basket"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -172,7 +174,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.location_on_outlined, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text(Dictionairy.words["Addresses"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Addresses"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -193,7 +195,7 @@ class TheDrawer extends StatelessWidget {
                                     Icon(Icons.access_time, size: 32, color: Colors.black.withOpacity(0.75),),
                                     Container(
                                       margin: EdgeInsets.only(left: 30),
-                                      child: Text(Dictionairy.words["Orders"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                      child: Text(Dictionairy.words["Orders"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                                     )
                                   ],
                                 ),
@@ -212,7 +214,7 @@ class TheDrawer extends StatelessWidget {
                               Icon(Icons.logout, size: 32, color: Colors.black.withOpacity(0.75),),
                               Container(
                                 margin: EdgeInsets.only(left: 30),
-                                child: Text(Dictionairy.words["Sign Out"][UserInformation.language], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                child: Text(Dictionairy.words["Sign Out"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
                               )
                             ],
                           ),
