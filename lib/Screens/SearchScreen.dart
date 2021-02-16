@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../Classes/Procucts.dart';
 import '../Classes/Basket.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+
+import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String searchTerm;
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
         centerTitle: true,
         title: Text(
           Dictionairy.words["Search"][UserInformation.language],
-          style: TextStyle(
+          style: GoogleFonts.almarai(
             color: Colors.black.withOpacity(0.75),
           ),
         ),
@@ -78,6 +81,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: TextField(
                     onSubmitted: (string){
                       setState(() {
+                        if (string == ""){
+                          searchTerm = null;
+                          return;
+                        }
                         searchTerm = string;                  
                       });
                     },
@@ -89,14 +96,25 @@ class _SearchScreenState extends State<SearchScreen> {
                       border: InputBorder.none,
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(vertical: 10),
-                      hintText: Dictionairy.words["Search"][UserInformation.language]
+                      hintText: Dictionairy.words["Search"][UserInformation.language],
+                      hintStyle: GoogleFonts.almarai()
                     ),
                   ),
                 ),
               ),
             ),
             searchTerm == null 
-            ? Container()
+            ? Container(
+              height: MediaQuery.of(context).size.height - 200, 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(Dictionairy.words["Search"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 40),),
+                  Icon(Icons.search, size: 40),
+                ],
+              ),
+            )
             : Container(
               margin: EdgeInsets.only(top: 20),
               child: Column(
@@ -104,7 +122,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ? [
                   Container(
                     padding: EdgeInsets.all(15),
-                    child: Text("No Results", style: TextStyle(fontSize: 22),),
+                    child: Text("No Results", style: GoogleFonts.almarai(fontSize: 22),),
                   )
                 ]
                 : Products.searchProductsByName(searchTerm).map((e){
@@ -155,7 +173,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   Basket.getQtyById(
                                     e["ID"].toString(),
                                   ),
-                                  style: TextStyle(
+                                  style: GoogleFonts.almarai(
                                     fontSize: 110,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black.withOpacity(0.5),
@@ -171,9 +189,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(e["Name"], style: TextStyle(fontSize: 16),),
-                                    Text(e["price"].toString() + " DT", style: TextStyle(fontSize: 16),),
-                                    Text(e["size"].toString(), style: TextStyle(fontSize: 16),),
+                                    Text(e["Name"], style: GoogleFonts.almarai(fontSize: 16),),
+                                    Text(e["price"].toString() + " DT", style: GoogleFonts.almarai(fontSize: 16),),
+                                    Text(e["size"].toString(), style: GoogleFonts.almarai(fontSize: 16),),
                                   ],
                                 ),
                               ),
@@ -207,7 +225,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       )
                                     ],
                                   ),
-                                  child: Center(child: Text("+", style: TextStyle(fontSize: 25),)),
+                                  child: Center(child: Text("+", style: GoogleFonts.almarai(fontSize: 25),)),
                                 ),
                               ),
                               InkWell(
@@ -231,7 +249,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       )
                                     ],
                                   ),
-                                  child: Center(child: Text("-", style: TextStyle(fontSize: 25),)),
+                                  child: Center(child: Text("-", style: GoogleFonts.almarai(fontSize: 25),)),
                                 ),
                               ),
                             ],

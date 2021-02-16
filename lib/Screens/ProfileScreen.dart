@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../Classes/Dictionairy.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -44,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         title: Text(
           Dictionairy.words["Profile"][UserInformation.language],
-          style: TextStyle(
+          style: GoogleFonts.almarai(
             color: Colors.black.withOpacity(0.75),
           ),
         ),
@@ -75,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(Dictionairy.words["Language"][UserInformation.language], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        Text(Dictionairy.words["Language"][UserInformation.language], style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 20),),
                         InkWell(
                           onTap: (){
                             showDialog(
@@ -138,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         child: Row(
                                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: [
-                                                            Text("عربي", style: TextStyle(fontSize: 20),),
+                                                            Text("عربي", style: GoogleFonts.almarai(fontSize: 20),),
                                                             Icon(Icons.language_outlined),
                                                           ],
                                                         ),
@@ -189,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         child: Row(
                                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: [
-                                                            Text("English", style: TextStyle(fontSize: 20),),
+                                                            Text("English", style: GoogleFonts.almarai(fontSize: 20),),
                                                             Icon(Icons.language_outlined),
                                                           ],
                                                         ),
@@ -240,7 +242,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         child: Row(
                                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: [
-                                                            Text("Français", style: TextStyle(fontSize: 20),),
+                                                            Text("Français", style: GoogleFonts.almarai(fontSize: 20),),
                                                             Icon(Icons.language_outlined),
                                                           ],
                                                         ),
@@ -263,13 +265,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               });
                             });
                           },
-                          child: Text(Dictionairy.words["edit"][UserInformation.language], style: TextStyle(color: Colors.blue, fontSize: 20),),
+                          child: Text(Dictionairy.words["edit"][UserInformation.language], style: GoogleFonts.almarai(color: Colors.blue, fontSize: 20),),
                         ),
                       ],
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 20),
-                      child: Text(UserInformation.language == "en" ? "English" : UserInformation.language == "fr" ? "Français" : "عربي", style: TextStyle(fontSize: 20, color: Colors.grey[600]),),
+                      child: Text(UserInformation.language == "en" ? "English" : UserInformation.language == "fr" ? "Français" : "عربي", style: GoogleFonts.almarai(fontSize: 20, color: Colors.grey[600]),),
                     )
                   ],
                 ),
@@ -295,13 +297,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(hintText[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": hintText[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text(Dictionairy.words["edit"][UserInformation.language], style: TextStyle(color: Colors.blue, fontSize: 20),)) : Text(""),
+                        Text(hintText[index], style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 20),),
+                        titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": hintText[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text(Dictionairy.words["edit"][UserInformation.language], style: GoogleFonts.almarai(color: Colors.blue, fontSize: 20),)) : Text(""),
                       ],
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 20),
-                      child: Text(stringArray[index], style: TextStyle(fontSize: 20, color: Colors.grey[600]),),
+                      child: Text(stringArray[index], style: GoogleFonts.almarai(fontSize: 20, color: Colors.grey[600]),),
                     )
                   ],
                 ),

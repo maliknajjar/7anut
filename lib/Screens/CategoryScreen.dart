@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 
 import "../Widgets/CategoryWidget.dart";
@@ -6,7 +7,6 @@ import "../Classes/Basket.dart";
 import '../Classes/Procucts.dart';
 import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
 
 class CategoryScreen extends StatefulWidget {
   
@@ -58,7 +58,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             isScrollable: true,
             tabs: [
               for(var item in Products.categories)
-              Tab(icon: Text(jsonDecode(item["name"])[UserInformation.language], style: TextStyle(color: Colors.black.withOpacity(0.75)),)),
+              Tab(icon: Text(jsonDecode(item["name"])[UserInformation.language], style: GoogleFonts.almarai(color: Colors.black.withOpacity(0.75)),)),
             ],
           ),
         ),
@@ -67,7 +67,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             TabBarView(
               children: [
                 for(var item in Products.categories)
-                CategoryWidget(jsonDecode(item["name"])[UserInformation.language], refresh),
+                CategoryWidget(jsonDecode(item["name"])["en"], refresh),
               ],
             ),
             AnimatedPositioned(
@@ -105,7 +105,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           color: Colors.black.withOpacity(0.75),
                         ),
                       ),
-                      Text(Dictionairy.words["Go to Basket"][UserInformation.language], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
+                      Text(Dictionairy.words["Go to Basket"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                     ],
                   ),
                 ),

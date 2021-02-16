@@ -183,7 +183,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   InkWell(
                     onTap: (){
-                      Navigator.of(context).pushNamed("/profile");
+                      Navigator.of(context).pushNamed("/profile")
+                      .then((value){
+                        setState(() {
+                                                  
+                        });
+                      });
                     },
                     child: Icon(
                       Icons.person_outline,
