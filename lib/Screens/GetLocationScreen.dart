@@ -9,8 +9,9 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
-import '../Classes/Functions.dart';
+
 import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../Classes/Dictionairy.dart';
 
 class GetLocationScreen extends StatefulWidget {
@@ -149,7 +150,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                       children: [
                                         Container(
                                           margin: EdgeInsets.only(bottom: 20, top: 20),
-                                          child: Text(Dictionairy.words["your location is not covered"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                          child: Text(Dictionairy.words["your location is not covered"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                         ),
                                       ],
                                     ),
@@ -183,7 +184,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                               color: Colors.yellow[100],
                                               borderRadius: BorderRadius.circular(10),
                                             ),
-                                            child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                            child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                                           ),
                                         ),
                                       ),
@@ -256,7 +257,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: Dictionairy.words["Search"][UserInformation.language]
+                          hintText: Dictionairy.words["Search"][UserInformation.language],
+                          hintStyle: GoogleFonts.almarai()
                         ),
                         onSubmitted: (string){
                           http.get("https://api.mapbox.com/geocoding/v5/mapbox.places/$string.json?access_token=pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA")
@@ -285,7 +287,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                             children: [
                                               Container(
                                                 margin: EdgeInsets.only(bottom: 20, top: 20),
-                                                child: Text(Dictionairy.words["didn not find any results"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                                child: Text(Dictionairy.words["didn not find any results"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                               ),
                                             ],
                                           ),
@@ -319,7 +321,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                                     color: Colors.yellow[100],
                                                     borderRadius: BorderRadius.circular(10),
                                                   ),
-                                                  child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                                  child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                                                 ),
                                               ),
                                             ),
@@ -375,7 +377,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.add_location_outlined, size: 35,),
-                            Text(Dictionairy.words["choose this location"][UserInformation.language], style: TextStyle(fontSize: 20,),),
+                            Text(Dictionairy.words["choose this location"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20,),),
                           ],
                         )
                       ),
@@ -406,7 +408,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                       children: [
                                         Container(
                                           margin: EdgeInsets.only(bottom: 20, top: 20),
-                                          child: Text(Dictionairy.words["you need to specify a location"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                                          child: Text(Dictionairy.words["you need to specify a location"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                         ),
                                       ],
                                     ),
@@ -440,7 +442,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                               color: Colors.yellow[100],
                                               borderRadius: BorderRadius.circular(10),
                                             ),
-                                            child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                                            child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                                           ),
                                         ),
                                       ),
@@ -585,7 +587,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                         children: [
                           Container(
                             margin: EdgeInsets.only(bottom: 20, top: 20),
-                            child: Text(Dictionairy.words["your location is not covered"][UserInformation.language], style: TextStyle(fontSize: 20),),
+                            child: Text(Dictionairy.words["your location is not covered"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                           ),
                         ],
                       ),
@@ -619,7 +621,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                 color: Colors.yellow[100],
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Text(Dictionairy.words["Ok"][UserInformation.language], style: TextStyle(fontSize: 16),),
+                              child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                             ),
                           ),
                         ),
