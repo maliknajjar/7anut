@@ -60,6 +60,7 @@ class _MyAppState extends State<MyApp> {
           if(response["error"] != null){
             print(response["error"]);
             prefs.remove("sessionID");
+            UserInformation();
             setState(() {
               isLoading = false;
               isLoggedIn = false;

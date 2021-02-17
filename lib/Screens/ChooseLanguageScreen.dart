@@ -43,6 +43,12 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context).settings.arguments;
+    if(args == null){
+      print("null");
+    }else{
+      print("nice");
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -122,7 +128,11 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                   SharedPreferences.getInstance().then((value){
                                     value.setString("language", "ar").then((theValue){
                                       UserInformation();    // refresh the UserInformation class
-                                      Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                                      if(args == null){
+                                        Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                                      }else{
+                                        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                      }
                                     });
                                   });
                                 },
@@ -159,7 +169,11 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                   SharedPreferences.getInstance().then((value){
                                     value.setString("language", "en").then((theValue){
                                       UserInformation();    // refresh the UserInformation class
-                                      Navigator.of(context).pushNamed("/login");
+                                      if(args == null){
+                                        Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                                      }else{
+                                        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                      }
                                     });
                                   });
                                 },
@@ -196,7 +210,11 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                   SharedPreferences.getInstance().then((value){
                                     value.setString("language", "fr").then((theValue){
                                       UserInformation();    // refresh the UserInformation class
-                                      Navigator.of(context).pushNamed("/login");
+                                      if(args == null){
+                                        Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                                      }else{
+                                        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                                      }
                                     });
                                   });
                                 },

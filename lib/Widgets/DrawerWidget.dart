@@ -201,6 +201,26 @@ class TheDrawer extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            Container(
+                              width: double.infinity,
+                              height: 25,
+                            ),
+                            InkWell(
+                              onTap: (){
+                                Navigator.of(context).pushNamed("/language", arguments: {"pop"});
+                              },
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.language_outlined, size: 32, color: Colors.black.withOpacity(0.75),),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 30),
+                                      child: Text(Dictionairy.words["Language"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75),),),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),

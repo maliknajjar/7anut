@@ -633,7 +633,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           AnimatedPositioned(
             bottom: notificationPlace,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: notificationColor,

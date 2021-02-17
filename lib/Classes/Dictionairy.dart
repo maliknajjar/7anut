@@ -545,5 +545,10 @@ class Dictionairy {
       "fr": "Coordonnées",
       "ar": "احداثيات",
     },
+    "the pin is not valid anymore": {
+      "en": "the Pin is not valid anymore",
+      "fr": "la Pin n'est plus valide",
+      "ar": "انتهت صلاحيته Pinرقم ال",
+    },
   };
 }
