@@ -31,7 +31,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   @override
   Widget build(BuildContext context) {
     final String token = 'pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA';
-    final String style = 'mapbox://styles/malik446644/ckjsiixy57o7r19oa0j65zen3';
+    String style = 'mapbox://styles/malik446644/ckl98dh5k0oyg17mqozor6l0u';
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -659,7 +659,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
 void drawTheCircle(MapboxMapController controller, LatLng center, double radius) async {
   await controller.addFill(FillOptions(
     fillColor: '#fff700',
-    fillOpacity: 0.2,
+    fillOpacity: 0.1,
     geometry: [
       circlePoints(center, radius),
     ]

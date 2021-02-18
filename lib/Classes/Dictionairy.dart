@@ -288,7 +288,7 @@ class Dictionairy {
     "Classic Address": {
       "en": "Classic Address",
       "fr": "Adresse classique",
-      "ar": "عنوان كلاسيكي",
+      "ar": "عنوان تقليدي",
     },
     "Map doesnt work on the Web version": {
       "en": "Map doesnt work on the Web version",
@@ -313,12 +313,12 @@ class Dictionairy {
     "additional information (optional)\nex: apartment number: 21": {
       "en": "additional information (optional)\nex: apartment number: 21",
       "fr": "informations complémentaires (optionnel)\nex: numéro d'appartement: 21",
-      "ar": "معلومات إضافية (اختيارية) \nمثال: رقم الشقة 21",
+      "ar": "معلومات إضافية (اختياري) \nمثال: رقم الشقة 21",
     },
     "instructions (optional)\nex: dont ring the bell": {
       "en": "instructions (optional)\nex: dont ring the bell",
       "fr": "instructions (optionnel)\n ex: ne pas sonner la cloche",
-      "ar": "تعليمات (اختيارية)\n مثال: لا ترن الجرس",
+      "ar": "تعليمات (اختياري)\n مثال: لا ترن الجرس",
     },
     "information": {
       "en": "information",
@@ -495,8 +495,8 @@ class Dictionairy {
       "fr": "Changer le mot de passe",
       "ar": "تغيير الرمز السري",
     },
-    "Check your email for the pin": {
-      "en": "Check your email for the pin",
+    "Check your email for pin": {
+      "en": "check your email for pin",
       "fr": "Vérifiez votre e-mail pour le pin",
       "ar": "pinتحقق من بريدك الإلكتروني للحصول على رقم ال",
     },

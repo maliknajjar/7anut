@@ -102,7 +102,7 @@ class _PinScreenState extends State<PinScreen> {
                                   color: Colors.blue.withOpacity(0.1),
                                   border: Border.all(width: 2, color: Colors.black.withOpacity(0.1))
                                 ),
-                                child: Text(Dictionairy.words["Check your email for the pin"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()),
+                                child: Text(Dictionairy.words["Check your email for pin"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto()),
                               ),
                               Container(
                                 margin: EdgeInsets.only(bottom: 10),
@@ -384,7 +384,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(Dictionairy.words[notificationMessage][UserInformation.language], style: GoogleFonts.almarai(color: Colors.white, fontSize: 18))
+                child: Text(Dictionairy.words["Search"][UserInformation.language], style: GoogleFonts.almarai(color: Colors.white, fontSize: 18))
               ),
             ), 
             duration: Duration(milliseconds: 500),
