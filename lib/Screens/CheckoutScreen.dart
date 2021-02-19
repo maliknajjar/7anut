@@ -163,7 +163,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           ),
                                                         ),
                                                       ),
-                                                      Addresses.getCurrentUserAddresses().length != 0
+                                                      10 /* replace addresses length with the 10 */ != 0
                                                       ? Container(
                                                         margin: EdgeInsets.only(bottom: 10, top: 20),
                                                         child: Text(Dictionairy.words["Addresses"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 20),),
@@ -173,7 +173,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                         alignment: Alignment.center,
                                                         child: Text(Dictionairy.words["There are no Addesses"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.5)),)
                                                       ),
-                                                      for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
+                                                      for (var i = 0; i < 10 /* replace addresses length with the 10 */; i++)
                                                       GestureDetector(
                                                         onTap: (){
                                                           Navigator.of(context).pop(i);
@@ -207,7 +207,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           child: Row(
                                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                             children: [
-                                                              Text(Addresses.getCurrentUserAddresses()[i]["title"], style: GoogleFonts.almarai(fontSize: 20),),
+                                                              Text("address title", style: GoogleFonts.almarai(fontSize: 20),),
                                                               Icon(Icons.location_on_outlined)
                                                             ],
                                                           ),
@@ -226,8 +226,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 }).then((value){
                                   if(value != null){
                                     setState((){
-                                      chosenAddress = Addresses.getCurrentUserAddresses()[value];
-                                      addressName = Addresses.getCurrentUserAddresses()[value]["title"];
+                                      chosenAddress = 11 /* replace 11 with the chosen address json */;
+                                      addressName = "replace this with chosen address title";
                                       print(chosenAddress);
                                     });
                                   }

@@ -137,6 +137,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                             elevation: 0,
                             backgroundColor: Colors.yellow[50],
                             child: Container(
+                              constraints: BoxConstraints(
+                                maxWidth: 300
+                              ),
                               padding: EdgeInsets.all(15),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -279,6 +282,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                                   elevation: 0,
                                   backgroundColor: Colors.yellow[50],
                                   child: Container(
+                                    constraints: BoxConstraints(
+                                      maxWidth: 300
+                                    ),
                                     padding: EdgeInsets.all(15),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -362,6 +368,29 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      height: double.infinity,
+                      margin: EdgeInsets.only(right: 10),
+                      width: 75,
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[50],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            color: Colors.black.withOpacity(0.5),
+                            offset: Offset(5, 5)
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                      child: Center(child: Icon(Icons.arrow_back, size: 35,),),
+                    ),
+                  ),
                   Expanded(
                     child: InkWell(
                       onTap: (){
@@ -404,6 +433,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                             elevation: 0,
                             backgroundColor: Colors.yellow[50],
                             child: Container(
+                              constraints: BoxConstraints(
+                                maxWidth: 300
+                              ),
                               padding: EdgeInsets.all(15),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -622,6 +654,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               elevation: 0,
               backgroundColor: Colors.yellow[50],
               child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: 300,
+                ),
                 padding: EdgeInsets.all(15),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

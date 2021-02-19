@@ -152,14 +152,132 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               if (theMap["type"] == "password") {
                 if(estimatePasswordStrength(theMap["inputs"].values.toList()[1]) < 0.3){
                   // notify("your password is weak", 2000, Colors.red);
-                  Functions.alert(context, "Weak", "your password is weak");
+                  // Functions.alert(context, "Weak", "your password is weak");
+                  showDialog(context: context, builder: (BuildContext context){
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0,
+                      backgroundColor: Colors.yellow[50],
+                      child: Container(
+                        constraints: BoxConstraints(
+                          maxWidth: 300
+                        ),
+                        padding: EdgeInsets.all(15),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(bottom: 40, top: 20),
+                              child: Text(Dictionairy.words["your password is weak"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.black.withOpacity(0.1),
+                                          Colors.black.withOpacity(0.025),
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      )
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 5,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow[100],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    );
+                  });
                   return;
                 }
               }
               for (var item in theMap["inputs"].values.toList()) {
                 if(item == ""){
                   print("input is empty");
-                  Functions.alert(context, "input is empty", "you must fill all the fields");
+                  // Functions.alert(context, "input is empty", "you must fill all the fields");
+                  showDialog(context: context, builder: (BuildContext context){
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0,
+                      backgroundColor: Colors.yellow[50],
+                      child: Container(
+                        constraints: BoxConstraints(
+                          maxWidth: 300
+                        ),
+                        padding: EdgeInsets.all(15),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(bottom: 40, top: 20),
+                              child: Text(Dictionairy.words["Make sure to fill all the fields"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.black.withOpacity(0.1),
+                                          Colors.black.withOpacity(0.025),
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      )
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 5,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow[100],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    );
+                  });
                   return;
                 }
               }
@@ -187,7 +305,66 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         Functions.logout(context, "Session is expired", Colors.red);
                         return;
                       }
-                      Functions.alert(context, "error", json.decode(value.body)["error"]);
+                      // Functions.alert(context, "error", json.decode(value.body)["error"]);
+                      showDialog(context: context, builder: (BuildContext context){
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 0,
+                          backgroundColor: Colors.yellow[50],
+                          child: Container(
+                            constraints: BoxConstraints(
+                              maxWidth: 300
+                            ),
+                            padding: EdgeInsets.all(15),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 40, top: 20),
+                                  child: Text(Dictionairy.words[json.decode(value.body)["error"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                      onTap: (){
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(12),
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Colors.black.withOpacity(0.1),
+                                              Colors.black.withOpacity(0.025),
+                                            ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                          )
+                                        ),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 15,
+                                            vertical: 5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.yellow[100],
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        );
+                      });
                       return;
                     }
                     if(json.decode(value.body)["value"] != null){

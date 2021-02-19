@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -99,26 +101,23 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 item["price"].toString());
                             widget.refresh();
                           },
-                          child: Container(
-                            height: theWidth < 600 ? theWidth * 0.085 : 50,
-                            width: theWidth < 600 ? theWidth * 0.085 : 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(theWidth < 600 ? theWidth * 0.035 : 20),
-                              ),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(2, 2),
-                                ),
-                              ],
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(theWidth < 600 ? theWidth * 0.035 : 20),
                             ),
-                            child: Icon(
-                              Icons.add,
-                              size: theWidth < 600 ? theWidth * 0.07 : 40,
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                              child: Container(
+                                height: theWidth < 600 ? theWidth * 0.085 : 50,
+                                width: theWidth < 600 ? theWidth * 0.085 : 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow[400].withOpacity(0.5),
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  size: theWidth < 600 ? theWidth * 0.07 : 40,
+                                ),
+                              ),
                             ),
                           ),
                         ),

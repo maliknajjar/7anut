@@ -14,21 +14,4 @@ abstract class Functions extends StatelessWidget {
       });
     });
   }
-  static void alert(BuildContext context, String title, String content){
-    showDialog(
-      context: context,
-      builder: (context) => new AlertDialog(
-        title: new Text(title),
-        content: Text(content),
-        actions: <Widget>[
-          new TextButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop(); // dismisses only the dialog and returns nothing
-            },
-            child: new Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
 }

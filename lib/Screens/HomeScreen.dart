@@ -8,8 +8,8 @@ import '../Widgets/DrawerWidget.dart';
 import '../Classes/Procucts.dart';
 import '../env.dart';
 
-import '../Classes/Adresses.dart';
 import '../Classes/Basket.dart';
+import '../Classes/Adresses.dart';
 import 'package:shop_app/Classes/UserInformation.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,9 +31,16 @@ class _HomeScreenState extends State<HomeScreen> {
     }).then((value){
       http.get(env.apiUrl + "/api/products/").then((r){
         if (this.mounted) {
-          setState(() {
-            dataIsAvailable = true;
-            Products.products = json.decode(r.body);
+          http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
+          .then((value){
+            Addresses.addressesBasket = jsonDecode(value.body);
+            print(Addresses.addressesBasket[0]);
+            
+            // what happens when you fetch all needed data
+            setState(() {
+              dataIsAvailable = true;
+              Products.products = json.decode(r.body);
+            });
           });
         }
       });
@@ -43,9 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   initState() {
     super.initState();
-
-    // adding the stored addresses to the address variable array
-    Addresses();
 
     // request categories and products from the server
     requestData();

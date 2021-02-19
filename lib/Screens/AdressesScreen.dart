@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/Classes/Adresses.dart';
 import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:http/http.dart' as http;
 
 import '../Classes/Adresses.dart';
 import '../Classes/Dictionairy.dart';
+import '../env.dart';
 
 class AdressesScreen extends StatefulWidget {
   @override
@@ -13,10 +16,11 @@ class AdressesScreen extends StatefulWidget {
 }
 
 class _AdressesScreenState extends State<AdressesScreen> {
-  // List<dynamic> currentUsersAddresses = Addresses.getCurrentUserAddresses();
 
   @override
   Widget build(BuildContext context) {
+    List addresses = Addresses.addressesBasket;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -47,7 +51,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
           )
         ],
       ),
-      body: !Addresses.isEmpty()
+      body: addresses.isEmpty // check if there are addresses
         ? InkWell(
           onTap: (){
             Navigator.of(context).pushNamed("/addaddress").then((value){
@@ -107,7 +111,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
+                for (var i = 0; i < addresses.length; i++)
                 InkWell(
                   hoverColor: Colors.white.withOpacity(0),
                   focusColor: Colors.white.withOpacity(0),
@@ -139,12 +143,9 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                       margin: EdgeInsets.only(bottom: 20, top: 20),
                                       child: Text(Dictionairy.words["Address Information"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                     ),
-                                    for (var item in Addresses.getCurrentUserAddresses()[i].values)
-                                    if (item != null)
-                                    Text(item.toString().contains("{latitude: ") 
-                                      ? item.toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", "\n ")
-                                      : item.toString(),
-                                    ),
+                                    for (var item in jsonDecode(addresses[i]["addresse"]).values) /* loop information off an address from addresses array */
+                                    Text(item),
+                                    // item.toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", "\n ")
                                   ],
                                 ),
                               ),
@@ -187,15 +188,6 @@ class _AdressesScreenState extends State<AdressesScreen> {
                           ),
                         )
                       );
-                    }).then((value){
-                      print(i);
-                      if (value == null) return;
-                      if (value){
-                        setState(() {
-                          Addresses.deleteAddress(i);
-                          print("done");
-                        });
-                      }
                     });
                   },
                   child: Container(
@@ -223,7 +215,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          child: Text(Addresses.getCurrentUserAddresses()[i]["title"], style: GoogleFonts.almarai(fontSize: 25),),
+                          child: Text(jsonDecode(addresses[i]["addresse"])["title"], style: GoogleFonts.almarai(fontSize: 25),),
                         ),
                         GestureDetector(
                           onTap: (){
@@ -251,7 +243,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                         children: [
                                           InkWell(
                                             onTap: (){
-                                              Navigator.of(context, rootNavigator: true).pop(false);
+                                              Navigator.of(context).pop();
                                             },
                                             child: Container(
                                               margin: EdgeInsets.only(right: 10),
@@ -282,7 +274,13 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                           ),
                                           InkWell(
                                             onTap: (){
-                                              Navigator.of(context, rootNavigator: true).pop(true);
+                                              print("nice");
+                                              // http.post(env.apiUrl + "/api/removeuseraddress", body: {"sessionID": UserInformation.sessionID, "email": UserInformation.email, "addressID": addresses[i]["ID"]})
+                                              // .then((value){
+                                                // print(value.body);
+                                                // if (value.body != "success") return;
+                                                // Navigator.of(context).pop(true);
+                                              // });
                                             },
                                             child: Container(
                                               padding: EdgeInsets.all(2),
@@ -317,14 +315,11 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                 )
                               );
                             }).then((value){
-                              print(i);
                               if (value == null) return;
-                              if (value){
-                                setState(() {
-                                  Addresses.deleteAddress(i);
-                                  print("done");
-                                });
-                              }
+                              // addresses.remove(addresses[i]);
+                              setState(() {
+                                Addresses.addressesBasket.remove(addresses[i]);                                              
+                              });
                             });
                           },
                           child: Container(

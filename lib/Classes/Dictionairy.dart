@@ -548,7 +548,7 @@ class Dictionairy {
     "you need to specify a location": {
       "en": "you need to specify a location",
       "fr": "vous devez spécifier un emplacement",
-      "ar": "عليك إلى تحديد الموقع",
+      "ar": "عليك تحديد الموقع",
     },
     "location": {
       "en": "Coordinates",
