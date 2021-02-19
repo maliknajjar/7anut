@@ -30,7 +30,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       initialIndex: int.parse(index),
       length: Products.categories.length,
       child: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black.withOpacity(0.75),

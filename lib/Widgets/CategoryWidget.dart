@@ -139,7 +139,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             item["Name"],
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                              fontSize: theWidth < 600 ? theWidth * 0.04 : 35,
+                              fontSize: theWidth < 600 ? theWidth * 0.04 : 24,
                             ),
                           ),
                           Row(
@@ -149,14 +149,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 item["size"],
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 35,
+                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
                                     color: Colors.grey),
                               ),
                               Text(
                                 item["price"].toString() + "DT",
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 35,
+                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
                                     color: Colors.grey),
                               ),
                             ],

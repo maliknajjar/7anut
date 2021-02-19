@@ -82,13 +82,24 @@ class _BasketScreenState extends State<BasketScreen> {
         ),
       )
       : Stack(
+        alignment: Alignment.topCenter,
         children: [
-          SingleChildScrollView(
+          Container(
             padding: EdgeInsets.only(bottom: 60),
             child: Container(
-              color: Colors.yellow[50],
-              padding: EdgeInsets.only(bottom: 0, top: 10),
-              child: Column(
+              width: 600,
+              decoration: BoxDecoration(
+                color: Colors.yellow[50],
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 10,
+                    spreadRadius: 10,
+                    color: Colors.black.withOpacity(0.1),
+                  )
+                ]
+              ),
+              child: ListView(
+                shrinkWrap: true,
                 children: [
                   for (int i = 0; i < Basket.basketItems.length; i++)
                     Container(
@@ -184,7 +195,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                       child: Text(
                                         "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
                                         style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 16,
                                           color: Colors.grey[900],
                                         ),
                                       ),
@@ -195,7 +206,7 @@ class _BasketScreenState extends State<BasketScreen> {
                             ],
                           ),
                           Container(
-                            height: 100,
+                            height: 105,
                             width: 90,
                             child: Column(
                               mainAxisAlignment:
@@ -313,7 +324,7 @@ class _BasketScreenState extends State<BasketScreen> {
                   ],
                 ),
               ),
-            ),
+          ),
             Align(
               alignment: Alignment.bottomCenter,
               child: InkWell(
@@ -342,7 +353,7 @@ class _BasketScreenState extends State<BasketScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(Dictionairy.words["Checkout"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
-                          Container(margin: EdgeInsets.only(top: 5), child: Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),))
+                          Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                         ],
                       ),
                       Container(child: Icon(Icons.arrow_forward), margin: EdgeInsets.only(left: 10),),
