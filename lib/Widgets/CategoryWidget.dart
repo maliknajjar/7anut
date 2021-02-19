@@ -30,17 +30,17 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       child: Container(
         color: Colors.white,
         constraints: BoxConstraints(
-          // maxWidth: 200,
+          maxWidth: 600,
         ),
         child: GridView.count(
           padding: EdgeInsets.only(
-            top: 10,
+            top: theWidth < 600 ? theWidth * 0.05 : 30,
             bottom: 100,
-            right: 10,
-            left: 10,
+            right: theWidth < 600 ? theWidth * 0.05 : 30,
+            left: theWidth < 600 ? theWidth * 0.05 : 30,
           ),
           mainAxisSpacing: 15,
-          crossAxisSpacing: theWidth * 0.05,
+          crossAxisSpacing: theWidth < 600 ? theWidth * 0.05 : 30,
           crossAxisCount: 3,
           childAspectRatio: 0.65,
           children: <Widget>[
@@ -72,7 +72,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.all(
-                              Radius.circular(theWidth * 0.06),
+                              Radius.circular(theWidth < 600 ? theWidth * 0.05 : 35),
                             ),
                             color: Colors.white,
                             boxShadow: [
@@ -87,8 +87,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         ),
                       ),
                       Positioned(
-                        right: theWidth * 0.0225,
-                        top: theWidth * 0.0225,
+                        right: theWidth < 600 ? theWidth * 0.0225 : 15,
+                        top: theWidth < 600 ? theWidth * 0.0225 : 15,
                         child: InkWell(
                           onTap: () {
                             Basket.addItem(
@@ -100,11 +100,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             widget.refresh();
                           },
                           child: Container(
-                            height: theWidth * 0.085,
-                            width: theWidth * 0.085,
+                            height: theWidth < 600 ? theWidth * 0.085 : 50,
+                            width: theWidth < 600 ? theWidth * 0.085 : 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(theWidth * 0.035),
+                                Radius.circular(theWidth < 600 ? theWidth * 0.035 : 20),
                               ),
                               color: Colors.white,
                               boxShadow: [
@@ -118,7 +118,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             ),
                             child: Icon(
                               Icons.add,
-                              size: theWidth * 0.07,
+                              size: theWidth < 600 ? theWidth * 0.07 : 40,
                             ),
                           ),
                         ),
@@ -139,7 +139,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             item["Name"],
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                              fontSize: theWidth * 0.04,
+                              fontSize: theWidth < 600 ? theWidth * 0.04 : 35,
                             ),
                           ),
                           Row(
@@ -149,14 +149,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 item["size"],
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontSize: theWidth * 0.035,
+                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 35,
                                     color: Colors.grey),
                               ),
                               Text(
                                 item["price"].toString() + "DT",
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontSize: theWidth * 0.035,
+                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 35,
                                     color: Colors.grey),
                               ),
                             ],
