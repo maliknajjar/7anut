@@ -435,7 +435,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(notificationMessage, style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18, color: Colors.white) : GoogleFonts.roboto(fontSize: 18, color: Colors.white))
+                child: Text(Dictionairy.words[notificationMessage][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18, color: Colors.white) : GoogleFonts.roboto(fontSize: 18, color: Colors.white))
               ),
             ), 
             duration: Duration(milliseconds: 500),

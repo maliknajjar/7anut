@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var theWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       drawer: TheDrawer(),
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -81,84 +82,86 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: <Widget>[
-          !dataIsAvailable
-          ? LoadingLogo()
-          : Container(
-            padding: EdgeInsets.only(
-              bottom: 54.5,
-            ),
-            color: Colors.white,
-            width: double.infinity,
-            child: GridView.count(
+          !dataIsAvailable ? LoadingLogo() : Center(
+            child: Container(
               padding: EdgeInsets.only(
-                bottom: 15,
-                top: theWidth * 0.025,
-                right: theWidth * 0.015,
-                left: theWidth * 0.015,
+                bottom: 54.5,
               ),
-              mainAxisSpacing: 0,
-              crossAxisSpacing: 0,
-              crossAxisCount: 4,
-              childAspectRatio: 0.64,
-              children: <Widget>[
-                for (var i = 0; i < products.length; i++)
-                InkWell(
-                  onTap: (){
-                    Navigator.of(context).pushNamed("/category", arguments: i).then((value){
-                      if(value == "refresh"){
-                        requestData();
-                        return;
-                      }
-                      setState(() {
-                                            
+              color: Colors.white,
+              constraints: BoxConstraints(
+                maxWidth: 600
+              ),
+              child: GridView.count(
+                padding: EdgeInsets.only(
+                  bottom: 15,
+                  top: theWidth < 600 ? theWidth * 0.025 : 15,
+                  right: theWidth < 600 ? theWidth * 0.025 : 15,
+                  left: theWidth < 600 ? theWidth * 0.025 : 15,
+                ),
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0,
+                crossAxisCount: 4,
+                childAspectRatio: 0.64,
+                children: <Widget>[
+                  for (var i = 0; i < products.length; i++)
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed("/category", arguments: i).then((value){
+                        if(value == "refresh"){
+                          requestData();
+                          return;
+                        }
+                        setState(() {
+                                              
+                        });
                       });
-                    });
-                  },
-                  child: Container(
-                    child: Column(
-                      children: <Widget>[
-                        AspectRatio(
-                          aspectRatio: 1,
-                          child: Container(
-                            margin: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(products[i]["imageUrl"]),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(theWidth * 0.04),
-                              ),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(2, 2),
+                    },
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                              margin: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(products[i]["imageUrl"]),
+                                  fit: BoxFit.cover,
                                 ),
-                              ],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(theWidth < 600 ? theWidth * 0.06 : 35),
+                                ),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(2, 2),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            top: 2.5,
-                          ),
-                          child: Center(
-                            child: Text(
-                              jsonDecode(products[i]["name"])[UserInformation.language],
-                              textAlign: TextAlign.center,
-                              style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: theWidth * 0.035) : GoogleFonts.roboto(fontSize: theWidth * 0.035),
+                          Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.only(
+                              top: 2.5,
+                            ),
+                            child: Center(
+                              child: Text(
+                                jsonDecode(products[i]["name"])[UserInformation.language],
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.almarai(fontSize: theWidth < 600 ? theWidth * 0.035 : 21),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Positioned(

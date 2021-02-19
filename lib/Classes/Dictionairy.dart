@@ -490,6 +490,16 @@ class Dictionairy {
       "fr": "l'email n'existe pas",
       "ar": "البريد الالكتروني غير موجود",
     },
+    "password is wrong": {
+      "en": "password is wrong",
+      "fr": "le mot de passe est incorrect",
+      "ar": "الرمز السري خطأ",
+    },
+    "old password is wrong": {
+      "en": "old password is wrong",
+      "fr": "l'ancien mot de passe est incorrect",
+      "ar": "الرمز السري القديم خطأ",
+    },
     "Change Password": {
       "en": "Change Password",
       "fr": "Changer le mot de passe",
@@ -549,6 +559,11 @@ class Dictionairy {
       "en": "the Pin is not valid anymore",
       "fr": "la Pin n'est plus valide",
       "ar": "انتهت صلاحيته Pinرقم ال",
+    },
+    "no message": {
+      "en": "no message",
+      "fr": "no message",
+      "ar": "no message",
     },
   };
 }

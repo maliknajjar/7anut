@@ -1,4 +1,4 @@
-package app.7anut.7anut
+package app.hanut.hanut
 
 import io.flutter.embedding.android.FlutterActivity
 
