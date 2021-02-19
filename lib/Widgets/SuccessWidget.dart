@@ -47,7 +47,6 @@ class SuccessWidget extends StatelessWidget {
                 Navigator.of(context).pushNamed("/orders");
               },
               child: Container(
-                width: 240,
                 padding: EdgeInsets.only(top: 10,bottom: 10,left: 20,right: 20,),
                 margin: EdgeInsets.only(top: 30),
                 decoration: BoxDecoration(
@@ -63,6 +62,7 @@ class SuccessWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(Dictionairy.words["Go to Orders Page"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, color: Colors.black.withOpacity(0.75)),),

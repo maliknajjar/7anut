@@ -93,265 +93,275 @@ class _AdressesScreenState extends State<AdressesScreen> {
         ),
         )
         : SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.only(
-            top: 20,
-            bottom: 15,
-            left: 15,
-            right: 15,
-          ),
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
-              InkWell(
-                hoverColor: Colors.white.withOpacity(0),
-                focusColor: Colors.white.withOpacity(0),
-                highlightColor: Colors.white.withOpacity(0),
-                splashColor: Colors.white.withOpacity(0),
-                onTap: (){
-                  showDialog(context: context, builder: (BuildContext context){
-                    return Dialog(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      elevation: 0,
-                      backgroundColor: Colors.yellow[50],
-                      child: Container(
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: 40,),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 20, top: 20),
-                                    child: Text(Dictionairy.words["Address Information"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
-                                  ),
-                                  for (var item in Addresses.getCurrentUserAddresses()[i].values)
-                                  if (item != null)
-                                  Text(item.toString().contains("{latitude: ") 
-                                    ? item.toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", "\n ")
-                                    : item.toString(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                InkWell(
-                                  onTap: (){
-                                    Navigator.of(context, rootNavigator: true).pop();
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Colors.black.withOpacity(0.1),
-                                          Colors.black.withOpacity(0.025),
-                                        ],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      )
-                                    ),
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                        vertical: 5,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.yellow[100],
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: 600
+            ),
+            padding: EdgeInsets.only(
+              top: 20,
+              bottom: 15,
+              left: 15,
+              right: 15,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (var i = 0; i < Addresses.getCurrentUserAddresses().length; i++)
+                InkWell(
+                  hoverColor: Colors.white.withOpacity(0),
+                  focusColor: Colors.white.withOpacity(0),
+                  highlightColor: Colors.white.withOpacity(0),
+                  splashColor: Colors.white.withOpacity(0),
+                  onTap: (){
+                    showDialog(context: context, builder: (BuildContext context){
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      )
-                    );
-                  }).then((value){
-                    print(i);
-                    if (value == null) return;
-                    if (value){
-                      setState(() {
-                        Addresses.deleteAddress(i);
-                        print("done");
-                      });
-                    }
-                  });
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.only(
-                    bottom: 10,
-                    top: 10,
-                    left: 15,
-                    right: 15,
-                  ),
-                  margin: EdgeInsets.only(bottom: 15),
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[50],
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 7.5,
-                        spreadRadius: 1,
-                        color: Colors.black.withOpacity(0.25),
-                        offset: Offset(2.5, 2.5),
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(15)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Text(Addresses.getCurrentUserAddresses()[i]["title"], style: GoogleFonts.almarai(fontSize: 25),),
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          showDialog(context: context, builder: (BuildContext context){
-                            return Dialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              elevation: 0,
-                              backgroundColor: Colors.yellow[50],
-                              child: Container(
-                                padding: EdgeInsets.all(15),
+                        elevation: 0,
+                        backgroundColor: Colors.yellow[50],
+                        child: Container(
+                          constraints: BoxConstraints(
+                            maxWidth: 300
+                          ),
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(bottom: 40,),
                                 child: Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.only(bottom: 40, top: 20),
-                                      child: Text(Dictionairy.words["Are you sure you want to delete this address ?"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                      margin: EdgeInsets.only(bottom: 20, top: 20),
+                                      child: Text(Dictionairy.words["Address Information"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        InkWell(
-                                          onTap: (){
-                                            Navigator.of(context, rootNavigator: true).pop(false);
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.only(right: 10),
-                                            padding: EdgeInsets.all(2),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(12),
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.black.withOpacity(0.1),
-                                                  Colors.black.withOpacity(0.025),
-                                                ],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              )
-                                            ),
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 15,
-                                                vertical: 5,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.yellow[100],
-                                                borderRadius: BorderRadius.circular(10),
-                                              ),
-                                              child: Text(Dictionairy.words["Cancel"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: (){
-                                            Navigator.of(context, rootNavigator: true).pop(true);
-                                          },
-                                          child: Container(
-                                            padding: EdgeInsets.all(2),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(12),
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.black.withOpacity(0.1),
-                                                  Colors.black.withOpacity(0.025),
-                                                ],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              )
-                                            ),
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 15,
-                                                vertical: 5,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.yellow[100],
-                                                borderRadius: BorderRadius.circular(10),
-                                              ),
-                                              child: Text(Dictionairy.words["Yes"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
+                                    for (var item in Addresses.getCurrentUserAddresses()[i].values)
+                                    if (item != null)
+                                    Text(item.toString().contains("{latitude: ") 
+                                      ? item.toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", "\n ")
+                                      : item.toString(),
+                                    ),
                                   ],
                                 ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.of(context, rootNavigator: true).pop();
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.black.withOpacity(0.1),
+                                            Colors.black.withOpacity(0.025),
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        )
+                                      ),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                          vertical: 5,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.yellow[100],
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Text(Dictionairy.words["Ok"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               )
-                            );
-                          }).then((value){
-                            print(i);
-                            if (value == null) return;
-                            if (value){
-                              setState(() {
-                                Addresses.deleteAddress(i);
-                                print("done");
-                              });
-                            }
-                          });
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            gradient: LinearGradient(
-                              colors: [Colors.red.withOpacity(0.25), Colors.red[50].withOpacity(0.25)],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
+                            ],
                           ),
+                        )
+                      );
+                    }).then((value){
+                      print(i);
+                      if (value == null) return;
+                      if (value){
+                        setState(() {
+                          Addresses.deleteAddress(i);
+                          print("done");
+                        });
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.only(
+                      bottom: 10,
+                      top: 10,
+                      left: 15,
+                      right: 15,
+                    ),
+                    margin: EdgeInsets.only(bottom: 15),
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[50],
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 7.5,
+                          spreadRadius: 1,
+                          color: Colors.black.withOpacity(0.25),
+                          offset: Offset(2.5, 2.5),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Text(Addresses.getCurrentUserAddresses()[i]["title"], style: GoogleFonts.almarai(fontSize: 25),),
+                        ),
+                        GestureDetector(
+                          onTap: (){
+                            showDialog(context: context, builder: (BuildContext context){
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 0,
+                                backgroundColor: Colors.yellow[50],
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: 300
+                                  ),
+                                  padding: EdgeInsets.all(15),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(bottom: 40, top: 20),
+                                        child: Text(Dictionairy.words["Are you sure you want to delete this address ?"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                            onTap: (){
+                                              Navigator.of(context, rootNavigator: true).pop(false);
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(right: 10),
+                                              padding: EdgeInsets.all(2),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(12),
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Colors.black.withOpacity(0.1),
+                                                    Colors.black.withOpacity(0.025),
+                                                  ],
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                )
+                                              ),
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 15,
+                                                  vertical: 5,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.yellow[100],
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
+                                                child: Text(Dictionairy.words["Cancel"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: (){
+                                              Navigator.of(context, rootNavigator: true).pop(true);
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(2),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(12),
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Colors.black.withOpacity(0.1),
+                                                    Colors.black.withOpacity(0.025),
+                                                  ],
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                )
+                                              ),
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 15,
+                                                  vertical: 5,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.yellow[100],
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
+                                                child: Text(Dictionairy.words["Yes"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              );
+                            }).then((value){
+                              print(i);
+                              if (value == null) return;
+                              if (value){
+                                setState(() {
+                                  Addresses.deleteAddress(i);
+                                  print("done");
+                                });
+                              }
+                            });
+                          },
                           child: Container(
+                            padding: EdgeInsets.all(2),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.red[50],
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 10,
-                                  spreadRadius: 0,
-                                  color: Colors.black.withOpacity(0.25),
-                                  offset: Offset(2.5, 2.5),
-                                )
-                              ],
+                              color: Colors.white,
+                              gradient: LinearGradient(
+                                colors: [Colors.red.withOpacity(0.25), Colors.red[50].withOpacity(0.25)],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
                             ),
-                            padding: EdgeInsets.all(5),
-                            child: Icon(Icons.delete_outline, size: 30, color: Colors.red,),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red[50],
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 10,
+                                    spreadRadius: 0,
+                                    color: Colors.black.withOpacity(0.25),
+                                    offset: Offset(2.5, 2.5),
+                                  )
+                                ],
+                              ),
+                              padding: EdgeInsets.all(5),
+                              child: Icon(Icons.delete_outline, size: 30, color: Colors.red,),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

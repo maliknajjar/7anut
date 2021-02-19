@@ -79,95 +79,46 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
               padding: EdgeInsets.only(
                 bottom: 75
               ),
-              child: Container(
-                padding: EdgeInsets.all(15),
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(Dictionairy.words["Orders"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
-                        Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            bottom: 20,
-                            top: 10,
-                          ),
-                          padding: EdgeInsets.only(
-                            top: 15,
-                            bottom: 15,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.yellow[100],
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 7.5,
-                                spreadRadius: 1,
-                                color: Colors.black.withOpacity(0.25),
-                                offset: Offset(2.5, 2.5),
-                              )
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(bottom: 10),
-                                padding: EdgeInsets.symmetric(horizontal: 15),
-                                child: Table(
-                                  columnWidths: {
-                                    0: FlexColumnWidth(2.0),
-                                    1: FlexColumnWidth(1.0),
-                                    2: FlexColumnWidth(1.0),
-                                    3: FlexColumnWidth(1.0),
-                                  },
-                                  children: [
-                                    TableRow(
-                                      children: [
-                                        Text(Dictionairy.words["Name"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text(Dictionairy.words["size"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text(Dictionairy.words["qty"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text(Dictionairy.words["price"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
-                                      ]
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              ClipRRect(
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                    bottom: 20
-                                  ),
-                                  padding: EdgeInsets.only(
-                                    left: 15,
-                                    right: 15,
-                                    bottom: 15
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.yellow[100],
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.yellow[100],
-                                        Colors.yellow[50].withOpacity(0.25)
-                                      ],
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      stops: [0.0, 1]
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 7.5,
-                                        spreadRadius: -0,
-                                        color: Colors.black.withOpacity(0.15),
-                                        offset: Offset(0, 5),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.yellow[100],
-                                      )
-                                    ],
-                                  ),
+              child: Center(
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  constraints: BoxConstraints(
+                    maxWidth: 600
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(Dictionairy.words["Orders"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
+                          Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              top: 10,
+                            ),
+                            padding: EdgeInsets.only(
+                              top: 15,
+                              bottom: 15,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.yellow[100],
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 7.5,
+                                  spreadRadius: 1,
+                                  color: Colors.black.withOpacity(0.25),
+                                  offset: Offset(2.5, 2.5),
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
                                   child: Table(
                                     columnWidths: {
                                       0: FlexColumnWidth(2.0),
@@ -176,138 +127,191 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                       3: FlexColumnWidth(1.0),
                                     },
                                     children: [
-                                      for (var i = 0; i < Basket.basketItems.length; i++)
                                       TableRow(
                                         children: [
-                                          Text(Basket.basketItems[i]["Name"], style: GoogleFonts.almarai(fontSize: 18),),
-                                          Text(Basket.basketItems[i]["size"], style: GoogleFonts.almarai(fontSize: 18),),
-                                          Text(Basket.basketItems[i]["qty"].toString(), style: GoogleFonts.almarai(fontSize: 18),),
-                                          Text((double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(3), style: GoogleFonts.almarai(fontSize: 18),),
+                                          Text(Dictionairy.words["Name"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                          Text(Dictionairy.words["size"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                          Text(Dictionairy.words["qty"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                          Text(Dictionairy.words["price"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
                                         ]
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
-                                margin: EdgeInsets.only(top: 0),
-                                width: double.infinity,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(Dictionairy.words["Subtotal"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 16),),
-                                        Text(Basket.getUltimateTotal().toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 16),),
+                                ClipRRect(
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                      bottom: 20
+                                    ),
+                                    padding: EdgeInsets.only(
+                                      left: 15,
+                                      right: 15,
+                                      bottom: 15
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.yellow[100],
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.yellow[100],
+                                          Colors.yellow[50].withOpacity(0.25)
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        stops: [0.0, 1]
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 7.5,
+                                          spreadRadius: -0,
+                                          color: Colors.black.withOpacity(0.15),
+                                          offset: Offset(0, 5),
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.yellow[100],
+                                        )
                                       ],
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    child: Table(
+                                      columnWidths: {
+                                        0: FlexColumnWidth(2.0),
+                                        1: FlexColumnWidth(1.0),
+                                        2: FlexColumnWidth(1.0),
+                                        3: FlexColumnWidth(1.0),
+                                      },
                                       children: [
-                                        Text(Dictionairy.words["transport fee"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 16),),
-                                        Text(theFee.toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 16),),
+                                        for (var i = 0; i < Basket.basketItems.length; i++)
+                                        TableRow(
+                                          children: [
+                                            Text(Basket.basketItems[i]["Name"], style: GoogleFonts.almarai(fontSize: 18),),
+                                            Text(Basket.basketItems[i]["size"], style: GoogleFonts.almarai(fontSize: 18),),
+                                            Text(Basket.basketItems[i]["qty"].toString(), style: GoogleFonts.almarai(fontSize: 18),),
+                                            Text((double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(3), style: GoogleFonts.almarai(fontSize: 18),),
+                                          ]
+                                        )
                                       ],
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(Dictionairy.words["total"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
-                                        Text((Basket.getUltimateTotal() + theFee).toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
-                                      ],
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  margin: EdgeInsets.only(top: 0),
+                                  width: double.infinity,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(Dictionairy.words["Subtotal"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 16),),
+                                          Text(Basket.getUltimateTotal().toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 16),),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(Dictionairy.words["transport fee"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 16),),
+                                          Text(theFee.toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 16),),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(Dictionairy.words["total"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                          Text((Basket.getUltimateTotal() + theFee).toStringAsFixed(3) + " DT", style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold),),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          ),
+                        ],
+                      ),
+                      Text(Dictionairy.words["Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          bottom: 20,
+                          top: 10
                         ),
-                      ],
-                    ),
-                    Text(Dictionairy.words["Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.only(
-                        bottom: 20,
-                        top: 10
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.yellow[100],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var item in address)
+                            if(item.toString() != "null")
+                            Text(item.toString(), style: GoogleFonts.almarai(fontSize: 18),),
+                          ],
+                        ),
                       ),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.yellow[100],
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7.5,
-                            spreadRadius: 1,
-                            color: Colors.black.withOpacity(0.25),
-                            offset: Offset(2.5, 2.5),
-                          )
-                        ],
+                      Text(Dictionairy.words["Payment Type"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          bottom: 20,
+                          top: 10
+                        ),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.yellow[100],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(Dictionairy.words[args["Payment Type"].toString()][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18),),
+                          ],
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (var item in address)
-                          if(item.toString() != "null")
-                          Text(item.toString(), style: GoogleFonts.almarai(fontSize: 18),),
-                        ],
+                      Text(Dictionairy.words["Delivery Date"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          bottom: 10,
+                          top: 10
+                        ),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.yellow[100],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(args["Recieve Date"].toString(), style: GoogleFonts.almarai(fontSize: 18),),
+                          ],
+                        ),
                       ),
-                    ),
-                    Text(Dictionairy.words["Payment Type"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.only(
-                        bottom: 20,
-                        top: 10
-                      ),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.yellow[100],
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7.5,
-                            spreadRadius: 1,
-                            color: Colors.black.withOpacity(0.25),
-                            offset: Offset(2.5, 2.5),
-                          )
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(Dictionairy.words[args["Payment Type"].toString()][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18),),
-                        ],
-                      ),
-                    ),
-                    Text(Dictionairy.words["Delivery Date"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.only(
-                        bottom: 10,
-                        top: 10
-                      ),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.yellow[100],
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7.5,
-                            spreadRadius: 1,
-                            color: Colors.black.withOpacity(0.25),
-                            offset: Offset(2.5, 2.5),
-                          )
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(args["Recieve Date"].toString(), style: GoogleFonts.almarai(fontSize: 18),),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

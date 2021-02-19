@@ -227,12 +227,16 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
           ),
           Positioned(
-            top: 10,
+            top: 0,
             child: SafeArea(
               child: Container(
                 padding: EdgeInsets.all(5),
+                margin: EdgeInsets.all(10),
                 height: 60,
                 width: width - 20,
+                constraints: BoxConstraints(
+                  maxWidth: 600
+                ),
                 decoration: BoxDecoration(
                   color: Colors.yellow[50],
                   boxShadow: [
@@ -352,7 +356,11 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               padding: EdgeInsets.all(10),
               height: 75,
               width: width,
+              constraints: BoxConstraints(
+                maxWidth: 600
+              ),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Expanded(
                     child: InkWell(
@@ -479,41 +487,81 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
           ),
           Container(
-            height: 50,
-            width: 50,
+            height: 60,
+            width: 60,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Positioned(
                   left: 0,
                   child: Container(
-                    color: Colors.black,
-                    width: 15,
-                    height: 3,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[50],
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                          color: Colors.black.withOpacity(0.5),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(2.5)
+                    ),
+                    width: 20,
+                    height: 5,
                   ),
                 ),
                 Positioned(
                   right: 0,
                   child: Container(
-                    color: Colors.black,
-                    width: 15,
-                    height: 3,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[50],
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                          color: Colors.black.withOpacity(0.5),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(2.5)
+                    ),
+                    width: 20,
+                    height: 5,
                   ),
                 ),
                 Positioned(
                   top: 0,
                   child: Container(
-                    color: Colors.black,
-                    width: 3,
-                    height: 15,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[50],
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                          color: Colors.black.withOpacity(0.5),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(2.5)
+                    ),
+                    width: 5,
+                    height: 20,
                   ),
                 ),
                 Positioned(
                   bottom: 0,
                   child: Container(
-                    color: Colors.black,
-                    width: 3,
-                    height: 15,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[50],
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                          color: Colors.black.withOpacity(0.5),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(2.5)
+                    ),
+                    width: 5,
+                    height: 20,
                   ),
                 ),
               ],

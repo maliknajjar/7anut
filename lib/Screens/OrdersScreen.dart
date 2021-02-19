@@ -96,173 +96,180 @@ class _OrdersScreenState extends State<OrdersScreen> {
             ],
           )
         )
-        : Column(
-          children: [
-            for(var n = 0; n < data.length; n++)
-            InkWell(
-              onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context) => OrderInformation(data[n])),);
-              },
-              child: Container(
-                // padding: EdgeInsets.all(15),
-                margin: EdgeInsets.only(bottom: 15),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.yellow[50],
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7.5,
-                      spreadRadius: 1,
-                      color: Colors.black.withOpacity(0.25),
-                      offset: Offset(2.5, 2.5),
-                    )
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                        bottom: 10,
-                        top: 10,
-                        left: 15,
-                        right: 15,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.yellow[50],
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7.5,
-                            spreadRadius: 1,
-                            color: Colors.black.withOpacity(0.15),
-                            offset: Offset(2.5, 2.5),
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(Dictionairy.words[jsonDecode(data[n]["status"])["status"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
-                              Container(
-                                margin: EdgeInsets.only(
-                                  left: 5
-                                ),
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
-                                  shape: BoxShape.circle,
-                                  color: Color.fromRGBO(jsonDecode(data[n]["status"])["color"]["r"], jsonDecode(data[n]["status"])["color"]["g"], jsonDecode(data[n]["status"])["color"]["b"], 1),
-                                ),
-                              ),
-                              jsonDecode(data[n]["status"])["message"] == null 
-                              ? Text("")
-                              : InkWell(
-                                onTap: (){
-                                  Functions.alert(context, "Information", jsonDecode(data[n]["status"])["message"]);
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 15
-                                  ),
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(width: 1.5, color: Colors.black.withOpacity(0.75)),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Center(child: Text("?", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),)),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(data[n]["orderTime"].split(" ")[0], style: GoogleFonts.almarai(fontSize: 16),),
-                              Text(data[n]["orderTime"].split(" ")[1], style: GoogleFonts.almarai(fontSize: 14),),
-                            ],
-                          ),
-                        ],
-                      ),
+        : Center(
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: 600
+            ),
+            child: Column(
+              children: [
+                for(var n = 0; n < data.length; n++)
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => OrderInformation(data[n])),);
+                  },
+                  child: Container(
+                    // padding: EdgeInsets.all(15),
+                    margin: EdgeInsets.only(bottom: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[50],
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 7.5,
+                          spreadRadius: 1,
+                          color: Colors.black.withOpacity(0.25),
+                          offset: Offset(2.5, 2.5),
+                        )
+                      ],
                     ),
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          Row(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            bottom: 10,
+                            top: 10,
+                            left: 15,
+                            right: 15,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.yellow[50],
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 7.5,
+                                spreadRadius: 1,
+                                color: Colors.black.withOpacity(0.15),
+                                offset: Offset(2.5, 2.5),
+                              )
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(Dictionairy.words["Order ID"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
-                              Container(
-                                child: Text(data[n]["orderID"], style: GoogleFonts.almarai(),),
-                                margin: EdgeInsets.only(
-                                  left: 10
-                                ),
+                              Row(
+                                children: [
+                                  Text(Dictionairy.words[jsonDecode(data[n]["status"])["status"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      left: 5
+                                    ),
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 1, color: Colors.black.withOpacity(0.5)),
+                                      shape: BoxShape.circle,
+                                      color: Color.fromRGBO(jsonDecode(data[n]["status"])["color"]["r"], jsonDecode(data[n]["status"])["color"]["g"], jsonDecode(data[n]["status"])["color"]["b"], 1),
+                                    ),
+                                  ),
+                                  jsonDecode(data[n]["status"])["message"] == null 
+                                  ? Text("")
+                                  : InkWell(
+                                    onTap: (){
+                                      Functions.alert(context, "Information", jsonDecode(data[n]["status"])["message"]);
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        left: 15
+                                      ),
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(width: 1.5, color: Colors.black.withOpacity(0.75)),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Center(child: Text("?", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(data[n]["orderTime"].split(" ")[0], style: GoogleFonts.almarai(fontSize: 16),),
+                                  Text(data[n]["orderTime"].split(" ")[1], style: GoogleFonts.almarai(fontSize: 14),),
+                                ],
                               ),
                             ],
                           ),
-                          space,
-                          Row(
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
                             children: [
-                              Text(Dictionairy.words["total"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
-                              Container(
-                                child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
-                                margin: EdgeInsets.only(
-                                  left: 10
-                                ),
+                              Row(
+                                children: [
+                                  Text(Dictionairy.words["Order ID"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
+                                  Container(
+                                    child: Text(data[n]["orderID"], style: GoogleFonts.almarai(),),
+                                    margin: EdgeInsets.only(
+                                      left: 10
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              space,
+                              Row(
+                                children: [
+                                  Text(Dictionairy.words["total"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
+                                  Container(
+                                    child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
+                                    margin: EdgeInsets.only(
+                                      left: 10
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              space,
+                              Row(
+                                children: [
+                                  Text(Dictionairy.words["Address"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
+                                  Container(
+                                    child: Text(jsonDecode(data[n]["address"])["title"], style: GoogleFonts.almarai(),),
+                                    margin: EdgeInsets.only(
+                                      left: 10
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              space,
+                              Row(
+                                children: [
+                                  Text(Dictionairy.words["Payment Type"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
+                                  Container(
+                                    child: Text(Dictionairy.words[data[n]["paymentType"]][UserInformation.language], style: GoogleFonts.almarai(),),
+                                    margin: EdgeInsets.only(
+                                      left: 10
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              space,
+                              Row(
+                                children: [
+                                  Text(Dictionairy.words["Delivery Date"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
+                                  Container(
+                                    child: Text(data[n]["recieveDate"], style: GoogleFonts.almarai(),),
+                                    margin: EdgeInsets.only(
+                                      left: 10
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                          space,
-                          Row(
-                            children: [
-                              Text(Dictionairy.words["Address"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
-                              Container(
-                                child: Text(jsonDecode(data[n]["address"])["title"], style: GoogleFonts.almarai(),),
-                                margin: EdgeInsets.only(
-                                  left: 10
-                                ),
-                              ),
-                            ],
-                          ),
-                          space,
-                          Row(
-                            children: [
-                              Text(Dictionairy.words["Payment Type"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
-                              Container(
-                                child: Text(Dictionairy.words[data[n]["paymentType"]][UserInformation.language], style: GoogleFonts.almarai(),),
-                                margin: EdgeInsets.only(
-                                  left: 10
-                                ),
-                              ),
-                            ],
-                          ),
-                          space,
-                          Row(
-                            children: [
-                              Text(Dictionairy.words["Delivery Date"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
-                              Container(
-                                child: Text(data[n]["recieveDate"], style: GoogleFonts.almarai(),),
-                                margin: EdgeInsets.only(
-                                  left: 10
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

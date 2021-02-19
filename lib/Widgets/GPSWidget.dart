@@ -32,7 +32,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return kIsWeb 
+    return !kIsWeb 
     ? Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,87 +56,16 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
               top: 5,
               bottom: 50
             ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 0,
-                      bottom: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.1),
-                          offset: Offset(5, 5)
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.yellow[50],
-                            ),
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                            ),
-                            BoxShadow(
-                              spreadRadius: 4,
-                              blurRadius: 5,
-                              color: Colors.white,
-                              offset: Offset(10, 10)
-                            ),
-                            BoxShadow(
-                              spreadRadius: -5,
-                              blurRadius: 20,
-                              color: Colors.yellow[100],
-                              offset: Offset(-5, -2.5)
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        child: TextField(
-                          onChanged: (string){
-                            title = string;
-                          },
-                          style: GoogleFonts.almarai(
-                            fontSize: 20,
-                          ),
-                          cursorColor: Colors.black54,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: Dictionairy.words["address name | ex: home"][UserInformation.language],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => GetLocationScreen(widget.cities))).then((value){
-                        setState(() {
-                          print(value);
-                          if (value != null) {
-                            location = value;
-                            mapButtonText = Dictionairy.words["Location Selected"][UserInformation.language];
-                          }
-                        });
-                      });
-                    },
-                    child: Container(
+            child: Center(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: 600
+                ),
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
                       margin: EdgeInsets.only(
                         top: 0,
                         bottom: 20,
@@ -155,187 +84,263 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
-                          height: 60,
+                          padding: EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
-                                BoxShadow(
-                                  color: Colors.yellow[50],
-                                ),
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                ),
-                                BoxShadow(
-                                  spreadRadius: 4,
-                                  blurRadius: 5,
-                                  color: Colors.white,
-                                  offset: Offset(10, 10)
-                                ),
-                                BoxShadow(
-                                  spreadRadius: -5,
-                                  blurRadius: 20,
-                                  color: Colors.yellow[100],
-                                  offset: Offset(-5, -2.5)
-                                ),
-                              ],
+                              BoxShadow(
+                                color: Colors.yellow[50],
+                              ),
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                              ),
+                              BoxShadow(
+                                spreadRadius: 4,
+                                blurRadius: 5,
+                                color: Colors.white,
+                                offset: Offset(10, 10)
+                              ),
+                              BoxShadow(
+                                spreadRadius: -5,
+                                blurRadius: 20,
+                                color: Colors.yellow[100],
+                                offset: Offset(-5, -2.5)
+                              ),
+                            ],
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
                           ),
-                          width: double.infinity,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: Icon(location != null ? Icons.done : Icons.add_location_alt_outlined, size: 30, color: Colors.black.withOpacity(0.75),)
+                          child: TextField(
+                            onChanged: (string){
+                              title = string;
+                            },
+                            style: GoogleFonts.almarai(
+                              fontSize: 20,
+                            ),
+                            cursorColor: Colors.black54,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(vertical: 10),
+                              hintText: Dictionairy.words["address name | ex: home"][UserInformation.language],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => GetLocationScreen(widget.cities))).then((value){
+                          setState(() {
+                            print(value);
+                            if (value != null) {
+                              location = value;
+                              mapButtonText = Dictionairy.words["Location Selected"][UserInformation.language];
+                            }
+                          });
+                        });
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          top: 0,
+                          bottom: 20,
+                        ),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 0,
+                              color: Colors.black.withOpacity(0.1),
+                              offset: Offset(5, 5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.yellow[50],
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                  ),
+                                  BoxShadow(
+                                    spreadRadius: 4,
+                                    blurRadius: 5,
+                                    color: Colors.white,
+                                    offset: Offset(10, 10)
+                                  ),
+                                  BoxShadow(
+                                    spreadRadius: -5,
+                                    blurRadius: 20,
+                                    color: Colors.yellow[100],
+                                    offset: Offset(-5, -2.5)
+                                  ),
+                                ],
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
                               ),
-                              Text(
-                                mapButtonText,
-                                style: GoogleFonts.almarai(
-                                  fontSize: 22.5,
-                                  color: Colors.black.withOpacity(0.75),
+                            ),
+                            width: double.infinity,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: Icon(location != null ? Icons.done : Icons.add_location_alt_outlined, size: 30, color: Colors.black.withOpacity(0.75),)
                                 ),
+                                Text(
+                                  mapButtonText,
+                                  style: GoogleFonts.almarai(
+                                    fontSize: 22.5,
+                                    color: Colors.black.withOpacity(0.75),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 0,
+                        bottom: 20,
+                      ),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            color: Colors.black.withOpacity(0.1),
+                            offset: Offset(5, 5)
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.yellow[50],
+                              ),
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                              ),
+                              BoxShadow(
+                                spreadRadius: 4,
+                                blurRadius: 5,
+                                color: Colors.white,
+                                offset: Offset(10, 10)
+                              ),
+                              BoxShadow(
+                                spreadRadius: -5,
+                                blurRadius: 20,
+                                color: Colors.yellow[100],
+                                offset: Offset(-5, -2.5)
                               ),
                             ],
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: TextField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            minLines: 5,
+                            onChanged: (string){
+                              information = string;
+                            },
+                            style: GoogleFonts.almarai(
+                              fontSize: 20,
+                            ),
+                            cursorColor: Colors.black54,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(vertical: 10),
+                              hintText: Dictionairy.words["additional information (optional)\nex: apartment number: 21"][UserInformation.language],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 0,
-                      bottom: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.1),
-                          offset: Offset(5, 5)
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.yellow[50],
-                            ),
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                            ),
-                            BoxShadow(
-                              spreadRadius: 4,
-                              blurRadius: 5,
-                              color: Colors.white,
-                              offset: Offset(10, 10)
-                            ),
-                            BoxShadow(
-                              spreadRadius: -5,
-                              blurRadius: 20,
-                              color: Colors.yellow[100],
-                              offset: Offset(-5, -2.5)
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 0,
+                        bottom: 20,
+                      ),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            color: Colors.black.withOpacity(0.1),
+                            offset: Offset(5, 5)
                           ),
-                        ),
-                        child: TextField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          minLines: 5,
-                          onChanged: (string){
-                            information = string;
-                          },
-                          style: GoogleFonts.almarai(
-                            fontSize: 20,
+                        ],
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.yellow[50],
+                              ),
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                              ),
+                              BoxShadow(
+                                spreadRadius: 4,
+                                blurRadius: 5,
+                                color: Colors.white,
+                                offset: Offset(10, 10)
+                              ),
+                              BoxShadow(
+                                spreadRadius: -5,
+                                blurRadius: 20,
+                                color: Colors.yellow[100],
+                                offset: Offset(-5, -2.5)
+                              ),
+                            ],
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
                           ),
-                          cursorColor: Colors.black54,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: Dictionairy.words["additional information (optional)\nex: apartment number: 21"][UserInformation.language],
+                          child: TextField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            minLines: 3,
+                            onChanged: (string){
+                              instructions = string;
+                            },
+                            style: GoogleFonts.almarai(
+                              fontSize: 20,
+                            ),
+                            cursorColor: Colors.black54,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(vertical: 10),
+                              hintText: Dictionairy.words["instructions (optional)\nex: dont ring the bell"][UserInformation.language],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 0,
-                      bottom: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          color: Colors.black.withOpacity(0.1),
-                          offset: Offset(5, 5)
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.yellow[50],
-                            ),
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                            ),
-                            BoxShadow(
-                              spreadRadius: 4,
-                              blurRadius: 5,
-                              color: Colors.white,
-                              offset: Offset(10, 10)
-                            ),
-                            BoxShadow(
-                              spreadRadius: -5,
-                              blurRadius: 20,
-                              color: Colors.yellow[100],
-                              offset: Offset(-5, -2.5)
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        child: TextField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          minLines: 3,
-                          onChanged: (string){
-                            instructions = string;
-                          },
-                          style: GoogleFonts.almarai(
-                            fontSize: 20,
-                          ),
-                          cursorColor: Colors.black54,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(vertical: 10),
-                            hintText: Dictionairy.words["instructions (optional)\nex: dont ring the bell"][UserInformation.language],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

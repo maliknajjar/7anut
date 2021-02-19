@@ -32,10 +32,13 @@ class OrderInformation extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Container(
-          padding: EdgeInsets.all(15),
-          child: Column(
+          constraints: BoxConstraints(
+            maxWidth: 600,
+          ),
+          child: ListView(
+            padding: EdgeInsets.all(15),
             children: [
               Table(
                 columnWidths: {

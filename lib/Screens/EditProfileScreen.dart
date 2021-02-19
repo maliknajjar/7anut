@@ -60,7 +60,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            width: double.infinity,
+            constraints: BoxConstraints(
+              maxWidth: 600,
+            ),
             height: double.infinity,
             padding: EdgeInsets.only(
               top: 25,
