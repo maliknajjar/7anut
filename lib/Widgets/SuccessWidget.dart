@@ -66,7 +66,7 @@ class SuccessWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(Dictionairy.words["Go to Orders Page"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
-                    Icon(Icons.arrow_forward)
+                    Container(margin: EdgeInsets.only(left: 15), child: Icon(Icons.arrow_forward))
                   ],
                 ),
               ),
@@ -80,7 +80,13 @@ class SuccessWidget extends StatelessWidget {
                 margin: EdgeInsets.only(top: 10),
                 child: Column(
                   children: [
-                    Text(Dictionairy.words["Go to Home Screen"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(Dictionairy.words["Go to Home Screen"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, color: Colors.black.withOpacity(0.75)),),
+                        Container(margin: EdgeInsets.only(left: 15), child: Icon(Icons.arrow_forward))
+                      ],
+                    ),
                   ],
                 ),
               ),

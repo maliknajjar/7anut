@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shop_app/Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
 import '../Screens/GetLocationScreen.dart';

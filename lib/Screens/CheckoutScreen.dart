@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../Classes/Adresses.dart';
@@ -163,7 +165,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           ),
                                                         ),
                                                       ),
-                                                      10 /* replace addresses length with the 10 */ != 0
+                                                      Addresses.addressesBasket.length != 0
                                                       ? Container(
                                                         margin: EdgeInsets.only(bottom: 10, top: 20),
                                                         child: Text(Dictionairy.words["Addresses"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 20),),
@@ -173,7 +175,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                         alignment: Alignment.center,
                                                         child: Text(Dictionairy.words["There are no Addesses"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.5)),)
                                                       ),
-                                                      for (var i = 0; i < 10 /* replace addresses length with the 10 */; i++)
+                                                      for (var i = 0; i < Addresses.addressesBasket.length; i++)
                                                       GestureDetector(
                                                         onTap: (){
                                                           Navigator.of(context).pop(i);
@@ -207,7 +209,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           child: Row(
                                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                             children: [
-                                                              Text("address title", style: GoogleFonts.almarai(fontSize: 20),),
+                                                              Text(jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], style: GoogleFonts.almarai(fontSize: 20),),
                                                               Icon(Icons.location_on_outlined)
                                                             ],
                                                           ),
@@ -226,8 +228,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 }).then((value){
                                   if(value != null){
                                     setState((){
-                                      chosenAddress = 11 /* replace 11 with the chosen address json */;
-                                      addressName = "replace this with chosen address title";
+                                      chosenAddress = jsonDecode(Addresses.addressesBasket[value]["addresse"]);
+                                      addressName = jsonDecode(Addresses.addressesBasket[value]["addresse"])["title"];
                                       print(chosenAddress);
                                     });
                                   }

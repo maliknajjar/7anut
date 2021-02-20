@@ -82,7 +82,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 },
                 child: Container(
                   height: 60,
-                  width: 225,
+                  padding: EdgeInsets.only(left: 30, right: 30),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(100)),
                     color: Colors.yellow[200],
@@ -96,6 +96,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ],
                   ),
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(

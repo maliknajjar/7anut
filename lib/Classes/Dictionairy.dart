@@ -118,12 +118,12 @@ class Dictionairy {
     "Deliver at": {
       "en": "Deliver at",
       "fr": "Date de livraison",
-      "ar": "تاريخ التسليم",
+      "ar": "تاريخ الاستلام",
     },
     "recieveDate": {
       "en": "Deliver at",
       "fr": "Date de livraison",
-      "ar": "تاريخ التسليم",
+      "ar": "تاريخ الاستلام",
     },
     "Choose Date": {
       "en": "Choose Date",
@@ -157,7 +157,7 @@ class Dictionairy {
     },
     "payment card": {
       "en": "payment card",
-      "fr": "carte de paiement",
+      "fr": "carte paiement",
       "ar": "بطاقة دفع",
     },
     "soon": {
@@ -188,7 +188,7 @@ class Dictionairy {
     "Delivery Date": {
       "en": "Delivery Date",
       "fr": "La date de livraison",
-      "ar": "موعد التسليم",
+      "ar": "موعد الاستلام",
     },
     "Name": {
       "en": "Name",

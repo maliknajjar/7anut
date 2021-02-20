@@ -732,7 +732,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
       SymbolOptions(
         geometry: coord == null ? controller.cameraPosition.target : coord,
         iconImage: "pin",
-        iconOffset: Offset(0, -20)
+        iconOffset: Offset(0, -27)
       ),
     );
     theLocation = coord;

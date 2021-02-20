@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
-import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import '../env.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ClassicAddressWidget extends StatefulWidget {
   List<dynamic> cities;
@@ -24,6 +25,8 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
   String state;
   String city;
   String instructions;
+
+  bool isWaiting = false;
 
   int indexOfState(String stateName){
     for (var i = 0; i < widget.cities.length; i++) {
@@ -520,6 +523,9 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                   });
                 }
                 else {
+                  setState(() {
+                    isWaiting = true;                  
+                  });
                   Map address = {
                     "title": title,
                     "state": state,
@@ -528,8 +534,26 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                     "streetAddress2": streetAddress2,
                     "instructions": instructions,
                   };
-                  // send address to the server and add it to the addresses class variable here
-                  Navigator.of(context).pop();
+                  http.post(env.apiUrl + "/api/createuseraddress", body: {
+                    "sessionID": UserInformation.sessionID,
+                    "email": UserInformation.email, 
+                    "address": jsonEncode(address)
+                  }).then((value){
+                    setState(() {
+                      isWaiting = false;
+                    });
+                    Addresses.addressesBasket.add({
+                      "ID": jsonDecode(value.body)["insertId"],
+                      "userEmail": UserInformation.email,
+                      "addresse": jsonEncode(address),
+                    });
+                    Navigator.of(context).pop();
+                  }).catchError((error){
+                    setState(() {
+                      isWaiting = false;                  
+                    });
+                    print(error);
+                  });
                 }
               },
               child: Container(
@@ -546,17 +570,19 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                     ),
                   ]
                 ),
-                child: Row(
+                child: !isWaiting
+                ? Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       margin: EdgeInsets.only(right: 5),
-                      child: Icon(Icons.save, size: 30,),
+                      child: Icon(Icons.save, size: 30, color: Colors.black.withOpacity(0.75),),
                     ),
-                    Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
                   ],
-                ),
+                )
+                : Image.asset("assets/images/theLoading.gif", height: 30),
               ),
             ),
           )
