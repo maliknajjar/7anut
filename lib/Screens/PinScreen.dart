@@ -254,7 +254,7 @@ class _PinScreenState extends State<PinScreen> {
                                       return;
                                     }
                                     Navigator.of(context).pop();
-                                    Navigator.of(context).pop(Dictionairy.words[response["message"]][UserInformation.language]);
+                                    Navigator.of(context).pop(Dictionairy.words[response["message"]] == null ? "null" : Dictionairy.words[response["message"]][UserInformation.language]);
                                   })
                                   .catchError((onError){
                                     print("Catch error");

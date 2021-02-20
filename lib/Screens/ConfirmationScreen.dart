@@ -283,7 +283,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(Dictionairy.words[args["Payment Type"].toString()][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18),),
+                            Text(Dictionairy.words[args["Payment Type"].toString()] == null ? "null" : Dictionairy.words[args["Payment Type"].toString()][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18),),
                           ],
                         ),
                       ),

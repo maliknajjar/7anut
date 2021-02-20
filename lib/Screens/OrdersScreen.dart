@@ -158,7 +158,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             children: [
                               Row(
                                 children: [
-                                  Text(Dictionairy.words[jsonDecode(data[n]["status"])["status"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                  Text(Dictionairy.words[jsonDecode(data[n]["status"])["status"]] == null ? "null" : Dictionairy.words[jsonDecode(data[n]["status"])["status"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                                   Container(
                                     margin: EdgeInsets.only(
                                       left: 5
@@ -305,7 +305,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 children: [
                                   Text(Dictionairy.words["Payment Type"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
                                   Container(
-                                    child: Text(Dictionairy.words[data[n]["paymentType"]][UserInformation.language], style: GoogleFonts.almarai(),),
+                                    child: Text(Dictionairy.words[data[n]["paymentType"]] == null ? "null" : Dictionairy.words[data[n]["paymentType"]][UserInformation.language], style: GoogleFonts.almarai(),),
                                     margin: EdgeInsets.only(
                                       left: 10
                                     ),

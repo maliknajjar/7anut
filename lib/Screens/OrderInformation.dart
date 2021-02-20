@@ -140,7 +140,7 @@ class OrderInformation extends StatelessWidget {
                           children: [
                             for (int i = 0; i < address.length; i++)
                             Text(
-                              Dictionairy.words[address.keys.toList()[i].toString()][UserInformation.language] + ": " + (address.values.toList()[i].toString().contains("{latitude: ") ? address.values.toList()[i].toString().toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", " ") : address.values.toList()[i].toString()), style: GoogleFonts.almarai(),
+                              Dictionairy.words[address.keys.toList()[i].toString()] == null ? "null" : Dictionairy.words[address.keys.toList()[i].toString()][UserInformation.language] + ": " + (address.values.toList()[i].toString().contains("{latitude: ") ? address.values.toList()[i].toString().toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", " ") : address.values.toList()[i].toString()), style: GoogleFonts.almarai(),
                             ),
                           ],
                         ),
@@ -185,7 +185,7 @@ class OrderInformation extends StatelessWidget {
                           ],
                         ),
                         margin: EdgeInsets.all(10),
-                        child: Text(data.values.toList()[i].toString() == "Cash" ? Dictionairy.words[data.values.toList()[i].toString()][UserInformation.language] : data.values.toList()[i].toString().contains('"status":') ? Dictionairy.words[jsonDecode(data.values.toList()[i].toString())["status"]][UserInformation.language] : data.values.toList()[i].toString(), style: GoogleFonts.almarai(),),
+                        child: Text(data.values.toList()[i].toString() == "Cash" ? Dictionairy.words[data.values.toList()[i].toString()] == null ? "null" : Dictionairy.words[data.values.toList()[i].toString()][UserInformation.language] : data.values.toList()[i].toString().contains('"status":') ? Dictionairy.words[jsonDecode(data.values.toList()[i].toString())["status"]] == null ? "null" : Dictionairy.words[jsonDecode(data.values.toList()[i].toString())["status"]][UserInformation.language] : data.values.toList()[i].toString(), style: GoogleFonts.almarai(),),
                       )
                     ]
                   ),

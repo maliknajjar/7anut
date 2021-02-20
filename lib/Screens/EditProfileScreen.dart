@@ -323,7 +323,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(bottom: 40, top: 20),
-                                  child: Text(Dictionairy.words[json.decode(value.body)["error"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                  child: Text(Dictionairy.words[json.decode(value.body)["error"]] == null ? "null" : Dictionairy.words[json.decode(value.body)["error"]][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
