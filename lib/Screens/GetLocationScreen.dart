@@ -519,8 +519,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             ),
           ),
           Container(
-            height: 60,
-            width: 60,
+            height: 65,
+            width: 65,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -531,9 +531,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       color: Colors.yellow[50],
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 1,
-                          spreadRadius: 1,
-                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 3,
+                          spreadRadius: 3,
+                          color: Colors.black.withOpacity(0.75),
                         )
                       ],
                       borderRadius: BorderRadius.circular(2.5)
@@ -549,9 +549,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       color: Colors.yellow[50],
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 1,
-                          spreadRadius: 1,
-                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 3,
+                          spreadRadius: 3,
+                          color: Colors.black.withOpacity(0.75),
                         )
                       ],
                       borderRadius: BorderRadius.circular(2.5)
@@ -567,9 +567,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       color: Colors.yellow[50],
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 1,
-                          spreadRadius: 1,
-                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 3,
+                          spreadRadius: 3,
+                          color: Colors.black.withOpacity(0.75),
                         )
                       ],
                       borderRadius: BorderRadius.circular(2.5)
@@ -585,9 +585,9 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       color: Colors.yellow[50],
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 1,
-                          spreadRadius: 1,
-                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 3,
+                          spreadRadius: 3,
+                          color: Colors.black.withOpacity(0.75),
                         )
                       ],
                       borderRadius: BorderRadius.circular(2.5)

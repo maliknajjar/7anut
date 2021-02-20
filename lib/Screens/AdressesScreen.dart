@@ -219,6 +219,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
+                            bool waiting = false;
                             showDialog(context: context, builder: (BuildContext context){
                               return Dialog(
                                 shape: RoundedRectangleBorder(
@@ -274,13 +275,16 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                           ),
                                           InkWell(
                                             onTap: (){
-                                              print("nice");
-                                              // http.post(env.apiUrl + "/api/removeuseraddress", body: {"sessionID": UserInformation.sessionID, "email": UserInformation.email, "addressID": addresses[i]["ID"]})
-                                              // .then((value){
-                                                // print(value.body);
-                                                // if (value.body != "success") return;
-                                                // Navigator.of(context).pop(true);
-                                              // });
+                                              waiting = true;
+                                              http.post(env.apiUrl + "/api/removeuseraddress", body: {
+                                                "sessionID": UserInformation.sessionID, 
+                                                "email": UserInformation.email, 
+                                                "addressID": addresses[i]["ID"].toString(),
+                                              }).then((value){
+                                                waiting = false;
+                                                print(value.body);
+                                                Navigator.of(context).pop(true);
+                                              });
                                             },
                                             child: Container(
                                               padding: EdgeInsets.all(2),
@@ -304,7 +308,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                                   color: Colors.yellow[100],
                                                   borderRadius: BorderRadius.circular(10),
                                                 ),
-                                                child: Text(Dictionairy.words["Yes"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                                child: !waiting ? Text(Dictionairy.words["Yes"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),) : Image.asset("assets/images/theLoading.gif", height: 18),
                                               ),
                                             ),
                                           ),

@@ -34,8 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
           http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
           .then((value){
             Addresses.addressesBasket = jsonDecode(value.body);
-            print(Addresses.addressesBasket[0]);
-            
             // what happens when you fetch all needed data
             setState(() {
               dataIsAvailable = true;

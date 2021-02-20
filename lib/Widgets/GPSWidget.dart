@@ -1,14 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:http/http.dart' as http;
+import 'package:shop_app/Classes/UserInformation.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Classes/Functions.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
 import '../Screens/GetLocationScreen.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../env.dart';
 
 class GPSAddAddress extends StatefulWidget {
   List<dynamic> cities;
@@ -418,6 +422,13 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                     "instructions": instructions,
                     "email": UserInformation.email,
                   };
+                  http.post(env.apiUrl + "/api/createuseraddress", body: {
+                    "sessionID": UserInformation.sessionID,
+                    "email": UserInformation.email, 
+                    "address": jsonEncode(address)
+                  }).then((value){
+                    print(value.body);
+                  });
                   // send address to the server and add it to the addresses class variable here
                   Navigator.of(context).pop();
                 }
