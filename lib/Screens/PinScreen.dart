@@ -234,7 +234,7 @@ class _PinScreenState extends State<PinScreen> {
                                     return;
                                   }
                                   setState(() {
-                                    theButton = Image.asset("assets/images/theLoading.gif", height: 39);
+                                    theButton = Container(margin: EdgeInsets.all(5), child: Image.asset("assets/images/theLoading.gif", height: 30));
                                   });
                                   http.post(env.apiUrl + "/api/changeforgottenPassword", body: {
                                     "email": widget.email,
