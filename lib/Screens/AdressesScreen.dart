@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../Classes/Adresses.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
 import '../env.dart';
 
 class AdressesScreen extends StatefulWidget {
@@ -291,11 +292,10 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                                     });
                                                     Navigator.of(context).pop(true);
                                                   })
-                                                  .catchError((error){
-                                                    setState(() {
-                                                      waiting = false;
-                                                    });
-                                                    print(error);
+                                                  .catchError((onError){
+                                                    print("Catch error");
+                                                    print(onError);
+                                                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                                   });
                                                 },
                                                 child: Container(

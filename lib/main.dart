@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './env.dart';
 import './Classes/UserInformation.dart';
+import './Classes/Functions.dart';
+import './Classes/Dictionairy.dart';
 
 import 'Screens/HomeScreen.dart';
 import 'Screens/LoginScreen.dart';
@@ -72,6 +74,11 @@ class _MyAppState extends State<MyApp> {
             isLoggedIn = true;
             isLoading = false;
           });
+        })
+        .catchError((onError){
+          print("Catch error");
+          print(onError);
+          Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
         });
       }
       else{

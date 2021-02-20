@@ -11,6 +11,7 @@ import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
 import '../Screens/GetLocationScreen.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
 import '../env.dart';
 
 class GPSAddAddress extends StatefulWidget {
@@ -441,11 +442,10 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                       "addresse": jsonEncode(address),
                     });
                     Navigator.of(context).pop();
-                  }).catchError((error){
-                    setState(() {
-                      isWaiting = false;                  
-                    });
-                    print(error);
+                  }).catchError((onError){
+                    print("Catch error");
+                    print(onError);
+                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                   });
                 }
               },

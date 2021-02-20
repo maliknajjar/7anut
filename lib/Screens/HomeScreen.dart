@@ -6,6 +6,8 @@ import 'dart:convert';
 import '../Screens/LoadingLogoScreen.dart';
 import '../Widgets/DrawerWidget.dart';
 import '../Classes/Procucts.dart';
+import '../Classes/Functions.dart';
+import '../Classes/Dictionairy.dart';
 import '../env.dart';
 
 import '../Classes/Basket.dart';
@@ -42,6 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         }
       });
+    })
+    .catchError((onError){
+      print("Catch error");
+      print(onError);
+      Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
     });
   }
 
@@ -154,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Text(
                                 jsonDecode(products[i]["name"])[UserInformation.language],
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.almarai(fontSize: theWidth < 600 ? theWidth * 0.035 : 21),
+                                style: GoogleFonts.almarai(fontSize: theWidth < 600 ? theWidth * 0.04 : 21),
                               ),
                             ),
                           ),

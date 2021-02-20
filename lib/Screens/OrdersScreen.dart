@@ -38,6 +38,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
         isDataHere = true;
         data = jsonDecode(value.body).reversed.toList();
       });
+    })
+    .catchError((onError){
+      print("Catch error");
+      print(onError);
+      Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
     });
   }
 

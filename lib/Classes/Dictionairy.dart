@@ -565,5 +565,10 @@ class Dictionairy {
       "fr": "no message",
       "ar": "no message",
     },
+    "Connection error": {
+      "en": "Connection error",
+      "fr": "Erreur de connexion",
+      "ar": "خطأ في الاتصال",
+    },
   };
 }

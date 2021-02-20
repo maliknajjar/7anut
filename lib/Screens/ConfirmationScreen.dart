@@ -39,6 +39,10 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
           return;
         }
       }
+    }).catchError((onError){
+      print("Catch error");
+      print(onError);
+      Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
     });
   }
   @override
@@ -342,6 +346,10 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       }
                       Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessWidget(),));
                     });
+                  }).catchError((onError){
+                    print("Catch error");
+                    print(onError);
+                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                   });
                 },
                 child: Container(

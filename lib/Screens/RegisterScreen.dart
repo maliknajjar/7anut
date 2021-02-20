@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../env.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -244,7 +245,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -519,6 +520,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         });
                                       });
                                     });
+                                  })
+                                  .catchError((onError){
+                                    print("Catch error");
+                                    print(onError);
+                                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },
                                 child: Container(
@@ -648,7 +654,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(notificationMessage, style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18, color: Colors.white) : GoogleFonts.roboto(fontSize: 18, color: Colors.white),)
+                child: Text(notificationMessage, style: GoogleFonts.almarai(fontSize: 18, color: Colors.white))
               ),
             ), 
             duration: Duration(milliseconds: 500),

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import '../Classes/Basket.dart';
 import '../Classes/Procucts.dart';

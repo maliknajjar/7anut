@@ -375,6 +375,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     UserInformation();
                     Navigator.of(context).pop();
                   }
+                })
+                .catchError((onError){
+                  print("Catch error");
+                  print(onError);
+                  Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                 });
               });
             },

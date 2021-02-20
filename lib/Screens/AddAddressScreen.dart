@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:shop_app/Classes/Functions.dart';
 import 'dart:convert';
 
 import '../Widgets/GPSWidget.dart';
@@ -23,17 +24,22 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   List<dynamic> r;
 
   @override
-    void initState() {
-      super.initState();
+  void initState() {
+    super.initState();
 
-      http.get(env.apiUrl + "/api/cities")
-      .then((value){
-        r = jsonDecode(value.body);
-        setState(() {
-          isDataHere = true;
-        });
+    http.get(env.apiUrl + "/api/cities")
+    .then((value){
+      r = jsonDecode(value.body);
+      setState(() {
+        isDataHere = true;
       });
-    }
+    })
+    .catchError((onError){
+      print("Catch error");
+      print(onError);
+      Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

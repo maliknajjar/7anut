@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:shop_app/Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
 
 import '../env.dart';
 
@@ -18,7 +19,7 @@ class PinScreen extends StatefulWidget {
 class _PinScreenState extends State<PinScreen> {
   String pin = "";
   String newPassword = "";
-  Widget theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18));
+  Widget theButton = Container(margin: EdgeInsets.all(10), child: Text(Dictionairy.words["Change Password"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18)),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -233,7 +234,7 @@ class _PinScreenState extends State<PinScreen> {
                                     return;
                                   }
                                   setState(() {
-                                    theButton = Image.asset("assets/images/theLoading.gif", height: 30);
+                                    theButton = Image.asset("assets/images/theLoading.gif", height: 39);
                                   });
                                   http.post(env.apiUrl + "/api/changeforgottenPassword", body: {
                                     "email": widget.email,
@@ -241,7 +242,7 @@ class _PinScreenState extends State<PinScreen> {
                                     "pin": pin
                                   }).then((result){
                                     setState(() {
-                                      theButton = Text(Dictionairy.words["Change Password"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai() : GoogleFonts.roboto());
+                                      theButton = Container(margin: EdgeInsets.all(10), child: Text(Dictionairy.words["Change Password"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18)),);
                                     });
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
@@ -254,12 +255,17 @@ class _PinScreenState extends State<PinScreen> {
                                     }
                                     Navigator.of(context).pop();
                                     Navigator.of(context).pop(Dictionairy.words[response["message"]][UserInformation.language]);
+                                  })
+                                  .catchError((onError){
+                                    print("Catch error");
+                                    print(onError);
+                                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(15),
+                                  padding: EdgeInsets.all(0),
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -384,7 +390,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(Dictionairy.words["Search"][UserInformation.language], style: GoogleFonts.almarai(color: Colors.white, fontSize: 18))
+                child: Text(notificationMessage, style: GoogleFonts.almarai(color: Colors.white, fontSize: 18))
               ),
             ), 
             duration: Duration(milliseconds: 500),

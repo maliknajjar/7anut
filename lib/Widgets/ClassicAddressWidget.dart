@@ -3,6 +3,7 @@ import 'dart:convert';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
 import '../env.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -548,11 +549,10 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                       "addresse": jsonEncode(address),
                     });
                     Navigator.of(context).pop();
-                  }).catchError((error){
-                    setState(() {
-                      isWaiting = false;                  
-                    });
-                    print(error);
+                  }).catchError((onError){
+                    print("Catch error");
+                    print(onError);
+                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                   });
                 }
               },

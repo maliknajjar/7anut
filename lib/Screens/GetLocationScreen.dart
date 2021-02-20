@@ -8,11 +8,11 @@ import 'package:flutter/services.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-
-
 import 'package:shop_app/Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
 
 class GetLocationScreen extends StatefulWidget {
   List<dynamic> cities;
@@ -347,6 +347,11 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                             var coord = jsonDecode(value.body)["features"][0];
                             addPin(coord: LatLng(coord["center"][1], coord["center"][0]));
                             coord["bbox"] != null ? controller.animateCamera(CameraUpdate.newLatLngBounds(LatLngBounds(southwest: LatLng(coord["bbox"][1], coord["bbox"][0]), northeast: LatLng(coord["bbox"][3], coord["bbox"][2])))) : controller.animateCamera(CameraUpdate.newLatLng(LatLng(coord["center"][1], coord["center"][0])));
+                          })
+                          .catchError((onError){
+                            print("Catch error");
+                            print(onError);
+                            Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                           });
                         },
                       ),

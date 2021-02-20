@@ -5,10 +5,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import '../env.dart';
-
-import './PinScreen.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
+
+import './PinScreen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   String email = "";
-  Widget theButton = Text(Dictionairy.words["Send Pin"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18),);
+  Widget theButton = Container(margin: EdgeInsets.all(10), child: Text(Dictionairy.words["Change Password"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18)),);
   String notificationMessage = "no message";
   double notificationPlace = -60;
   Color notificationColor = Colors.red;
@@ -158,13 +159,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     return;
                                   }
                                   setState(() {
-                                    theButton = Image.asset("assets/images/theLoading.gif", height: 30);
+                                    theButton = Image.asset("assets/images/theLoading.gif", height: 39);
                                   });
                                   http.post(env.apiUrl + "/api/forgetpassword", body: {
                                     "email": email,
                                   }).then((result){
                                     setState(() {
-                                      theButton = Text(Dictionairy.words["Send Pin"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18),);
+                                      theButton = Container(margin: EdgeInsets.all(10), child: Text(Dictionairy.words["Change Password"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18)),);
                                     });
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
@@ -176,12 +177,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       return;
                                     }
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => PinScreen(email)));
+                                  })
+                                  .catchError((onError){
+                                    print("Catch error");
+                                    print(onError);
+                                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(top: 25),
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(15),
+                                  padding: EdgeInsets.all(0),
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -305,7 +311,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(notificationMessage, style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18, color: Colors.white) : GoogleFonts.roboto(fontSize: 18, color: Colors.white),)
+                child: Text(notificationMessage, style: GoogleFonts.almarai(fontSize: 18, color: Colors.white))
               ),
             ), 
             duration: Duration(milliseconds: 500),

@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../env.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Functions.dart';
 
 class LoginScreen extends StatefulWidget {
   String message;
@@ -268,6 +269,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         });
                                       });
                                     });
+                                  })
+                                  .catchError((onError){
+                                    print("Catch error");
+                                    print(onError);
+                                    Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },
                                 child: Container(
@@ -435,7 +441,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(Dictionairy.words[notificationMessage][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18, color: Colors.white) : GoogleFonts.roboto(fontSize: 18, color: Colors.white))
+                child: Text(notificationMessage, style:GoogleFonts.almarai(fontSize: 18, color: Colors.white))
               ),
             ), 
             duration: Duration(milliseconds: 500),
