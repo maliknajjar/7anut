@@ -527,7 +527,6 @@ class _ClassicAddressWidgetState extends State<ClassicAddressWidget> {
                     "streetAddress": streetAddress,
                     "streetAddress2": streetAddress2,
                     "instructions": instructions,
-                    "email": UserInformation.email
                   };
                   // send address to the server and add it to the addresses class variable here
                   Navigator.of(context).pop();

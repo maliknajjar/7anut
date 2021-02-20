@@ -144,8 +144,8 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                       child: Text(Dictionairy.words["Address Information"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
                                     ),
                                     for (var item in jsonDecode(addresses[i]["addresse"]).values) /* loop information off an address from addresses array */
-                                    Text(item),
-                                    // item.toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", "\n ")
+                                    if (item.toString() != "null")
+                                    Text(item.toString().contains("{latitude: ") ? item.toString().replaceAll("{", "").replaceAll("}", "").replaceAll("latitude: ", "").replaceAll("longitude: ", "").replaceAll(", ", " ") : item.toString()),
                                   ],
                                 ),
                               ),
@@ -221,102 +221,116 @@ class _AdressesScreenState extends State<AdressesScreen> {
                           onTap: (){
                             bool waiting = false;
                             showDialog(context: context, builder: (BuildContext context){
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                elevation: 0,
-                                backgroundColor: Colors.yellow[50],
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: 300
-                                  ),
-                                  padding: EdgeInsets.all(15),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(bottom: 40, top: 20),
-                                        child: Text(Dictionairy.words["Are you sure you want to delete this address ?"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    elevation: 0,
+                                    backgroundColor: Colors.yellow[50],
+                                    child: Container(
+                                      constraints: BoxConstraints(
+                                        maxWidth: 300
                                       ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                      padding: EdgeInsets.all(15),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          InkWell(
-                                            onTap: (){
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(right: 10),
-                                              padding: EdgeInsets.all(2),
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(12),
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    Colors.black.withOpacity(0.1),
-                                                    Colors.black.withOpacity(0.025),
-                                                  ],
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                )
-                                              ),
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 15,
-                                                  vertical: 5,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.yellow[100],
-                                                  borderRadius: BorderRadius.circular(10),
-                                                ),
-                                                child: Text(Dictionairy.words["Cancel"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
-                                              ),
-                                            ),
+                                          Container(
+                                            margin: EdgeInsets.only(bottom: 40, top: 20),
+                                            child: Text(Dictionairy.words["Are you sure you want to delete this address ?"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                                           ),
-                                          InkWell(
-                                            onTap: (){
-                                              waiting = true;
-                                              http.post(env.apiUrl + "/api/removeuseraddress", body: {
-                                                "sessionID": UserInformation.sessionID, 
-                                                "email": UserInformation.email, 
-                                                "addressID": addresses[i]["ID"].toString(),
-                                              }).then((value){
-                                                waiting = false;
-                                                print(value.body);
-                                                Navigator.of(context).pop(true);
-                                              });
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.all(2),
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(12),
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    Colors.black.withOpacity(0.1),
-                                                    Colors.black.withOpacity(0.025),
-                                                  ],
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                )
-                                              ),
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 15,
-                                                  vertical: 5,
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              InkWell(
+                                                onTap: (){
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.only(right: 10),
+                                                  padding: EdgeInsets.all(2),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(12),
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.black.withOpacity(0.1),
+                                                        Colors.black.withOpacity(0.025),
+                                                      ],
+                                                      begin: Alignment.topLeft,
+                                                      end: Alignment.bottomRight,
+                                                    )
+                                                  ),
+                                                  child: Container(
+                                                    padding: EdgeInsets.symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 5,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.yellow[100],
+                                                      borderRadius: BorderRadius.circular(10),
+                                                    ),
+                                                    child: Text(Dictionairy.words["Cancel"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                                                  ),
                                                 ),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.yellow[100],
-                                                  borderRadius: BorderRadius.circular(10),
-                                                ),
-                                                child: !waiting ? Text(Dictionairy.words["Yes"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),) : Image.asset("assets/images/theLoading.gif", height: 18),
                                               ),
-                                            ),
-                                          ),
+                                              InkWell(
+                                                onTap: (){
+                                                  setState(() {
+                                                    waiting = true;
+                                                  });
+                                                  http.post(env.apiUrl + "/api/removeuseraddress", body: {
+                                                    "sessionID": UserInformation.sessionID, 
+                                                    "email": UserInformation.email, 
+                                                    "addressID": addresses[i]["ID"].toString(),
+                                                  }).then((value){
+                                                    print(value.body);
+                                                    setState(() {
+                                                      waiting = false;
+                                                    });
+                                                    Navigator.of(context).pop(true);
+                                                  })
+                                                  .catchError((error){
+                                                    setState(() {
+                                                      waiting = false;
+                                                    });
+                                                    print(error);
+                                                  });
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.all(2),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(12),
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.black.withOpacity(0.1),
+                                                        Colors.black.withOpacity(0.025),
+                                                      ],
+                                                      begin: Alignment.topLeft,
+                                                      end: Alignment.bottomRight,
+                                                    )
+                                                  ),
+                                                  child: Container(
+                                                    padding: EdgeInsets.symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 5,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.yellow[100],
+                                                      borderRadius: BorderRadius.circular(10),
+                                                    ),
+                                                    child: !waiting ? Text(Dictionairy.words["Yes"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),) : Image.asset("assets/images/theLoading.gif", height: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
                                         ],
-                                      )
-                                    ],
-                                  ),
-                                )
+                                      ),
+                                    )
+                                  );
+                                }
                               );
                             }).then((value){
                               if (value == null) return;

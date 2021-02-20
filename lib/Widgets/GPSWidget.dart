@@ -28,8 +28,9 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
   String information;
   String instructions;
   LatLng location;
-  
   String mapButtonText = Dictionairy.words["Add Location"][UserInformation.language];
+
+  bool isWaiting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +128,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(vertical: 10),
                               hintText: Dictionairy.words["address name | ex: home"][UserInformation.language],
+                              hintStyle: GoogleFonts.almarai()
                             ),
                           ),
                         ),
@@ -272,6 +274,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(vertical: 10),
                               hintText: Dictionairy.words["additional information (optional)\nex: apartment number: 21"][UserInformation.language],
+                              hintStyle: GoogleFonts.almarai(height: 1.5)
                             ),
                           ),
                         ),
@@ -338,6 +341,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(vertical: 10),
                               hintText: Dictionairy.words["instructions (optional)\nex: dont ring the bell"][UserInformation.language],
+                              hintStyle: GoogleFonts.almarai(height: 1.5)
                             ),
                           ),
                         ),
@@ -415,22 +419,35 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   });
                 }
                 else {
+                  setState(() {
+                    isWaiting = true;                  
+                  });
                   Map address = {
                     "title": title, 
                     "location": {"latitude": location.latitude, "longitude": location.longitude}, 
                     "information": information, 
                     "instructions": instructions,
-                    "email": UserInformation.email,
                   };
                   http.post(env.apiUrl + "/api/createuseraddress", body: {
                     "sessionID": UserInformation.sessionID,
                     "email": UserInformation.email, 
                     "address": jsonEncode(address)
                   }).then((value){
-                    print(value.body);
+                    setState(() {
+                      isWaiting = false;
+                    });
+                    Addresses.addressesBasket.add({
+                      "ID": jsonDecode(value.body)["insertId"],
+                      "userEmail": UserInformation.email,
+                      "addresse": jsonEncode(address),
+                    });
+                    Navigator.of(context).pop();
+                  }).catchError((error){
+                    setState(() {
+                      isWaiting = false;                  
+                    });
+                    print(error);
                   });
-                  // send address to the server and add it to the addresses class variable here
-                  Navigator.of(context).pop();
                 }
               },
               child: Container(
@@ -447,7 +464,8 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                     ),
                   ]
                 ),
-                child: Row(
+                child: !isWaiting
+                ? Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -457,7 +475,8 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                     ),
                     Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
                   ],
-                ),
+                )
+                : Image.asset("assets/images/theLoading.gif", height: 30),
               ),
             ),
           )
