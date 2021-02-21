@@ -15,6 +15,7 @@ class BasketScreen extends StatefulWidget {
 class _BasketScreenState extends State<BasketScreen> {
   @override
   Widget build(BuildContext context) {
+    var theWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Basket.basketItems.isEmpty ? Colors.white : Colors.white,
       appBar: AppBar(
@@ -85,7 +86,7 @@ class _BasketScreenState extends State<BasketScreen> {
         alignment: Alignment.topCenter,
         children: [
           Container(
-            padding: EdgeInsets.only(bottom: 60),
+            padding: EdgeInsets.only(bottom: theWidth < 600 ? 60 : 50),
             child: Container(
               width: 600,
               decoration: BoxDecoration(
@@ -96,14 +97,18 @@ class _BasketScreenState extends State<BasketScreen> {
                     spreadRadius: 10,
                     color: Colors.black.withOpacity(0.1),
                   )
-                ]
+                ],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ) // wooooooooooooooooooooooooooooow
               ),
               child: ListView(
                 shrinkWrap: true,
                 children: [
                   for (int i = 0; i < Basket.basketItems.length; i++)
                     Container(
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.all(theWidth < 600 ? 30 : 30),
                       margin: EdgeInsets.only(bottom: i == Basket.basketItems.length - 1 ? 0 : 20),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -128,7 +133,13 @@ class _BasketScreenState extends State<BasketScreen> {
                           BoxShadow(
                             color: Colors.yellow[50],
                           )
-                        ]
+                        ],
+                        borderRadius: i == Basket.basketItems.length - 1 && theWidth > 600
+                        ? BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        )
+                        : BorderRadius.circular(0)
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
