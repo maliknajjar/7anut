@@ -105,12 +105,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               Radius.circular(theWidth < 600 ? theWidth * 0.035 : 20),
                             ),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
                               child: Container(
                                 height: theWidth < 600 ? theWidth * 0.085 : 50,
                                 width: theWidth < 600 ? theWidth * 0.085 : 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow[400].withOpacity(0.5),
+                                  color: Colors.yellow.withOpacity(0.5),
                                 ),
                                 child: Icon(
                                   Icons.add,

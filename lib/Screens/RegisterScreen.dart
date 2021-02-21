@@ -323,6 +323,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               },
                                               style: TextStyle(fontSize: 15),
                                               cursorColor: Colors.black54,
+                                              keyboardType: TextInputType.number,
                                               decoration: InputDecoration(
                                                 border: InputBorder.none,
                                                 isDense: true,
@@ -471,7 +472,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     return;
                                   }
                                   // check if the password is strong enough
-                                  if(estimatePasswordStrength(password) < 0.3){
+                                  print(estimatePasswordStrength(password));
+                                  if(estimatePasswordStrength(password) < 0.1){
                                     notify(Dictionairy.words["your password is weak"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }

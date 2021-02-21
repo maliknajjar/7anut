@@ -544,7 +544,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       borderRadius: BorderRadius.circular(2.5)
                     ),
                     width: 20,
-                    height: 5,
+                    height: 3,
                   ),
                 ),
                 Positioned(
@@ -562,7 +562,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       borderRadius: BorderRadius.circular(2.5)
                     ),
                     width: 20,
-                    height: 5,
+                    height: 3,
                   ),
                 ),
                 Positioned(
@@ -579,7 +579,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       ],
                       borderRadius: BorderRadius.circular(2.5)
                     ),
-                    width: 5,
+                    width: 3,
                     height: 20,
                   ),
                 ),
@@ -597,7 +597,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       ],
                       borderRadius: BorderRadius.circular(2.5)
                     ),
-                    width: 5,
+                    width: 3,
                     height: 20,
                   ),
                 ),
