@@ -87,6 +87,15 @@ class _BasketScreenState extends State<BasketScreen> {
         children: [
           Container(
             padding: EdgeInsets.only(bottom: theWidth < 600 ? 60 : 50),
+            margin: theWidth > 600 
+            ? EdgeInsets.only(
+              left: 20,
+              right: 20,
+            )
+            : EdgeInsets.only(
+              left: 0,
+              right: 0,
+            ),
             child: Container(
               width: 600,
               decoration: BoxDecoration(

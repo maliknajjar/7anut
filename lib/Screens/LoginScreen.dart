@@ -248,8 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18));
                                     var response = json.decode(result.body);
                                     if(response["error"] != null){
-                                      print(response["error"].toString());
-                                      notify(response["error"].toString(), 2000, Colors.red);
+                                      notify(Dictionairy.words[response["error"].toString()][UserInformation.language], 2000, Colors.red);
                                       return;
                                     }
                                     // saving these information when everything is successful

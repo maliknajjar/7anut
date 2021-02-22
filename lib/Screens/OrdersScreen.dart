@@ -31,7 +31,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       });
       print(value.body);
       if(value.body.contains("error")){
-        Functions.logout(context, "Session is expired", Colors.red);
+        Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
         return;
       }
       setState(() {

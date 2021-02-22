@@ -296,6 +296,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 }, 
                 body: json.encode(theMap))
                 .then((value){
+                  print(value.body);
                   setState(() {
                     button = Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black.withOpacity(0.75)),);
                   });
@@ -303,6 +304,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     if(json.decode(value.body)["error"] != null){
                       if(value.body.contains("session")){
                         Functions.logout(context, "Session is expired", Colors.red);
+                        return;
+                      } 
+                      if (json.decode(value.body)["error"] == "this account was banned") {
+                        print("this account is banned");
+                        Functions.logout(context, Dictionairy.words["this account was banned"][UserInformation.language], Colors.red);
                         return;
                       }
                       // Functions.alert(context, "error", json.decode(value.body)["error"]);

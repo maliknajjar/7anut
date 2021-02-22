@@ -570,5 +570,10 @@ class Dictionairy {
       "fr": "Erreur de connexion",
       "ar": "خطأ في الاتصال",
     },
+    "this account was banned": {
+      "en": "this account was banned",
+      "fr": "ce compte a été interdit",
+      "ar": "تم حظر هذا الحساب",
+    },
   };
 }
