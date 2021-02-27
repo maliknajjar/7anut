@@ -81,7 +81,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Navigator.of(context).pushNamed("/basket").then((value) => setState((){}));
                 },
                 child: Container(
-                  height: 60,
+                  height: 50,
                   padding: EdgeInsets.only(left: 30, right: 30),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(100)),
@@ -103,11 +103,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         margin: EdgeInsets.only(right: 10),
                         child: Icon(
                           Icons.shopping_cart,
-                          size: 35,
+                          size: 30,
                           color: Colors.black.withOpacity(0.75),
                         ),
                       ),
-                      Text(Dictionairy.words["Go to Basket"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
+                      Text(Dictionairy.words["Go to Basket"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                     ],
                   ),
                 ),
