@@ -117,7 +117,7 @@ class _BasketScreenState extends State<BasketScreen> {
                 children: [
                   for (int i = 0; i < Basket.basketItems.length; i++)
                     Container(
-                      padding: EdgeInsets.all(theWidth < 600 ? 30 : 30),
+                      padding: EdgeInsets.all(theWidth < 600 ? 15 : 15),
                       margin: EdgeInsets.only(bottom: i == Basket.basketItems.length - 1 ? 0 : 20),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(

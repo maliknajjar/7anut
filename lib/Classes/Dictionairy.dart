@@ -541,8 +541,8 @@ class Dictionairy {
       "ar": "لم يتم العثور على أي نتائج",
     },
     "choose this location": {
-      "en": "choose this location",
-      "fr": "choisissez cet endroit",
+      "en": "pin location",
+      "fr": "choisissez endroit",
       "ar": "اختر هذا الموقع",
     },
     "you need to specify a location": {
@@ -574,6 +574,11 @@ class Dictionairy {
       "en": "this account was banned",
       "fr": "ce compte a été interdit",
       "ar": "تم حظر هذا الحساب",
+    },
+    "Your request has been sent successfully": {
+      "en": "Your request has been sent successfully",
+      "fr": "Votre demande a été envoyée avec succès",
+      "ar": "تم ارسال طلبك بنجاح",
     },
   };
 }

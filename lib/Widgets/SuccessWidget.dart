@@ -26,19 +26,14 @@ class SuccessWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(50),
               decoration: BoxDecoration(
-                color: Colors.green[100],
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 7.5,
-                    spreadRadius: 1,
-                    color: Colors.black.withOpacity(0.1),
-                    offset: Offset(2.5, 2.5),
-                  )
-                ],
-                shape: BoxShape.circle
                 // borderRadius: BorderRadius.circular(15)
               ),
-              child: Icon(Icons.done_outline, size: 100, color: Colors.black.withOpacity(0.5),),
+              child: Column(
+                children: [
+                  Icon(Icons.done_outline, size: 100, color: Colors.black.withOpacity(0.5),),
+                  Container(margin: EdgeInsets.only(top: 15), child: Text(Dictionairy.words["Your request has been sent successfully"][UserInformation.language], textAlign: TextAlign.center, style: GoogleFonts.almarai(fontSize: 22, color: Colors.black.withOpacity(0.75)),))
+                ],
+              ),
             ),
             GestureDetector(
               onTap: (){
