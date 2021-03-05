@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
-      title: 'Flutter Demo',
+      title: '7anut Web',
       home: isLanguageChosen ? isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen() : ChooseLanguageScreen(),
       // home: ProfileScreen(),
       routes: {

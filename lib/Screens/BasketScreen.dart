@@ -371,8 +371,9 @@ class _BasketScreenState extends State<BasketScreen> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(margin: EdgeInsets.only(bottom: 5), child: Text(Dictionairy.words["Checkout"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)),
+                          Container(margin: EdgeInsets.only(bottom: 0), child: Text(Dictionairy.words["Checkout"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)),
                           Text(Basket.getUltimateTotal().toStringAsFixed(2) + " DT", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),)
                         ],
                       ),
