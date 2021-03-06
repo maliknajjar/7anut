@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:shop_app/Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,21 +36,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return kIsWeb 
-    ? Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(Icons.cancel_outlined, size: 100, color: Colors.black.withOpacity(0.25)),
-        Container(
-          margin: EdgeInsets.only(
-            top: 10
-          ),
-          child: Text(Dictionairy.words["Map doesnt work on the Web version"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18),),
-        ),
-      ],
-    )
-    : Container(
+    return Container(
       height: double.infinity,
       child: Stack(
         alignment: Alignment.topCenter,

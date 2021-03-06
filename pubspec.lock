@@ -162,14 +162,21 @@ packages:
       name: geolocator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.13"
+    version: "6.2.1"
   geolocator_platform_interface:
     dependency: transitive
     description:
       name: geolocator_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.8"
+    version: "1.0.9"
+  geolocator_web:
+    dependency: transitive
+    description:
+      name: geolocator_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   google_fonts:
     dependency: "direct main"
     description:
@@ -215,10 +222,12 @@ packages:
   mapbox_gl:
     dependency: "direct main"
     description:
-      name: mapbox_gl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.0"
+      path: "."
+      ref: webcss
+      resolved-ref: f609b1b7586f21f8f8439a08bd7abafc6d77cc1a
+      url: "https://github.com/tobrun/flutter-mapbox-gl.git"
+    source: git
+    version: "0.10.0"
   mapbox_gl_dart:
     dependency: transitive
     description:
@@ -229,17 +238,21 @@ packages:
   mapbox_gl_platform_interface:
     dependency: transitive
     description:
-      name: mapbox_gl_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.0"
+      path: mapbox_gl_platform_interface
+      ref: HEAD
+      resolved-ref: "5df934232034988c516da11c6c72f4eee119822c"
+      url: "https://github.com/tobrun/flutter-mapbox-gl.git"
+    source: git
+    version: "0.10.0"
   mapbox_gl_web:
     dependency: transitive
     description:
-      name: mapbox_gl_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.0"
+      path: mapbox_gl_web
+      ref: HEAD
+      resolved-ref: "5df934232034988c516da11c6c72f4eee119822c"
+      url: "https://github.com/tobrun/flutter-mapbox-gl.git"
+    source: git
+    version: "0.10.0"
   matcher:
     dependency: transitive
     description:
@@ -471,4 +484,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=1.20.0"

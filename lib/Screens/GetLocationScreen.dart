@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:shop_app/Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -44,8 +45,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             accessToken: token,
             styleString: style,
             initialCameraPosition: CameraPosition(
-              zoom: 10.0,
-              target: LatLng(36.8065, 10.1815),
+              zoom: 5.5,
+              target: LatLng(33.7932, 9.5608),
             ),
             onStyleLoadedCallback: (){
               for (var i = 0; i < widget.cities.length; i++){
@@ -81,7 +82,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   ],
                 ),
                 child: Center(
-                  child: Text("+", style: TextStyle(fontSize: 25),),
+                  child: Icon(Icons.add, size: 35,),
                 ),
               ),
             ),
@@ -110,7 +111,13 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   borderRadius: BorderRadius.circular(50)
                 ),
                 child: Center(
-                  child: Text("-", style: TextStyle(fontSize: 25),),
+                  child: Center(
+                    child: Container(
+                      width: 15,
+                      height: 3,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -737,7 +744,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
       SymbolOptions(
         geometry: coord == null ? controller.cameraPosition.target : coord,
         iconImage: "pin",
-        iconOffset: Offset(0, -27)
+        iconOffset: kIsWeb ? Offset(0, -73) : Offset(0, -27),
+        iconSize: kIsWeb ? 0.5 : null,
       ),
     );
     theLocation = coord;
