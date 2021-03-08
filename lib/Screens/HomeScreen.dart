@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               margin: EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(products[i]["imageUrl"]),
+                                  image: NetworkImage(env.apiUrl + products[i]["imageUrl"]),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: BorderRadius.all(

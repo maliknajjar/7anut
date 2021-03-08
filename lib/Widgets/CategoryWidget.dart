@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../Classes/Basket.dart';
 import '../Classes/Procucts.dart';
+import '../env.dart';
 
 class CategoryWidget extends StatefulWidget {
   String category;
@@ -69,7 +70,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(item["imageUrl"]),
+                              image: NetworkImage(env.apiUrl + item["imageUrl"]),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.all(
@@ -96,7 +97,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 item["ID"].toString(),
                                 item["Name"],
                                 item["size"],
-                                item["imageUrl"],
+                                env.apiUrl + item["imageUrl"],
                                 item["price"].toString());
                             widget.refresh();
                           },
