@@ -10,7 +10,7 @@ import '../env.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmationScreen extends StatefulWidget {
@@ -344,7 +344,9 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                         Functions.logout(context, "Session is expired", Colors.red);
                         return;
                       }
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessWidget(),));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessWidget(),));
+                      // Navigator.of(context).pushAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => SuccessWidget()), (route) => false);
                     });
                   }).catchError((onError){
                     print("Catch error");

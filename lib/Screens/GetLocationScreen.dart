@@ -9,7 +9,7 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Classes/Dictionairy.dart';

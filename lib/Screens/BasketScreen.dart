@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // classes
 import '../Classes/Basket.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
 
 import 'package:google_fonts/google_fonts.dart';

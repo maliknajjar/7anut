@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Classes/Dictionairy.dart';

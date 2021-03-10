@@ -4,7 +4,7 @@ import '../Classes/Procucts.dart';
 import '../Classes/Basket.dart';
 import '../Classes/Dictionairy.dart';
 
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchScreen extends StatefulWidget {

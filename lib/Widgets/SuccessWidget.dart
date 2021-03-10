@@ -2,7 +2,7 @@ import '../Classes/Basket.dart';
 import '../Classes/Dictionairy.dart';
 
 import 'package:flutter/material.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SuccessWidget extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:shop_app/Classes/Functions.dart';
+import '../Classes/Functions.dart';
 import 'dart:convert';
 
 import '../Widgets/GPSWidget.dart';
@@ -9,7 +9,7 @@ import '../Widgets/ClassicAddressWidget.dart';
 
 import './LoadingLogoScreen.dart';
 
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Classes/Dictionairy.dart';
 import '../env.dart';
@@ -47,7 +47,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
     return DefaultTabController(
       length: 2,
-      initialIndex: kIsWeb ? 1 : 0,
+      initialIndex: 0,
       child: !isDataHere ? LoadingLogo() : Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

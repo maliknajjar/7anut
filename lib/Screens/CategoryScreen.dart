@@ -5,7 +5,7 @@ import 'dart:convert';
 import "../Widgets/CategoryWidget.dart";
 import "../Classes/Basket.dart";
 import '../Classes/Procucts.dart';
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
 
 class CategoryScreen extends StatefulWidget {

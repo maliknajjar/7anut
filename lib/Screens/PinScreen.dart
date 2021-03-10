@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:shop_app/Classes/UserInformation.dart';
+import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
 import '../Classes/Functions.dart';
 
