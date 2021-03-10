@@ -2,8 +2,5 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 // ignore: camel_case_types
 class env {
-  static String apiUrl = kIsWeb 
-  ? "http://localhost"         // for the web wich is in the same server location
-  // : "http://7anut.app";     // for the device
-  : "http://192.168.1.40";     // for the device
+  static String apiUrl = "https://7anut.app";
 }
