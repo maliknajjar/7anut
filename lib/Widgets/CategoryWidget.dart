@@ -70,7 +70,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(env.apiUrl + item["imageUrl"]),
+                              image: NetworkImage(item["imageUrl"]),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.all(
