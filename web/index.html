@@ -32,6 +32,12 @@
         navigator.serviceWorker.register('flutter_service_worker.js');
       });
     }
+    // to fix arabic words and added to the write order
+    mapboxgl.setRTLTextPlugin(
+      'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+      null,
+      true // Lazy load the plugin
+    );
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
   <picture id="splash">
