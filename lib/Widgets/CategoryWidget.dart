@@ -97,7 +97,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 item["ID"].toString(),
                                 item["Name"],
                                 item["size"],
-                                env.apiUrl + item["imageUrl"],
+                                item["imageUrl"],
                                 item["price"].toString());
                             widget.refresh();
                           },
