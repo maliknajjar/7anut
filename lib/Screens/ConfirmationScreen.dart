@@ -340,6 +340,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       "recieveDate": args["Recieve Date"].toString(),
                     }))
                     .then((value){
+                      print(value.body);
                       if(jsonDecode(value.body)["error"] != null){
                         Functions.logout(context, "Session is expired", Colors.red);
                         return;

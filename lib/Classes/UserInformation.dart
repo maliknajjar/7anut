@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:device_info/device_info.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class UserInformation {
   static String email;
@@ -11,12 +12,12 @@ class UserInformation {
   static String phoneNumber;
   static String language;
 
-  static String appName;
-  static String packageName;
-  static String version;
-  static String buildNumber;
+  static String appName = "";
+  static String packageName = "";
+  static String version = "";
+  static String buildNumber = "";
 
-  static String deviceID;
+  static String deviceID = "";
 
   UserInformation(){
     SharedPreferences.getInstance().then((prefs){
@@ -34,10 +35,15 @@ class UserInformation {
       buildNumber = packageInfo.buildNumber;
     });
 
-    printModel();
+    if (kIsWeb) {
+      deviceID = "other";
+      return;
+    }
+
+    saveDeviceID();
   }
 
-  void printModel() async {
+  void saveDeviceID() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if(Platform.isAndroid){
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -46,7 +52,7 @@ class UserInformation {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       deviceID = iosInfo.identifierForVendor;
     }else{
-      deviceID = "null";
+      deviceID = "other";
     }
   }
 }

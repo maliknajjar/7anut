@@ -122,6 +122,40 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                         ),
                       ),
+                      Positioned(
+                        left: theWidth < 600 ? theWidth * 0.0225 : 15,
+                        bottom: theWidth < 600 ? theWidth * 0.0225 : 15,
+                        child: InkWell(
+                          onTap: () {
+                            Basket.addItem(
+                                item["ID"].toString(),
+                                item["Name"],
+                                item["size"],
+                                item["imageUrl"],
+                                item["price"].toString());
+                            widget.refresh();
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(theWidth < 600 ? theWidth * 0.035 : 20),
+                            ),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                              child: Container(
+                                height: theWidth < 600 ? theWidth * 0.085 : 50,
+                                width: theWidth < 600 ? theWidth * 0.085 : 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow.withOpacity(0.5),
+                                ),
+                                child: Icon(
+                                  Icons.remove,
+                                  size: theWidth < 600 ? theWidth * 0.07 : 40,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   Expanded(

@@ -275,6 +275,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                         },
                                         child: Container(
                                           width: 40,
+                                          height: 35,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(10),
@@ -289,14 +290,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                               ),
                                             ],
                                           ),
-                                          child: Text(
-                                            "+",
-                                            style: TextStyle(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
+                                          child: Icon(
+                                            Icons.add
+                                          )
                                         ),
                                       ),
                                       InkWell(
@@ -307,6 +303,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                         },
                                         child: Container(
                                           width: 40,
+                                          height: 35,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(10),
@@ -322,14 +319,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                               ),
                                             ],
                                           ),
-                                          child: Text(
-                                            "-",
-                                            style: TextStyle(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
+                                          child: Icon(
+                                            Icons.remove
+                                          )
                                         ),
                                       ),
                                     ],
