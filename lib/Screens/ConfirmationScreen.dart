@@ -52,7 +52,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     List address = args["Address"].values.toList();
     if(args["Address"].containsKey("location")){
       for (var i = 0; i < address.length; i++) {
-        if(i == 1) address[i] = address[i]["latitude"].toStringAsFixed(5) + ", " + address[i]["longitude"].toStringAsFixed(5);
+        if(i == 2) address[i] = address[i]["latitude"].toStringAsFixed(5) + ", " + address[i]["longitude"].toStringAsFixed(5);
       }
     }
     address.removeAt(0);

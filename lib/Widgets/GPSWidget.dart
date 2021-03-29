@@ -28,6 +28,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
   String instructions;
   LatLng location;
   String mapButtonText = Dictionairy.words["Add Location"][UserInformation.language];
+  String theState;
 
   bool isWaiting = false;
 
@@ -125,7 +126,8 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                           setState(() {
                             print(value);
                             if (value != null) {
-                              location = value;
+                              location = value[0];
+                              theState = value[1];
                               mapButtonText = Dictionairy.words["Location Selected"][UserInformation.language];
                             }
                           });
@@ -409,6 +411,7 @@ class _GPSAddAddressState extends State<GPSAddAddress> {
                   });
                   Map address = {
                     "title": title, 
+                    "state": theState,
                     "location": {"latitude": location.latitude, "longitude": location.longitude}, 
                     "information": information, 
                     "instructions": instructions,

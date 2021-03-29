@@ -29,6 +29,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   LatLng theLocation;
   Circle circles;
 
+  String theState;
+
   @override
   Widget build(BuildContext context) {
     final String token = 'pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA';
@@ -434,7 +436,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      if (theLocation != null) Navigator.of(context).pop(theLocation);
+                      if (theLocation != null) Navigator.of(context).pop([theLocation, theState]);
                       // else Functions.alert(context, "choose location", "you need to specify a location");
                       else{
                         showDialog(context: context, builder: (BuildContext context){
@@ -730,6 +732,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
           return;
         }
       }else{
+        theState = widget.cities[i]["state"];
         break;
       }
     }
