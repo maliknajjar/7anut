@@ -492,6 +492,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     "fullName": fullName,
                                     "phoneNumber": phoneNumber,
                                     "password": password,
+                                    "deviceID": UserInformation.deviceID,
                                   }).then((result){
                                     var response = json.decode(result.body);
                                     setState(() {

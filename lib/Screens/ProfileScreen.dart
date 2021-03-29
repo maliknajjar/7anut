@@ -1,11 +1,11 @@
 import 'dart:ui';
 
+import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../Classes/Dictionairy.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -36,6 +36,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // adding it to an array so i can add the version number in the last
+    List<Widget> arr = [Text("test")];
+    arr.clear();
+    for(int index = 0; index < titles.length; index++){
+      arr.add(
+        Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 7.5,
+                spreadRadius: 1,
+                color: Colors.black.withOpacity(0.25),
+                offset: Offset(2.5, 2.5),
+              )
+            ],
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.yellow[50],
+          ),
+          padding: EdgeInsets.all(15),
+          margin: EdgeInsets.only(bottom: 25),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(hintText[index], 
+                    style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  titles[index] != "email" 
+                  ? InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed(
+                        "/editprofile", 
+                        arguments: {
+                          "type": titles[index], "title": hintText[index], "inputs": theInputs[index]
+                        } 
+                      )
+                      .then((value){
+                        setState(() {
+                          refreshPrefs();
+                        });
+                      });
+                    }, 
+                    child: Text(Dictionairy.words["edit"][UserInformation.language], 
+                    style: GoogleFonts.almarai(color: Colors.blue, fontSize: 20),)
+                  ) 
+                  : Text(""),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Text(stringArray[index], style: GoogleFonts.almarai(fontSize: 20, color: Colors.grey[600]),),
+              )
+            ],
+          ),
+        ),
+      );
+    }
+    arr.add(
+      Text(UserInformation.version + " + " + UserInformation.buildNumber, style: TextStyle(color: Colors.black.withOpacity(0.25)),),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -60,40 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             padding: EdgeInsets.all(15),
             child: Column(
-              children: [
-                for(int index = 0; index < titles.length; index++)
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 7.5,
-                        spreadRadius: 1,
-                        color: Colors.black.withOpacity(0.25),
-                        offset: Offset(2.5, 2.5),
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.yellow[50],
-                  ),
-                  padding: EdgeInsets.all(15),
-                  margin: EdgeInsets.only(bottom: 25),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(hintText[index], style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 20),),
-                          titles[index] != "email" ? InkWell(onTap: (){Navigator.of(context).pushNamed("/editprofile", arguments: {"type": titles[index], "title": hintText[index], "inputs": theInputs[index]} ).then((value){setState(() {refreshPrefs();});});}, child: Text(Dictionairy.words["edit"][UserInformation.language], style: GoogleFonts.almarai(color: Colors.blue, fontSize: 20),)) : Text(""),
-                        ],
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: Text(stringArray[index], style: GoogleFonts.almarai(fontSize: 20, color: Colors.grey[600]),),
-                      )
-                    ],
-                  ),
-                ),
-              ],
+              children: arr
             ),
           ),
         ),

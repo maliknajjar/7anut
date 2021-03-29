@@ -244,6 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   http.post(env.apiUrl + "/api/signin", body: {
                                     "email": email,
                                     "password": password,
+                                    "deviceID": UserInformation.deviceID,
                                   }).then((result){
                                     theButton = Text(Dictionairy.words["Sign In"][UserInformation.language], style: UserInformation.language == "ar" ? GoogleFonts.almarai(fontSize: 18) : GoogleFonts.roboto(fontSize: 18));
                                     var response = json.decode(result.body);
