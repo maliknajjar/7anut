@@ -51,12 +51,12 @@ class Basket {
     return Basket.basketItems.length.toString();
   }
 
-  static String getQtyById(String id){
+  static String getQtyById(String id, {bool forAnimation}){
     int totalNumber = 0;
     for(int i = 0; i < Basket.basketItems.length; i++){
       if(Basket.basketItems[i]["ID"] == id) totalNumber += Basket.basketItems[i]["qty"];
     }
-    if(totalNumber == 0) return "";
+    if(totalNumber == 0) return forAnimation == null ? "" : "0";
     return totalNumber.toString();
   }
 

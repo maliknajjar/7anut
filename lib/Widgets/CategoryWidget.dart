@@ -99,6 +99,9 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 item["size"],
                                 item["imageUrl"],
                                 item["price"].toString());
+                            setState(() {
+                              print("refreshed");
+                            });
                             widget.refresh();
                           },
                           child: ClipRRect(
@@ -106,12 +109,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               Radius.circular(theWidth < 600 ? theWidth * 0.035 : 20),
                             ),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                              filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                               child: Container(
                                 height: theWidth < 600 ? theWidth * 0.085 : 50,
                                 width: theWidth < 600 ? theWidth * 0.085 : 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow.withOpacity(0.5),
+                                  color: Colors.yellow[200].withOpacity(0.75),
                                 ),
                                 child: Icon(
                                   Icons.add,
@@ -123,16 +126,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         ),
                       ),
                       Positioned(
-                        left: theWidth < 600 ? theWidth * 0.0225 : 15,
+                        right: theWidth < 600 ? theWidth * 0.0225 : 15,
                         bottom: theWidth < 600 ? theWidth * 0.0225 : 15,
                         child: InkWell(
                           onTap: () {
-                            Basket.addItem(
-                                item["ID"].toString(),
-                                item["Name"],
-                                item["size"],
-                                item["imageUrl"],
-                                item["price"].toString());
+                            Basket.removeItem(item["ID"].toString());
+                            setState(() {
+                              print("item removed");                            
+                            });
                             widget.refresh();
                           },
                           child: ClipRRect(
@@ -140,12 +141,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               Radius.circular(theWidth < 600 ? theWidth * 0.035 : 20),
                             ),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                              child: Container(
-                                height: theWidth < 600 ? theWidth * 0.085 : 50,
-                                width: theWidth < 600 ? theWidth * 0.085 : 50,
+                              filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.fastOutSlowIn,
+                                height: int.parse(Basket.getQtyById(item["ID"].toString(), forAnimation: true)) >= 1 ? theWidth < 600 ? theWidth * 0.085 : 50 : 0,
+                                width: int.parse(Basket.getQtyById(item["ID"].toString(), forAnimation: true)) >= 1 ? theWidth < 600 ? theWidth * 0.085 : 50 : 0,
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow.withOpacity(0.5),
+                                  color: Colors.yellow[200].withOpacity(0.75),
                                 ),
                                 child: Icon(
                                   Icons.remove,
