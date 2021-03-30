@@ -14,4 +14,18 @@ abstract class Functions extends StatelessWidget {
       });
     });
   }
+  
+  static bool isVersionSupported(String currentVersion, String minimumVersion){
+    List cvarr = currentVersion.split(".");
+    List mvarr = minimumVersion.split(".");
+    for (int i = 0; i < cvarr.length; i++){
+      if(int.parse(cvarr[i]) < int.parse(mvarr[i])){
+        return false;
+      }else if (int.parse(cvarr[i]) == int.parse(mvarr[i])) {
+        if (i == cvarr.length - 1) return true;
+      }else{
+        return true;
+      }
+    }
+  }
 }

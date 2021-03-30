@@ -17,8 +17,11 @@ import '../Classes/Functions.dart';
 
 class GetLocationScreen extends StatefulWidget {
   List<dynamic> cities;
-  GetLocationScreen(List<dynamic> theCities){
+  List initCameraPosition;
+  GetLocationScreen(List<dynamic> theCities, List initCamera){
     cities = theCities;
+    initCameraPosition = initCamera;
+    print(initCameraPosition);
   }
   @override
   _GetLocationScreenState createState() => _GetLocationScreenState();
@@ -47,8 +50,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             accessToken: token,
             styleString: style,
             initialCameraPosition: CameraPosition(
-              zoom: 5.5,
-              target: LatLng(33.7932, 9.5608),
+              zoom: widget.initCameraPosition[2].toDouble(),
+              target: LatLng(widget.initCameraPosition[0].toDouble(), widget.initCameraPosition[1].toDouble()),
             ),
             onStyleLoadedCallback: (){
               for (var i = 0; i < widget.cities.length; i++){
@@ -732,7 +735,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
           return;
         }
       }else{
-        theState = widget.cities[i]["state"];
+        theState = widget.cities[i]["store_name"];
         break;
       }
     }

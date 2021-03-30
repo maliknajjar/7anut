@@ -23,6 +23,7 @@ import 'Screens/AddAddressScreen.dart';
 import 'Screens/ConfirmationScreen.dart';
 import 'Screens/SearchScreen.dart';
 import 'Screens/ChooseLanguageScreen.dart';
+import 'Screens/VersionNotSupported.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,10 +39,21 @@ class _MyAppState extends State<MyApp> {
   bool isLoggedIn = false;
   bool isLoading = true;
   bool isLanguageChosen = true;
+  bool versionIsSupported = true;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    /*//////////////////////////////////////////////////////////////
+    // checking if the version is suppprted before doing anything // 
+    *///////////////////////////////////////////////////////////////
+    UserInformation.saveDeviceID();
+    versionIsSupported = Functions.isVersionSupported("10.5.3", "10.5.3");
+    print(UserInformation.version);
+    print(UserInformation.buildNumber);
+    print("finished writing");
+    
 
     /*//////////////////////////////////////////////////////////////
     // getting user information from storage if its session still //
@@ -96,7 +108,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: '7anut Web',
-      home: isLanguageChosen ? isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen() : ChooseLanguageScreen(),
+      home: !versionIsSupported ? VersionNotSupported() : isLanguageChosen ? isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen() : ChooseLanguageScreen(),
       // home: ProfileScreen(),
       routes: {
         "/home": (context) => HomeScreen(),

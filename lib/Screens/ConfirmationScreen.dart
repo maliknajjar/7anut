@@ -50,10 +50,8 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     var theWidth = MediaQuery.of(context).size.width;
     Map<String, dynamic> args = ModalRoute.of(context).settings.arguments as Map;
     List address = args["Address"].values.toList();
-    if(args["Address"].containsKey("location")){
-      for (var i = 0; i < address.length; i++) {
-        if(i == 2) address[i] = address[i]["latitude"].toStringAsFixed(5) + ", " + address[i]["longitude"].toStringAsFixed(5);
-      }
+    for (var i = 0; i < address.length; i++) {
+      if(i == 2) address[i] = address[i]["latitude"].toStringAsFixed(5) + ", " + address[i]["longitude"].toStringAsFixed(5);
     }
     address.removeAt(0);
     

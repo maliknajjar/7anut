@@ -43,7 +43,7 @@ class UserInformation {
     saveDeviceID();
   }
 
-  void saveDeviceID() async {
+  static void saveDeviceID() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if(Platform.isAndroid){
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
