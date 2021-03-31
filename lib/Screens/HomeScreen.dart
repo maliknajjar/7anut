@@ -209,22 +209,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       margin: EdgeInsets.only(left: 7.5),
                       child: Text(
-                        Addresses.addressesBasket.isEmpty 
-                        ? Dictionairy.words["Loading"][UserInformation.language] + "..."
-                        : jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
+                        Addresses.addressesBasket.isEmpty && !dataIsAvailable ? Dictionairy.words["Loading"][UserInformation.language] + "..." : Addresses.addressesBasket.isEmpty ? Dictionairy.words["Add Address"][UserInformation.language] : jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
                         style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     ),
                     Text(
-                      Addresses.addressesBasket.isEmpty 
-                      ? ""
-                      : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                      Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
                       style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                     ),
                     Text(
-                      Addresses.addressesBasket.isEmpty 
-                      ? ""
-                      : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                      Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
                       style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                     ),
                   ],
@@ -290,7 +284,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   // NULL space for design /\ /\ /\ /\ /\
                   InkWell(
                     onTap: (){
-                      Navigator.of(context).pushNamed("/adresses");
+                      Navigator.of(context).pushNamed("/adresses").then((value){
+                        requestData();
+                      });
                     },
                     child: Icon(
                       Icons.location_on_outlined,
