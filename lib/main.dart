@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:package_info_plus/package_info_plus.dart';
 import 'dart:convert';
 import './env.dart';
 import './Classes/UserInformation.dart';
@@ -48,11 +49,14 @@ class _MyAppState extends State<MyApp> {
     /*//////////////////////////////////////////////////////////////
     // checking if the version is suppprted before doing anything // 
     *///////////////////////////////////////////////////////////////
-    UserInformation.saveDeviceID();
-    versionIsSupported = Functions.isVersionSupported("10.5.3", "10.5.3");
-    print(UserInformation.version);
-    print(UserInformation.buildNumber);
-    print("finished writing");
+    http.get(env.apiUrl + "/api/minimumversion").then((value){
+      print(value.body);
+      PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+        versionIsSupported = Functions.isVersionSupported(packageInfo.version + "." + packageInfo.buildNumber, value.body);
+        print(packageInfo.version + "." + packageInfo.buildNumber);
+        print("finished writing");
+      });
+    });
     
 
     /*//////////////////////////////////////////////////////////////

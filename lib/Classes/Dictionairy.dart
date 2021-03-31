@@ -580,5 +580,10 @@ class Dictionairy {
       "fr": "Votre demande a été envoyée avec succès",
       "ar": "تم ارسال طلبك بنجاح",
     },
+    "Loading": {
+      "en": "Loading",
+      "fr": "Chargement",
+      "ar": "قيد التحميل",
+    },
   };
 }

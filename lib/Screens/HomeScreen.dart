@@ -93,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           !dataIsAvailable ? LoadingLogo() : Center(
             child: Container(
+              margin: EdgeInsets.only(top: 65),
               padding: EdgeInsets.only(
                 bottom: 54.5,
               ),
@@ -171,6 +172,53 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
+            ),
+          ),
+          Container(
+            height: 45,
+            margin: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: 12.5,
+            ),
+            constraints: BoxConstraints(
+              maxWidth: 600
+            ),
+            decoration: BoxDecoration(
+              color: Colors.yellow[100],
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 7.5,
+                  spreadRadius: 1,
+                  color: Colors.black.withOpacity(0.2),
+                  offset: Offset(2.5, 2.5),
+                )
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.map_outlined),
+                    Container(
+                      margin: EdgeInsets.only(left: 7.5),
+                      child: Text(
+                        Addresses.addressesBasket.isEmpty 
+                        ? Dictionairy.words["Loading"][UserInformation.language] + "..."
+                        : jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
+                        style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
+                Icon(Icons.keyboard_arrow_down_sharp, size: 28,)
+              ],
             ),
           ),
           Positioned(

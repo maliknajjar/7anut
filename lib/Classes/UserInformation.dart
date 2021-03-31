@@ -28,13 +28,6 @@ class UserInformation {
       language = prefs.getString("language");
     });
 
-    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      appName = packageInfo.appName;
-      packageName = packageInfo.packageName;
-      version = packageInfo.version;
-      buildNumber = packageInfo.buildNumber;
-    });
-
     if (kIsWeb) {
       deviceID = "other";
       return;
@@ -43,7 +36,7 @@ class UserInformation {
     saveDeviceID();
   }
 
-  static void saveDeviceID() async {
+  void saveDeviceID() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if(Platform.isAndroid){
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
