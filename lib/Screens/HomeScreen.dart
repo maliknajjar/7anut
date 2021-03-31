@@ -215,6 +215,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     ),
+                    Text(
+                      Addresses.addressesBasket.isEmpty 
+                      ? ""
+                      : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                      style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                    ),
+                    Text(
+                      Addresses.addressesBasket.isEmpty 
+                      ? ""
+                      : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                      style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                    ),
                   ],
                 ),
                 Icon(Icons.keyboard_arrow_down_sharp, size: 28,)
