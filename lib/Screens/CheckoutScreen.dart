@@ -1,12 +1,11 @@
 import 'dart:convert';
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 import '../Classes/Adresses.dart';
 import '../Classes/Dictionairy.dart';
-
 import '../Classes/UserInformation.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CheckoutScreen extends StatefulWidget {
   @override
@@ -14,13 +13,9 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  var chosenAddress;
   String payWith;
   String payWithText;
   String recieveAtTime;
-
-  String addressName;
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,209 +55,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   padding: EdgeInsets.all(15),
                   child: Column(
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                          bottom: 25
-                        ),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.yellow[50],
-                              Colors.yellow[100], 
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 7.5,
-                              spreadRadius: 1,
-                              color: Colors.black.withOpacity(0.25),
-                              offset: Offset(2.5, 2.5),
-                            )
-                          ]
-                        ),
-                        padding: EdgeInsets.only(
-                          top: 15,
-                          bottom: 20,
-                          left: 15,
-                          right: 15,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(Dictionairy.words["Deliver to"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),),
-                            GestureDetector(
-                              onTap: (){
-                                showDialog(context: context, builder: (BuildContext context){
-                                  return StatefulBuilder(
-                                    builder: (context, setState){
-                                      return Dialog(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        elevation: 0,
-                                        backgroundColor: Colors.yellow[100],
-                                        child: SingleChildScrollView(
-                                          child: Container(
-                                            constraints: BoxConstraints(
-                                              maxWidth: 300
-                                            ),
-                                            padding: EdgeInsets.all(15),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: (){
-                                                          Navigator.pushNamed(context, "/addaddress").then((value){
-                                                            setState(() {
-                                                              
-                                                            });
-                                                          });
-                                                        },
-                                                        child: Container(
-                                                          width: double.infinity,
-                                                          padding: EdgeInsets.all(3),
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(12),
-                                                            gradient: LinearGradient(
-                                                              colors: [
-                                                                Colors.black.withOpacity(0.1),
-                                                                Colors.black.withOpacity(0.05),
-                                                              ],
-                                                              begin: Alignment.topLeft,
-                                                              end: Alignment.bottomRight,
-                                                            ),
-                                                          ),
-                                                          child: Container(
-                                                            alignment: Alignment.center,
-                                                            padding: EdgeInsets.symmetric(
-                                                              vertical: 10,
-                                                            ),
-                                                            decoration: BoxDecoration(
-                                                              color: Colors.white.withOpacity(0.8),
-                                                              borderRadius: BorderRadius.circular(10),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors.yellow
-                                                                )
-                                                              ]
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
-                                                                Container(child: Icon(Icons.add_location_outlined, color: Colors.black.withOpacity(0.75),), margin: EdgeInsets.only(left: 10),)
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Addresses.addressesBasket.length != 0
-                                                      ? Container(
-                                                        margin: EdgeInsets.only(bottom: 10, top: 20),
-                                                        child: Text(Dictionairy.words["Addresses"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 20),),
-                                                      ) 
-                                                      : Container(
-                                                        padding: EdgeInsets.all(30),
-                                                        alignment: Alignment.center,
-                                                        child: Text(Dictionairy.words["There are no Addesses"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.5)),)
-                                                      ),
-                                                      for (var i = 0; i < Addresses.addressesBasket.length; i++)
-                                                      GestureDetector(
-                                                        onTap: (){
-                                                          Navigator.of(context).pop(i);
-                                                        },
-                                                        child: Container(
-                                                          margin: EdgeInsets.only(
-                                                            bottom: 10
-                                                          ),
-                                                          width: double.infinity,
-                                                          decoration: BoxDecoration(
-                                                            color: Colors.yellow[50],
-                                                            gradient: LinearGradient(
-                                                              colors: [
-                                                                Colors.yellow[50],
-                                                                Colors.yellow[100],
-                                                              ],
-                                                              begin: Alignment.topCenter,
-                                                              end: Alignment.bottomCenter,
-                                                            ),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                blurRadius: 5,
-                                                                spreadRadius: 1,
-                                                                color: Colors.black.withOpacity(0.2),
-                                                                offset: Offset(2.5, 2.5),
-                                                              )
-                                                            ],
-                                                            borderRadius: BorderRadius.circular(10)
-                                                          ),
-                                                          padding: EdgeInsets.all(15),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              Text(jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], style: GoogleFonts.almarai(fontSize: 20),),
-                                                              Icon(Icons.location_on_outlined)
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      );
-                                    },
-                                  );
-                                }).then((value){
-                                  if(value != null){
-                                    setState((){
-                                      chosenAddress = jsonDecode(Addresses.addressesBasket[value]["addresse"]);
-                                      addressName = jsonDecode(Addresses.addressesBasket[value]["addresse"])["title"];
-                                      print(chosenAddress);
-                                    });
-                                  }
-                                });
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(top: 15),
-                                decoration: BoxDecoration(
-                                  color: Colors.yellow[50],
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 7.5,
-                                      spreadRadius: 1,
-                                      color: Colors.black.withOpacity(0.25),
-                                      offset: Offset(2.5, 2.5),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(10)
-                                ),
-                                padding: EdgeInsets.all(15),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(addressName == null ? Dictionairy.words["Choose Address"][UserInformation.language] : addressName, style: GoogleFonts.almarai(fontSize: 20),),
-                                    Icon(Icons.arrow_drop_down)
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      
                       Container(
                         margin: EdgeInsets.only(
                           bottom: 25
@@ -511,14 +304,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  for (var i = 1; i < 8; i++)
                                                   Container(
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
                                                         GestureDetector(
                                                           onTap: (){
-                                                            Navigator.of(context).pop(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10));
+                                                            Navigator.of(context).pop(DateTime(now.year, now.month, now.day + 1).toString().substring(0, 10));
                                                           },
                                                           child: Container(
                                                             margin: EdgeInsets.only(
@@ -549,7 +341,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                             child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                               children: [
-                                                                Text(DateTime(now.year, now.month, now.day + i).toString().substring(0, 10) + (i == 1 ? " (${Dictionairy.words["Tomorrow"][UserInformation.language]})" : ""), style: GoogleFonts.almarai(fontSize: 20),),
+                                                                Text(DateTime(now.year, now.month, now.day + 1).toString().substring(0, 10) + " (${Dictionairy.words["Tomorrow"][UserInformation.language]})", style: GoogleFonts.almarai(fontSize: 20),),
                                                                 Icon(Icons.date_range_outlined)
                                                               ],
                                                             ),
@@ -609,7 +401,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               bottom: 0,
               child: GestureDetector(
                 onTap: (){
-                  if(chosenAddress == null || payWith == null || recieveAtTime == null){
+                  if(payWith == null || recieveAtTime == null){
                     // Functions.alert(context, "fill the fields", "you need to fill all the fields");
                     showDialog(context: context, builder: (BuildContext context){
                       return Dialog(
@@ -682,7 +474,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     });
                     return;
                   }
-                  var information = {"Address": chosenAddress, "Payment Type": payWith, "Recieve Date": recieveAtTime};
+                  var information = {"Address": jsonDecode(Addresses.addressesBasket[0]["addresse"]), "Payment Type": payWith, "Recieve Date": recieveAtTime};
                   Navigator.of(context).pushNamed("/confirmation", arguments: information);
                 },
                 child: Container(

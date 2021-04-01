@@ -585,5 +585,10 @@ class Dictionairy {
       "fr": "Chargement",
       "ar": "قيد التحميل",
     },
+    "store": {
+      "en": "store",
+      "fr": "Magasin",
+      "ar": "مخزن",
+    },
   };
 }

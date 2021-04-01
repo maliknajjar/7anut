@@ -214,6 +214,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Text(
+                      Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
+                      style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                    ),
+                    Text(
                       Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
                       style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                     ),
