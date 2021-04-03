@@ -116,9 +116,9 @@ class Dictionairy {
       "ar": "اختر طريقة الدفع",
     },
     "Deliver at": {
-      "en": "Deliver at",
-      "fr": "Date de livraison",
-      "ar": "تاريخ الاستلام",
+      "en": "Delivery time",
+      "fr": "Délai de livraison",
+      "ar": "وقت التوصيل",
     },
     "recieveDate": {
       "en": "Deliver at",
@@ -126,9 +126,9 @@ class Dictionairy {
       "ar": "تاريخ الاستلام",
     },
     "Choose Date": {
-      "en": "Choose Date",
-      "fr": "Choisissez la date",
-      "ar": "اختر التاريخ",
+      "en": "Choose Time",
+      "fr": "Choisissez l'heure",
+      "ar": "اختر الوقت",
     },
     "Next": {
       "en": "Next",

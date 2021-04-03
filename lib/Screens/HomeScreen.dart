@@ -1,15 +1,16 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:convert';
 
 import '../Screens/LoadingLogoScreen.dart';
 import '../Widgets/DrawerWidget.dart';
+import '../env.dart';
+
 import '../Classes/Procucts.dart';
 import '../Classes/Functions.dart';
 import '../Classes/Dictionairy.dart';
-import '../env.dart';
-
+import '../Classes/WebSocket.dart';
 import '../Classes/Basket.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
@@ -56,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
   initState() {
     super.initState();
 
-    // request categories and products from the server
-    requestData();
+    WebSocket();         // opening a websocket connection
+    requestData();      // request categories and products from the server
   }
 
   @override
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           !dataIsAvailable ? LoadingLogo() : Center(
             child: Container(
-              margin: EdgeInsets.only(top: 65),
+              margin: EdgeInsets.only(top: 75),
               padding: EdgeInsets.only(
                 bottom: 54.5,
               ),
@@ -179,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: EdgeInsets.only(
               left: 20,
               right: 20,
-              top: 20,
+              top: 25,
             ),
             padding: EdgeInsets.symmetric(
               horizontal: 12.5,
@@ -205,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.map_outlined),
+                    Icon(Icons.gps_fixed_outlined),
                     Container(
                       margin: EdgeInsets.only(left: 7.5),
                       child: Text(

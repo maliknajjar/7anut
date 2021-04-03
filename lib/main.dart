@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'dart:convert';
 import './env.dart';
+
 import './Classes/UserInformation.dart';
 import './Classes/Functions.dart';
 import './Classes/Dictionairy.dart';
@@ -57,7 +58,6 @@ class _MyAppState extends State<MyApp> {
         print("finished writing");
       });
     });
-    
 
     /*//////////////////////////////////////////////////////////////
     // getting user information from storage if its session still //

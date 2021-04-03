@@ -20,6 +20,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now().toUtc().add(Duration(hours: 1));
+    print(now);
 
     var theWidth = MediaQuery.of(context).size.width;
 
@@ -343,6 +344,45 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                               children: [
                                                                 Text(DateTime(now.year, now.month, now.day + 1).toString().substring(0, 10) + " (${Dictionairy.words["Tomorrow"][UserInformation.language]})", style: GoogleFonts.almarai(fontSize: 20),),
                                                                 Icon(Icons.date_range_outlined)
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: (){
+                                                            Navigator.of(context).pop("Now");
+                                                          },
+                                                          child: Container(
+                                                            margin: EdgeInsets.only(
+                                                              bottom: 10
+                                                            ),
+                                                            width: double.infinity,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.yellow[50],
+                                                              gradient: LinearGradient(
+                                                                colors: [
+                                                                  Colors.yellow[50],
+                                                                  Colors.yellow[100],
+                                                                ],
+                                                                begin: Alignment.topCenter,
+                                                                end: Alignment.bottomCenter,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius: 5,
+                                                                  spreadRadius: 1,
+                                                                  color: Colors.black.withOpacity(0.2),
+                                                                  offset: Offset(2.5, 2.5),
+                                                                )
+                                                              ],
+                                                              borderRadius: BorderRadius.circular(10)
+                                                            ),
+                                                            padding: EdgeInsets.all(15),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                              children: [
+                                                                Text("Now", style: GoogleFonts.almarai(fontSize: 20),),
+                                                                Icon(Icons.timer)
                                                               ],
                                                             ),
                                                           ),
