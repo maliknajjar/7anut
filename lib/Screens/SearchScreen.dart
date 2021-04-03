@@ -229,7 +229,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         )
                                       ],
                                     ),
-                                    child: Center(child: Text("+", style: GoogleFonts.almarai(fontSize: 28),)),
+                                    child: Center(child: Icon(Icons.add)),
                                   ),
                                 ),
                                 InkWell(
@@ -253,7 +253,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         )
                                       ],
                                     ),
-                                    child: Center(child: Text("-", style: GoogleFonts.almarai(fontSize: 28),)),
+                                    child: Center(child: Icon(Icons.remove)),
                                   ),
                                 ),
                               ],

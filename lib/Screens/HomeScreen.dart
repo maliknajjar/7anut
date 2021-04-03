@@ -10,7 +10,7 @@ import '../env.dart';
 import '../Classes/Procucts.dart';
 import '../Classes/Functions.dart';
 import '../Classes/Dictionairy.dart';
-import '../Classes/WebSocket.dart';
+import '../Classes/TheWebSocket.dart';
 import '../Classes/Basket.dart';
 import '../Classes/Adresses.dart';
 import '../Classes/UserInformation.dart';
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   initState() {
     super.initState();
 
-    WebSocket();         // opening a websocket connection
+    TheWebSocket.connect();         // opening a websocket connection
     requestData();      // request categories and products from the server
   }
 
