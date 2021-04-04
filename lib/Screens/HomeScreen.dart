@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
   initState() {
     super.initState();
 
-    TheWebSocket.connect();         // opening a websocket connection
-    requestData();      // request categories and products from the server
+    TheWebSocket.connect(context);         // opening a websocket connection
+    requestData();                        // request categories and products from the server
   }
 
   @override

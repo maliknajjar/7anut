@@ -161,8 +161,8 @@ class Dictionairy {
       "ar": "بطاقة دفع",
     },
     "soon": {
-      "en": "soon",
-      "fr": "bientôt",
+      "en": "Soon",
+      "fr": "Bientôt",
       "ar": "قريبا",
     },
     "Tomorrow": {
@@ -589,6 +589,21 @@ class Dictionairy {
       "en": "store",
       "fr": "Magasin",
       "ar": "مخزن",
+    },
+    "Reconnect": {
+      "en": "Reconnect",
+      "fr": "Reconnecter",
+      "ar": "اعادة الاتصال",
+    },
+    "connection error message": {
+      "en": "the app can't connect to the server",
+      "fr": "l'application ne peut pas se connecter au serveur",
+      "ar": "حدث خطأ وقت الاتصال بالخادم"
+    },
+    "Now": {
+      "en": "Now",
+      "fr": "maintenant",
+      "ar": "الان"
     },
   };
 }

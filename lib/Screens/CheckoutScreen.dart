@@ -20,8 +20,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now().toUtc().add(Duration(hours: 1));
-    print(now);
-
     var theWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -350,7 +348,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                         ),
                                                         GestureDetector(
                                                           onTap: (){
-                                                            Navigator.of(context).pop("Now");
+                                                            // Navigator.of(context).pop("Now");
                                                           },
                                                           child: Container(
                                                             margin: EdgeInsets.only(
@@ -381,7 +379,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                             child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                               children: [
-                                                                Text("Now", style: GoogleFonts.almarai(fontSize: 20),),
+                                                                Text(Dictionairy.words["Now"][UserInformation.language] + " (" + Dictionairy.words["soon"][UserInformation.language] + ")", style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.5)),),
                                                                 Icon(Icons.timer)
                                                               ],
                                                             ),

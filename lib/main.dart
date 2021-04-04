@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
-import 'dart:convert';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import './env.dart';
 
 import './Classes/UserInformation.dart';
@@ -28,7 +30,11 @@ import 'Screens/ChooseLanguageScreen.dart';
 import 'Screens/VersionNotSupported.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    Phoenix(
+      child: MyApp()
+    )
+  );
 }
 
 class MyApp extends StatefulWidget {
