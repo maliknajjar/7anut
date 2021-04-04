@@ -23,28 +23,39 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var products;
   bool dataIsAvailable = false;
+  bool thereIsSelectedAddress = false;
 
   void requestData(){
     setState(() {
       dataIsAvailable = false;
+      thereIsSelectedAddress = false;
     });
     http.get(env.apiUrl + "/api/categories").then((r){
       products = json.decode(r.body);
       Products.categories= json.decode(r.body);
     }).then((value){
-      http.get(env.apiUrl + "/api/products/").then((r){
-        if (this.mounted) {
-          http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
-          .then((value){
-            Addresses.addressesBasket = jsonDecode(value.body);
-            // what happens when you fetch all needed data
+      if (this.mounted) {
+        http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
+        .then((value){
+          if(jsonDecode(value.body).isEmpty){
             setState(() {
               dataIsAvailable = true;
+              thereIsSelectedAddress = false;
+            });
+            return;
+          }
+          Addresses.addressesBasket = jsonDecode(value.body);
+          // what happens when you fetch all needed data
+          http.get(env.apiUrl + "/api/products/" + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]).then((r){
+            print(jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]);
+            setState(() {
+              dataIsAvailable = true;
+              thereIsSelectedAddress = true;
               Products.products = json.decode(r.body);
             });
           });
-        }
-      });
+        });
+      }
     })
     .catchError((onError){
       print("Catch error");
@@ -92,7 +103,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: <Widget>[
-          !dataIsAvailable ? LoadingLogo() : Center(
+          thereIsSelectedAddress == false && dataIsAvailable == true 
+          ? Center(
+            child: Text("there is no selected address"),
+          )
+          : !dataIsAvailable 
+          ? LoadingLogo() 
+          : Center(
             child: Container(
               margin: EdgeInsets.only(top: 75),
               padding: EdgeInsets.only(
