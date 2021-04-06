@@ -1,5 +1,6 @@
 class Basket {
   static List basketItems = [];
+  static Map simpleArray = {};
 
   static void clearBasket(){
     basketItems.clear();
@@ -66,5 +67,15 @@ class Basket {
       totalNumber += Basket.basketItems[i]["qty"] * double.parse(Basket.basketItems[i]["price"]);
     }
     return totalNumber;
+  }
+
+  static void addItemToSimpleMap(productID){
+    if(!simpleArray.containsKey(productID)) simpleArray[productID] = 0;
+    simpleArray[productID]++;
+  }
+
+  static void removeItemToSimpleMap(productID){
+    simpleArray[productID]--;
+    if(simpleArray[productID] == 0) simpleArray.remove(productID);
   }
 }

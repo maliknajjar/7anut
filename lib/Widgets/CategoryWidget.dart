@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../Classes/Basket.dart';
 import '../Classes/Procucts.dart';
+import '../Classes/UserInformation.dart';
+import '../Classes/Functions.dart';
 import '../env.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -19,9 +23,22 @@ class CategoryWidget extends StatefulWidget {
 
 class _CategoryWidgetState extends State<CategoryWidget> {
   String category;
+  List<bool> isLoading = [];
+  List<bool> isLoadingForMinus = [];
 
   _CategoryWidgetState(String cat) {
     category = cat;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    for (var i = 0; i < Products.getProductsByCategory(category).length; i++) {
+      isLoading.add(false);
+      isLoadingForMinus.add(false);
+    }
   }
 
   @override
@@ -46,7 +63,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           crossAxisCount: 3,
           childAspectRatio: 0.65,
           children: <Widget>[
-            for (var item in Products.getProductsByCategory(category))
+            for (var i = 0; i < Products.getProductsByCategory(category).length; i++)
               Column(
                 children: <Widget>[
                   Stack(
@@ -59,7 +76,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           child: FittedBox(
                             child: Text(
                               Basket.getQtyById(
-                                item["ID"].toString(),
+                                Products.getProductsByCategory(category)[i]["ID"].toString(),
                               ),
                               style: TextStyle(
                                 fontSize: 110,
@@ -70,7 +87,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(item["imageUrl"]),
+                              image: NetworkImage(Products.getProductsByCategory(category)[i]["imageUrl"]),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.all(
@@ -93,16 +110,35 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         top: theWidth < 600 ? theWidth * 0.0225 : 15,
                         child: InkWell(
                           onTap: () {
-                            Basket.addItem(
-                                item["ID"].toString(),
-                                item["Name"],
-                                item["size"],
-                                item["imageUrl"],
-                                item["price"].toString());
-                            setState(() {
-                              print("refreshed");
-                            });
-                            widget.refresh();
+                            if(isLoading[i] == false){  // to prevent the user from clicking while loading
+                              setState(() {
+                                isLoading[i] = true;
+                              });
+                              Basket.addItemToSimpleMap(Products.getProductsByCategory(category)[i]["ID"].toString());
+                              http.post(env.apiUrl + "/api/takeproduct", body: {
+                                "email": UserInformation.email, 
+                                "sessionID": UserInformation.sessionID, 
+                                "ID": Products.getProductsByCategory(category)[i]["ID"].toString(),
+                                "basket": jsonEncode(Basket.simpleArray)
+                              })
+                              .then((value){
+                                print(value.body);
+                                if(jsonDecode(value.body)["msg"] == "product finished"){
+                                  Basket.removeItemToSimpleMap(Products.getProductsByCategory(category)[i]["ID"].toString());
+                                  setState(() {
+                                    isLoading[i] = false;
+                                  });
+                                  Functions.showTheDialogue(context);
+                                  return;
+                                }
+                                Basket.addItem(Products.getProductsByCategory(category)[i]["ID"].toString(), Products.getProductsByCategory(category)[i]["Name"], Products.getProductsByCategory(category)[i]["size"], Products.getProductsByCategory(category)[i]["imageUrl"], Products.getProductsByCategory(category)[i]["price"].toString());
+                                setState(() {
+                                  print("refreshed");
+                                  isLoading[i] = false;
+                                });
+                                widget.refresh();
+                              });
+                            }
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(
@@ -116,7 +152,9 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 decoration: BoxDecoration(
                                   color: Colors.yellow[200].withOpacity(0.75),
                                 ),
-                                child: Icon(
+                                child: isLoading[i]
+                                  ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                  : Icon(
                                   Icons.add,
                                   size: theWidth < 600 ? theWidth * 0.07 : 40,
                                 ),
@@ -130,11 +168,27 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         bottom: theWidth < 600 ? theWidth * 0.0225 : 15,
                         child: InkWell(
                           onTap: () {
-                            Basket.removeItem(item["ID"].toString());
-                            setState(() {
-                              print("item removed");                            
-                            });
-                            widget.refresh();
+                            print(Basket.getQtyById(Products.getProductsByCategory(category)[i]["ID"].toString()));
+                            if(isLoadingForMinus[i] == false && int.parse(Basket.getQtyById(Products.getProductsByCategory(category)[i]["ID"].toString())) != 0){ // to prevent the user from clicking while loading
+                              setState(() {
+                                isLoadingForMinus[i] = true;
+                              });
+                              Basket.removeItemToSimpleMap(Products.getProductsByCategory(category)[i]["ID"].toString());
+                              http.post(env.apiUrl + "/api/leaveproduct", body: {
+                                "email": UserInformation.email, 
+                                "sessionID": UserInformation.sessionID, 
+                                "ID": Products.getProductsByCategory(category)[i]["ID"].toString(),
+                                "basket": jsonEncode(Basket.simpleArray)
+                              })
+                              .then((value){
+                                Basket.removeItem(Products.getProductsByCategory(category)[i]["ID"].toString());
+                                setState(() {
+                                  print("refreshed");
+                                  isLoadingForMinus[i] = false;
+                                });
+                                widget.refresh();
+                              });
+                            }
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(
@@ -145,12 +199,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 500),
                                 curve: Curves.fastOutSlowIn,
-                                height: int.parse(Basket.getQtyById(item["ID"].toString(), forAnimation: true)) >= 1 ? theWidth < 600 ? theWidth * 0.085 : 50 : 0,
-                                width: int.parse(Basket.getQtyById(item["ID"].toString(), forAnimation: true)) >= 1 ? theWidth < 600 ? theWidth * 0.085 : 50 : 0,
+                                height: int.parse(Basket.getQtyById(Products.getProductsByCategory(category)[i]["ID"].toString(), forAnimation: true)) >= 1 ? theWidth < 600 ? theWidth * 0.085 : 50 : 0,
+                                width: int.parse(Basket.getQtyById(Products.getProductsByCategory(category)[i]["ID"].toString(), forAnimation: true)) >= 1 ? theWidth < 600 ? theWidth * 0.085 : 50 : 0,
                                 decoration: BoxDecoration(
                                   color: Colors.yellow[200].withOpacity(0.75),
                                 ),
-                                child: Icon(
+                                child: isLoadingForMinus[i]
+                                  ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                  : Icon(
                                   Icons.remove,
                                   size: theWidth < 600 ? theWidth * 0.07 : 40,
                                 ),
@@ -172,7 +228,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            item["Name"],
+                            Products.getProductsByCategory(category)[i]["Name"],
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: theWidth < 600 ? theWidth * 0.04 : 24,
@@ -182,14 +238,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                item["size"],
+                                Products.getProductsByCategory(category)[i]["size"],
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                     fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
                                     color: Colors.grey),
                               ),
                               Text(
-                                item["price"].toString() + "DT",
+                                Products.getProductsByCategory(category)[i]["price"].toString() + "DT",
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                     fontSize: theWidth < 600 ? theWidth * 0.035 : 20,

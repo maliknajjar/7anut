@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // classes
 import '../Classes/Basket.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
+import '../Classes/Procucts.dart';
+import '../Classes/Functions.dart';
+import '../env.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +18,20 @@ class BasketScreen extends StatefulWidget {
 }
 
 class _BasketScreenState extends State<BasketScreen> {
+  List<bool> isLoading = [];
+  List<bool> isLoadingForMinus = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    for (var i = 0; i < Basket.basketItems.length; i++) {
+      isLoading.add(false);
+      isLoadingForMinus.add(false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var theWidth = MediaQuery.of(context).size.width;
@@ -269,9 +288,32 @@ class _BasketScreenState extends State<BasketScreen> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          setState(() {
-                                            Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString());
-                                          });
+                                          if(isLoading[i] == false){  // to prevent the user from clicking while loading
+                                            setState(() {
+                                              isLoading[i] = true;
+                                            });
+                                            Basket.addItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
+                                            http.post(env.apiUrl + "/api/takeproduct", body: {
+                                              "email": UserInformation.email, 
+                                              "sessionID": UserInformation.sessionID, 
+                                              "ID": Basket.basketItems[i]["ID"].toString(),
+                                              "basket": jsonEncode(Basket.simpleArray)
+                                            })
+                                            .then((value){
+                                              if(jsonDecode(value.body)["msg"] == "product finished"){
+                                                Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
+                                                setState(() {
+                                                  isLoading[i] = false;
+                                                });
+                                                Functions.showTheDialogue(context);
+                                                return;
+                                              }
+                                              setState(() {
+                                                isLoading[i] = false;
+                                                Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString());
+                                              });
+                                            });
+                                          }
                                         },
                                         child: Container(
                                           width: 40,
@@ -290,16 +332,33 @@ class _BasketScreenState extends State<BasketScreen> {
                                               ),
                                             ],
                                           ),
-                                          child: Icon(
+                                          child: isLoading[i]
+                                          ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                          : Icon(
                                             Icons.add
                                           )
                                         ),
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          setState(() {
-                                            Basket.removeItem(Basket.basketItems[i]["ID"]);
-                                          });
+                                          if(isLoadingForMinus[i] == false){  // to prevent the user from clicking while loading
+                                            setState(() {
+                                              isLoadingForMinus[i] = true;
+                                            });
+                                            Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
+                                            http.post(env.apiUrl + "/api/leaveproduct", body: {
+                                              "email": UserInformation.email, 
+                                              "sessionID": UserInformation.sessionID, 
+                                              "ID": Basket.basketItems[i]["ID"].toString(),
+                                              "basket": jsonEncode(Basket.simpleArray)
+                                            })
+                                            .then((value){
+                                              setState(() {
+                                                isLoadingForMinus[i] = false;
+                                                Basket.removeItem(Basket.basketItems[i]["ID"]);
+                                              });
+                                            });
+                                          }
                                         },
                                         child: Container(
                                           width: 40,
@@ -319,7 +378,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                               ),
                                             ],
                                           ),
-                                          child: Icon(
+                                          child: isLoadingForMinus[i]
+                                          ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                          : Icon(
                                             Icons.remove
                                           )
                                         ),

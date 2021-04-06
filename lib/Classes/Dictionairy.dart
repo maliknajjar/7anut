@@ -605,5 +605,10 @@ class Dictionairy {
       "fr": "maintenant",
       "ar": "الان"
     },
+    "this product is out of stock": {
+      "en": "this product is out of stock",
+      "fr": "Ce produit est en rupture de stock",
+      "ar": "نفد هذا المنتج من المخازن"
+    },
   };
 }
