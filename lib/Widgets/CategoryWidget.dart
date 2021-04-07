@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import '../Classes/Basket.dart';
 import '../Classes/Procucts.dart';
 import '../Classes/UserInformation.dart';
+import '../Classes/Dictionairy.dart';
 import '../Classes/Functions.dart';
 import '../env.dart';
 
@@ -123,6 +124,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               })
                               .then((value){
                                 print(value.body);
+                                if(value.body.contains("error")){
+                                  Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                  return;
+                                }
                                 if(jsonDecode(value.body)["msg"] == "product finished"){
                                   Basket.removeItemToSimpleMap(Products.getProductsByCategory(category)[i]["ID"].toString());
                                   setState(() {
@@ -181,6 +186,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 "basket": jsonEncode(Basket.simpleArray)
                               })
                               .then((value){
+                                if(value.body.contains("error")){
+                                  Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                  return;
+                                }
                                 Basket.removeItem(Products.getProductsByCategory(category)[i]["ID"].toString());
                                 setState(() {
                                   print("refreshed");

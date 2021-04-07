@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
@@ -13,10 +12,10 @@ class TheWebSocket {
   static void connect(context){
     WebSocketChannel channel = WebSocketChannel.connect(Uri.parse(theUrl));
     print("connection established");
-    // channel.sink.add('hello server');
+    channel.sink.add('{"sessionID": "${UserInformation.sessionID}", "email": "${UserInformation.email}"}');
     channel.stream.listen((message) {
       print(message);
-      channel.sink.close(status.goingAway);
+      // channel.sink.close(status.goingAway);      //refrence to how to close the channel from flutter app
     }, onDone: (){
       print("connection is closed");
       noConnection(context);

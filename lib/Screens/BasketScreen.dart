@@ -6,7 +6,6 @@ import 'dart:convert';
 import '../Classes/Basket.dart';
 import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
-import '../Classes/Procucts.dart';
 import '../Classes/Functions.dart';
 import '../env.dart';
 
@@ -300,6 +299,10 @@ class _BasketScreenState extends State<BasketScreen> {
                                               "basket": jsonEncode(Basket.simpleArray)
                                             })
                                             .then((value){
+                                              if(value.body.contains("error")){
+                                                Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                                return;
+                                              }
                                               if(jsonDecode(value.body)["msg"] == "product finished"){
                                                 Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
                                                 setState(() {
@@ -353,6 +356,10 @@ class _BasketScreenState extends State<BasketScreen> {
                                               "basket": jsonEncode(Basket.simpleArray)
                                             })
                                             .then((value){
+                                              if(value.body.contains("error")){
+                                                Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                                return;
+                                              }
                                               setState(() {
                                                 isLoadingForMinus[i] = false;
                                                 Basket.removeItem(Basket.basketItems[i]["ID"]);
