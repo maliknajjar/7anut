@@ -168,7 +168,7 @@ class OrderInformation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.all(10),
-                        child: Text(data.keys.toList()[i].toString() == "totalPrice" ? Dictionairy.words["Subtotal"][UserInformation.language] : Dictionairy.words[data.keys.toList()[i].toString()][UserInformation.language], style: GoogleFonts.almarai(),),
+                        child: Text(data.keys.toList()[i].toString() == "totalPrice" ? Dictionairy.words["Subtotal + fee"][UserInformation.language] : Dictionairy.words[data.keys.toList()[i].toString()][UserInformation.language], style: GoogleFonts.almarai(),),
                       ),
                       Container(
                         padding: EdgeInsets.all(10),

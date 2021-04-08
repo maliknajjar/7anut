@@ -217,7 +217,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               }
               for (var item in theMap["inputs"].values.toList()) {
                 if(item == ""){
-                  print("input is empty");
                   // Functions.alert(context, "input is empty", "you must fill all the fields");
                   showDialog(context: context, builder: (BuildContext context){
                     return Dialog(
@@ -296,7 +295,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 }, 
                 body: json.encode(theMap))
                 .then((value){
-                  print(value.body);
                   setState(() {
                     button = Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black.withOpacity(0.75)),);
                   });
@@ -307,7 +305,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         return;
                       } 
                       if (json.decode(value.body)["error"] == "this account was banned") {
-                        print("this account is banned");
                         Functions.logout(context, Dictionairy.words["this account was banned"][UserInformation.language], Colors.red);
                         return;
                       }
@@ -375,16 +372,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     }
                     if(json.decode(value.body)["value"] != null){
                       prefs.setString(theMap["type"], json.decode(value.body)["value"]);
-                      print("string was changed");
                     }
-                    print(value.body);
                     UserInformation();
                     Navigator.of(context).pop();
                   }
                 })
                 .catchError((onError){
-                  print("Catch error");
-                  print(onError);
                   Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                 });
               });

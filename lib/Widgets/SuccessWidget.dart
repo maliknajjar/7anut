@@ -1,4 +1,3 @@
-import '../Classes/Basket.dart';
 import '../Classes/Dictionairy.dart';
 
 import 'package:flutter/material.dart';
@@ -37,8 +36,7 @@ class SuccessWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (){
-                Basket.clearBasket();
-                Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                Navigator.of(context).pop();
                 Navigator.of(context).pushNamed("/orders");
               },
               child: Container(
@@ -68,8 +66,7 @@ class SuccessWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (){
-                Basket.clearBasket();
-                Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                Navigator.of(context).pop();
               },
               child: Container(
                 margin: EdgeInsets.only(top: 10),

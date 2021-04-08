@@ -44,11 +44,6 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments;
-    if(args == null){
-      print("null");
-    }else{
-      print("nice");
-    }
 
     return Scaffold(
       backgroundColor: Colors.white,

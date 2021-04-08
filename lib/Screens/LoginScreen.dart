@@ -255,13 +255,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     // saving these information when everything is successful
                                     SharedPreferences.getInstance().then((value){
                                       value.setString("email", email).then((theValue){
-                                        print("email saved: " + response["email"]);
                                         value.setString("sessionID", response["session"]).then((anotherValue){
-                                          print("sessionID saved: " + response["session"]);
                                           value.setString("full name", response["fullName"]).then((anotherValue){
-                                            print("full name saved: " + response["fullName"]);
                                             value.setString("phone number", response["phoneNumber"]).then((anotherValue){
-                                              print("phone number saved: " + response["phoneNumber"]);
                                               UserInformation();  // saving logged in user information
                                               Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                             });
@@ -271,8 +267,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     });
                                   })
                                   .catchError((onError){
-                                    print("Catch error");
-                                    print(onError);
                                     Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },

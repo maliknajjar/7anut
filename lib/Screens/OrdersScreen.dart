@@ -25,11 +25,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
       "sessionID": UserInformation.sessionID,
     })
     .then((value){
-      print({
-      "email": UserInformation.email,
-      "sessionID": UserInformation.sessionID,
-      });
-      print(value.body);
       if(value.body.contains("error")){
         Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
         return;
@@ -40,8 +35,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
       });
     })
     .catchError((onError){
-      print("Catch error");
-      print(onError);
       Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
     });
   }
@@ -281,7 +274,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 children: [
                                   Text(Dictionairy.words["total"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontWeight: FontWeight.bold),),
                                   Container(
-                                    child: Text((data[n]["transportFee"] + data[n]["totalPrice"]).toString() + " DT"),
+                                    child: Text(data[n]["totalPrice"].toString() + " DT"),
                                     margin: EdgeInsets.only(
                                       left: 10
                                     ),

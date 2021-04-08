@@ -211,7 +211,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 InkWell(
                                   onTap: (){
                                     setState(() {
-                                      Basket.addItem(e["ID"].toString(), e["Name"], e["size"], e["imageUrl"], e["price"].toString());
+                                      Basket.addItem(e["ID"].toString(), e["Name"], e["size"], e["imageUrl"], e["price"].toString(), e["limit_amount_per_user"]);
                                     });
                                   },
                                   child: Container(

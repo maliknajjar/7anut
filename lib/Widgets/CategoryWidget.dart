@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 import '../Classes/Basket.dart';
@@ -47,7 +48,9 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     var theWidth = MediaQuery.of(context).size.width;
 
     return Center(
-      child: Container(
+      child: Products.getProductsByCategory(category).isEmpty 
+      ? Text(Dictionairy.words["category is empty"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20),)
+      : Container(
         color: Colors.white,
         constraints: BoxConstraints(
           maxWidth: 600,
@@ -59,15 +62,17 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             right: theWidth < 600 ? theWidth * 0.05 : 30,
             left: theWidth < 600 ? theWidth * 0.05 : 30,
           ),
-          mainAxisSpacing: 15,
+          mainAxisSpacing: 5,
           crossAxisSpacing: theWidth < 600 ? theWidth * 0.05 : 30,
           crossAxisCount: 3,
-          childAspectRatio: 0.65,
+          childAspectRatio: 0.54,
           children: <Widget>[
             for (var i = 0; i < Products.getProductsByCategory(category).length; i++)
+              if(Products.getProductsByCategory(category)[i]["amount"] != 0)
               Column(
                 children: <Widget>[
                   Stack(
+                    alignment: Alignment.bottomLeft,
                     children: [
                       AspectRatio(
                         aspectRatio: 1,
@@ -112,6 +117,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         child: InkWell(
                           onTap: () {
                             if(isLoading[i] == false){  // to prevent the user from clicking while loading
+                              if(Basket.simpleArray[Products.getProductsByCategory(category)[i]["ID"].toString()] == Products.getProductsByCategory(category)[i]["limit_amount_per_user"]){
+                                Functions.showTheDialogue(context, "limit per user");
+                                return;
+                              }
                               setState(() {
                                 isLoading[i] = true;
                               });
@@ -123,7 +132,6 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 "basket": jsonEncode(Basket.simpleArray)
                               })
                               .then((value){
-                                print(value.body);
                                 if(value.body.contains("error")){
                                   Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
                                   return;
@@ -133,12 +141,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                   setState(() {
                                     isLoading[i] = false;
                                   });
-                                  Functions.showTheDialogue(context);
+                                  Functions.showTheDialogue(context, "this product is out of stock");
                                   return;
                                 }
-                                Basket.addItem(Products.getProductsByCategory(category)[i]["ID"].toString(), Products.getProductsByCategory(category)[i]["Name"], Products.getProductsByCategory(category)[i]["size"], Products.getProductsByCategory(category)[i]["imageUrl"], Products.getProductsByCategory(category)[i]["price"].toString());
+                                Basket.addItem(Products.getProductsByCategory(category)[i]["ID"].toString(), Products.getProductsByCategory(category)[i]["Name"], Products.getProductsByCategory(category)[i]["size"], Products.getProductsByCategory(category)[i]["imageUrl"], Products.getProductsByCategory(category)[i]["price"].toString(), Products.getProductsByCategory(category)[i]["limit_amount_per_user"]);
                                 setState(() {
-                                  print("refreshed");
                                   isLoading[i] = false;
                                 });
                                 widget.refresh();
@@ -173,7 +180,6 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         bottom: theWidth < 600 ? theWidth * 0.0225 : 15,
                         child: InkWell(
                           onTap: () {
-                            print(Basket.getQtyById(Products.getProductsByCategory(category)[i]["ID"].toString()));
                             if(isLoadingForMinus[i] == false && int.parse(Basket.getQtyById(Products.getProductsByCategory(category)[i]["ID"].toString())) != 0){ // to prevent the user from clicking while loading
                               setState(() {
                                 isLoadingForMinus[i] = true;
@@ -192,7 +198,6 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 }
                                 Basket.removeItem(Products.getProductsByCategory(category)[i]["ID"].toString());
                                 setState(() {
-                                  print("refreshed");
                                   isLoadingForMinus[i] = false;
                                 });
                                 widget.refresh();
@@ -224,6 +229,30 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                         ),
                       ),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        margin: EdgeInsets.only(
+                          bottom: theWidth < 600 ? theWidth * 0.035 : 2.5, 
+                          left: theWidth < 600 ? theWidth * 0.035 : 2.5
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withOpacity(0.75),
+                              blurRadius: 5
+                            )
+                          ]
+                        ),
+                        child: Text(
+                          Products.getProductsByCategory(category)[i]["size"],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
+                            color: Colors.black.withOpacity(0.75)
+                          ),
+                        ),
+                      )
                     ],
                   ),
                   Expanded(
@@ -233,34 +262,41 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         top: 7.5,
                         left: 10,
                       ),
+                      alignment: Alignment.center,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            Products.getProductsByCategory(category)[i]["Name"],
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: theWidth < 600 ? theWidth * 0.04 : 24,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.yellow[100],
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  offset: Offset(2.5, 2.5),
+                                  color: Colors.black.withOpacity(0.1)
+                                )
+                              ]
+                            ),
+                            padding: EdgeInsets.all(2.5),
+                            child: Text(
+                              Products.getProductsByCategory(category)[i]["price"].toString() + "DT",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
+                                color: Colors.black.withOpacity(0.85)
+                              ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                Products.getProductsByCategory(category)[i]["size"],
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
-                                    color: Colors.grey),
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            child: Text(
+                              Products.getProductsByCategory(category)[i]["Name"],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
                               ),
-                              Text(
-                                Products.getProductsByCategory(category)[i]["price"].toString() + "DT",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
-                                    color: Colors.grey),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),

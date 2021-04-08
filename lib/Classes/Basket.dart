@@ -6,18 +6,14 @@ class Basket {
     basketItems.clear();
   }
 
-  static void printAllSelectedItems(){
-    print(Basket.basketItems);
-  }
-
-  static void addItem(String itemID, String itemName, String itemSize, String itemImageUrl, String itemPrice){
+  static void addItem(String itemID, String itemName, String itemSize, String itemImageUrl, String itemPrice, int itemUserLimit){
     for(int i = 0; i < Basket.basketItems.length; i++){
       if(Basket.basketItems[i]["ID"] == itemID){
         Basket.basketItems[i]["qty"]++;
         return;
       }
     }
-    basketItems.add({"ID": itemID, "Name": itemName, "size": itemSize, "imageUrl": itemImageUrl, "price": itemPrice, "qty": 1});
+    basketItems.add({"ID": itemID, "Name": itemName, "size": itemSize, "imageUrl": itemImageUrl, "price": itemPrice, "limit_amount_per_user": itemUserLimit, "qty": 1});
   }
 
   static void removeItem(String itemID){

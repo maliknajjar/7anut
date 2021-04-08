@@ -472,7 +472,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     return;
                                   }
                                   // check if the password is strong enough
-                                  print(estimatePasswordStrength(password));
                                   if(estimatePasswordStrength(password) < 0.1){
                                     notify(Dictionairy.words["your password is weak"][UserInformation.language], 2000, Colors.red);
                                     return;
@@ -509,13 +508,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     // saving these information when everything is successful
                                     SharedPreferences.getInstance().then((value){
                                       value.setString("email", email).then((theValue){
-                                        print("email saved: " + response["email"]);
                                         value.setString("sessionID", response["session"]).then((anotherValue){
-                                          print("sessionID saved: " + response["session"]);
                                           value.setString("full name", response["fullName"]).then((anotherValue){
-                                            print("full name saved: " + response["fullName"]);
                                             value.setString("phone number", response["phoneNumber"]).then((anotherValue){
-                                              print("phone number saved: " + response["phoneNumber"]);
                                               UserInformation();  // saving logged in user information
                                               Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                             });
@@ -525,8 +520,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     });
                                   })
                                   .catchError((onError){
-                                    print("Catch error");
-                                    print(onError);
                                     Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },

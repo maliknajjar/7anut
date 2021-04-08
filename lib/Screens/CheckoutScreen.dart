@@ -214,7 +214,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     if(value == null) return;
                                     payWith = value;
                                     payWithText = Dictionairy.words[value] == null ? "null" : Dictionairy.words[value][UserInformation.language];
-                                    print(payWith);
                                   });
                                 });
                               },

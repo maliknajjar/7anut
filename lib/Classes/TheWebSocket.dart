@@ -8,22 +8,20 @@ import './UserInformation.dart';
 
 class TheWebSocket {
   static String theUrl = 'wss://7anut.app';
+  WebSocketChannel channel;
 
   static void connect(context){
     WebSocketChannel channel = WebSocketChannel.connect(Uri.parse(theUrl));
-    print("connection established");
     channel.sink.add('{"sessionID": "${UserInformation.sessionID}", "email": "${UserInformation.email}"}');
     channel.stream.listen((message) {
-      print(message);
       // channel.sink.close(status.goingAway);      //refrence to how to close the channel from flutter app
     }, onDone: (){
-      print("connection is closed");
       noConnection(context);
       // connect();
     }, onError: (error) {
-      print("there was an error");
     });
   }
+  
   static void noConnection(context){
     showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
       return StatefulBuilder(
@@ -53,7 +51,6 @@ class TheWebSocket {
                       children: [
                         InkWell(
                           onTap: (){
-                            print("works");
                             Phoenix.rebirth(context);
                           },
                           child: Container(

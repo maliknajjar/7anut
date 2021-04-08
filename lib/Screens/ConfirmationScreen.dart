@@ -40,8 +40,6 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
         }
       }
     }).catchError((onError){
-      print("Catch error");
-      print(onError);
       Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
     });
   }
@@ -328,8 +326,8 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                     http.post(env.apiUrl + "/api/addOrder",
                     headers: {"Content-Type": "application/json"},
                     body: json.encode({
-                      "sessionID": prefs.getString("sessionID"),
-                      "email": prefs.getString("email"),
+                      "sessionID": UserInformation.sessionID,
+                      "email": UserInformation.email,
                       "orders": jsonEncode(Basket.basketItems),
                       "transportFee": double.parse(theFee.toStringAsFixed(3)),
                       "totalPrice": double.parse((Basket.getUltimateTotal() + theFee).toStringAsFixed(3)),
@@ -338,18 +336,21 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       "recieveDate": args["Recieve Date"].toString(),
                     }))
                     .then((value){
-                      print(value.body);
                       if(jsonDecode(value.body)["error"] != null){
                         Functions.logout(context, "Session is expired", Colors.red);
                         return;
                       }
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessWidget(),));
                       // Navigator.of(context).pushAndRemoveUntil('/home', (Route<dynamic> route) => false);
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => SuccessWidget()), (route) => false);
+                      http.post(env.apiUrl + "/api/clearuserbasket", body: {"sessionID": UserInformation.sessionID, "email": UserInformation.email,})
+                      .then((thevalue){
+                        Basket.clearBasket();
+                        Basket.simpleArray.clear();
+                        Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessWidget()),);
+                      });
                     });
                   }).catchError((onError){
-                    print("Catch error");
-                    print(onError);
                     Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                   });
                 },

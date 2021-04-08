@@ -58,11 +58,8 @@ class _BasketScreenState extends State<BasketScreen> {
       body: Basket.basketItems.isEmpty 
       ? InkWell(
         onTap: (){
-          Navigator.of(context).pushNamed("/category", arguments: 0).then((value){
-            setState(() {
-                            
-            });
-          });
+          Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+          Navigator.of(context).pushNamed("/category", arguments: 0);
         },
         child: Container(
           width: double.infinity,
@@ -201,7 +198,8 @@ class _BasketScreenState extends State<BasketScreen> {
                               ),
                               Container(
                                 margin: EdgeInsets.only(left: 10),
-                                height: 90,
+                                height: 100,
+                                width: 162,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,9 +207,12 @@ class _BasketScreenState extends State<BasketScreen> {
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          Basket.basketItems[i]["Name"],
-                                          style: GoogleFonts.almarai(fontSize: 20),
+                                        Container(
+                                          margin: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            Basket.basketItems[i]["Name"],
+                                            style: GoogleFonts.almarai(fontSize: 15),
+                                          ),
                                         ),
                                         Text(
                                           Basket.basketItems[i]["price"] + " DT",
@@ -229,13 +230,11 @@ class _BasketScreenState extends State<BasketScreen> {
                                         ),
                                       ],
                                     ),
-                                    Center(
-                                      child: Text(
-                                        "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.grey[900],
-                                        ),
+                                    Text(
+                                      "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey[900],
                                       ),
                                     ),
                                   ],
@@ -288,6 +287,10 @@ class _BasketScreenState extends State<BasketScreen> {
                                       InkWell(
                                         onTap: () {
                                           if(isLoading[i] == false){  // to prevent the user from clicking while loading
+                                            if(Basket.simpleArray[Basket.basketItems[i]["ID"].toString()] == Basket.basketItems[i]["limit_amount_per_user"]){
+                                              Functions.showTheDialogue(context, "limit per user");
+                                              return;
+                                            }
                                             setState(() {
                                               isLoading[i] = true;
                                             });
@@ -308,12 +311,12 @@ class _BasketScreenState extends State<BasketScreen> {
                                                 setState(() {
                                                   isLoading[i] = false;
                                                 });
-                                                Functions.showTheDialogue(context);
+                                                Functions.showTheDialogue(context, "this product is out of stock");
                                                 return;
                                               }
                                               setState(() {
                                                 isLoading[i] = false;
-                                                Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString());
+                                                Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString(), Basket.basketItems[i]["limit_amount_per_user"]);
                                               });
                                             });
                                           }
@@ -409,7 +412,6 @@ class _BasketScreenState extends State<BasketScreen> {
               alignment: Alignment.bottomCenter,
               child: InkWell(
                 onTap: (){
-                  print("tapped on checkout");
                   Navigator.of(context).pushNamed("/checkout");
                 },
                 child: Container(

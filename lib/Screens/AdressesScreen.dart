@@ -286,15 +286,12 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                                     "email": UserInformation.email, 
                                                     "addressID": addresses[i]["ID"].toString(),
                                                   }).then((value){
-                                                    print(value.body);
                                                     setState(() {
                                                       waiting = false;
                                                     });
                                                     Navigator.of(context).pop(true);
                                                   })
                                                   .catchError((onError){
-                                                    print("Catch error");
-                                                    print(onError);
                                                     Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                                   });
                                                 },

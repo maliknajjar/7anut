@@ -49,8 +49,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       });
     })
     .catchError((onError){
-      print("Catch error");
-      print(onError);
       Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
     });
   }
@@ -163,7 +161,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           onTap: (){
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => GetLocationScreen(r, initCamera))).then((value){
                               setState(() {
-                                print(value);
                                 if (value != null) {
                                   location = value[0];
                                   theState = value[1];
@@ -470,8 +467,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         });
                         Navigator.of(context).pop();
                       }).catchError((onError){
-                        print("Catch error");
-                        print(onError);
                         Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                       });
                     }

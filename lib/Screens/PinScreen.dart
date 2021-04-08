@@ -257,8 +257,6 @@ class _PinScreenState extends State<PinScreen> {
                                     Navigator.of(context).pop(Dictionairy.words[response["message"]] == null ? "null" : Dictionairy.words[response["message"]][UserInformation.language]);
                                   })
                                   .catchError((onError){
-                                    print("Catch error");
-                                    print(onError);
                                     Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },

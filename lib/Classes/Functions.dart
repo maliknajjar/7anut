@@ -32,7 +32,7 @@ abstract class Functions extends StatelessWidget {
     }
   }
 
-  static void showTheDialogue(context){
+  static void showTheDialogue(context, String text){
     showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
       return StatefulBuilder(
         builder: (context, setState) {
@@ -54,14 +54,13 @@ abstract class Functions extends StatelessWidget {
                   children: [
                     Container(
                       margin: EdgeInsets.only(bottom: 40, top: 20),
-                      child: Text(Dictionairy.words["this product is out of stock"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
+                      child: Text(Dictionairy.words[text][UserInformation.language], style: GoogleFonts.almarai(fontSize: 16),),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         InkWell(
                           onTap: (){
-                            print("works");
                             Navigator.of(context).pop();
                           },
                           child: Container(

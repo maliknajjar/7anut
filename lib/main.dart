@@ -57,11 +57,8 @@ class _MyAppState extends State<MyApp> {
     // checking if the version is suppprted before doing anything // 
     *///////////////////////////////////////////////////////////////
     http.get(env.apiUrl + "/api/minimumversion").then((value){
-      print(value.body);
       PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
         versionIsSupported = Functions.isVersionSupported(packageInfo.version + "." + packageInfo.buildNumber, value.body);
-        print(packageInfo.version + "." + packageInfo.buildNumber);
-        print("finished writing");
       });
     });
 
@@ -82,7 +79,6 @@ class _MyAppState extends State<MyApp> {
         }).then((result){
           var response = json.decode(result.body);
           if(response["error"] != null){
-            print(response["error"]);
             prefs.remove("sessionID");
             UserInformation();
             setState(() {
@@ -98,8 +94,6 @@ class _MyAppState extends State<MyApp> {
           });
         })
         .catchError((onError){
-          print("Catch error");
-          print(onError);
           Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
         });
       }

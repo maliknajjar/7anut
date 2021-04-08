@@ -179,8 +179,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => PinScreen(email)));
                                   })
                                   .catchError((onError){
-                                    print("Catch error");
-                                    print(onError);
                                     Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                                   });
                                 },

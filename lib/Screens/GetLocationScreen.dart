@@ -21,7 +21,6 @@ class GetLocationScreen extends StatefulWidget {
   GetLocationScreen(List<dynamic> theCities, List initCamera){
     cities = theCities;
     initCameraPosition = initCamera;
-    print(initCameraPosition);
   }
   @override
   _GetLocationScreenState createState() => _GetLocationScreenState();
@@ -69,7 +68,6 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             child: InkWell(
               onTap: () async {
                 await controller.animateCamera(CameraUpdate.zoomIn());
-                print(controller.cameraPosition.zoom);
               },
               child: Container(
                 width: 50,
@@ -98,7 +96,6 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             child: InkWell(
               onTap: () async {
                 await controller.animateCamera(CameraUpdate.zoomOut());
-                print("working");
               },
               child: Container(
                 width: 50,
@@ -132,7 +129,6 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             right: 25,
             child: InkWell(
               onTap: () async {
-                print("working");
                 determinePosition().then((value){
                   for (var i = 0; i < widget.cities.length; i++){
                     var cityCoord = widget.cities[i];
@@ -282,9 +278,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                         onSubmitted: (string){
                           http.get("https://api.mapbox.com/geocoding/v5/mapbox.places/$string.json?access_token=pk.eyJ1IjoibWFsaWs0NDY2NDQiLCJhIjoiY2tqc2FzNnM5M3kwdzJzbG9pZjNwaGhoYyJ9.fvy5js-0tXvMXh5SrJWwLA")
                           .then((value){
-                            print("woooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooow");
                             if (jsonDecode(value.body)["features"].length == 0){
-                              print("no result");
                               // Functions.alert(context, "no results", "didnt find any results");
                               showDialog(context: context, builder: (BuildContext context){
                                 return Dialog(
@@ -361,8 +355,6 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                             coord["bbox"] != null ? controller.animateCamera(CameraUpdate.newLatLngBounds(LatLngBounds(southwest: LatLng(coord["bbox"][1], coord["bbox"][0]), northeast: LatLng(coord["bbox"][3], coord["bbox"][2])))) : controller.animateCamera(CameraUpdate.newLatLng(LatLng(coord["center"][1], coord["center"][0])));
                           })
                           .catchError((onError){
-                            print("Catch error");
-                            print(onError);
                             Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                           });
                         },

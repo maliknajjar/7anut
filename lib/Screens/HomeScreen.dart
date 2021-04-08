@@ -47,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
           Addresses.addressesBasket = jsonDecode(value.body);
           // what happens when you fetch all needed data
           http.get(env.apiUrl + "/api/products/" + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]).then((r){
-            print(jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]);
             setState(() {
               dataIsAvailable = true;
               thereIsSelectedAddress = true;
@@ -58,8 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     })
     .catchError((onError){
-      print("Catch error");
-      print(onError);
       Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
     });
   }
@@ -69,7 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     TheWebSocket.connect(context);         // opening a websocket connection
-    requestData();                        // request categories and products from the server
+    http.post(env.apiUrl + "/api/returnEverything", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})      // making sure all products are returned before using tha app
+    .then((thevalue){
+      requestData();          // request categories and products from the server
+    });
   }
 
   @override
@@ -102,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Stack(
+        alignment: Alignment.topCenter,
         children: <Widget>[
           thereIsSelectedAddress == false && dataIsAvailable == true 
           ? Center(
@@ -503,7 +504,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               });
                               http.post(env.apiUrl + "/api/swapuseraddresses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "top": Addresses.addressesBasket[0]["ID"].toString(), "bottom": Addresses.addressesBasket[i]["ID"].toString()})
                               .then((r){
-                                print(r.body);
                                 Navigator.of(context).pop("changed");
                               });
                             },
@@ -555,7 +555,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }).then((value){
       if(value == "changed"){
         Addresses.addressesBasket.clear();
-        requestData();
+        Basket.clearBasket();
+        Basket.simpleArray.clear();
+        http.post(env.apiUrl + "/api/returnEverything", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})      // making sure all products are returned before using tha app
+        .then((thevalue){
+          requestData();          // request categories and products from the server
+        });
       }
     });
   }

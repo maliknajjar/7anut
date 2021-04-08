@@ -215,6 +215,11 @@ class Dictionairy {
       "fr": "Subtotal",
       "ar": "المجموع الفرعي",
     },
+    "Subtotal + fee": {
+      "en": "Subtotal + fee",
+      "fr": "Subtotal + frais",
+      "ar": "مصاريف الشحن + المجموع الفرعي",
+    },
     "transport fee": {
       "en": "transport fee",
       "fr": "frais de transport",
@@ -609,6 +614,16 @@ class Dictionairy {
       "en": "this product is out of stock",
       "fr": "Ce produit est en rupture de stock",
       "ar": "نفد هذا المنتج من المخازن"
+    },
+    "limit per user": {
+      "en": "You have reached the maximum purchase limit per user",
+      "fr": "Vous avez atteint la limite d'achat maximale par utilisateur",
+      "ar": "لقد وصلت إلى الحد الأقصى للشراء لكل مستخدم"
+    },
+    "category is empty": {
+      "en": "This category is empty in this store",
+      "fr": "Cette catégorie est vide dans ce magasin",
+      "ar": "هذه الفئة فارغة في هذا المتجر"
     },
   };
 }
