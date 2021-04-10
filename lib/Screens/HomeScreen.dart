@@ -105,14 +105,45 @@ class _HomeScreenState extends State<HomeScreen> {
         alignment: Alignment.topCenter,
         children: <Widget>[
           thereIsSelectedAddress == false && dataIsAvailable == true 
-          ? Center(
-            child: Text("there is no selected address"),
+          ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("there is no selected address", style: TextStyle(fontSize: 18)),
+              InkWell(
+                onTap: (){
+                  showDialogue();
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
+                  margin: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Colors.yellow[100],
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 15,
+                        spreadRadius: 0,
+                        offset: Offset(2, 2),
+                        color: Colors.black.withOpacity(0.25)
+                      )
+                    ]
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                      Icon(Icons.add_location_alt_outlined)
+                    ],
+                  ),
+                ),
+              )
+            ],
           )
           : !dataIsAvailable 
           ? LoadingLogo() 
           : Center(
             child: Container(
-              margin: EdgeInsets.only(top: 75),
+              margin: EdgeInsets.only(top: 70),
               padding: EdgeInsets.only(
                 bottom: 54.5,
               ),
@@ -561,7 +592,9 @@ class _HomeScreenState extends State<HomeScreen> {
         .then((thevalue){
           requestData();          // request categories and products from the server
         });
+        return;
       }
+      requestData();
     });
   }
 }

@@ -58,14 +58,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         child: GridView.count(
           padding: EdgeInsets.only(
             top: theWidth < 600 ? theWidth * 0.05 : 30,
-            bottom: 100,
+            bottom: 0,
             right: theWidth < 600 ? theWidth * 0.05 : 30,
             left: theWidth < 600 ? theWidth * 0.05 : 30,
           ),
-          mainAxisSpacing: 5,
+          mainAxisSpacing: 0,
           crossAxisSpacing: theWidth < 600 ? theWidth * 0.05 : 30,
           crossAxisCount: 3,
-          childAspectRatio: 0.54,
+          childAspectRatio: theWidth < 600 ? 0.525 : 0.57,
           children: <Widget>[
             for (var i = 0; i < Products.getProductsByCategory(category).length; i++)
               if(Products.getProductsByCategory(category)[i]["amount"] != 0)
@@ -165,7 +165,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                   color: Colors.yellow[200].withOpacity(0.75),
                                 ),
                                 child: isLoading[i]
-                                  ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                  ? Image.asset("assets/images/theLoading.gif", scale: theWidth < 600 ? theWidth * 0.025 : 8,)
                                   : Icon(
                                   Icons.add,
                                   size: theWidth < 600 ? theWidth * 0.07 : 40,
@@ -219,7 +219,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                   color: Colors.yellow[200].withOpacity(0.75),
                                 ),
                                 child: isLoadingForMinus[i]
-                                  ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                  ? Image.asset("assets/images/theLoading.gif", scale: theWidth < 600 ? theWidth * 0.025 : 8,)
                                   : Icon(
                                   Icons.remove,
                                   size: theWidth < 600 ? theWidth * 0.07 : 40,
@@ -229,30 +229,6 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        margin: EdgeInsets.only(
-                          bottom: theWidth < 600 ? theWidth * 0.035 : 2.5, 
-                          left: theWidth < 600 ? theWidth * 0.035 : 2.5
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white.withOpacity(0.75),
-                              blurRadius: 5
-                            )
-                          ]
-                        ),
-                        child: Text(
-                          Products.getProductsByCategory(category)[i]["size"],
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
-                            color: Colors.black.withOpacity(0.75)
-                          ),
-                        ),
-                      )
                     ],
                   ),
                   Expanded(
@@ -266,36 +242,77 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.yellow[100],
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5,
-                                  offset: Offset(2.5, 2.5),
-                                  color: Colors.black.withOpacity(0.1)
-                                )
-                              ]
-                            ),
-                            padding: EdgeInsets.all(2.5),
-                            child: Text(
-                              Products.getProductsByCategory(category)[i]["price"].toString() + "DT",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
-                                color: Colors.black.withOpacity(0.85)
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 5),
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow[50],
+                                  borderRadius: BorderRadius.circular(5),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2.5, 2.5),
+                                      color: Colors.black.withOpacity(0.1)
+                                    )
+                                  ]
+                                ),
+                                padding: EdgeInsets.all(2.5),
+                                child: Text(
+                                  "850",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: theWidth < 600 ? theWidth * 0.025 : 16,
+                                    color: Colors.black.withOpacity(0.5),
+                                    decoration: TextDecoration.lineThrough
+                                  ),
+                                ),
                               ),
-                            ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow[200],
+                                  borderRadius: BorderRadius.circular(5),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2.5, 2.5),
+                                      color: Colors.black.withOpacity(0.1)
+                                    )
+                                  ]
+                                ),
+                                padding: EdgeInsets.all(2.5),
+                                child: Text(
+                                  Products.getProductsByCategory(category)[i]["price"].toString() + " DT",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: theWidth < 600 ? theWidth * 0.035 : 16,
+                                    color: Colors.black.withOpacity(0.85)
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 5),
+                            margin: EdgeInsets.only(
+                              bottom: theWidth < 600 ? theWidth * 0.0015 : 1,
+                              top: theWidth < 600 ? theWidth * 0.01 : 5,
+                            ),
                             child: Text(
                               Products.getProductsByCategory(category)[i]["Name"],
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: theWidth < 600 ? theWidth * 0.035 : 20,
+                                fontSize: theWidth < 600 ? theWidth * 0.03 : 18,
                               ),
+                              maxLines: 2,
+                            ),
+                          ),
+                          Text(
+                            Products.getProductsByCategory(category)[i]["size"].toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: theWidth < 600 ? theWidth * 0.03 : 16,
+                              color: Colors.black.withOpacity(0.5)
                             ),
                           ),
                         ],

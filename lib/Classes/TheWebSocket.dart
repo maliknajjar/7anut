@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/Classes/Basket.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -16,6 +17,8 @@ class TheWebSocket {
     channel.stream.listen((message) {
       // channel.sink.close(status.goingAway);      //refrence to how to close the channel from flutter app
     }, onDone: (){
+      Basket.clearBasket();
+      Basket.simpleArray.clear();
       noConnection(context);
       // connect();
     }, onError: (error) {

@@ -16,6 +16,7 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   bool dataIsAvailable = false;
+  bool isRefreshing = false;
 
   refresh(){
     setState(() {});
@@ -43,11 +44,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
           actions: [
             GestureDetector(
               onTap: (){
-                Navigator.of(context).pop("refresh");
+                setState(() {
+                  isRefreshing = true;
+                });
+                Future.delayed(const Duration(milliseconds: 500), (){
+                  Navigator.of(context).pop("refresh");
+                });
               },
               child: Container(
-                margin: EdgeInsets.only(right: 10),
-                child: Icon(Icons.refresh),
+                margin: EdgeInsets.only(right: isRefreshing ? 0 : 10),
+                child: isRefreshing 
+                ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                : Icon(Icons.refresh),
               ),
             )
           ],
