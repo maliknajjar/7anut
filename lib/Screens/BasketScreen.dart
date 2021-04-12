@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
 
 // classes
@@ -101,6 +102,9 @@ class _BasketScreenState extends State<BasketScreen> {
         alignment: Alignment.topCenter,
         children: [
           Container(
+            constraints: BoxConstraints(
+              maxWidth: 600
+            ),
             // padding: EdgeInsets.only(bottom: double.infinity),
             margin: theWidth > 600 
             ? EdgeInsets.only(
@@ -111,296 +115,139 @@ class _BasketScreenState extends State<BasketScreen> {
               left: 0,
               right: 0,
             ),
-            child: SingleChildScrollView(
+            child: ListView(
               clipBehavior: Clip.none,
-              child: Container(
-                width: 600,
-                margin: EdgeInsets.only(bottom: theWidth < 600 ? 50 : 125),
-                decoration: BoxDecoration(
-                  color: Colors.yellow[50],
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 10,
-                      spreadRadius: 10,
-                      color: Colors.black.withOpacity(0.1),
-                    )
-                  ],
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ) // wooooooooooooooooooooooooooooow
-                ),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < 10;)
-                      Container(
-                        // padding: EdgeInsets.all(theWidth < 600 ? 15 : 15),
-                        padding: EdgeInsets.only(
-                          bottom: i == Basket.basketItems.length - 1 ? 30 : 15,
-                          left: 15,
-                          right: 15,
-                          top: 15
-                        ),
-                        margin: EdgeInsets.only(bottom: i == Basket.basketItems.length - 1 ? 0 : 20),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.white.withOpacity(0.75),
-                              Colors.yellow[50],
-                            ],
-                            stops: [
-                              0,
-                              1,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
+              children: [
+                Container(
+                  width: 600,
+                  margin: EdgeInsets.only(bottom: theWidth < 600 ? 50 : 125),
+                  decoration: BoxDecoration(
+                    color: Colors.yellow[50],
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 10,
+                        spreadRadius: 10,
+                        color: Colors.black.withOpacity(0.1),
+                      )
+                    ],
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ) // wooooooooooooooooooooooooooooow
+                  ),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < Basket.basketItems.length; i++)
+                        Container(
+                          // padding: EdgeInsets.all(theWidth < 600 ? 15 : 15),
+                          padding: EdgeInsets.only(
+                            bottom: i == Basket.basketItems.length - 1 ? 30 : 15,
+                            left: 15,
+                            right: 15,
+                            top: 15
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: -10,
-                              color: Colors.black.withOpacity(0.2),
-                              offset: Offset(0, 15),
-                            ),
-                            BoxShadow(
-                              color: Colors.yellow[50],
-                            )
-                          ],
-                          borderRadius: i == Basket.basketItems.length - 1 && theWidth > 600
-                          ? BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                          )
-                          : BorderRadius.circular(0)
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        Basket.basketItems[i]["imageUrl"],
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.25),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(2, 2),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.white,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  height: 100,
-                                  width: 162,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(bottom: 5),
-                                            child: Text(
-                                              Basket.basketItems[i]["Name"],
-                                              style: GoogleFonts.almarai(fontSize: 15),
-                                            ),
-                                          ),
-                                          Text(
-                                            Basket.basketItems[i]["price"] + " DT",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey[700]
-                                            ),
-                                          ),
-                                          Text(
-                                            Basket.basketItems[i]["size"],
-                                            style: GoogleFonts.almarai(
-                                              fontSize: 15,
-                                              color: Colors.grey[700]
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.grey[900],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
+                          margin: EdgeInsets.only(bottom: i == Basket.basketItems.length - 1 ? 0 : 20),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.white.withOpacity(0.75),
+                                Colors.yellow[50],
                               ],
+                              stops: [
+                                0,
+                                1,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                             ),
-                            Container(
-                              height: 105,
-                              width: 90,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 10,
+                                spreadRadius: -10,
+                                color: Colors.black.withOpacity(0.2),
+                                offset: Offset(0, 15),
+                              ),
+                              BoxShadow(
+                                color: Colors.yellow[50],
+                              )
+                            ],
+                            borderRadius: i == Basket.basketItems.length - 1 && theWidth > 600
+                            ? BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            )
+                            : BorderRadius.circular(0)
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
                                 children: [
                                   Container(
-                                    width: double.infinity,
-                                    height: 55,
+                                    height: 100,
+                                    width: 100,
                                     decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          Basket.basketItems[i]["imageUrl"],
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
+                                        Radius.circular(20),
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.yellow[100],
-                                        ),
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
+                                          color: Colors.grey.withOpacity(0.25),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(2, 2),
                                         ),
                                         BoxShadow(
                                           color: Colors.white,
-                                          blurRadius: 5,
-                                          spreadRadius: -2.5,
-                                          offset: Offset(2.5, 2.5),
-                                        ),
-                                        BoxShadow(
-                                          color: Colors.yellow[100].withOpacity(0.75),
-                                          blurRadius: 5,
-                                          spreadRadius: -2.5,
-                                          offset: Offset(2.5, 2.5),
                                         ),
                                       ],
                                     ),
-                                    child: Center(child: Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 30),)),
                                   ),
                                   Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                    margin: EdgeInsets.only(left: 10),
+                                    height: 100,
+                                    width: 162,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        InkWell(
-                                          onTap: () {
-                                            if(isLoading[i] == false){  // to prevent the user from clicking while loading
-                                              if(Basket.simpleArray[Basket.basketItems[i]["ID"].toString()] == Basket.basketItems[i]["limit_amount_per_user"]){
-                                                Functions.showTheDialogue(context, "limit per user");
-                                                return;
-                                              }
-                                              setState(() {
-                                                isLoading[i] = true;
-                                              });
-                                              Basket.addItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
-                                              http.post(env.apiUrl + "/api/takeproduct", body: {
-                                                "email": UserInformation.email, 
-                                                "sessionID": UserInformation.sessionID, 
-                                                "ID": Basket.basketItems[i]["ID"].toString(),
-                                                "basket": jsonEncode(Basket.simpleArray)
-                                              })
-                                              .then((value){
-                                                if(value.body.contains("error")){
-                                                  Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
-                                                  return;
-                                                }
-                                                if(jsonDecode(value.body)["msg"] == "product finished"){
-                                                  Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
-                                                  setState(() {
-                                                    isLoading[i] = false;
-                                                  });
-                                                  Functions.showTheDialogue(context, "this product is out of stock");
-                                                  return;
-                                                }
-                                                setState(() {
-                                                  isLoading[i] = false;
-                                                  Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString(), Basket.basketItems[i]["limit_amount_per_user"]);
-                                                });
-                                              });
-                                            }
-                                          },
-                                          child: Container(
-                                            width: 40,
-                                            height: 35,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(10),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(bottom: 5),
+                                              child: Text(
+                                                Basket.basketItems[i]["Name"],
+                                                style: GoogleFonts.almarai(fontSize: 15),
                                               ),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey.withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(2, 2),
-                                                ),
-                                              ],
                                             ),
-                                            child: isLoading[i]
-                                            ? Image.asset("assets/images/theLoading.gif", scale: 12,)
-                                            : Icon(
-                                              Icons.add
-                                            )
-                                          ),
+                                            Text(
+                                              Basket.basketItems[i]["price"] + " DT",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.grey[700]
+                                              ),
+                                            ),
+                                            Text(
+                                              Basket.basketItems[i]["size"],
+                                              style: GoogleFonts.almarai(
+                                                fontSize: 15,
+                                                color: Colors.grey[700]
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            if(isLoadingForMinus[i] == false){  // to prevent the user from clicking while loading
-                                              setState(() {
-                                                isLoadingForMinus[i] = true;
-                                              });
-                                              Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
-                                              http.post(env.apiUrl + "/api/leaveproduct", body: {
-                                                "email": UserInformation.email, 
-                                                "sessionID": UserInformation.sessionID, 
-                                                "ID": Basket.basketItems[i]["ID"].toString(),
-                                                "basket": jsonEncode(Basket.simpleArray)
-                                              })
-                                              .then((value){
-                                                if(value.body.contains("error")){
-                                                  Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
-                                                  return;
-                                                }
-                                                setState(() {
-                                                  isLoadingForMinus[i] = false;
-                                                  Basket.removeItem(Basket.basketItems[i]["ID"]);
-                                                });
-                                              });
-                                            }
-                                          },
-                                          child: Container(
-                                            width: 40,
-                                            height: 35,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(2, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: isLoadingForMinus[i]
-                                            ? Image.asset("assets/images/theLoading.gif", scale: 12,)
-                                            : Icon(
-                                              Icons.remove
-                                            )
+                                        Text(
+                                          "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.grey[900],
                                           ),
                                         ),
                                       ],
@@ -408,13 +255,172 @@ class _BasketScreenState extends State<BasketScreen> {
                                   )
                                 ],
                               ),
-                            )
-                          ],
+                              Container(
+                                height: 105,
+                                width: 90,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      height: 55,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.yellow[100],
+                                          ),
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                          ),
+                                          BoxShadow(
+                                            color: Colors.white,
+                                            blurRadius: 5,
+                                            spreadRadius: -2.5,
+                                            offset: Offset(2.5, 2.5),
+                                          ),
+                                          BoxShadow(
+                                            color: Colors.yellow[100].withOpacity(0.75),
+                                            blurRadius: 5,
+                                            spreadRadius: -2.5,
+                                            offset: Offset(2.5, 2.5),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Center(child: Text(Basket.basketItems[i]["qty"].toString(), style: TextStyle(fontSize: 30),)),
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              if(isLoading[i] == false){  // to prevent the user from clicking while loading
+                                                if(Basket.simpleArray[Basket.basketItems[i]["ID"].toString()] == Basket.basketItems[i]["limit_amount_per_user"]){
+                                                  Functions.showTheDialogue(context, "limit per user");
+                                                  return;
+                                                }
+                                                setState(() {
+                                                  isLoading[i] = true;
+                                                });
+                                                Basket.addItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
+                                                http.post(env.apiUrl + "/api/takeproduct", body: {
+                                                  "email": UserInformation.email, 
+                                                  "sessionID": UserInformation.sessionID, 
+                                                  "ID": Basket.basketItems[i]["ID"].toString(),
+                                                  "basket": jsonEncode(Basket.simpleArray)
+                                                })
+                                                .then((value){
+                                                  if(value.body.contains("error")){
+                                                    Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                                    return;
+                                                  }
+                                                  if(jsonDecode(value.body)["msg"] == "product finished"){
+                                                    Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
+                                                    setState(() {
+                                                      isLoading[i] = false;
+                                                    });
+                                                    Functions.showTheDialogue(context, "this product is out of stock");
+                                                    return;
+                                                  }
+                                                  setState(() {
+                                                    isLoading[i] = false;
+                                                    Basket.addItem(Basket.basketItems[i]["ID"], Basket.basketItems[i]["Name"], Basket.basketItems[i]["size"], Basket.basketItems[i]["imageUrl"], Basket.basketItems[i]["price"].toString(), Basket.basketItems[i]["limit_amount_per_user"]);
+                                                  });
+                                                });
+                                              }
+                                            },
+                                            child: Container(
+                                              width: 40,
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 5,
+                                                    offset: Offset(2, 2),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: isLoading[i]
+                                              ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                              : Icon(
+                                                Icons.add
+                                              )
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              if(isLoadingForMinus[i] == false){  // to prevent the user from clicking while loading
+                                                setState(() {
+                                                  isLoadingForMinus[i] = true;
+                                                });
+                                                Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
+                                                http.post(env.apiUrl + "/api/leaveproduct", body: {
+                                                  "email": UserInformation.email, 
+                                                  "sessionID": UserInformation.sessionID, 
+                                                  "ID": Basket.basketItems[i]["ID"].toString(),
+                                                  "basket": jsonEncode(Basket.simpleArray)
+                                                })
+                                                .then((value){
+                                                  if(value.body.contains("error")){
+                                                    Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                                    return;
+                                                  }
+                                                  setState(() {
+                                                    isLoadingForMinus[i] = false;
+                                                    Basket.removeItem(Basket.basketItems[i]["ID"]);
+                                                  });
+                                                });
+                                              }
+                                            },
+                                            child: Container(
+                                              width: 40,
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 5,
+                                                    offset: Offset(2, 2),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: isLoadingForMinus[i]
+                                              ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                                              : Icon(
+                                                Icons.remove
+                                              )
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+              ],
             ),
           ),
             Align(

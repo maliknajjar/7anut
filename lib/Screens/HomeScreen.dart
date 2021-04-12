@@ -567,29 +567,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        child: Text(
-                                          jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
-                                          style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
-                                        ),
-                                      ),
-                                      Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
-                                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                                      ),
-                                      Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
-                                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                                      ),
-                                      Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
-                                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                                      ),
-                                    ],
-                                  ),
+                                  Text(jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], style: GoogleFonts.almarai(fontSize: 20),),
                                   Icon(Icons.location_on_outlined)
                                 ],
                               ),
