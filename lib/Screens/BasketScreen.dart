@@ -132,7 +132,7 @@ class _BasketScreenState extends State<BasketScreen> {
                 ),
                 child: Column(
                   children: [
-                    for (int i = 0; i < Basket.basketItems.length; i++)
+                    for (int i = 0; i < 10;)
                       Container(
                         // padding: EdgeInsets.all(theWidth < 600 ? 15 : 15),
                         padding: EdgeInsets.only(

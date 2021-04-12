@@ -621,9 +621,9 @@ class Dictionairy {
       "ar": "لقد وصلت إلى الحد الأقصى للشراء لكل مستخدم"
     },
     "category is empty": {
-      "en": "This category is empty in this store",
-      "fr": "Cette catégorie est vide dans ce magasin",
-      "ar": "هذه الفئة فارغة في هذا المتجر"
+      "en": "This category is empty on this current location",
+      "fr": "Cette catégorie est vide à cet emplacement actuel",
+      "ar": "هذه الفئة فارغة في هذا الموقع الحالي"
     },
   };
 }

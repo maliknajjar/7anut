@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/Classes/Basket.dart';
+import 'package:shop_app/Classes/Functions.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -9,6 +10,7 @@ import './UserInformation.dart';
 
 class TheWebSocket {
   static String theUrl = 'wss://7anut.app';
+  static bool isDone = false;
   WebSocketChannel channel;
 
   static void connect(context){
@@ -16,12 +18,20 @@ class TheWebSocket {
     channel.sink.add('{"sessionID": "${UserInformation.sessionID}", "email": "${UserInformation.email}"}');
     channel.stream.listen((message) {
       // channel.sink.close(status.goingAway);      //refrence to how to close the channel from flutter app
+      if(message == "session is wrong"){
+        Functions.logout(context, "session error", Colors.red);
+        isDone = true;
+        return;
+      }
     }, onDone: (){
-      Basket.clearBasket();
-      Basket.simpleArray.clear();
-      noConnection(context);
-      // connect();
+      if(isDone == false){
+        Basket.clearBasket();
+        Basket.simpleArray.clear();
+        noConnection(context);
+      }
+      isDone = false;
     }, onError: (error) {
+
     });
   }
   

@@ -112,7 +112,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // to remove the debug banner
       title: '7anut Web',
-      home: !versionIsSupported ? VersionNotSupported() : isLanguageChosen ? isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen() : ChooseLanguageScreen(),
+      // home: !versionIsSupported ? VersionNotSupported() : isLanguageChosen ? isLoading ? LoadingLogo() : isLoggedIn ? HomeScreen() : LoginScreen() : ChooseLanguageScreen(),
+      home: BasketScreen(),
       // home: ProfileScreen(),
       routes: {
         "/home": (context) => HomeScreen(),
