@@ -14,8 +14,14 @@ class Products {
 
   static List getProductsByCategory(String cat){
     List productsArr = [];
-    for(int i = 0; i < Products.products.length; i++){
-      if(Products.products[i]["category"] == cat) productsArr.add(Products.products[i]);
+    if(cat != "special offers"){
+      for(int i = 0; i < Products.products.length; i++){
+        if(Products.products[i]["category"] == cat) productsArr.add(Products.products[i]);
+      }
+    }else{
+      for(int i = 0; i < Products.products.length; i++){
+        if(Products.products[i]["previous_price"] != null) productsArr.add(Products.products[i]);
+      }
     }
     return productsArr;
   }

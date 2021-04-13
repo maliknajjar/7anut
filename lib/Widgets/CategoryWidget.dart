@@ -68,7 +68,6 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           childAspectRatio: theWidth < 600 ? 0.525 : 0.57,
           children: <Widget>[
             for (var i = 0; i < Products.getProductsByCategory(category).length; i++)
-              if(Products.getProductsByCategory(category)[i]["amount"] != 0)
               Column(
                 children: <Widget>[
                   Stack(
@@ -245,7 +244,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Container(
+                              Products.getProductsByCategory(category)[i]["previous_price"] == null ? Container() : Container(
                                 margin: EdgeInsets.only(right: 5),
                                 decoration: BoxDecoration(
                                   color: Colors.yellow[50],
@@ -260,7 +259,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 ),
                                 padding: EdgeInsets.all(2.5),
                                 child: Text(
-                                  "850",
+                                  Products.getProductsByCategory(category)[i]["previous_price"].toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: theWidth < 600 ? theWidth * 0.025 : 16,

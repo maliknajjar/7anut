@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ? LoadingLogo() 
           : Center(
             child: Container(
-              margin: EdgeInsets.only(top: 70),
+              margin: EdgeInsets.only(top: 75),
               padding: EdgeInsets.only(
                 bottom: 54.5,
               ),

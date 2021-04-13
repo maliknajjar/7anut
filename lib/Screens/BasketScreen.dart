@@ -211,7 +211,9 @@ class _BasketScreenState extends State<BasketScreen> {
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(left: 10),
-                                    height: 100,
+                                    constraints: BoxConstraints(
+                                      maxWidth: 100,
+                                    ),
                                     width: 162,
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
