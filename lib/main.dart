@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
     *///////////////////////////////////////////////////////////////
     http.get(env.apiUrl + "/api/minimumversion").then((value){
       PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-        versionIsSupported = Functions.isVersionSupported(packageInfo.version + "." + packageInfo.buildNumber, value.body);
+        versionIsSupported = Functions.isVersionSupported(packageInfo.version, value.body);
       });
     });
 

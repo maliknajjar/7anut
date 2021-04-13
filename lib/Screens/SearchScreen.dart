@@ -188,6 +188,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               Container(
                                 margin: EdgeInsets.only(left: 15, top: 15,),
                                 child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: 150
+                                  ),
                                   height: 90,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
