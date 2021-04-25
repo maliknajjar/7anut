@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),),
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           child: Icon(Icons.add_location_alt_outlined),
@@ -570,7 +570,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                                 borderRadius: BorderRadius.circular(10)
                               ),
-                              padding: EdgeInsets.all(15),
+                              padding: EdgeInsets.all(10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [

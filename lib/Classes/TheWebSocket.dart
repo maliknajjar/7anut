@@ -11,10 +11,11 @@ import './UserInformation.dart';
 class TheWebSocket {
   static String theUrl = 'wss://7anut.app';
   static bool isDone = false;
-  WebSocketChannel channel;
+  static bool withoutDialogue = false;
+  static WebSocketChannel channel;
 
   static void connect(context){
-    WebSocketChannel channel = WebSocketChannel.connect(Uri.parse(theUrl));
+    channel = WebSocketChannel.connect(Uri.parse(theUrl));
     channel.sink.add('{"sessionID": "${UserInformation.sessionID}", "email": "${UserInformation.email}"}');
     channel.stream.listen((message) {
       // channel.sink.close(status.goingAway);      //refrence to how to close the channel from flutter app
@@ -27,11 +28,21 @@ class TheWebSocket {
       if(isDone == false){
         Basket.clearBasket();
         Basket.simpleArray.clear();
+        if(withoutDialogue == true) return channel.sink.close();
         noConnection(context);
       }
       isDone = false;
     }, onError: (error) {
 
+    });
+  }
+
+  static closeConnectionManually(){
+    withoutDialogue = true;
+    channel.sink.close().then((value){
+      Future.delayed(const Duration(milliseconds: 500), (){
+        withoutDialogue = false;
+      });
     });
   }
   

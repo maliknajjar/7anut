@@ -200,8 +200,8 @@ class _AdressesScreenState extends State<AdressesScreen> {
                     child: Container(
                       width: double.infinity,
                       padding: EdgeInsets.only(
-                        bottom: 10,
-                        top: 10,
+                        bottom: 7.5,
+                        top: 7.5,
                         left: 15,
                         right: 15,
                       ),

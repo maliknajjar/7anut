@@ -5,17 +5,27 @@ import 'package:google_fonts/google_fonts.dart';
 import '../Screens/LoginScreen.dart';
 
 import './Basket.dart';
+import './Adresses.dart';
 import './Dictionairy.dart';
 import './UserInformation.dart';
+import './TheWebSocket.dart';
 
 abstract class Functions extends StatelessWidget {
   static void logout(BuildContext context, String theMessge, Color theColor){
+    // clear user's basket
     Basket.clearBasket();
+    // clear user's simple array
+    Basket.simpleArray.clear();
+    // clear user's addresses
+    Addresses.addressesBasket.clear();
+    //clear the user's session id
     SharedPreferences.getInstance().then((prefs){
       prefs.remove("sessionID").then((value){
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => theMessge != null ? LoginScreen(message: theMessge, theColor: theColor,) : LoginScreen()), (route) => false);
       });
     });
+    // close the websockets connection if its open
+    TheWebSocket.closeConnectionManually();
   }
   
   static bool isVersionSupported(String currentVersion, String minimumVersion){
