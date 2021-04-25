@@ -109,31 +109,36 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("there is no selected address", style: TextStyle(fontSize: 18)),
-              InkWell(
-                onTap: (){
-                  showDialogue();
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
-                  margin: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[100],
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 15,
-                        spreadRadius: 0,
-                        offset: Offset(2, 2),
-                        color: Colors.black.withOpacity(0.25)
-                      )
-                    ]
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                      Icon(Icons.add_location_alt_outlined)
-                    ],
+              Container(
+                child: InkWell(
+                  onTap: (){
+                    showDialogue();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
+                    margin: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[100],
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 15,
+                          spreadRadius: 0,
+                          offset: Offset(2, 2),
+                          color: Colors.black.withOpacity(0.25)
+                        )
+                      ]
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(Dictionairy.words["Add Address"][UserInformation.language], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          child: Icon(Icons.add_location_alt_outlined),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -224,65 +229,67 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          InkWell(
-            onTap: (){
-              showDialogue();
-            },
-            child: Container(
-              height: 45,
-              margin: EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 25,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 12.5,
-              ),
-              constraints: BoxConstraints(
-                maxWidth: 600
-              ),
-              decoration: BoxDecoration(
-                color: Colors.yellow[100],
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 7.5,
-                    spreadRadius: 1,
-                    color: Colors.black.withOpacity(0.2),
-                    offset: Offset(2.5, 2.5),
-                  )
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.gps_fixed_outlined),
-                      Container(
-                        margin: EdgeInsets.only(left: 7.5),
-                        child: Text(
-                          Addresses.addressesBasket.isEmpty && !dataIsAvailable ? Dictionairy.words["Loading"][UserInformation.language] + "..." : Addresses.addressesBasket.isEmpty ? Dictionairy.words["Add Address"][UserInformation.language] : jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
-                          style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
+          Container(
+            margin: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 25,
+            ),
+            child: InkWell(
+              onTap: (){
+                showDialogue();
+              },
+              child: Container(
+                height: 45,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12.5,
+                ),
+                constraints: BoxConstraints(
+                  maxWidth: 600
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.yellow[100],
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7.5,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.2),
+                      offset: Offset(2.5, 2.5),
+                    )
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.gps_fixed_outlined),
+                        Container(
+                          margin: EdgeInsets.only(left: 7.5),
+                          child: Text(
+                            Addresses.addressesBasket.isEmpty && !dataIsAvailable ? Dictionairy.words["Loading"][UserInformation.language] + "..." : Addresses.addressesBasket.isEmpty ? Dictionairy.words["Add Address"][UserInformation.language] : jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
+                            style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
                         ),
-                      ),
-                      Text(
-                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
-                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                      ),
-                      Text(
-                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
-                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                      ),
-                      Text(
-                        Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
-                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                      ),
-                    ],
-                  ),
-                  Icon(Icons.keyboard_arrow_down_sharp, size: 28,)
-                ],
+                        Text(
+                          Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
+                          style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                        ),
+                        Text(
+                          Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                          style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                        ),
+                        Text(
+                          Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                          style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                        ),
+                      ],
+                    ),
+                    Icon(Icons.keyboard_arrow_down_sharp, size: 28,)
+                  ],
+                ),
               ),
             ),
           ),
@@ -344,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   InkWell(
                     onTap: (){
                       Navigator.of(context).pushNamed("/adresses").then((value){
-                        requestData();
+                        if (value == "refresh") requestData();
                       });
                     },
                     child: Icon(
@@ -511,7 +518,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
-                                    Container(child: Icon(Icons.add_location_outlined, color: Colors.black.withOpacity(0.75),), margin: EdgeInsets.only(left: 10),)
+                                    Container(child: Icon(Icons.add_location_alt_outlined, color: Colors.black.withOpacity(0.75),), margin: EdgeInsets.only(left: 10),)
                                   ],
                                 ),
                               ),
@@ -616,7 +623,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
         return;
       }
-      requestData();
     });
   }
 }

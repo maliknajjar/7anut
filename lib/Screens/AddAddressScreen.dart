@@ -465,7 +465,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           "userEmail": UserInformation.email,
                           "addresse": jsonEncode(address),
                         });
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pop("refresh");
                       }).catchError((onError){
                         Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
                       });
