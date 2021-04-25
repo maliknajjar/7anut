@@ -226,20 +226,20 @@ class _AdressesScreenState extends State<AdressesScreen> {
                             children: [
                               Container(
                                 child: Text(
-                                  jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
+                                  jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], 
                                   style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 20),
                                 ),
                               ),
                               Text(
-                                Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
+                                Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["store"], 
                                 style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                               ),
                               Text(
-                                Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                                Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
                                 style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                               ),
                               Text(
-                                Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                                Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
                                 style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                               ),
                             ],

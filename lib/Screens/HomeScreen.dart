@@ -460,7 +460,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.only(
                         top: 10
                       ),
-                      child: Text(Dictionairy.words["Loading"][UserInformation.language] + "...", style: TextStyle(fontSize: 20),),
+                      child: Text(Dictionairy.words["Loading"][UserInformation.language] + "...", style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold),),
                     ),
                   ],
                 ),
@@ -579,20 +579,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Container(
                                         child: Text(
-                                          jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
+                                          jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], 
                                           style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
                                         ),
                                       ),
                                       Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
+                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["store"], 
                                         style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                                       ),
                                       Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
                                         style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                                       ),
                                       Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                                        Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
                                         style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
                                       ),
                                     ],
