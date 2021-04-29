@@ -52,9 +52,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 });
               },
               child: Container(
-                margin: EdgeInsets.only(right: isRefreshing ? 0 : 10),
+                margin: EdgeInsets.only(right: 10),
                 child: isRefreshing 
-                ? Image.asset("assets/images/theLoading.gif", scale: 12,)
+                ? Image.asset("assets/images/theLoading.gif", scale: 12, alignment: Alignment.centerRight,)
                 : Icon(Icons.refresh),
               ),
             )

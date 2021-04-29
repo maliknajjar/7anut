@@ -27,6 +27,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   String category;
   List<bool> isLoading = [];
   List<bool> isLoadingForMinus = [];
+  List<bool> isFavourite = [];
 
   _CategoryWidgetState(String cat) {
     category = cat;
@@ -40,6 +41,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     for (var i = 0; i < Products.getProductsByCategory(category).length; i++) {
       isLoading.add(false);
       isLoadingForMinus.add(false);
+      isFavourite.add(false);
+      if(Products.favourite.isNotEmpty){
+        Products.favourite.forEach((element) {
+          if(Products.getProductsByCategory(category)[i]["ID"] == int.tryParse(element)) isFavourite[i] = true;
+        });
+      }
     }
   }
 
@@ -86,7 +93,13 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               style: TextStyle(
                                 fontSize: 110,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black.withOpacity(0.75),
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.white.withOpacity(0.75),
+                                    blurRadius: 15
+                                  )
+                                ]
                               ),
                             ),
                           ),
@@ -116,27 +129,29 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         child: InkWell(
                           onTap: () {
                             if(isLoading[i] == false){  // to prevent the user from clicking while loading
-                              if(Basket.simpleArray[Products.getProductsByCategory(category)[i]["ID"].toString()] == Products.getProductsByCategory(category)[i]["limit_amount_per_user"]){
-                                Functions.showTheDialogue(context, "limit per user");
-                                return;
-                              }
                               setState(() {
                                 isLoading[i] = true;
                               });
-                              Basket.addItemToSimpleMap(Products.getProductsByCategory(category)[i]["ID"].toString());
                               http.post(env.apiUrl + "/api/takeproduct", body: {
                                 "email": UserInformation.email, 
                                 "sessionID": UserInformation.sessionID, 
                                 "ID": Products.getProductsByCategory(category)[i]["ID"].toString(),
-                                "basket": jsonEncode(Basket.simpleArray)
+                                "basket": jsonEncode(Basket.addToSimpleFuture(Products.getProductsByCategory(category)[i]["ID"].toString()))
                               })
                               .then((value){
                                 if(value.body.contains("error")){
                                   Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
                                   return;
                                 }
+                                // cancel every thing if limit is reached
+                                if(jsonDecode(value.body)["msg"] == "reached limit"){
+                                  Functions.showTheDialogue(context, "limit per user");
+                                  setState(() {
+                                    isLoading[i] = false;
+                                  });
+                                  return;
+                                }
                                 if(jsonDecode(value.body)["msg"] == "product finished"){
-                                  Basket.removeItemToSimpleMap(Products.getProductsByCategory(category)[i]["ID"].toString());
                                   setState(() {
                                     isLoading[i] = false;
                                   });
@@ -183,12 +198,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               setState(() {
                                 isLoadingForMinus[i] = true;
                               });
-                              Basket.removeItemToSimpleMap(Products.getProductsByCategory(category)[i]["ID"].toString());
                               http.post(env.apiUrl + "/api/leaveproduct", body: {
                                 "email": UserInformation.email, 
                                 "sessionID": UserInformation.sessionID, 
                                 "ID": Products.getProductsByCategory(category)[i]["ID"].toString(),
-                                "basket": jsonEncode(Basket.simpleArray)
+                                "basket": jsonEncode(Basket.removeFromSimpleFuture(Products.getProductsByCategory(category)[i]["ID"].toString()))
                               })
                               .then((value){
                                 if(value.body.contains("error")){
@@ -226,6 +240,31 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               ),
                             ),
                           ),
+                        ),
+                      ),
+                      Positioned(
+                        left: theWidth < 600 ? theWidth * 0.0225 : 15,
+                        bottom: theWidth < 600 ? theWidth * 0.0225 : 15,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              if(isFavourite[i] == false){
+                                isFavourite[i] = true;
+                                Products.favourite.add(Products.getProductsByCategory(category)[i]["ID"].toString());
+                                http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
+                              }else{
+                                isFavourite[i] = false;
+                                Products.favourite.remove(Products.getProductsByCategory(category)[i]["ID"].toString());
+                                http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
+                                if(category == "Favourites") {
+                                  isFavourite[i] = true;
+                                }
+                              }
+                            });
+                          },
+                          child: !isFavourite[i] 
+                          ? Icon(Icons.favorite_outline, color: Colors.red.withOpacity(0.5), size: 30,)
+                          : Icon(Icons.favorite, color: Colors.red.withOpacity(0.75), size: 30,)
                         ),
                       ),
                     ],

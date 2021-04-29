@@ -30,34 +30,37 @@ class _HomeScreenState extends State<HomeScreen> {
       dataIsAvailable = false;
       thereIsSelectedAddress = false;
     });
-    http.get(env.apiUrl + "/api/categories").then((r){
-      products = json.decode(r.body);
-      Products.categories= json.decode(r.body);
-    }).then((value){
-      if (this.mounted) {
-        http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
-        .then((value){
-          if(jsonDecode(value.body).isEmpty){
-            setState(() {
-              dataIsAvailable = true;
-              thereIsSelectedAddress = false;
-            });
-            return;
-          }
-          Addresses.addressesBasket = jsonDecode(value.body);
-          // what happens when you fetch all needed data
-          http.get(env.apiUrl + "/api/products/" + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]).then((r){
-            setState(() {
-              dataIsAvailable = true;
-              thereIsSelectedAddress = true;
-              Products.products = json.decode(r.body);
+    http.post(env.apiUrl + "/api/favourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID}).then((re){
+      Products.favourite = re.body == "" ? [] : re.body.split(",");
+      http.get(env.apiUrl + "/api/categories").then((r){
+        products = json.decode(r.body);
+        Products.categories= json.decode(r.body);
+      }).then((value){
+        if (this.mounted) {
+          http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
+          .then((value){
+            if(jsonDecode(value.body).isEmpty){
+              setState(() {
+                dataIsAvailable = true;
+                thereIsSelectedAddress = false;
+              });
+              return;
+            }
+            Addresses.addressesBasket = jsonDecode(value.body);
+            // what happens when you fetch all needed data
+            http.get(env.apiUrl + "/api/products/" + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]).then((r){
+              setState(() {
+                dataIsAvailable = true;
+                thereIsSelectedAddress = true;
+                Products.products = json.decode(r.body);
+              });
             });
           });
-        });
-      }
-    })
-    .catchError((onError){
-      Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
+        }
+      })
+      .catchError((onError){
+        Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
+      });
     });
   }
 
@@ -96,7 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: Container(
               margin: EdgeInsets.only(right: 10),
-              child: Icon(Icons.refresh),
+              child: !dataIsAvailable 
+              ? Image.asset("assets/images/theLoading.gif", scale: 12, alignment: Alignment.centerRight,)
+              : Icon(Icons.refresh),
             ),
           )
         ],
@@ -105,50 +110,52 @@ class _HomeScreenState extends State<HomeScreen> {
         alignment: Alignment.topCenter,
         children: <Widget>[
           thereIsSelectedAddress == false && dataIsAvailable == true 
-          ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("there is no selected address", style: TextStyle(fontSize: 18)),
-              Container(
-                child: InkWell(
-                  onTap: (){
-                    showDialogue();
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
-                    margin: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: Colors.yellow[100],
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 15,
-                          spreadRadius: 0,
-                          offset: Offset(2, 2),
-                          color: Colors.black.withOpacity(0.25)
-                        )
-                      ]
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5),
-                          child: Icon(Icons.add_location_alt_outlined),
-                        )
-                      ],
+          ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("there is no selected address", style: TextStyle(fontSize: 18)),
+                Container(
+                  child: InkWell(
+                    onTap: (){
+                      showDialogue();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[100],
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 15,
+                            spreadRadius: 0,
+                            offset: Offset(2, 2),
+                            color: Colors.black.withOpacity(0.25)
+                          )
+                        ]
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),),
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            child: Icon(Icons.add_location_alt_outlined),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           )
           : !dataIsAvailable 
           ? LoadingLogo() 
           : Center(
             child: Container(
-              margin: EdgeInsets.only(top: 75),
+              margin: EdgeInsets.only(top: 26),
               padding: EdgeInsets.only(
                 bottom: 54.5,
               ),
@@ -159,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: GridView.count(
                 padding: EdgeInsets.only(
                   bottom: 15,
-                  top: theWidth < 600 ? theWidth * 0.025 : 15,
+                  top: theWidth < 600 ? (theWidth * 0.025) + 50 : 15 + 50,
                   right: theWidth < 600 ? theWidth * 0.025 : 15,
                   left: theWidth < 600 ? theWidth * 0.025 : 15,
                 ),
@@ -231,10 +238,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Container(
             margin: EdgeInsets.only(
-              left: 20,
-              right: 20,
-              top: 25,
+              right: theWidth < 600 ? theWidth * 0.025 : 15,
+              left: theWidth < 600 ? theWidth * 0.025 : 15,
+              top: 17.5,
             ),
+            padding: EdgeInsets.all(8),
             child: InkWell(
               onTap: (){
                 showDialogue();
@@ -262,30 +270,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.gps_fixed_outlined),
-                        Container(
-                          margin: EdgeInsets.only(left: 7.5),
-                          child: Text(
-                            Addresses.addressesBasket.isEmpty && !dataIsAvailable ? Dictionairy.words["Loading"][UserInformation.language] + "..." : Addresses.addressesBasket.isEmpty ? Dictionairy.words["Add Address"][UserInformation.language] : jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
-                            style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: ClipRect(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.gps_fixed_outlined),
+                            Container(
+                              margin: EdgeInsets.only(left: 7.5),
+                              child: Text(
+                                Addresses.addressesBasket.isEmpty && !dataIsAvailable ? Dictionairy.words["Loading"][UserInformation.language] + "..." : Addresses.addressesBasket.isEmpty ? Dictionairy.words["Add Address"][UserInformation.language] : jsonDecode(Addresses.addressesBasket[0]["addresse"])["title"], 
+                                style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                            ),
+                            Text(
+                              Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
+                              style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                            ),
+                            Text(
+                              Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                              style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                            ),
+                            Text(
+                              Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                              style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                            ),
+                          ],
                         ),
-                        Text(
-                          Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"], 
-                          style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                        ),
-                        Text(
-                          Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
-                          style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                        ),
-                        Text(
-                          Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[0]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
-                          style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                        ),
-                      ],
+                      ),
                     ),
                     Icon(Icons.keyboard_arrow_down_sharp, size: 28,)
                   ],
@@ -487,46 +500,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               });
                             },
                             child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.black.withOpacity(0.1),
-                                    Colors.black.withOpacity(0.05),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10,
                               ),
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 10,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.yellow
-                                    )
-                                  ]
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
-                                    Container(child: Icon(Icons.add_location_alt_outlined, color: Colors.black.withOpacity(0.75),), margin: EdgeInsets.only(left: 10),)
-                                  ],
-                                ),
+                              decoration: BoxDecoration(
+                                color: Colors.yellow[50],
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 5,
+                                    spreadRadius: 1,
+                                    color: Colors.black.withOpacity(0.2),
+                                    offset: Offset(2.5, 2.5),
+                                  )
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(Dictionairy.words["Add Address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, color: Colors.black.withOpacity(0.75)),),
+                                  Container(child: Icon(Icons.add_location_alt_outlined, color: Colors.black.withOpacity(0.75),), margin: EdgeInsets.only(left: 10),)
+                                ],
                               ),
                             ),
                           ),
                           Addresses.addressesBasket.length != 0
                           ? Container(
-                            margin: EdgeInsets.only(bottom: 10, top: 20),
+                            margin: EdgeInsets.only(bottom: 15, top: 20),
                             child: Text(Dictionairy.words["Addresses"][UserInformation.language] + ":", style: GoogleFonts.almarai(fontSize: 20),),
                           ) 
                           : Container(
@@ -547,7 +548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             child: Container(
                               margin: EdgeInsets.only(
-                                bottom: 10
+                                bottom: 15
                               ),
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -574,28 +575,33 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        child: Text(
-                                          jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], 
-                                          style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
-                                        ),
+                                  Flexible(
+                                    fit: FlexFit.loose,
+                                    child: ClipRect(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            child: Text(
+                                              jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], 
+                                              style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 18),
+                                            ),
+                                          ),
+                                          Text(
+                                            Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["store"], 
+                                            style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                                          ),
+                                          Text(
+                                            Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                                            style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                                          ),
+                                          Text(
+                                            Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                                            style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["store"], 
-                                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                                      ),
-                                      Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
-                                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                                      ),
-                                      Text(
-                                        Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
-                                        style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                   Icon(Icons.location_on_outlined)
                                 ],

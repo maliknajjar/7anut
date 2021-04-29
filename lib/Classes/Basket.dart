@@ -10,9 +10,11 @@ class Basket {
     for(int i = 0; i < Basket.basketItems.length; i++){
       if(Basket.basketItems[i]["ID"] == itemID){
         Basket.basketItems[i]["qty"]++;
+        Basket.simpleArray[itemID] = Basket.basketItems[i]["qty"];
         return;
       }
     }
+    Basket.simpleArray[itemID] = 1;
     basketItems.add({"ID": itemID, "Name": itemName, "size": itemSize, "imageUrl": itemImageUrl, "price": itemPrice, "limit_amount_per_user": itemUserLimit, "qty": 1});
   }
 
@@ -20,10 +22,34 @@ class Basket {
     for(int i = 0; i < Basket.basketItems.length; i++){
       if(Basket.basketItems[i]["ID"] == itemID){
         Basket.basketItems[i]["qty"]--;
-        if(Basket.basketItems[i]["qty"] <= 0) Basket.basketItems.removeAt(i);
+        Basket.simpleArray[itemID] = Basket.basketItems[i]["qty"];
+        if(Basket.basketItems[i]["qty"] <= 0){
+          Basket.basketItems.removeAt(i);
+          Basket.simpleArray.remove(itemID);
+        }
         return;
       }
     }
+  }
+
+  static Map addToSimpleFuture(String itemID){
+    Map map = Basket.simpleArray;
+    if(map[itemID] != null){
+      map[itemID]++;
+    }else{
+      map[itemID] = 1;
+    }
+    return map;
+  }
+
+  static Map removeFromSimpleFuture(String itemID){
+    Map map = simpleArray;
+    if(map[itemID] <= 1){
+      map.remove(itemID);
+    }else{
+      map[itemID]--;
+    }
+    return map;
   }
 
   static void changeItemQty(String itemID, String itemQty){
@@ -63,15 +89,5 @@ class Basket {
       totalNumber += Basket.basketItems[i]["qty"] * double.parse(Basket.basketItems[i]["price"]);
     }
     return totalNumber;
-  }
-
-  static void addItemToSimpleMap(productID){
-    if(!simpleArray.containsKey(productID)) simpleArray[productID] = 0;
-    simpleArray[productID]++;
-  }
-
-  static void removeItemToSimpleMap(productID){
-    simpleArray[productID]--;
-    if(simpleArray[productID] == 0) simpleArray.remove(productID);
   }
 }

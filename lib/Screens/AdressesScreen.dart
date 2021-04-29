@@ -49,7 +49,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                 color: Colors.black,
               ),
               onPressed: () {
-                Navigator.of(context).pushNamed("/addaddress").then((value){
+                Navigator.of(context).pushNamed("/addaddress", arguments: "new").then((value){  
                   setState(() {
                     if(value == "refresh") refreshIsRequired = true;
                   });
@@ -61,7 +61,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
         body: addresses.isEmpty // check if there are addresses
           ? InkWell(
             onTap: (){
-              Navigator.of(context).pushNamed("/addaddress").then((value){
+              Navigator.of(context).pushNamed("/addaddress", arguments: "new").then((value){
                 setState(() {
                   if(value == "refresh") refreshIsRequired = true;
                 });
@@ -203,7 +203,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                         bottom: 7.5,
                         top: 7.5,
                         left: 15,
-                        right: 15,
+                        right: 7.5,
                       ),
                       margin: EdgeInsets.only(bottom: 15),
                       decoration: BoxDecoration(
@@ -221,28 +221,75 @@ class _AdressesScreenState extends State<AdressesScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                child: Text(
-                                  jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], 
-                                  style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 20),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: ClipRect(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      jsonDecode(Addresses.addressesBasket[i]["addresse"])["title"], 
+                                      style: GoogleFonts.almarai(fontWeight: FontWeight.bold, fontSize: 20),
+                                    ),
+                                  ),
+                                  Text(
+                                    Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["store"], 
+                                    style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                                  ),
+                                  Text(
+                                    Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
+                                    style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                                  ),
+                                  Text(
+                                    Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
+                                    style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: (){
+                              print(Addresses.addressesBasket[i]["ID"]);
+                              Navigator.of(context).pushNamed("/addaddress", arguments: Addresses.addressesBasket[i]["ID"].toString()).then((value){
+                                setState(() {
+                                  if(value == "refresh") refreshIsRequired = true;
+                                });
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(2),
+                              margin: EdgeInsets.only(
+                                right: 5,
+                                left: 5
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                gradient: LinearGradient(
+                                  colors: [Colors.blue.withOpacity(0.25), Colors.blue[50].withOpacity(0.25)],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
                                 ),
                               ),
-                              Text(
-                                Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["store"], 
-                                style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.blue[50],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 10,
+                                      spreadRadius: 0,
+                                      color: Colors.black.withOpacity(0.25),
+                                      offset: Offset(2.5, 2.5),
+                                    )
+                                  ],
+                                ),
+                                padding: EdgeInsets.all(5),
+                                child: Icon(Icons.edit_outlined, size: 25, color: Colors.blue,),
                               ),
-                              Text(
-                                Addresses.addressesBasket.isEmpty ? "" : "  " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["latitude"].toStringAsFixed(5), 
-                                style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                              ),
-                              Text(
-                                Addresses.addressesBasket.isEmpty ? "" : ", " + jsonDecode(Addresses.addressesBasket[i]["addresse"])["location"]["longitude"].toStringAsFixed(5), 
-                                style: GoogleFonts.almarai(fontSize: 14, height: 1.3),
-                              ),
-                            ],
+                            ),
                           ),
                           GestureDetector(
                             onTap: (){
@@ -389,7 +436,7 @@ class _AdressesScreenState extends State<AdressesScreen> {
                                   ],
                                 ),
                                 padding: EdgeInsets.all(5),
-                                child: Icon(Icons.delete_outline, size: 30, color: Colors.red,),
+                                child: Icon(Icons.delete_outline, size: 25, color: Colors.red,),
                               ),
                             ),
                           ),

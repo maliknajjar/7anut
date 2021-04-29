@@ -24,12 +24,12 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   String information;
   String instructions;
   LatLng location;
-  String mapButtonText = Dictionairy.words["Add Location"][UserInformation.language];
   String theState;
+  String mapButtonText = Dictionairy.words["Add Location"][UserInformation.language];
 
   bool isWaiting = false;
-
   bool isDataHere = false;
+  bool isDone = false;
   List<dynamic> r;
   List initCamera;
 
@@ -57,6 +57,23 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    String type = ModalRoute.of(context).settings.arguments as String;
+    if(type != "new" && isDone == false){
+      location = LatLng(jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["location"]["latitude"], jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["location"]["longitude"]);
+      theState = jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["location"]["store"];
+      mapButtonText = Dictionairy.words["Location Selected"][UserInformation.language];
+
+      title = jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["title"];
+      information = jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["information"];
+      instructions = jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["instructions"];
+      theState = jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["store"];
+      isDone = true;
+    }
+    print("title: " + title.toString());
+    print("information: " + information.toString());
+    print("instructions: " + instructions.toString());
+    print("location: " + location.toString());
+    print("theState: " + theState.toString());
 
     return Container(
       height: double.infinity,
@@ -146,6 +163,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                                   fontSize: 20,
                                 ),
                                 cursorColor: Colors.black54,
+                                controller: TextEditingController()..text = title,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   isDense: true,
@@ -159,10 +177,11 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => GetLocationScreen(r, initCamera))).then((value){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => GetLocationScreen(r, initCamera, location != null ? location : null))).then((value){
                               setState(() {
                                 if (value != null) {
                                   location = value[0];
+                                  print(location);
                                   theState = value[1];
                                   mapButtonText = Dictionairy.words["Location Selected"][UserInformation.language];
                                 }
@@ -288,6 +307,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                                 onChanged: (string){
                                   information = string;
                                 },
+                                controller: TextEditingController()..text = information,
                                 style: GoogleFonts.almarai(
                                   fontSize: 20,
                                 ),
@@ -358,6 +378,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                                 style: GoogleFonts.almarai(
                                   fontSize: 20,
                                 ),
+                                controller: TextEditingController()..text = instructions,
                                 cursorColor: Colors.black54,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -452,19 +473,23 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         "information": information, 
                         "instructions": instructions,
                       };
-                      http.post(env.apiUrl + "/api/createuseraddress", body: {
+                      String url = type == "new" ? "/api/createuseraddress" : "/api/edituseraddress";
+                      http.post(env.apiUrl + url, body: {
                         "sessionID": UserInformation.sessionID,
-                        "email": UserInformation.email, 
-                        "address": jsonEncode(address)
+                        "email": UserInformation.email,
+                        "address": jsonEncode(address),
+                        "addressID": type
                       }).then((value){
                         setState(() {
                           isWaiting = false;
                         });
-                        Addresses.addressesBasket.add({
+                        type == "new"
+                        ? Addresses.addressesBasket.add({
                           "ID": jsonDecode(value.body)["insertId"],
                           "userEmail": UserInformation.email,
                           "addresse": jsonEncode(address),
-                        });
+                        })
+                        : Addresses.edit(int.parse(type), jsonEncode(address));
                         Navigator.of(context).pop("refresh");
                       }).catchError((onError){
                         Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
@@ -492,9 +517,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(right: 5),
-                          child: Icon(Icons.save, size: 30, color: Colors.black.withOpacity(0.75),),
+                          child: Icon(type != "new" ? Icons.edit_outlined : Icons.save, size: 30, color: Colors.black.withOpacity(0.75),),
                         ),
-                        Text(Dictionairy.words["Save"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
+                        Text(Dictionairy.words[type != "new" ? "edit" : "Save"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.75)),),
                       ],
                     )
                     : Image.asset("assets/images/theLoading.gif", height: 30),

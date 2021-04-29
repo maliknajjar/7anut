@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Classes/Procucts.dart';
 import '../Classes/Basket.dart';
 import '../Classes/Dictionairy.dart';
-
 import '../Classes/UserInformation.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../Classes/Functions.dart';
+import '../env.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -14,7 +18,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String searchTerm;
-
+  List<bool> isLoading = [];
+  List<bool> isLoadingForMinus = [];
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +89,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     child: TextField(
                       onSubmitted: (string){
+                        isLoading.clear();
+                        isLoadingForMinus.clear();
+                        for (var i = 0; i < Products.searchProductsByName(string).length; i++) {
+                          isLoading.add(false);
+                          isLoadingForMinus.add(false);
+                        }
                         setState(() {
                           if (string == ""){
                             searchTerm = null;
@@ -121,151 +132,224 @@ class _SearchScreenState extends State<SearchScreen> {
               )
               : Container(
                 margin: EdgeInsets.only(top: 20),
-                child: Column(
-                  children: Products.searchProductsByName(searchTerm).contains("no results")
-                  ? [
-                    Container(
+                child: Container(
+                  child: Products.searchProductsByName(searchTerm).contains("no results")
+                  ? Container(
                       padding: EdgeInsets.all(15),
                       child: Text("No Results", style: GoogleFonts.almarai(fontSize: 22),),
                     )
-                  ]
-                  : Products.searchProductsByName(searchTerm).map((e){
-                    return Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.only(bottom: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.yellow[50],
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7.5,
-                            spreadRadius: 1,
-                            color: Colors.black.withOpacity(0.25),
-                            offset: Offset(2.5, 2.5),
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                width: 85,
-                                height: 85,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(e["imageUrl"]),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 7.5,
-                                      spreadRadius: 1,
-                                      color: Colors.black.withOpacity(0.25),
-                                      offset: Offset(2.5, 2.5),
-                                    ),
-                                    BoxShadow(
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(10)
+                  : Column(
+                    children: [
+                      for (var i = 0; i < Products.searchProductsByName(searchTerm).length; i++)
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        margin: EdgeInsets.only(bottom: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.yellow[50],
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7.5,
+                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.25),
+                              offset: Offset(2.5, 2.5),
+                            )
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              width: 85,
+                              height: 85,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(Products.searchProductsByName(searchTerm)[i]["imageUrl"]),
+                                  fit: BoxFit.cover,
                                 ),
-                                child: FittedBox(
-                                  child: Text(
-                                    Basket.getQtyById(
-                                      e["ID"].toString(),
-                                    ),
-                                    style: GoogleFonts.almarai(
-                                      fontSize: 110,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black.withOpacity(0.5),
-                                    ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 7.5,
+                                    spreadRadius: 1,
+                                    color: Colors.black.withOpacity(0.25),
+                                    offset: Offset(2.5, 2.5),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.white,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: FittedBox(
+                                child: Text(
+                                  Basket.getQtyById(
+                                    Products.searchProductsByName(searchTerm)[i]["ID"].toString(),
+                                  ),
+                                  style: GoogleFonts.almarai(
+                                    fontSize: 110,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black.withOpacity(0.75),
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.white.withOpacity(0.75),
+                                        blurRadius: 15
+                                      )
+                                    ]
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(left: 15, top: 15,),
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: 150
-                                  ),
-                                  height: 90,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(e["Name"], style: GoogleFonts.almarai(fontSize: 16),),
-                                      Text(e["price"].toString() + " DT", style: GoogleFonts.almarai(fontSize: 16),),
-                                      Text(e["size"].toString(), style: GoogleFonts.almarai(fontSize: 16),),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            height: 100,
-                            margin: EdgeInsets.only(right: 5),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  onTap: (){
-                                    setState(() {
-                                      Basket.addItem(e["ID"].toString(), e["Name"], e["size"], e["imageUrl"], e["price"].toString(), e["limit_amount_per_user"]);
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 7.5,
-                                          spreadRadius: 1,
-                                          color: Colors.black.withOpacity(0.25),
-                                          offset: Offset(2.5, 2.5),
-                                        )
-                                      ],
-                                    ),
-                                    child: Center(child: Icon(Icons.add)),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: (){
-                                    setState(() {
-                                      Basket.removeItem(e["ID"].toString());
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 7.5,
-                                          spreadRadius: 1,
-                                          color: Colors.black.withOpacity(0.25),
-                                          offset: Offset(2.5, 2.5),
-                                        )
-                                      ],
-                                    ),
-                                    child: Center(child: Icon(Icons.remove)),
-                                  ),
-                                ),
-                              ],
                             ),
-                          )
-                        ],
+                            Flexible(
+                              fit: FlexFit.tight,
+                              child: Container(
+                                height: 80,
+                                margin: EdgeInsets.only(left: 15),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(Products.searchProductsByName(searchTerm)[i]["Name"], style: GoogleFonts.almarai(fontSize: 16),),
+                                    Text(Products.searchProductsByName(searchTerm)[i]["price"].toString() + " DT", style: GoogleFonts.almarai(fontSize: 16, color: Colors.black.withOpacity(0.5)),),
+                                    Text(Products.searchProductsByName(searchTerm)[i]["size"].toString(), style: GoogleFonts.almarai(fontSize: 16, color: Colors.black.withOpacity(0.5)),),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 110,
+                              margin: EdgeInsets.only(right: 7.5),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  InkWell(
+                                    onTap: (){
+                                      // setState(() {
+                                      //   Basket.addItem(Products.searchProductsByName(searchTerm)[i]["ID"].toString(), Products.searchProductsByName(searchTerm)[i]["Name"], Products.searchProductsByName(searchTerm)[i]["size"], Products.searchProductsByName(searchTerm)[i]["imageUrl"], Products.searchProductsByName(searchTerm)[i]["price"].toString(), Products.searchProductsByName(searchTerm)[i]["limit_amount_per_user"]);
+                                      // });
+                                      if(isLoading[i] == false){  // to prevent the user from clicking while loading
+                                        setState(() {
+                                          isLoading[i] = true;
+                                        });
+                                        http.post(env.apiUrl + "/api/takeproduct", body: {
+                                          "email": UserInformation.email, 
+                                          "sessionID": UserInformation.sessionID, 
+                                          "ID": Products.searchProductsByName(searchTerm)[i]["ID"].toString(),
+                                          "basket": jsonEncode(Basket.addToSimpleFuture(Products.searchProductsByName(searchTerm)[i]["ID"].toString()))
+                                        })
+                                        .then((value){
+                                          if(value.body.contains("error")){
+                                            print(value.body);
+                                            Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                            return;
+                                          }
+                                          // cancel every thing if limit is reached
+                                          print(value.body);
+                                          if(jsonDecode(value.body)["msg"] == "reached limit"){
+                                            Functions.showTheDialogue(context, "limit per user");
+                                            setState(() {
+                                              isLoading[i] = false;
+                                            });
+                                            return;
+                                          }
+                                          if(jsonDecode(value.body)["msg"] == "product finished"){
+                                            setState(() {
+                                              isLoading[i] = false;
+                                            });
+                                            Functions.showTheDialogue(context, "this product is out of stock");
+                                            return;
+                                          }
+                                          Basket.addItem(Products.searchProductsByName(searchTerm)[i]["ID"].toString(), Products.searchProductsByName(searchTerm)[i]["Name"], Products.searchProductsByName(searchTerm)[i]["size"], Products.searchProductsByName(searchTerm)[i]["imageUrl"], Products.searchProductsByName(searchTerm)[i]["price"].toString(), Products.searchProductsByName(searchTerm)[i]["limit_amount_per_user"]);
+                                          setState(() {
+                                            isLoading[i] = false;
+                                          });
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow[100],
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 7.5,
+                                            spreadRadius: 1,
+                                            color: Colors.black.withOpacity(0.25),
+                                            offset: Offset(2.5, 2.5),
+                                          )
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: isLoading[i]
+                                        ? Image.asset("assets/images/theLoading.gif", scale: width < 600 ? width * 0.025 : 8,)
+                                        : Icon(
+                                          Icons.add,
+                                          size: width < 600 ? width * 0.07 : 40,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      // setState(() {
+                                      //   Basket.removeItem(Products.searchProductsByName(searchTerm)[i]["ID"].toString());
+                                      // });
+                                      if(isLoadingForMinus[i] == false && int.parse(Basket.getQtyById(Products.searchProductsByName(searchTerm)[i]["ID"].toString())) != 0){ // to prevent the user from clicking while loading
+                                        setState(() {
+                                          isLoadingForMinus[i] = true;
+                                        });
+                                        http.post(env.apiUrl + "/api/leaveproduct", body: {
+                                          "email": UserInformation.email, 
+                                          "sessionID": UserInformation.sessionID, 
+                                          "ID": Products.searchProductsByName(searchTerm)[i]["ID"].toString(),
+                                          "basket": jsonEncode(Basket.removeFromSimpleFuture(Products.searchProductsByName(searchTerm)[i]["ID"].toString()))
+                                        })
+                                        .then((value){
+                                          print(value.body);
+                                          if(value.body.contains("error")){
+                                            Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
+                                            return;
+                                          }
+                                          Basket.removeItem(Products.searchProductsByName(searchTerm)[i]["ID"].toString());
+                                          setState(() {
+                                            isLoadingForMinus[i] = false;
+                                          });
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow[100],
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 7.5,
+                                            spreadRadius: 1,
+                                            color: Colors.black.withOpacity(0.25),
+                                            offset: Offset(2.5, 2.5),
+                                          )
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: isLoadingForMinus[i]
+                                        ? Image.asset("assets/images/theLoading.gif", scale: width < 600 ? width * 0.025 : 8,)
+                                        : Icon(Icons.remove, size: width < 600 ? width * 0.07 : 40,),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    );
-                  }).toList()
+                    ],
+                  ),
                 ),
               )
             ],

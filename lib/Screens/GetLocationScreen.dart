@@ -18,9 +18,11 @@ import '../Classes/Functions.dart';
 class GetLocationScreen extends StatefulWidget {
   List<dynamic> cities;
   List initCameraPosition;
-  GetLocationScreen(List<dynamic> theCities, List initCamera){
+  LatLng thePinLocation;
+  GetLocationScreen(List<dynamic> theCities, List initCamera, LatLng pinLocation){
     cities = theCities;
     initCameraPosition = initCamera;
+    thePinLocation = pinLocation;
   }
   @override
   _GetLocationScreenState createState() => _GetLocationScreenState();
@@ -40,7 +42,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -49,13 +51,14 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             accessToken: token,
             styleString: style,
             initialCameraPosition: CameraPosition(
-              zoom: widget.initCameraPosition[2].toDouble(),
-              target: LatLng(widget.initCameraPosition[0].toDouble(), widget.initCameraPosition[1].toDouble()),
+              zoom: widget.thePinLocation != null ? 17.5 : widget.initCameraPosition[2].toDouble(),
+              target: widget.thePinLocation != null ? widget.thePinLocation : LatLng(widget.initCameraPosition[0].toDouble(), widget.initCameraPosition[1].toDouble()),
             ),
             onStyleLoadedCallback: (){
               for (var i = 0; i < widget.cities.length; i++){
                 drawTheCircle(controller, LatLng(widget.cities[i]["latitude"], widget.cities[i]["longitude"]), widget.cities[i]["radius"]);
               }
+              if(widget.thePinLocation != null) addPin(coord: widget.thePinLocation);
             },
             onMapCreated: (MapboxMapController controller) async{
               this.controller = controller;
@@ -431,7 +434,10 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      if (theLocation != null) Navigator.of(context).pop([theLocation, theState]);
+                      if (theLocation != null){
+                        Navigator.of(context).pop([theLocation, theState]);
+                        print(theLocation);
+                      }
                       // else Functions.alert(context, "choose location", "you need to specify a location");
                       else{
                         showDialog(context: context, builder: (BuildContext context){
@@ -747,6 +753,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
       ),
     );
     theLocation = coord;
+    print(theLocation);
   }
 }
 

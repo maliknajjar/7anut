@@ -181,81 +181,76 @@ class _BasketScreenState extends State<BasketScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                          Basket.basketItems[i]["imageUrl"],
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.25),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(2, 2),
-                                        ),
-                                        BoxShadow(
-                                          color: Colors.white,
-                                        ),
-                                      ],
+                              Container(
+                                height: 100,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      Basket.basketItems[i]["imageUrl"],
                                     ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 10),
-                                    constraints: BoxConstraints(
-                                      maxWidth: 100,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.25),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(2, 2),
                                     ),
-                                    width: 162,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.only(bottom: 5),
-                                              child: Text(
-                                                Basket.basketItems[i]["Name"],
-                                                style: GoogleFonts.almarai(fontSize: 15),
-                                              ),
+                                    BoxShadow(
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(bottom: 5),
+                                            child: Text(
+                                              Basket.basketItems[i]["Name"],
+                                              style: GoogleFonts.almarai(fontSize: 15),
                                             ),
-                                            Text(
-                                              Basket.basketItems[i]["price"] + " DT",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.grey[700]
-                                              ),
-                                            ),
-                                            Text(
-                                              Basket.basketItems[i]["size"],
-                                              style: GoogleFonts.almarai(
-                                                fontSize: 15,
-                                                color: Colors.grey[700]
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.grey[900],
                                           ),
+                                          Text(
+                                            Basket.basketItems[i]["price"] + " DT",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.grey[700]
+                                            ),
+                                          ),
+                                          Text(
+                                            Basket.basketItems[i]["size"],
+                                            style: GoogleFonts.almarai(
+                                              fontSize: 15,
+                                              color: Colors.grey[700]
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        "Total: " + (double.parse(Basket.basketItems[i]["price"]) * Basket.basketItems[i]["qty"]).toStringAsFixed(2) + " DT",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.grey[900],
                                         ),
-                                      ],
-                                    ),
-                                  )
-                                ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                               Container(
                                 height: 105,
@@ -302,27 +297,29 @@ class _BasketScreenState extends State<BasketScreen> {
                                           InkWell(
                                             onTap: () {
                                               if(isLoading[i] == false){  // to prevent the user from clicking while loading
-                                                if(Basket.simpleArray[Basket.basketItems[i]["ID"].toString()] == Basket.basketItems[i]["limit_amount_per_user"]){
-                                                  Functions.showTheDialogue(context, "limit per user");
-                                                  return;
-                                                }
                                                 setState(() {
                                                   isLoading[i] = true;
                                                 });
-                                                Basket.addItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
                                                 http.post(env.apiUrl + "/api/takeproduct", body: {
                                                   "email": UserInformation.email, 
                                                   "sessionID": UserInformation.sessionID, 
                                                   "ID": Basket.basketItems[i]["ID"].toString(),
-                                                  "basket": jsonEncode(Basket.simpleArray)
+                                                  "basket": jsonEncode(Basket.addToSimpleFuture(Basket.basketItems[i]["ID"].toString()))
                                                 })
                                                 .then((value){
                                                   if(value.body.contains("error")){
                                                     Functions.logout(context, Dictionairy.words[jsonDecode(value.body)["error"]][UserInformation.language], Colors.red);
                                                     return;
                                                   }
+                                                  // cancel every thing if limit is reached
+                                                  if(jsonDecode(value.body)["msg"] == "reached limit"){
+                                                    Functions.showTheDialogue(context, "limit per user");
+                                                    setState(() {
+                                                      isLoading[i] = false;
+                                                    });
+                                                    return;
+                                                  }
                                                   if(jsonDecode(value.body)["msg"] == "product finished"){
-                                                    Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
                                                     setState(() {
                                                       isLoading[i] = false;
                                                     });
@@ -366,12 +363,11 @@ class _BasketScreenState extends State<BasketScreen> {
                                                 setState(() {
                                                   isLoadingForMinus[i] = true;
                                                 });
-                                                Basket.removeItemToSimpleMap(Basket.basketItems[i]["ID"].toString());
                                                 http.post(env.apiUrl + "/api/leaveproduct", body: {
                                                   "email": UserInformation.email, 
                                                   "sessionID": UserInformation.sessionID, 
                                                   "ID": Basket.basketItems[i]["ID"].toString(),
-                                                  "basket": jsonEncode(Basket.simpleArray)
+                                                  "basket": jsonEncode(Basket.removeFromSimpleFuture(Basket.basketItems[i]["ID"].toString()))
                                                 })
                                                 .then((value){
                                                   if(value.body.contains("error")){
