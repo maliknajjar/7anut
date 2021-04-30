@@ -196,22 +196,34 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Container(
                               margin: EdgeInsets.all(8),
                               decoration: BoxDecoration(
+                                color: Colors.white,
                                 image: DecorationImage(
-                                  image: NetworkImage(products[i]["imageUrl"]),
+                                  image: ExactAssetImage("assets/images/loadingImage.gif"),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(theWidth < 600 ? theWidth * 0.06 : 35),
                                 ),
-                                color: Colors.white,
                                 boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(2, 2),
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(products[i]["imageUrl"]),
+                                    fit: BoxFit.cover,
                                   ),
-                                ],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(theWidth < 600 ? theWidth * 0.06 : 35),
+                                  ),
+                                  color: Colors.pink.withOpacity(0.0),
+                                ),
                               ),
                             ),
                           ),

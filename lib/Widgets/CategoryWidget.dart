@@ -82,44 +82,88 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                     children: [
                       AspectRatio(
                         aspectRatio: 1,
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          child: FittedBox(
-                            child: Text(
-                              Basket.getQtyById(
-                                Products.getProductsByCategory(category)[i]["ID"].toString(),
+                        child: InkWell(
+                          onTap: (){
+                            showDialog(context: context, builder: (BuildContext context){
+                              return StatefulBuilder(
+                                builder: (context, setState){
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    elevation: 0,
+                                    backgroundColor: Colors.yellow[100],
+                                    child: SingleChildScrollView(
+                                      child: AspectRatio(
+                                        aspectRatio: 1,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.pink,
+                                            borderRadius: BorderRadius.circular(10),
+                                            image: DecorationImage(
+                                              image: NetworkImage(Products.getProductsByCategory(category)[i]["imageUrl"]),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  );
+                                },
+                              );
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: ExactAssetImage("assets/images/loadingImage.gif"),
+                                fit: BoxFit.cover,
                               ),
-                              style: TextStyle(
-                                fontSize: 110,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black.withOpacity(0.75),
-                                shadows: [
-                                  Shadow(
-                                    color: Colors.white.withOpacity(0.75),
-                                    blurRadius: 15
-                                  )
-                                ]
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(theWidth < 600 ? theWidth * 0.05 : 35),
+                              ),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
+                            ),
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              child: FittedBox(
+                                child: Text(
+                                  Basket.getQtyById(
+                                    Products.getProductsByCategory(category)[i]["ID"].toString(),
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 110,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black.withOpacity(0.75),
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.white.withOpacity(0.75),
+                                        blurRadius: 15
+                                      )
+                                    ]
+                                  ),
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(Products.getProductsByCategory(category)[i]["imageUrl"]),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(theWidth < 600 ? theWidth * 0.05 : 35),
+                                ),
+                                color: Colors.white.withOpacity(0.0),
                               ),
                             ),
-                          ),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(Products.getProductsByCategory(category)[i]["imageUrl"]),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(theWidth < 600 ? theWidth * 0.05 : 35),
-                            ),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(2, 2),
-                              ),
-                            ],
                           ),
                         ),
                       ),
