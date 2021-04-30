@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:password_strength/password_strength.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -472,7 +471,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     return;
                                   }
                                   // check if the password is strong enough
-                                  if(estimatePasswordStrength(password) < 0.1){
+                                  if(password.length < 6){
                                     notify(Dictionairy.words["your password is weak"][UserInformation.language], 2000, Colors.red);
                                     return;
                                   }

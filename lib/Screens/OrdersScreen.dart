@@ -81,7 +81,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       body: !isDataHere 
       ? LoadingLogo() 
       : SingleChildScrollView(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
         child: data.isEmpty 
         ? Container(
           height: height - 100,

@@ -466,9 +466,9 @@ class Dictionairy {
       "ar": "تأكيد الرمز السري",
     },
     "your password is weak": {
-      "en": "your password is weak",
-      "fr": "votre mot de passe est faible",
-      "ar": "رمزك السري ضعيف",
+      "en": "password must be at least 6 charachters",
+      "fr": "Le mot de passe doit être au moins de 6 caractères",
+      "ar": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
     },
     "Password does not match": {
       "en": "Password does not match",
@@ -624,6 +624,11 @@ class Dictionairy {
       "en": "This category is empty in this address",
       "fr": "Cette catégorie est vide dans cette adresse",
       "ar": "هذه الفئة فارغة في هذا العنوان"
+    },
+    "No Results": {
+      "en": "No Results",
+      "fr": "Aucun résultat",
+      "ar": "لا نتائج"
     },
   };
 }

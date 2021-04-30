@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:password_strength/password_strength.dart';
 import '../Classes/UserInformation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../env.dart';
 import '../Classes/Functions.dart';
-import '../Classes/UserInformation.dart';
 import '../Classes/Dictionairy.dart';
 
 //ignore: must_be_immutable
@@ -150,7 +148,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onTap: (){
               // check if user's new password is week
               if (theMap["type"] == "password") {
-                if(estimatePasswordStrength(theMap["inputs"].values.toList()[1]) < 0.3){
+                if(theMap["inputs"].values.toList()[1].length < 6){
                   // notify("your password is weak", 2000, Colors.red);
                   // Functions.alert(context, "Weak", "your password is weak");
                   showDialog(context: context, builder: (BuildContext context){

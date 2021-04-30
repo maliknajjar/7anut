@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,6 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
   String searchTerm;
   List<bool> isLoading = [];
   List<bool> isLoadingForMinus = [];
+  List<bool> isFavourite = [];
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +93,16 @@ class _SearchScreenState extends State<SearchScreen> {
                       onSubmitted: (string){
                         isLoading.clear();
                         isLoadingForMinus.clear();
+                        isFavourite.add(false);
                         for (var i = 0; i < Products.searchProductsByName(string).length; i++) {
                           isLoading.add(false);
                           isLoadingForMinus.add(false);
+                          isFavourite.add(false);
+                          if(Products.favourite.isNotEmpty){
+                            Products.favourite.forEach((element) {
+                              if(Products.searchProductsByName(string)[i]["ID"] == int.tryParse(element)) isFavourite[i] = true;
+                            });
+                          }
                         }
                         setState(() {
                           if (string == ""){
@@ -135,8 +144,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Container(
                   child: Products.searchProductsByName(searchTerm).contains("no results")
                   ? Container(
+                      alignment: Alignment.center,
                       padding: EdgeInsets.all(15),
-                      child: Text("No Results", style: GoogleFonts.almarai(fontSize: 22),),
+                      child: Text(Dictionairy.words["No Results"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 22),),
                     )
                   : Column(
                     children: [
@@ -159,46 +169,72 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 10),
-                              width: 85,
-                              height: 85,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(Products.searchProductsByName(searchTerm)[i]["imageUrl"]),
-                                  fit: BoxFit.cover,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 7.5,
-                                    spreadRadius: 1,
-                                    color: Colors.black.withOpacity(0.25),
-                                    offset: Offset(2.5, 2.5),
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white,
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: FittedBox(
-                                child: Text(
-                                  Basket.getQtyById(
-                                    Products.searchProductsByName(searchTerm)[i]["ID"].toString(),
-                                  ),
-                                  style: GoogleFonts.almarai(
-                                    fontSize: 110,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black.withOpacity(0.75),
-                                    shadows: [
-                                      Shadow(
-                                        color: Colors.white.withOpacity(0.75),
-                                        blurRadius: 15
+                            Stack(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  width: 85,
+                                  height: 85,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(Products.searchProductsByName(searchTerm)[i]["imageUrl"]),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 7.5,
+                                        spreadRadius: 1,
+                                        color: Colors.black.withOpacity(0.25),
+                                        offset: Offset(2.5, 2.5),
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.white,
                                       )
-                                    ]
+                                    ],
+                                    borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: FittedBox(
+                                    child: Text(
+                                      Basket.getQtyById(
+                                        Products.searchProductsByName(searchTerm)[i]["ID"].toString(),
+                                      ),
+                                      style: GoogleFonts.almarai(
+                                        fontSize: 110,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black.withOpacity(0.75),
+                                        shadows: [
+                                          Shadow(
+                                            color: Colors.white.withOpacity(0.75),
+                                            blurRadius: 15
+                                          )
+                                        ]
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                Positioned(
+                                  bottom: 5,
+                                  left: 15,
+                                  child: InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        if(isFavourite[i] == false){
+                                          isFavourite[i] = true;
+                                          Products.favourite.add(Products.searchProductsByName(searchTerm)[i]["ID"].toString());
+                                          http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
+                                        }else{
+                                          isFavourite[i] = false;
+                                          Products.favourite.remove(Products.searchProductsByName(searchTerm)[i]["ID"].toString());
+                                          http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
+                                        }
+                                      });
+                                    },
+                                    child: !isFavourite[i] 
+                                    ? Icon(Icons.favorite_outline, color: Colors.red.withOpacity(0.5), size: 30,)
+                                    : Icon(Icons.favorite, color: Colors.red.withOpacity(0.75), size: 30,)
+                                  ),
+                                )
+                              ],
                             ),
                             Flexible(
                               fit: FlexFit.tight,
