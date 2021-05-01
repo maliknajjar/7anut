@@ -100,7 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           isFavourite.add(false);
                           if(Products.favourite.isNotEmpty){
                             Products.favourite.forEach((element) {
-                              if(Products.searchProductsByName(string)[i]["ID"] == int.tryParse(element)) isFavourite[i] = true;
+                              if(Products.searchProductsByName(string)[i]["Name"] == element) isFavourite[i] = true;
                             });
                           }
                         }
@@ -142,7 +142,7 @@ class _SearchScreenState extends State<SearchScreen> {
               : Container(
                 margin: EdgeInsets.only(top: 20),
                 child: Container(
-                  child: Products.searchProductsByName(searchTerm).contains("no results")
+                  child: Products.searchProductsByName(searchTerm).isEmpty
                   ? Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(15),
@@ -173,11 +173,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(left: 10),
-                                  width: 85,
-                                  height: 85,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage(Products.searchProductsByName(searchTerm)[i]["imageUrl"]),
+                                      image: ExactAssetImage("assets/images/loadingImage.gif"),
                                       fit: BoxFit.cover,
                                     ),
                                     boxShadow: [
@@ -187,27 +185,36 @@ class _SearchScreenState extends State<SearchScreen> {
                                         color: Colors.black.withOpacity(0.25),
                                         offset: Offset(2.5, 2.5),
                                       ),
-                                      BoxShadow(
-                                        color: Colors.white,
-                                      )
                                     ],
                                     borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: FittedBox(
-                                    child: Text(
-                                      Basket.getQtyById(
-                                        Products.searchProductsByName(searchTerm)[i]["ID"].toString(),
+                                  child: Container(
+                                    width: 85,
+                                    height: 85,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.0),
+                                      image: DecorationImage(
+                                        image: NetworkImage(Products.searchProductsByName(searchTerm)[i]["imageUrl"]),
+                                        fit: BoxFit.cover,
                                       ),
-                                      style: GoogleFonts.almarai(
-                                        fontSize: 110,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black.withOpacity(0.75),
-                                        shadows: [
-                                          Shadow(
-                                            color: Colors.white.withOpacity(0.75),
-                                            blurRadius: 15
-                                          )
-                                        ]
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    child: FittedBox(
+                                      child: Text(
+                                        Basket.getQtyById(
+                                          Products.searchProductsByName(searchTerm)[i]["ID"].toString(),
+                                        ),
+                                        style: GoogleFonts.almarai(
+                                          fontSize: 110,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black.withOpacity(0.75),
+                                          shadows: [
+                                            Shadow(
+                                              color: Colors.white.withOpacity(0.75),
+                                              blurRadius: 15
+                                            )
+                                          ]
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -220,11 +227,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                       setState(() {
                                         if(isFavourite[i] == false){
                                           isFavourite[i] = true;
-                                          Products.favourite.add(Products.searchProductsByName(searchTerm)[i]["ID"].toString());
+                                          Products.favourite.add(Products.searchProductsByName(searchTerm)[i]["Name"].toString());
                                           http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
                                         }else{
                                           isFavourite[i] = false;
-                                          Products.favourite.remove(Products.searchProductsByName(searchTerm)[i]["ID"].toString());
+                                          Products.favourite.remove(Products.searchProductsByName(searchTerm)[i]["Name"].toString());
                                           http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
                                         }
                                       });

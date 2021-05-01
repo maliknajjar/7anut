@@ -44,7 +44,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       isFavourite.add(false);
       if(Products.favourite.isNotEmpty){
         Products.favourite.forEach((element) {
-          if(Products.getProductsByCategory(category)[i]["ID"] == int.tryParse(element)) isFavourite[i] = true;
+          if(Products.getProductsByCategory(category)[i]["Name"] == element) isFavourite[i] = true;
         });
       }
     }
@@ -286,7 +286,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                         ),
                       ),
-                      Positioned(
+                      category != "Special offers" 
+                      ? Positioned(
                         left: theWidth < 600 ? theWidth * 0.0225 : 15,
                         bottom: theWidth < 600 ? theWidth * 0.0225 : 15,
                         child: InkWell(
@@ -294,11 +295,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             setState(() {
                               if(isFavourite[i] == false){
                                 isFavourite[i] = true;
-                                Products.favourite.add(Products.getProductsByCategory(category)[i]["ID"].toString());
+                                Products.favourite.add(Products.getProductsByCategory(category)[i]["Name"].toString());
                                 http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
                               }else{
                                 isFavourite[i] = false;
-                                Products.favourite.remove(Products.getProductsByCategory(category)[i]["ID"].toString());
+                                Products.favourite.remove(Products.getProductsByCategory(category)[i]["Name"].toString());
                                 http.post(env.apiUrl + "/api/addfavourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID, "favourite": Products.favourite.join(",")});
                                 if(category == "Favourites") {
                                   isFavourite[i] = true;
@@ -310,7 +311,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ? Icon(Icons.favorite_outline, color: Colors.red.withOpacity(0.5), size: 30,)
                           : Icon(Icons.favorite, color: Colors.red.withOpacity(0.75), size: 30,)
                         ),
-                      ),
+                      )
+                      :Container(),
                     ],
                   ),
                   Expanded(

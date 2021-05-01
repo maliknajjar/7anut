@@ -5,11 +5,12 @@ class Products {
 
   static List searchProductsByName(String productName){
     List searchedItems = [];
+    if(productName.isEmpty) return searchedItems;
     for (var i = 0; i < products.length; i++) {
-      // if(Products.products[i]["Name"] == productName) searchedItems.add(Products.products[i]);
+      if(Products.products[i]["category"] == "Special offers" || Products.products[i]["category"] == "Favourites") continue;
       if(Products.products[i]["Name"].toLowerCase().contains(productName.toLowerCase())) searchedItems.add(Products.products[i]);
     }
-    if(searchedItems.isEmpty) searchedItems.add("no results");
+    print(searchedItems);
     return searchedItems;
   }
 
@@ -18,7 +19,7 @@ class Products {
     if(cat == "Favourites"){
       for(int i = 0; i < Products.products.length; i++){
         favourite.forEach((element) {
-          if(Products.products[i]["ID"].toString() == element) productsArr.add(Products.products[i]);
+          if(Products.products[i]["Name"].toString() == element) productsArr.add(Products.products[i]);
         });
       }
     }else{
