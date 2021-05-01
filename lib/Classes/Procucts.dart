@@ -5,10 +5,15 @@ class Products {
 
   static List searchProductsByName(String productName){
     List searchedItems = [];
+    int number = 0;
     if(productName.isEmpty) return searchedItems;
     for (var i = 0; i < products.length; i++) {
+      if(number == 20) break;
       if(Products.products[i]["category"] == "Special offers" || Products.products[i]["category"] == "Favourites") continue;
-      if(Products.products[i]["Name"].toLowerCase().contains(productName.toLowerCase())) searchedItems.add(Products.products[i]);
+      if(Products.products[i]["Name"].toLowerCase().contains(productName.toLowerCase())) {
+        number++;
+        searchedItems.add(Products.products[i]);
+      }
     }
     print(searchedItems);
     return searchedItems;
