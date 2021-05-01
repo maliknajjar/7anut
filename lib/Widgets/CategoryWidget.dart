@@ -308,8 +308,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             });
                           },
                           child: !isFavourite[i] 
-                          ? Icon(Icons.favorite_outline, color: Colors.red.withOpacity(0.5), size: 30,)
-                          : Icon(Icons.favorite, color: Colors.red.withOpacity(0.75), size: 30,)
+                          ? Icon(Icons.favorite_outline, color: Colors.red.withOpacity(0.5), size: theWidth < 600 ? (theWidth * 0.085) - 5 : 50 - 5,)
+                          : Icon(Icons.favorite, color: Colors.red.withOpacity(0.75), size: theWidth < 600 ? (theWidth * 0.085) - 5 : 50 - 5,)
                         ),
                       )
                       :Container(),
