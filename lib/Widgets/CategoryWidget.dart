@@ -53,6 +53,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     var theWidth = MediaQuery.of(context).size.width;
+    var theHeight = MediaQuery.of(context).size.height;
 
     return Center(
       child: Products.getProductsByCategory(category).isEmpty 
@@ -91,19 +92,16 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    elevation: 0,
                                     backgroundColor: Colors.yellow[100],
-                                    child: SingleChildScrollView(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.pink,
-                                            borderRadius: BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                              image: NetworkImage(Products.getProductsByCategory(category)[i]["imageUrl"]),
-                                              fit: BoxFit.cover,
-                                            ),
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.pink,
+                                          borderRadius: BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                            image: NetworkImage(Products.getProductsByCategory(category)[i]["imageUrl"]),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
