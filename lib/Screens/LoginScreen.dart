@@ -258,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         value.setString("sessionID", response["session"]).then((anotherValue){
                                           value.setString("full name", response["fullName"]).then((anotherValue){
                                             value.setString("phone number", response["phoneNumber"]).then((anotherValue){
-                                              UserInformation();  // saving logged in user information
+                                              UserInformation();  // saving logged in user information 
                                               Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
                                             });
                                           });
