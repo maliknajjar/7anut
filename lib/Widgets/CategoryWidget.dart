@@ -97,7 +97,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                       aspectRatio: 1,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color: Colors.pink,
+                                          color: Colors.white,
                                           borderRadius: BorderRadius.circular(10),
                                           image: DecorationImage(
                                             image: NetworkImage(Products.getProductsByCategory(category)[i]["imageUrl"]),
