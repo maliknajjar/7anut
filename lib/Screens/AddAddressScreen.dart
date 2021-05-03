@@ -69,11 +69,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       theState = jsonDecode(Addresses.getAddressById(int.parse(type))["addresse"])["store"];
       isDone = true;
     }
-    print("title: " + title.toString());
-    print("information: " + information.toString());
-    print("instructions: " + instructions.toString());
-    print("location: " + location.toString());
-    print("theState: " + theState.toString());
 
     return Container(
       height: double.infinity,
@@ -181,7 +176,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                               setState(() {
                                 if (value != null) {
                                   location = value[0];
-                                  print(location);
                                   theState = value[1];
                                   mapButtonText = Dictionairy.words["Location Selected"][UserInformation.language];
                                 }

@@ -26,40 +26,46 @@ class _HomeScreenState extends State<HomeScreen> {
   bool thereIsSelectedAddress = false;
 
   void requestData(){
+    Addresses.addressesBasket.clear();
+    Basket.clearBasket();
+    Basket.simpleArray.clear();
     setState(() {
       dataIsAvailable = false;
       thereIsSelectedAddress = false;
     });
-    http.post(env.apiUrl + "/api/favourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID}).then((re){
-      Products.favourite = re.body == "" ? [] : re.body.split(",");
-      http.get(env.apiUrl + "/api/categories").then((r){
-        products = json.decode(r.body);
-        Products.categories= json.decode(r.body);
-      }).then((value){
-        if (this.mounted) {
-          http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
-          .then((value){
-            if(jsonDecode(value.body).isEmpty){
-              setState(() {
-                dataIsAvailable = true;
-                thereIsSelectedAddress = false;
-              });
-              return;
-            }
-            Addresses.addressesBasket = jsonDecode(value.body);
-            // what happens when you fetch all needed data
-            http.get(env.apiUrl + "/api/products/" + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]).then((r){
-              setState(() {
-                dataIsAvailable = true;
-                thereIsSelectedAddress = true;
-                Products.products = json.decode(r.body);
+    http.post(env.apiUrl + "/api/returnEverything", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})      // making sure all products are returned before using tha app
+    .then((thevalue){
+      http.post(env.apiUrl + "/api/favourite", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID}).then((re){
+        Products.favourite = re.body == "" ? [] : re.body.split(",");
+        http.get(env.apiUrl + "/api/categories").then((r){
+          products = json.decode(r.body);
+          Products.categories= json.decode(r.body);
+        }).then((value){
+          if (this.mounted) {
+            http.post(env.apiUrl + "/api/getuseraddreses", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})
+            .then((value){
+              if(jsonDecode(value.body).isEmpty){
+                setState(() {
+                  dataIsAvailable = true;
+                  thereIsSelectedAddress = false;
+                });
+                return;
+              }
+              Addresses.addressesBasket = jsonDecode(value.body);
+              // what happens when you fetch all needed data
+              http.get(env.apiUrl + "/api/products/" + jsonDecode(Addresses.addressesBasket[0]["addresse"])["store"]).then((r){
+                setState(() {
+                  dataIsAvailable = true;
+                  thereIsSelectedAddress = true;
+                  Products.products = json.decode(r.body);
+                });
               });
             });
-          });
-        }
-      })
-      .catchError((onError){
-        Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
+          }
+        })
+        .catchError((onError){
+          Functions.logout(context, Dictionairy.words["Connection error"][UserInformation.language], Colors.red);
+        });
       });
     });
   }
@@ -114,11 +120,13 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("there is no selected address", style: TextStyle(fontSize: 18)),
+                Text(Dictionairy.words["there is no selected address"][UserInformation.language], style: GoogleFonts.almarai(fontSize: 18)),
                 Container(
                   child: InkWell(
                     onTap: (){
-                      showDialogue();
+                      Navigator.pushNamed(context, "/addaddress", arguments: "new").then((value){
+                        requestData();
+                      });
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12.5),
@@ -505,7 +513,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           InkWell(
                             onTap: (){
-                              Navigator.pushNamed(context, "/addaddress").then((value){
+                              Navigator.pushNamed(context, "/addaddress", arguments: "new").then((value){
                                 setState(() {
                                   
                                 });
@@ -632,13 +640,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }).then((value){
       if(value == "changed"){
-        Addresses.addressesBasket.clear();
-        Basket.clearBasket();
-        Basket.simpleArray.clear();
-        http.post(env.apiUrl + "/api/returnEverything", body: {"email": UserInformation.email, "sessionID": UserInformation.sessionID})      // making sure all products are returned before using tha app
-        .then((thevalue){
-          requestData();          // request categories and products from the server
-        });
+        requestData();          // request categories and products from the server
         return;
       }
     });

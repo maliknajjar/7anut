@@ -46,7 +46,10 @@ class _SearchScreenState extends State<SearchScreen> {
             maxWidth: 600,
           ),
           child: ListView(
-            padding: EdgeInsets.all(15),
+            padding: EdgeInsets.symmetric(
+              horizontal: 15,
+              vertical: 20,
+            ),
             children: [
               Container(
                 decoration: BoxDecoration(

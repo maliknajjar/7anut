@@ -173,7 +173,6 @@ class _AdressesScreenState extends State<AdressesScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            print(Addresses.addressesBasket[i]["ID"]);
                             Navigator.of(context).pushNamed("/addaddress", arguments: Addresses.addressesBasket[i]["ID"].toString()).then((value){  
                               setState(() {
                                 if(value == "refresh") refreshIsRequired = true;

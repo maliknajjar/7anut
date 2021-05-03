@@ -630,5 +630,10 @@ class Dictionairy {
       "fr": "Aucun résultat",
       "ar": "لا نتائج"
     },
+    "there is no selected address": {
+      "en": "There is no selected address",
+      "fr": "Il n'y a pas d'adresse sélectionnée",
+      "ar": "لا يوجد عنوان محدد"
+    },
   };
 }
